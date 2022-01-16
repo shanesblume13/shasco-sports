@@ -100,7 +100,7 @@ unlinked_spec.ds
 **/.ios/ServiceDefinitions.json
 **/.ios/Runner/GeneratedPluginRegistrant.*
 **/.ios/Runner.xcworkspace/xcuserdata/shane.blume.xcuserdatad/UserInterfaceState.xcuserstate
-
+**.ios/Flutter/engine/Flutter.xcframework/
 
 # macOS
 **/macos/Flutter/GeneratedPluginRegistrant.swift
