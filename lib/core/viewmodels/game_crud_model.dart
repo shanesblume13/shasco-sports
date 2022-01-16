@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/game.dart';
-import 'package:pick/core/models/sport_model.dart';
 
 class GameCrudModel {
   List<Game> games = [

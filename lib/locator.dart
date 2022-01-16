@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:pick/core/services/api_service.dart';
+import 'package:pick/core/viewmodels/game_crud_model.dart';
 import 'package:pick/core/viewmodels/matchup_crud_model.dart';
 import 'package:pick/core/viewmodels/league_crud_model.dart';
 import 'package:pick/core/viewmodels/season_crud_mold.dart';
@@ -17,4 +18,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => SportCrudModel());
   locator.registerLazySingleton(() => LeagueCrudModel());
   locator.registerLazySingleton(() => SeasonCrudModel());
+  locator.registerLazySingleton(() => GameCrudModel());
 }
