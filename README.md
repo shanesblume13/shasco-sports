@@ -1,11 +1,15 @@
-# pick
+# Pick
 
-A new flutter module project.
+A mobile app built with flutter and firebase that allows users to play various games based on sports predecitions.
 
-## Getting Started
+# To Do
+- Add a pick'em style format.
+    - With condifence points.
+    - Without confidence points.
+    - With spreads.
+    - Without spreads.
+- Add firebase authentication.
+- Create a splash screen.
+- Add a custom name and logo/icon.
+- Add a squares style format.
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.dev/).
-
-For instructions integrating Flutter modules to your existing applications,
-see the [add-to-app documentation](https://flutter.dev/docs/development/add-to-app).
