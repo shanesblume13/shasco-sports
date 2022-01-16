@@ -13,7 +13,7 @@ class Router {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(
-          builder: (_) => const SportsView(),
+          builder: (_) => const GamesView(),
         );
       case '/sports':
         return MaterialPageRoute(

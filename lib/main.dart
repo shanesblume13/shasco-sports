@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pick/core/viewmodels/game_crud_model.dart';
 import 'package:pick/core/viewmodels/matchup_crud_model.dart';
 import 'package:pick/core/viewmodels/league_crud_model.dart';
 import 'package:pick/core/viewmodels/season_crud_mold.dart';
@@ -37,6 +38,9 @@ class App extends StatelessWidget {
         ),
         Provider(
           create: (_) => locator<LeagueCrudModel>(),
+        ),
+        Provider(
+          create: (_) => locator<GameCrudModel>(),
         ),
         ChangeNotifierProvider(
           create: (_) => locator<SeasonCrudModel>(),

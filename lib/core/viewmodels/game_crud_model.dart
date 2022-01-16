@@ -6,12 +6,12 @@ class GameCrudModel {
     Game(
       id: 0,
       name: 'Pick\'em',
-      iconData: Icons.sports_football,
+      iconData: Icons.list,
     ),
     Game(
       id: 1,
       name: 'Squares',
-      iconData: Icons.sports_basketball,
+      iconData: Icons.apps,
     ),
   ];
 
