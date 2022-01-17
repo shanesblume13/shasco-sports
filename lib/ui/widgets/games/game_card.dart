@@ -21,7 +21,7 @@ class GameCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => LogoView(),
+            builder: (_) => const LogoView(),
           ),
         );
       },
