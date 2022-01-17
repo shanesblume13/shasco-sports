@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterfire_ui/auth.dart';
+import 'package:pick/ui/widgets/auth/auth_card.dart';
 import '/ui/router.dart' as my_router;
 
 class AuthView extends StatelessWidget {
@@ -12,8 +13,17 @@ class AuthView extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const SignInScreen(
-            providerConfigs: [
+          return SignInScreen(
+            headerBuilder: (context, constraints, _) {
+              return const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: AuthCard(),
+                ),
+              );
+            },
+            providerConfigs: const [
               EmailProviderConfiguration(),
             ],
           );
