@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class WeekOrderClip extends StatelessWidget {
-  const WeekOrderClip({
+class WeekStartClip extends StatelessWidget {
+  const WeekStartClip({
     Key? key,
-    required this.order,
+    required this.startDate,
   }) : super(key: key);
 
-  final int order;
+  final String startDate;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class WeekOrderClip extends StatelessWidget {
               color: Colors.black,
             ),
             Text(
-              order.toString(),
+              startDate.toString(),
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 12,

@@ -3,7 +3,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:pick/core/models/week_model.dart';
 import 'package:pick/ui/views/week_detail.dart';
 import 'package:pick/ui/widgets/weeks/week_name_container.dart';
-import 'package:pick/ui/widgets/weeks/week_order_clip.dart';
+import 'package:pick/ui/widgets/weeks/week_start_clip.dart';
 
 class WeeksListview extends StatelessWidget {
   WeeksListview({
@@ -41,7 +41,7 @@ class WeeksListview extends StatelessWidget {
                 columnSizes: [1.fr, 2.fr, 3.fr, auto],
                 children: [
                   gridArea('order').containing(
-                    WeekOrderClip(order: weeks[i].order),
+                    WeekStartClip(startDate: weeks[i].startDate),
                   ),
                   gridArea('weekName').containing(
                     WeekNameContainer(name: weeks[i].name),

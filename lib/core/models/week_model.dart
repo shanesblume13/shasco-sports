@@ -4,7 +4,6 @@ import 'package:pick/core/models/season.dart';
 class Week {
   String id;
   String name;
-  int order;
   String startDate;
   String lockDate;
   String endDate;
@@ -15,7 +14,6 @@ class Week {
   Week({
     required this.id,
     required this.name,
-    required this.order,
     required this.startDate,
     required this.lockDate,
     required this.endDate,
@@ -27,7 +25,6 @@ class Week {
   Week.fromQueryDocumentSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot, this.id)
       : name = snapshot['name'],
-        order = snapshot['order'],
         startDate = snapshot['startDate'],
         lockDate = snapshot['lockDate'],
         endDate = snapshot['endDate'],
@@ -38,7 +35,6 @@ class Week {
 
   Week.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : name = snapshot['name'],
-        order = snapshot['order'],
         startDate = snapshot['startDate'],
         lockDate = snapshot['lockDate'],
         endDate = snapshot['endDate'],
@@ -50,7 +46,6 @@ class Week {
   toJson() {
     return {
       'name': name,
-      'order': order,
       'startDate': startDate,
       'lockDate': lockDate,
       'endDate': endDate,

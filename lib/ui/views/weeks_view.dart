@@ -41,7 +41,7 @@ class _WeeksViewState extends State<WeeksView> {
                     .toList() ??
                 [];
 
-            weeks.sort((a, b) => a.order.compareTo(b.order));
+            weeks.sort((a, b) => a.startDate.compareTo(b.startDate));
 
             return WeeksListview(weeks: weeks);
           } else {

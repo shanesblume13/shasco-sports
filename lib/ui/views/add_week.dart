@@ -129,7 +129,6 @@ class _AddWeekViewState extends State<AddWeekView> {
                       Week(
                         id: '',
                         name: name,
-                        order: order,
                         startDate: startDate,
                         lockDate: lockDate,
                         endDate: endDate,

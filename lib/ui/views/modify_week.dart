@@ -61,20 +61,6 @@ class _ModifyWeekState extends State<ModifyWeek> {
                 height: 16,
               ),
               TextFormField(
-                  initialValue: widget.week.order.toString(),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Order',
-                    fillColor: Colors.grey[300],
-                    filled: true,
-                  ),
-                  validator: (value) {
-                    if (value?.isEmpty ?? true) {
-                      return 'Please enter an Order';
-                    }
-                  },
-                  onSaved: (value) => order = int.tryParse(value ?? '') ?? 0),
-              TextFormField(
                   initialValue: widget.week.startDate,
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -140,7 +126,6 @@ class _ModifyWeekState extends State<ModifyWeek> {
                         Week(
                           id: widget.week.id,
                           name: name,
-                          order: order,
                           startDate: startDate,
                           lockDate: lockDate,
                           endDate: endDate,
