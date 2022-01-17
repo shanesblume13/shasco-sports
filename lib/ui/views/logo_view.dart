@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
 class LogoView extends StatefulWidget {
   const LogoView({
@@ -41,11 +42,76 @@ class _LogoViewState extends State<LogoView> {
           });
         },
         child: Center(
-          child: AnimatedContainer(
-            width: 60,
-            height: 60,
-            color: color,
-            duration: const Duration(milliseconds: 500),
+          child: LayoutGrid(
+            rowGap: 3,
+            columnGap: 3,
+            areas: '''
+                1 2 3
+                4 5 6
+                7 8 9
+              ''',
+            rowSizes: [
+              60.px,
+              60.px,
+              60.px,
+            ],
+            columnSizes: [
+              60.px,
+              60.px,
+              60.px,
+            ],
+            children: [
+              gridArea('1').containing(
+                Container(
+                  color: color,
+                ),
+              ),
+              gridArea('1').containing(
+                Container(
+                  color: color,
+                ),
+              ),
+              gridArea('2').containing(
+                Container(
+                  color: color,
+                ),
+              ),
+              gridArea('3').containing(
+                Container(
+                  color: color,
+                ),
+              ),
+              gridArea('4').containing(
+                Container(
+                  color: color,
+                ),
+              ),
+              gridArea('5').containing(
+                Container(
+                  color: color,
+                ),
+              ),
+              gridArea('6').containing(
+                Container(
+                  color: color,
+                ),
+              ),
+              gridArea('7').containing(
+                Container(
+                  color: color,
+                ),
+              ),
+              gridArea('8').containing(
+                Container(
+                  color: color,
+                ),
+              ),
+              gridArea('9').containing(
+                Container(
+                  color: color,
+                ),
+              ),
+            ],
           ),
         ),
       ),
