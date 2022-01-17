@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pick/ui/views/add_matchup.dart';
 import 'package:pick/ui/views/add_week.dart';
+import 'package:pick/ui/views/auth_view.dart';
 import 'package:pick/ui/views/games_view.dart';
 import 'package:pick/ui/views/matchup_view.dart';
 import 'package:pick/ui/views/leagues_view.dart';
@@ -14,6 +15,10 @@ class Router {
       case '/':
         return MaterialPageRoute(
           builder: (_) => const GamesView(),
+        );
+      case '/auth':
+        return MaterialPageRoute(
+          builder: (_) => const AuthView(),
         );
       case '/sports':
         return MaterialPageRoute(

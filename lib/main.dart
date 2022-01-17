@@ -48,7 +48,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: '/',
+        initialRoute: '/auth',
         title: 'Pickem App',
         theme: ThemeData(),
         onGenerateRoute: my_router.Router.generateRoute,
