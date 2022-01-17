@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:pick/core/models/game.dart';
+import 'package:pick/ui/views/logo_view.dart';
 import 'package:pick/ui/widgets/games/game_card_image_clip.dart';
 import 'package:pick/ui/widgets/games/game_card_name_container.dart';
 
@@ -17,14 +18,12 @@ class GameCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         null;
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (_) => LeaguesView(
-        //       sport: sport.name,
-        //     ),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => LogoView(),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

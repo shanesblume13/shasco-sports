@@ -3,6 +3,7 @@ import 'package:pick/ui/views/add_matchup.dart';
 import 'package:pick/ui/views/add_week.dart';
 import 'package:pick/ui/views/auth_view.dart';
 import 'package:pick/ui/views/games_view.dart';
+import 'package:pick/ui/views/logo_view.dart';
 import 'package:pick/ui/views/matchup_view.dart';
 import 'package:pick/ui/views/leagues_view.dart';
 import 'package:pick/ui/views/seasons_view.dart';
@@ -19,6 +20,10 @@ class Router {
       case '/auth':
         return MaterialPageRoute(
           builder: (_) => const AuthView(),
+        );
+      case '/logo':
+        return MaterialPageRoute(
+          builder: (_) => const LogoView(),
         );
       case '/sports':
         return MaterialPageRoute(
