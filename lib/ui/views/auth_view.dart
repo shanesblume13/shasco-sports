@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutterfire_ui/auth.dart';
 import '/ui/router.dart' as my_router;
 
 class AuthView extends StatelessWidget {
@@ -11,8 +12,10 @@ class AuthView extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const Center(
-            child: Text('Not Authenticated'),
+          return const SignInScreen(
+            providerConfigs: [
+              EmailProviderConfiguration(),
+            ],
           );
         }
 

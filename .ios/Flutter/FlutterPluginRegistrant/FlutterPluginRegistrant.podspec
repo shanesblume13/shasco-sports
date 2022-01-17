@@ -22,4 +22,10 @@ Depends on all your plugins, and provides a function to register them.
   s.dependency 'cloud_firestore'
   s.dependency 'firebase_auth'
   s.dependency 'firebase_core'
+  s.dependency 'firebase_database'
+  s.dependency 'firebase_dynamic_links'
+  s.dependency 'flutter_facebook_auth'
+  s.dependency 'google_sign_in'
+  s.dependency 'sign_in_with_apple'
+  s.dependency 'twitter_login'
 end
