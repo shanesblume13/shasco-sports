@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:pick/core/models/league_model.dart';
-import 'package:pick/ui/views/seasons_view.dart';
+import 'package:pick/ui/views/games_view.dart';
 import 'package:pick/ui/widgets/leagues/league_card_image_clip.dart';
 import 'package:pick/ui/widgets/leagues/league_card_name_container.dart';
 import 'package:pick/ui/widgets/leagues/league_card_season_count_container.dart';
@@ -19,9 +19,7 @@ class LeagueCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => SeasonsView(league: league.name)));
+            context, MaterialPageRoute(builder: (_) => const GamesView()));
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

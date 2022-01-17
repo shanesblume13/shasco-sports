@@ -5,7 +5,9 @@ import 'package:pick/ui/widgets/games/game_cards_listview.dart';
 import 'package:provider/provider.dart';
 
 class GamesView extends StatelessWidget {
-  const GamesView({Key? key}) : super(key: key);
+  const GamesView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
