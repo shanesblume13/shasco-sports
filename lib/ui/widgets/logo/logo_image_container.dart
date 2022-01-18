@@ -51,7 +51,7 @@ class LogoImageContainer extends StatelessWidget {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     child: CircleAvatar(
-                      backgroundColor: Palette.shascoBlue,
+                      backgroundColor: Palette.shascoGreen,
                       radius: square2Radius,
                     ),
                   ),
@@ -62,7 +62,7 @@ class LogoImageContainer extends StatelessWidget {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     child: CircleAvatar(
-                      backgroundColor: Palette.shascoBlue,
+                      backgroundColor: Palette.shascoRed,
                       radius: square7Radius,
                     ),
                   ),

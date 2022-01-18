@@ -53,7 +53,7 @@ class _LogoViewState extends State<LogoView> {
     Future.delayed(const Duration(milliseconds: 2000)).then(
       (value) => setState(
         () {
-          //square7Radius = 0;
+          square7Radius = 0;
         },
       ),
     );
@@ -64,29 +64,29 @@ class _LogoViewState extends State<LogoView> {
         },
       ),
     );
-    // Future.delayed(const Duration(milliseconds: 3500)).then(
-    //   (value) => setState(
-    //     () {
-    //       logoSize = 30;
-    //       strokeWidth = 6;
-    //       square2Radius = 0;
-    //     },
-    //   ),
-    // );
-    // Future.delayed(const Duration(milliseconds: 4000)).then(
-    //   (value) => setState(
-    //     () {
-    //       logoTextSize = 24;
-    //     },
-    //   ),
-    // );
-    // Future.delayed(const Duration(milliseconds: 4500)).then(
-    //   (value) => setState(
-    //     () {
-    //       logoTextColor = Palette.shascoBlue;
-    //     },
-    //   ),
-    // );
+    Future.delayed(const Duration(milliseconds: 3500)).then(
+      (value) => setState(
+        () {
+          logoSize = 30;
+          strokeWidth = 6;
+          square2Radius = 0;
+        },
+      ),
+    );
+    Future.delayed(const Duration(milliseconds: 4000)).then(
+      (value) => setState(
+        () {
+          logoTextSize = 24;
+        },
+      ),
+    );
+    Future.delayed(const Duration(milliseconds: 4500)).then(
+      (value) => setState(
+        () {
+          logoTextColor = Palette.shascoBlue;
+        },
+      ),
+    );
   }
 
   @override
@@ -97,7 +97,6 @@ class _LogoViewState extends State<LogoView> {
           child: Text('Animated Logo'),
         ),
       ),
-      backgroundColor: Palette.shascoYellow,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -109,7 +108,7 @@ class _LogoViewState extends State<LogoView> {
               children: [
                 LogoImageContainer(
                   logoSize: logoSize,
-                  strokeWidth: 18,
+                  strokeWidth: strokeWidth,
                   square2Radius: square2Radius,
                   square7Radius: square7Radius,
                 ),
