@@ -20,7 +20,7 @@ class GameCard extends StatelessWidget {
         // Navigator.push(
         //   context,
         //   MaterialPageRoute(
-        //     builder: (_) => const LegssView(),
+        //     builder: (_) => const LegsView(),
         //   ),
         // );
       },
