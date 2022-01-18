@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pick/ui/shared/palette.dart';
 
 class LogoImageClip extends CustomPainter {
   LogoImageClip({
@@ -13,7 +14,7 @@ class LogoImageClip extends CustomPainter {
     double height = size.height;
     Path path = Path();
     Paint paint = Paint()
-      ..color = Colors.black
+      ..color = Palette.shascoBlue
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;

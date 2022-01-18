@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:pick/ui/shared/palette.dart';
 import 'package:pick/ui/widgets/logo/logo_image_clip.dart';
 
 class LogoImageContainer extends StatelessWidget {
@@ -50,7 +51,7 @@ class LogoImageContainer extends StatelessWidget {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     child: CircleAvatar(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Palette.shascoGreen,
                       radius: square2Radius,
                     ),
                   ),
@@ -61,7 +62,7 @@ class LogoImageContainer extends StatelessWidget {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     child: CircleAvatar(
-                      backgroundColor: Colors.red,
+                      backgroundColor: Palette.shascoRed,
                       radius: square7Radius,
                     ),
                   ),

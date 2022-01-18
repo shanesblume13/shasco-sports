@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pick/ui/shared/palette.dart';
 import 'package:pick/ui/widgets/logo/logo_image_container.dart';
 import 'package:pick/ui/widgets/logo/logo_name_container.dart';
 
@@ -13,6 +14,7 @@ class LogoView extends StatefulWidget {
 
 class _LogoViewState extends State<LogoView> {
   double logoSize = 120;
+  Color logoTextColor = Colors.transparent;
   int animationStep = 0;
   double strokeWidth = 12;
   double logoTextSize = 0;
@@ -51,7 +53,6 @@ class _LogoViewState extends State<LogoView> {
     Future.delayed(const Duration(milliseconds: 2000)).then(
       (value) => setState(
         () {
-          //logoColor = Colors.black;
           square7Radius = 0;
         },
       ),
@@ -59,7 +60,6 @@ class _LogoViewState extends State<LogoView> {
     Future.delayed(const Duration(milliseconds: 2500)).then(
       (value) => setState(
         () {
-          //logoColor = Colors.green;
           square2Radius = 30;
         },
       ),
@@ -67,17 +67,23 @@ class _LogoViewState extends State<LogoView> {
     Future.delayed(const Duration(milliseconds: 3500)).then(
       (value) => setState(
         () {
-          //logoColor = Colors.black;
           logoSize = 30;
           strokeWidth = 6;
           square2Radius = 0;
         },
       ),
     );
-    Future.delayed(const Duration(milliseconds: 4500)).then(
+    Future.delayed(const Duration(milliseconds: 4000)).then(
       (value) => setState(
         () {
           logoTextSize = 24;
+        },
+      ),
+    );
+    Future.delayed(const Duration(milliseconds: 4500)).then(
+      (value) => setState(
+        () {
+          logoTextColor = Palette.shascoBlue;
         },
       ),
     );
@@ -106,7 +112,10 @@ class _LogoViewState extends State<LogoView> {
                   square2Radius: square2Radius,
                   square7Radius: square7Radius,
                 ),
-                LogoNameContainer(logoTextSize: logoTextSize),
+                LogoNameContainer(
+                  logoTextSize: logoTextSize,
+                  logoTextColor: logoTextColor,
+                ),
               ],
             ),
           ],
