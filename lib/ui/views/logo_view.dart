@@ -30,7 +30,6 @@ class _LogoViewState extends State<LogoView> {
     Future.delayed(const Duration(milliseconds: 500)).then(
       (value) => setState(
         () {
-          //logoColor = Colors.red;
           square7Radius = 30;
         },
       ),
@@ -38,7 +37,6 @@ class _LogoViewState extends State<LogoView> {
     Future.delayed(const Duration(milliseconds: 1000)).then(
       (value) => setState(
         () {
-          //logoColor = Colors.black;
           square7Radius = 0;
         },
       ),
@@ -46,8 +44,6 @@ class _LogoViewState extends State<LogoView> {
     Future.delayed(const Duration(milliseconds: 1500)).then(
       (value) => setState(
         () {
-          //square2Color = Colors.grey;
-          //logoColor = Colors.red;
           square7Radius = 30;
         },
       ),
