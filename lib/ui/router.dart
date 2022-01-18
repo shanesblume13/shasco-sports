@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/ui/views/add_matchup.dart';
-import 'package:pick/ui/views/add_week.dart';
+import 'package:pick/ui/views/add_leg.dart';
 import 'package:pick/ui/views/auth_view.dart';
 import 'package:pick/ui/views/games_view.dart';
 import 'package:pick/ui/views/logo_view.dart';
@@ -8,7 +8,7 @@ import 'package:pick/ui/views/matchup_view.dart';
 import 'package:pick/ui/views/leagues_view.dart';
 import 'package:pick/ui/views/seasons_view.dart';
 import 'package:pick/ui/views/sports_view.dart';
-import 'package:pick/ui/views/weeks_view.dart';
+import 'package:pick/ui/views/legs_view.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -45,17 +45,17 @@ class Router {
         return MaterialPageRoute(
           builder: (_) => const MatchupsView(),
         );
-      case '/weeks':
+      case '/legs':
         return MaterialPageRoute(
-          builder: (_) => const WeeksView(),
+          builder: (_) => const LegsView(),
         );
       case '/addMatchup':
         return MaterialPageRoute(
           builder: (_) => const AddMathcupView(),
         );
-      case '/addWeek':
+      case '/addLeg':
         return MaterialPageRoute(
-          builder: (_) => const AddWeekView(),
+          builder: (_) => const AddLegView(),
         );
       default:
         return MaterialPageRoute(

@@ -13,8 +13,8 @@ class AddMathcupView extends StatefulWidget {
 
 class _AddMathcupViewState extends State<AddMathcupView> {
   final _formKey = GlobalKey<FormState>();
-  String weekId = '';
-  int weekOrder = 0;
+  String legId = '';
+  int legOrder = 0;
   String homeTeamId = '';
   String awayTeamId = '';
   bool isLocked = true;
@@ -41,7 +41,7 @@ class _AddMathcupViewState extends State<AddMathcupView> {
                 value: '1',
                 onChanged: (String? newValue) {
                   setState(() {
-                    weekId = newValue ?? '';
+                    legId = newValue ?? '';
                   });
                 },
                 items: teamIds.map<DropdownMenuItem<String>>((String value) {
@@ -56,16 +56,16 @@ class _AddMathcupViewState extends State<AddMathcupView> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'Week Order',
+                  hintText: 'Leg Order',
                   fillColor: Colors.grey[300],
                   filled: true,
                 ),
                 validator: (value) {
                   if (value?.isEmpty ?? true) {
-                    return 'Please enter a Week Order';
+                    return 'Please enter a Leg Order';
                   }
                 },
-                onSaved: (value) => weekOrder = int.parse(value ?? '0'),
+                onSaved: (value) => legOrder = int.parse(value ?? '0'),
               ),
               DropdownButton<String>(
                 value: '1',
@@ -151,8 +151,8 @@ class _AddMathcupViewState extends State<AddMathcupView> {
                     await matchupProvider.addMatchup(
                       Matchup(
                         id: '',
-                        weekId: weekId as DocumentReference,
-                        weekOrder: weekOrder,
+                        legId: legId as DocumentReference,
+                        legOrder: legOrder,
                         homeTeamId: homeTeamId,
                         awayTeamId: awayTeamId,
                         isLocked: isLocked,

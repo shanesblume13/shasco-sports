@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Matchup {
   String id;
-  DocumentReference weekId;
-  int weekOrder;
+  DocumentReference legId;
+  int legOrder;
   String homeTeamId;
   String awayTeamId;
   bool isLocked;
@@ -13,8 +13,8 @@ class Matchup {
 
   Matchup({
     required this.id,
-    required this.weekId,
-    required this.weekOrder,
+    required this.legId,
+    required this.legOrder,
     required this.homeTeamId,
     required this.awayTeamId,
     required this.isLocked,
@@ -24,8 +24,8 @@ class Matchup {
   });
 
   Matchup.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot, this.id)
-      : weekId = snapshot['weekId'],
-        weekOrder = snapshot['weekOrder'],
+      : legId = snapshot['legId'],
+        legOrder = snapshot['legOrder'],
         homeTeamId = snapshot['homeTeamId'],
         awayTeamId = snapshot['awayTeamId'],
         isLocked = snapshot['isLocked'],
@@ -34,8 +34,8 @@ class Matchup {
         winningTeamId = snapshot['winningTeamId'];
 
   Matchup.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
-      : weekId = snapshot['weekId'],
-        weekOrder = snapshot['weekOrder'],
+      : legId = snapshot['legId'],
+        legOrder = snapshot['legOrder'],
         homeTeamId = snapshot['homeTeamId'],
         awayTeamId = snapshot['awayTeamId'],
         isLocked = snapshot['isLocked'],
@@ -45,8 +45,8 @@ class Matchup {
 
   Matchup.fromMap(Map<String, dynamic> map)
       : id = map['id'],
-        weekId = map['weekId'],
-        weekOrder = map['weekOrder'],
+        legId = map['legId'],
+        legOrder = map['legOrder'],
         homeTeamId = map['homeTeamId'],
         awayTeamId = map['awayTeamId'],
         isLocked = map['isLocked'],
@@ -56,8 +56,8 @@ class Matchup {
 
   toJson() {
     return {
-      'weekId': weekId,
-      'weekOrder': weekOrder,
+      'legId': legId,
+      'legOrder': legOrder,
       'homeTeamId': homeTeamId,
       'awayTeamId': awayTeamId,
       'isLocked': isLocked,

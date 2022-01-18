@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pick/core/models/season.dart';
 
-class Week {
+class Leg {
   String id;
   String name;
   String startDate;
@@ -11,7 +11,7 @@ class Week {
   bool isComplete;
   Season? season;
 
-  Week({
+  Leg({
     required this.id,
     required this.name,
     required this.startDate,
@@ -22,7 +22,7 @@ class Week {
     this.season,
   });
 
-  Week.fromQueryDocumentSnapshot(
+  Leg.fromQueryDocumentSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot, this.id)
       : name = snapshot['name'],
         startDate = snapshot['startDate'],
@@ -33,7 +33,7 @@ class Week {
         season = Season.fromQueryDocumentSnapshot(
             snapshot['season'], snapshot['season']['id']);
 
-  Week.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
+  Leg.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : name = snapshot['name'],
         startDate = snapshot['startDate'],
         lockDate = snapshot['lockDate'],

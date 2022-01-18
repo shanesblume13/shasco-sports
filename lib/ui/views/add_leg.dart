@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/week_model.dart';
-import 'package:pick/core/viewmodels/week_crud_model.dart';
+import 'package:pick/core/models/leg_model.dart';
+import 'package:pick/core/viewmodels/leg_crud_model.dart';
 import 'package:provider/provider.dart';
 
-class AddWeekView extends StatefulWidget {
-  const AddWeekView({Key? key}) : super(key: key);
+class AddLegView extends StatefulWidget {
+  const AddLegView({Key? key}) : super(key: key);
 
   @override
-  _AddWeekViewState createState() => _AddWeekViewState();
+  _AddLegViewState createState() => _AddLegViewState();
 }
 
-class _AddWeekViewState extends State<AddWeekView> {
+class _AddLegViewState extends State<AddLegView> {
   final _formKey = GlobalKey<FormState>();
   String name = '';
   int order = 0;
@@ -22,11 +22,11 @@ class _AddWeekViewState extends State<AddWeekView> {
 
   @override
   Widget build(BuildContext context) {
-    var weekProvider = Provider.of<WeekCrudModel>(context);
+    var legProvider = Provider.of<LegCrudModel>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Week'),
+        title: const Text('Add Leg'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -46,7 +46,7 @@ class _AddWeekViewState extends State<AddWeekView> {
                     return 'Please enter a Name';
                   }
                 },
-                onSaved: (value) => name = value ?? 'New Week',
+                onSaved: (value) => name = value ?? 'New Leg',
               ),
               TextFormField(
                 keyboardType: TextInputType.number,
@@ -125,8 +125,8 @@ class _AddWeekViewState extends State<AddWeekView> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    await weekProvider.addWeek(
-                      Week(
+                    await legProvider.addLeg(
+                      Leg(
                         id: '',
                         name: name,
                         startDate: startDate,
@@ -139,8 +139,12 @@ class _AddWeekViewState extends State<AddWeekView> {
                     Navigator.pop(context);
                   }
                 },
-                child: const Text('Add Week',
-                    style: TextStyle(color: Colors.white)),
+                child: const Text(
+                  'Add Leg',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               )
             ],
           ),

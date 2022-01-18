@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:pick/core/models/week_model.dart';
-import 'package:pick/ui/views/week_detail.dart';
-import 'package:pick/ui/widgets/weeks/week_name_container.dart';
-import 'package:pick/ui/widgets/weeks/week_start_clip.dart';
+import 'package:pick/core/models/leg_model.dart';
+import 'package:pick/ui/views/leg_detail.dart';
+import 'package:pick/ui/widgets/legs/leg_name_container.dart';
+import 'package:pick/ui/widgets/legs/leg_start_clip.dart';
 
-class WeeksListview extends StatelessWidget {
-  WeeksListview({
+class LegsListview extends StatelessWidget {
+  LegsListview({
     Key? key,
-    required this.weeks,
+    required this.legs,
   }) : super(key: key);
 
-  final List<Week> weeks;
-  final List<Widget> weekCards = [];
+  final List<Leg> legs;
+  final List<Widget> legCards = [];
 
   @override
   Widget build(BuildContext context) {
-    for (int i = 0; i < weeks.length; i++) {
-      weekCards.add(
+    for (int i = 0; i < legs.length; i++) {
+      legCards.add(
         GestureDetector(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (_) => WeekDetail(week: weeks[i])));
+                MaterialPageRoute(builder: (_) => LegDetail(leg: legs[i])));
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -29,9 +29,9 @@ class WeeksListview extends StatelessWidget {
               elevation: 6,
               child: LayoutGrid(
                 areas: '''
-                    order weekName startDate matchupCount
-                    order weekName lockDate matchupCount
-                    order weekName endDate matchtupCountLabel
+                    order legName startDate matchupCount
+                    order legName lockDate matchupCount
+                    order legName endDate matchtupCountLabel
                   ''',
                 rowSizes: const [
                   auto,
@@ -41,10 +41,10 @@ class WeeksListview extends StatelessWidget {
                 columnSizes: [1.fr, 2.fr, 3.fr, auto],
                 children: [
                   gridArea('order').containing(
-                    WeekStartClip(startDate: weeks[i].startDate),
+                    LegStartClip(startDate: legs[i].startDate),
                   ),
-                  gridArea('weekName').containing(
-                    WeekNameContainer(name: weeks[i].name),
+                  gridArea('legName').containing(
+                    LegNameContainer(name: legs[i].name),
                   ),
                   gridArea('startDate').containing(
                     Row(
@@ -55,7 +55,7 @@ class WeeksListview extends StatelessWidget {
                           color: Colors.green,
                         ),
                         Text(
-                          'Start: ${weeks[i].startDate.toString()}',
+                          'Start: ${legs[i].startDate.toString()}',
                         ),
                       ],
                     ),
@@ -69,7 +69,7 @@ class WeeksListview extends StatelessWidget {
                           color: Colors.green,
                         ),
                         Text(
-                          'Lock: ${weeks[i].lockDate.toString()}',
+                          'Lock: ${legs[i].lockDate.toString()}',
                         ),
                       ],
                     ),
@@ -83,7 +83,7 @@ class WeeksListview extends StatelessWidget {
                           color: Colors.green,
                         ),
                         Text(
-                          'End: ${weeks[i].endDate.toString()}',
+                          'End: ${legs[i].endDate.toString()}',
                         ),
                       ],
                     ),
@@ -111,6 +111,6 @@ class WeeksListview extends StatelessWidget {
         ),
       );
     }
-    return ListView(children: weekCards);
+    return ListView(children: legCards);
   }
 }

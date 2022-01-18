@@ -40,12 +40,12 @@ class SeasonCrudModel extends ChangeNotifier {
     return;
   }
 
-  Future updateWeek(Season data, String id) async {
+  Future updateLeg(Season data, String id) async {
     await _apiService.updateDocument(data.toJson(), id);
     return;
   }
 
-  Future addWeek(Season data) async {
+  Future addLeg(Season data) async {
     var result = await _apiService.addDocument(data.toJson());
 
     return;

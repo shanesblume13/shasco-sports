@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class WeekNameContainer extends StatelessWidget {
-  const WeekNameContainer({
+class LegNameContainer extends StatelessWidget {
+  const LegNameContainer({
     Key? key,
     required this.name,
   }) : super(key: key);

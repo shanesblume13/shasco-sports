@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class WeekStartClip extends StatelessWidget {
-  const WeekStartClip({
+class LegStartClip extends StatelessWidget {
+  const LegStartClip({
     Key? key,
     required this.startDate,
   }) : super(key: key);

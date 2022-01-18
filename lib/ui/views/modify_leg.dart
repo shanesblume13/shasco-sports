@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/week_model.dart';
-import 'package:pick/core/viewmodels/week_crud_model.dart';
+import 'package:pick/core/models/leg_model.dart';
+import 'package:pick/core/viewmodels/leg_crud_model.dart';
 import 'package:provider/provider.dart';
 
-class ModifyWeek extends StatefulWidget {
-  final Week week;
+class ModifyLeg extends StatefulWidget {
+  final Leg leg;
 
-  const ModifyWeek({
+  const ModifyLeg({
     Key? key,
-    required this.week,
+    required this.leg,
   }) : super(key: key);
 
   @override
-  _ModifyWeekState createState() => _ModifyWeekState();
+  _ModifyLegState createState() => _ModifyLegState();
 }
 
-class _ModifyWeekState extends State<ModifyWeek> {
+class _ModifyLegState extends State<ModifyLeg> {
   final _formKey = GlobalKey<FormState>();
 
   String id = '';
@@ -29,12 +29,12 @@ class _ModifyWeekState extends State<ModifyWeek> {
 
   @override
   Widget build(BuildContext context) {
-    final weekProvider = Provider.of<WeekCrudModel>(context);
+    final legProvider = Provider.of<LegCrudModel>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text('Modify Week Detail'),
+          child: Text('Modify Leg Detail'),
         ),
       ),
       body: Padding(
@@ -44,7 +44,7 @@ class _ModifyWeekState extends State<ModifyWeek> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                  initialValue: widget.week.name,
+                  initialValue: widget.leg.name,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Name',
@@ -61,7 +61,7 @@ class _ModifyWeekState extends State<ModifyWeek> {
                 height: 16,
               ),
               TextFormField(
-                  initialValue: widget.week.startDate,
+                  initialValue: widget.leg.startDate,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Start Date',
@@ -75,7 +75,7 @@ class _ModifyWeekState extends State<ModifyWeek> {
                   },
                   onSaved: (value) => startDate = value ?? ''),
               TextFormField(
-                  initialValue: widget.week.lockDate,
+                  initialValue: widget.leg.lockDate,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Lock Date',
@@ -89,7 +89,7 @@ class _ModifyWeekState extends State<ModifyWeek> {
                   },
                   onSaved: (value) => lockDate = value ?? ''),
               TextFormField(
-                  initialValue: widget.week.endDate,
+                  initialValue: widget.leg.endDate,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'End Date',
@@ -103,7 +103,7 @@ class _ModifyWeekState extends State<ModifyWeek> {
                   },
                   onSaved: (value) => endDate = value ?? ''),
               Checkbox(
-                value: widget.week.isLocked,
+                value: widget.leg.isLocked,
                 onChanged: (bool? newValue) {
                   setState(() {
                     isLocked = newValue ?? true;
@@ -111,7 +111,7 @@ class _ModifyWeekState extends State<ModifyWeek> {
                 },
               ),
               Checkbox(
-                value: widget.week.isComplete,
+                value: widget.leg.isComplete,
                 onChanged: (bool? newValue) {
                   setState(() {
                     isComplete = newValue ?? false;
@@ -122,9 +122,9 @@ class _ModifyWeekState extends State<ModifyWeek> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState?.save();
-                    await weekProvider.updateWeek(
-                        Week(
-                          id: widget.week.id,
+                    await legProvider.updateLeg(
+                        Leg(
+                          id: widget.leg.id,
                           name: name,
                           startDate: startDate,
                           lockDate: lockDate,
@@ -133,11 +133,11 @@ class _ModifyWeekState extends State<ModifyWeek> {
                           isComplete: isComplete,
                           season: null,
                         ),
-                        widget.week.id);
+                        widget.leg.id);
                     Navigator.pop(context);
                   }
                 },
-                child: const Text('Modify Week',
+                child: const Text('Modify Leg',
                     style: TextStyle(color: Colors.white)),
               )
             ],

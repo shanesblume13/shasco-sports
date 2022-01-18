@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/week_model.dart';
-import 'package:pick/core/viewmodels/week_crud_model.dart';
-import 'package:pick/ui/views/modify_week.dart';
+import 'package:pick/core/models/leg_model.dart';
+import 'package:pick/core/viewmodels/leg_crud_model.dart';
+import 'package:pick/ui/views/modify_leg.dart';
 import 'package:provider/provider.dart';
 
-class WeekDetail extends StatelessWidget {
-  final Week week;
+class LegDetail extends StatelessWidget {
+  final Leg leg;
 
-  const WeekDetail({
+  const LegDetail({
     Key? key,
-    required this.week,
+    required this.leg,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final weekProvider = Provider.of<WeekCrudModel>(context);
+    final legProvider = Provider.of<LegCrudModel>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Week Detail'),
+        title: const Text('Leg Detail'),
         actions: [
           IconButton(
             iconSize: 35,
             icon: const Icon(Icons.delete_forever),
             onPressed: () async {
-              await weekProvider.removeWeek(week.id);
+              await legProvider.removeLeg(leg.id);
               Navigator.pop(context);
             },
           ),
@@ -35,8 +35,8 @@ class WeekDetail extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => ModifyWeek(
-                    week: week,
+                  builder: (_) => ModifyLeg(
+                    leg: leg,
                   ),
                 ),
               );
@@ -49,7 +49,7 @@ class WeekDetail extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           // Hero(
-          //   tag: week.id,
+          //   tag: leg.id,
           //   child: Image.asset(
           //     'assets/${product.img}.jpg',
           //     height: MediaQuery.of(context).size.height * 0.35,
@@ -60,14 +60,14 @@ class WeekDetail extends StatelessWidget {
             height: 20,
           ),
           Text(
-            week.name,
+            leg.name,
             style: const TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 22,
                 fontStyle: FontStyle.italic),
           ),
           Text(
-            '${week.startDate} \$',
+            '${leg.startDate} \$',
             style: const TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 22,

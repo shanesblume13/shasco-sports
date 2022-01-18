@@ -5,7 +5,7 @@ import 'package:pick/core/viewmodels/matchup_crud_model.dart';
 import 'package:pick/core/viewmodels/league_crud_model.dart';
 import 'package:pick/core/viewmodels/season_crud_mold.dart';
 import 'package:pick/core/viewmodels/sport_crud_model.dart';
-import 'package:pick/core/viewmodels/week_crud_model.dart';
+import 'package:pick/core/viewmodels/leg_crud_model.dart';
 import 'package:pick/firebase_options.dart';
 import 'package:pick/locator.dart';
 import 'package:pick/ui/shared/palette.dart';
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => locator<WeekCrudModel>(),
+          create: (_) => locator<LegCrudModel>(),
         ),
         ChangeNotifierProvider(
           create: (_) => locator<MatchupCrudModel>(),
