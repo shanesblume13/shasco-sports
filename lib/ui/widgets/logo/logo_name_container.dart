@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pick/ui/shared/palette.dart';
 
 class LogoNameContainer extends StatelessWidget {
   const LogoNameContainer({
