@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class LogoSquareImageClip extends CustomPainter {
-  LogoSquareImageClip({
-    required this.color,
+class LogoImageClip extends CustomPainter {
+  LogoImageClip({
+    required this.strokeWidth,
   });
 
-  final Color color;
+  final double strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -13,8 +13,8 @@ class LogoSquareImageClip extends CustomPainter {
     double height = size.height;
     Path path = Path();
     Paint paint = Paint()
-      ..color = color
-      ..strokeWidth = 12
+      ..color = Colors.black
+      ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 

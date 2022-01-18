@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:pick/ui/shared/logo_square_image_clip.dart';
+import 'package:pick/ui/widgets/logo/logo_image_container.dart';
+import 'package:pick/ui/widgets/logo/logo_name_container.dart';
 
 class LogoView extends StatefulWidget {
   const LogoView({
@@ -12,57 +12,76 @@ class LogoView extends StatefulWidget {
 }
 
 class _LogoViewState extends State<LogoView> {
-  Color square2Color = Colors.blue;
-  Color square7Color = Colors.transparent;
-  Color logoColor = Colors.black;
   double logoSize = 120;
-  Alignment logoAlignment = Alignment.center;
-  int colorStep = 0;
+  int animationStep = 0;
+  double strokeWidth = 12;
+  double logoTextSize = 0;
+  double square2Radius = 0;
+  double square7Radius = 0;
 
   @override
   void initState() {
+    createAnimationFrames();
+
+    super.initState();
+  }
+
+  void createAnimationFrames() {
     Future.delayed(const Duration(milliseconds: 500)).then(
       (value) => setState(
         () {
-          square7Color = Colors.red;
+          //logoColor = Colors.red;
+          square7Radius = 30;
         },
       ),
     );
     Future.delayed(const Duration(milliseconds: 1000)).then(
       (value) => setState(
         () {
-          square7Color = Colors.transparent;
+          //logoColor = Colors.black;
+          square7Radius = 0;
         },
       ),
     );
     Future.delayed(const Duration(milliseconds: 1500)).then(
       (value) => setState(
         () {
-          square7Color = Colors.red;
+          //square2Color = Colors.grey;
+          //logoColor = Colors.red;
+          square7Radius = 30;
         },
       ),
     );
     Future.delayed(const Duration(milliseconds: 2000)).then(
       (value) => setState(
         () {
-          square7Color = Colors.transparent;
+          //logoColor = Colors.black;
+          square7Radius = 0;
         },
       ),
     );
     Future.delayed(const Duration(milliseconds: 2500)).then(
       (value) => setState(
         () {
-          square2Color = Colors.green;
-          logoColor = Colors.green;
+          //logoColor = Colors.green;
+          square2Radius = 30;
         },
       ),
     );
     Future.delayed(const Duration(milliseconds: 3500)).then(
       (value) => setState(
         () {
-          square2Color = Colors.transparent;
+          //logoColor = Colors.black;
           logoSize = 30;
-          logoAlignment = Alignment.centerLeft;
+          strokeWidth = 6;
+          square2Radius = 0;
+        },
+      ),
+    );
+    Future.delayed(const Duration(milliseconds: 4500)).then(
+      (value) => setState(
+        () {
+          logoTextSize = 24;
         },
       ),
     );
@@ -76,86 +95,25 @@ class _LogoViewState extends State<LogoView> {
           child: Text('Animated Logo'),
         ),
       ),
-      body: Center(
-        child: AnimatedAlign(
-          alignment: logoAlignment,
-          duration: const Duration(milliseconds: 1000),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: LogoSquare(
-              logoSize: logoSize,
-              logoColor: logoColor,
-              square2Color: square2Color,
-              square7Color: square7Color,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                LogoImageContainer(
+                  logoSize: logoSize,
+                  strokeWidth: strokeWidth,
+                  square2Radius: square2Radius,
+                  square7Radius: square7Radius,
+                ),
+                LogoNameContainer(logoTextSize: logoTextSize),
+              ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LogoSquare extends StatelessWidget {
-  const LogoSquare({
-    Key? key,
-    required this.logoSize,
-    required this.logoColor,
-    required this.square2Color,
-    required this.square7Color,
-  }) : super(key: key);
-
-  final double logoSize;
-  final Color logoColor;
-  final Color square2Color;
-  final Color square7Color;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: LogoSquareImageClip(color: logoColor),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: AnimatedContainer(
-          duration: const Duration(seconds: 1),
-          height: logoSize,
-          width: logoSize,
-          child: LayoutGrid(
-            rowGap: 12,
-            columnGap: 12,
-            areas: '''
-                . 2 .
-                . . .
-                7 . .
-              ''',
-            rowSizes: [
-              1.fr,
-              1.fr,
-              1.fr,
-            ],
-            columnSizes: [
-              1.fr,
-              1.fr,
-              1.fr,
-            ],
-            children: [
-              gridArea('2').containing(
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 1000),
-                  child: CircleAvatar(
-                    backgroundColor: square2Color,
-                  ),
-                ),
-              ),
-              gridArea('7').containing(
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 1000),
-                  child: CircleAvatar(
-                    backgroundColor: square7Color,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          ],
         ),
       ),
     );
