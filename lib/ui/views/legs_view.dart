@@ -28,7 +28,7 @@ class _LegsViewState extends State<LegsView> {
       ),
       appBar: AppBar(
         title: const Center(
-          child: Text('Leg View'),
+          child: Text('Legs View'),
         ),
       ),
       body: StreamBuilder(

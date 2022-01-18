@@ -12,7 +12,7 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   //locator.registerLazySingleton(() => ApiService('mathcups'));
-  locator.registerLazySingleton(() => ApiService('seasons'));
+  locator.registerLazySingleton(() => ApiService('legs'));
   locator.registerLazySingleton(() => MatchupCrudModel());
   locator.registerLazySingleton(() => LegCrudModel());
   locator.registerLazySingleton(() => SportCrudModel());

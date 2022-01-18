@@ -29,9 +29,7 @@ class Leg {
         lockDate = snapshot['lockDate'],
         endDate = snapshot['endDate'],
         isLocked = snapshot['isLocked'],
-        isComplete = snapshot['isComplete'],
-        season = Season.fromQueryDocumentSnapshot(
-            snapshot['season'], snapshot['season']['id']);
+        isComplete = snapshot['isComplete'];
 
   Leg.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : name = snapshot['name'],
@@ -39,9 +37,7 @@ class Leg {
         lockDate = snapshot['lockDate'],
         endDate = snapshot['endDate'],
         isLocked = snapshot['isLocked'],
-        isComplete = snapshot['isComplete'],
-        season = Season.fromDocumentSnapshot(
-            snapshot['season'], snapshot['season']['id']);
+        isComplete = snapshot['isComplete'];
 
   toJson() {
     return {
@@ -51,7 +47,6 @@ class Leg {
       'endDate': endDate,
       'isLocked': isLocked,
       'isComplete': isComplete,
-      'season': season?.toJson(),
     };
   }
 }
