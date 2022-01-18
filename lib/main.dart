@@ -8,6 +8,7 @@ import 'package:pick/core/viewmodels/sport_crud_model.dart';
 import 'package:pick/core/viewmodels/week_crud_model.dart';
 import 'package:pick/firebase_options.dart';
 import 'package:pick/locator.dart';
+import 'package:pick/ui/shared/palette.dart';
 import 'package:provider/provider.dart';
 import 'ui/router.dart' as my_router;
 
@@ -50,7 +51,9 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/auth',
         title: 'Pickem App',
-        theme: ThemeData(),
+        theme: ThemeData(
+          primarySwatch: Palette.shascoBlue,
+        ),
         onGenerateRoute: my_router.Router.generateRoute,
       ),
     );
