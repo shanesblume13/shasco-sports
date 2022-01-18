@@ -3,13 +3,13 @@
 A mobile app built with flutter and firebase that allows users to play various games based on sports predecitions.
 
 # To Do
-- Add a pick'em style format.
-    - With condifence points.
-    - Without confidence points.
-    - With spreads.
-    - Without spreads.
-- Add firebase authentication.
 - Create a splash screen.
-- Add a custom name and logo/icon.
+- Update icon logo and name.
+- Add a pick'em style format.
+    - Weekly legs
+    - With condifence points.
+    - With spreads.
+- Add pick'em leagues
+- Add pick'em metrics
 - Add a squares style format.
 
