@@ -9,24 +9,20 @@ class SeasonViewModel extends ChangeNotifier {
 
   List<Season> seasons = [];
 
-  Future<List<Season>> fetchSeasons(String? league) async {
+  // TODO: Only return seasons with a matching league
+  Future<List<Season>> fetchSeasons(String league) async {
     var result = await _apiService.getDataCollection();
 
-    if (league == null || league == '') {
-      seasons = result.docs
-          .map((doc) => Season.fromQueryDocumentSnapshot(doc, doc.id))
-          .toList();
-    } else {
-      seasons = result.docs
-          .map((doc) => Season.fromQueryDocumentSnapshot(doc, doc.id))
-          .toList();
-    }
+    seasons = result.docs
+        .map((doc) => Season.fromQueryDocumentSnapshot(doc, doc.id))
+        .toList();
 
     return seasons;
   }
 
+  // TODO: Only return seasons with a matching leagueå
   Stream<QuerySnapshot<Map<String, dynamic>>> fetchSeasonsAsStream(
-      String? league) {
+      String league) {
     return _apiService.streamDataCollection();
   }
 
@@ -40,13 +36,14 @@ class SeasonViewModel extends ChangeNotifier {
     return;
   }
 
-  Future updateLeg(Season data, String id) async {
+  Future updateSeason(Season data, String id) async {
     await _apiService.updateDocument(data.toJson(), id);
     return;
   }
 
-  Future addLeg(Season data) async {
-    var result = await _apiService.addDocument(data.toJson());
+  Future addSeason(Season data) async {
+    // var result = await _apiService.addDocument(data.toJson());
+    await _apiService.addDocument(data.toJson());
 
     return;
   }

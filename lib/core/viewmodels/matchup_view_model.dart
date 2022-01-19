@@ -37,7 +37,8 @@ class MatchupViewModel extends ChangeNotifier {
   }
 
   Future addMatchup(Matchup data) async {
-    var result = await _apiService.addDocument(data.toJson());
+    // var result = await _apiService.addDocument(data.toJson());
+    await _apiService.addDocument(data.toJson());
 
     return;
   }

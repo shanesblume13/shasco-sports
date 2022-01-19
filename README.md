@@ -11,6 +11,7 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [] 2 Users w/ Picks, firestore U
     - [] Stats, Graphs, and Results, Firestore U
 - Create a splash screen.
+- Update loading indicator to incorporate logo.
 - Add a pick'em style format.
 - Add pick'em leagues
 - Add pick'em metrics

@@ -35,5 +35,5 @@ class LogoImageClip extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldPainter) => true;
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

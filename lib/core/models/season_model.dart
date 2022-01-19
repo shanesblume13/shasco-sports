@@ -6,8 +6,6 @@ class Season {
   String league;
   String startDate;
   String endDate;
-  bool isLocked;
-  bool isComplete;
 
   Season({
     required this.id,
@@ -15,8 +13,6 @@ class Season {
     required this.league,
     required this.startDate,
     required this.endDate,
-    required this.isLocked,
-    required this.isComplete,
   });
 
   Season.fromQueryDocumentSnapshot(
@@ -24,17 +20,13 @@ class Season {
       : name = snapshot['name'],
         league = snapshot['league'],
         startDate = snapshot['startDate'],
-        endDate = snapshot['endDate'],
-        isLocked = snapshot['isLocked'],
-        isComplete = snapshot['isComplete'];
+        endDate = snapshot['endDate'];
 
   Season.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : name = snapshot['name'],
         league = snapshot['league'],
         startDate = snapshot['startDate'],
-        endDate = snapshot['endDate'],
-        isLocked = snapshot['isLocked'],
-        isComplete = snapshot['isComplete'];
+        endDate = snapshot['endDate'];
 
   toJson() {
     return {
@@ -42,8 +34,6 @@ class Season {
       'league': league,
       'startDate': startDate,
       'endDate': endDate,
-      'isLocked': isLocked,
-      'isComplete': isComplete,
     };
   }
 }

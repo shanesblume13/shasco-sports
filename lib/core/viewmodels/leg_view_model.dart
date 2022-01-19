@@ -37,7 +37,8 @@ class LegViewModel extends ChangeNotifier {
   }
 
   Future addLeg(Leg data) async {
-    var result = await _apiService.addDocument(data.toJson());
+    // var result = await _apiService.addDocument(data.toJson());
+    await _apiService.addDocument(data.toJson());
 
     return;
   }
