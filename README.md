@@ -4,12 +4,12 @@ A mobile app built with flutter and firebase that allows users to play various g
 
 # To Do
 - Demo a week of picks
-    - League: NFL
-    - Season: 2021-2022
-    - Leg: Week 18
-    - 10 Matchups
-    - 2 Users
-    - Stats, Graphs, and Results
+    - [x] League: NFL, local
+    - [] Season: 2021-2022, firestore, SA
+    - [] Leg: Week 18, firestore, SA
+    - [] 10 Matchups, firestore, LA
+    - [] 2 Users w/ Picks, firestore, LU
+    - [] Stats, Graphs, and Results, ?, VO
 - Create a splash screen.
 - Add a pick'em style format.
 - Add pick'em leagues
