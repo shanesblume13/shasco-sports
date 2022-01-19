@@ -4,8 +4,8 @@ class Season {
   String id;
   String name;
   String league;
-  String startDate;
-  String endDate;
+  DateTime startDate;
+  DateTime endDate;
 
   Season({
     required this.id,
@@ -19,14 +19,14 @@ class Season {
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot, this.id)
       : name = snapshot['name'],
         league = snapshot['league'],
-        startDate = snapshot['startDate'],
-        endDate = snapshot['endDate'];
+        startDate = (snapshot['startDate'] as Timestamp).toDate(),
+        endDate = (snapshot['endDate'] as Timestamp).toDate();
 
   Season.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : name = snapshot['name'],
         league = snapshot['league'],
-        startDate = snapshot['startDate'],
-        endDate = snapshot['endDate'];
+        startDate = (snapshot['startDate'] as Timestamp).toDate(),
+        endDate = (snapshot['endDate'] as Timestamp).toDate();
 
   toJson() {
     return {
