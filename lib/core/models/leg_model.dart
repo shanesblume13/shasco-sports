@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pick/core/models/season.dart';
+import 'package:pick/core/models/season_model.dart';
 
 class Leg {
   String id;

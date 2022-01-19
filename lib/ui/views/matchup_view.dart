@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/matchup_model.dart';
-import 'package:pick/core/viewmodels/matchup_crud_model.dart';
+import 'package:pick/core/viewmodels/matchup_view_model.dart';
 import 'package:pick/ui/widgets/matchups/matchup_listview.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class _MatchupsViewState extends State<MatchupsView> {
 
   @override
   Widget build(BuildContext context) {
-    final matchupProvider = Provider.of<MatchupCrudModel>(context);
+    final matchupProvider = Provider.of<MatchupViewModel>(context);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(

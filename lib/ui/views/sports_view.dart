@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/sport_model.dart';
-import 'package:pick/core/viewmodels/sport_crud_model.dart';
+import 'package:pick/core/viewmodels/sport_view_model.dart';
 import 'package:pick/ui/widgets/sports/sport_cards_listview.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +9,7 @@ class SportsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sportProvider = Provider.of<SportCrudModel>(context);
+    final sportProvider = Provider.of<SportViewModel>(context);
     final List<Sport> sports = sportProvider.fetchSports();
 
     return Scaffold(

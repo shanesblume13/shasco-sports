@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
-import 'package:pick/core/viewmodels/leg_crud_model.dart';
+import 'package:pick/core/viewmodels/leg_view_model.dart';
 import 'package:pick/ui/widgets/legs/legs_listview.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class _LegsViewState extends State<LegsView> {
 
   @override
   Widget build(BuildContext context) {
-    final legProvider = Provider.of<LegCrudModel>(context);
+    final legProvider = Provider.of<LegViewModel>(context);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(

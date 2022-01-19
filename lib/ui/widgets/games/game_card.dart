@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:pick/core/models/game.dart';
+import 'package:pick/core/models/game_model.dart';
 import 'package:pick/ui/views/legs_view.dart';
 import 'package:pick/ui/widgets/games/game_card_image_clip.dart';
 import 'package:pick/ui/widgets/games/game_card_name_container.dart';

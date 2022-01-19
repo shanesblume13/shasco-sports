@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/matchup_model.dart';
-import 'package:pick/core/viewmodels/matchup_crud_model.dart';
+import 'package:pick/core/viewmodels/matchup_view_model.dart';
 import 'package:provider/provider.dart';
 
 class AddMathcupView extends StatefulWidget {
@@ -24,7 +24,7 @@ class _AddMathcupViewState extends State<AddMathcupView> {
 
   @override
   Widget build(BuildContext context) {
-    var matchupProvider = Provider.of<MatchupCrudModel>(context);
+    var matchupProvider = Provider.of<MatchupViewModel>(context);
     List<String> teamIds = ['1', '2', '3', '4', '5'];
 
     return Scaffold(

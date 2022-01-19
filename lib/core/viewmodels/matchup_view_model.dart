@@ -1,42 +1,42 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/leg_model.dart';
+import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/services/api_service.dart';
 import 'package:pick/locator.dart';
 
-class LegCrudModel extends ChangeNotifier {
+class MatchupViewModel extends ChangeNotifier {
   final ApiService _apiService = locator<ApiService>();
 
-  List<Leg> legs = [];
+  List<Matchup> matchups = [];
 
-  Future<List<Leg>> fetcLegs() async {
+  Future<List<Matchup>> fetchMatchups() async {
     var result = await _apiService.getDataCollection();
-    legs = result.docs
-        .map((doc) => Leg.fromQueryDocumentSnapshot(doc, doc.id))
+    matchups = result.docs
+        .map((doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id))
         .toList();
-    return legs;
+    return matchups;
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> fetchLegsAsStream() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchMatchupsAsStream() {
     return _apiService.streamDataCollection();
   }
 
-  Future<Leg> getLegById(String id) async {
+  Future<Matchup> getMatchupById(String id) async {
     var doc = await _apiService.getDocumentById(id);
-    return Leg.fromDocumentSnapshot(doc, doc.id);
+    return Matchup.fromDocumentSnapshot(doc, doc.id);
   }
 
-  Future removeLeg(String id) async {
+  Future removeMatchup(String id) async {
     await _apiService.removeDocument(id);
     return;
   }
 
-  Future updateLeg(Leg data, String id) async {
+  Future updateMatchup(Matchup data, String id) async {
     await _apiService.updateDocument(data.toJson(), id);
     return;
   }
 
-  Future addLeg(Leg data) async {
+  Future addMatchup(Matchup data) async {
     var result = await _apiService.addDocument(data.toJson());
 
     return;

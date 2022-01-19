@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/game.dart';
-import 'package:pick/core/viewmodels/game_crud_model.dart';
+import 'package:pick/core/models/game_model.dart';
+import 'package:pick/core/viewmodels/game_view_model.dart';
 import 'package:pick/ui/widgets/games/game_cards_listview.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,7 @@ class GamesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gameProvider = Provider.of<GameCrudModel>(context);
+    final gameProvider = Provider.of<GameViewModel>(context);
     final List<Game> games = gameProvider.fetchGames();
 
     return Scaffold(

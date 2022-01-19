@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
-import 'package:pick/core/viewmodels/leg_crud_model.dart';
+import 'package:pick/core/viewmodels/leg_view_model.dart';
 import 'package:provider/provider.dart';
 
 class ModifyLeg extends StatefulWidget {
@@ -29,7 +29,7 @@ class _ModifyLegState extends State<ModifyLeg> {
 
   @override
   Widget build(BuildContext context) {
-    final legProvider = Provider.of<LegCrudModel>(context);
+    final legProvider = Provider.of<LegViewModel>(context);
 
     return Scaffold(
       appBar: AppBar(

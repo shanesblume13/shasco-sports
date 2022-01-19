@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/game.dart';
+import 'package:pick/core/models/game_model.dart';
 import 'package:pick/ui/widgets/games/game_card.dart';
 
 class GameCardsListview extends StatelessWidget {

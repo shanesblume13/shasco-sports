@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/season.dart';
+import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/services/api_service.dart';
 import 'package:pick/locator.dart';
 
-class SeasonCrudModel extends ChangeNotifier {
+class SeasonViewModel extends ChangeNotifier {
   final ApiService _apiService = locator<ApiService>();
 
   List<Season> seasons = [];

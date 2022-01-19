@@ -5,11 +5,11 @@ A mobile app built with flutter and firebase that allows users to play various g
 # To Do
 - Demo a week of picks
     - [x] League: NFL, local
-    - [] Season: 2021-2022, firestore, SA
-    - [] Leg: Week 18, firestore, SA
-    - [] 10 Matchups, firestore, LA
-    - [] 2 Users w/ Picks, firestore, LU
-    - [] Stats, Graphs, and Results, ?, VO
+    - [] Season: 2021-2022, firestore SA
+    - [] Leg: Week 18, firestore SA
+    - [] 10 Matchups, firestore LA
+    - [] 2 Users w/ Picks, firestore U
+    - [] Stats, Graphs, and Results, Firestore U
 - Create a splash screen.
 - Add a pick'em style format.
 - Add pick'em leagues
@@ -17,6 +17,7 @@ A mobile app built with flutter and firebase that allows users to play various g
 - Add a squares style format.
 
 # Issues
+- locator.registerLazySingleton(() => ApiService(<Entity Name>)) needs to be set for multiple entities.
 - App signs with dominionsystems email unless XCode is open and updated.
 - Fastlane files are removed on pub get.
 - Podfile reverts platform:ios version to 9.0 on pub get.

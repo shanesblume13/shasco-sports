@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/season.dart';
-import 'package:pick/core/viewmodels/season_crud_mold.dart';
+import 'package:pick/core/models/season_model.dart';
+import 'package:pick/core/viewmodels/season_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SeasonsView extends StatefulWidget {
-  final String? league;
+  final String league;
 
   const SeasonsView({
     Key? key,
-    this.league,
+    required this.league,
   }) : super(key: key);
 
   @override
@@ -21,8 +21,8 @@ class _SeasonsViewState extends State<SeasonsView> {
 
   @override
   Widget build(BuildContext context) {
-    final seasonProvider = Provider.of<SeasonCrudModel>(context);
-    String? league = widget.league;
+    final seasonProvider = Provider.of<SeasonViewModel>(context);
+    String league = widget.league;
 
     return Scaffold(
       // floatingActionButton: FloatingActionButton(
@@ -37,28 +37,17 @@ class _SeasonsViewState extends State<SeasonsView> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: seasonProvider.fetchSeasonsAsStream(league ?? ''),
+        stream: seasonProvider.fetchSeasonsAsStream(league),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.hasData) {
-            if (league == null || league == '') {
-              seasons = snapshot.data?.docs
-                      .map((doc) =>
-                          Season.fromQueryDocumentSnapshot(doc, doc.id))
-                      .toList() ??
-                  [];
-            } else {
-              seasons = snapshot.data?.docs
-                      .map((doc) =>
-                          Season.fromQueryDocumentSnapshot(doc, doc.id))
-                      .where((season) =>
-                          season.league.toString().toLowerCase() ==
-                          league.toLowerCase())
-                      .toList() ??
-                  [];
-            }
-
-            // return SeasonsListview(seasons: seasons);
+            seasons = snapshot.data?.docs
+                    .map((doc) => Season.fromQueryDocumentSnapshot(doc, doc.id))
+                    .where((season) =>
+                        season.league.toString().toLowerCase() ==
+                        league.toLowerCase())
+                    .toList() ??
+                [];
             return Text(
               'Season count: ${seasons.length}',
             );
