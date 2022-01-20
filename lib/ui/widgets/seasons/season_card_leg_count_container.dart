@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
+import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/viewmodels/leg_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SeasonCardLegCountContainer extends StatefulWidget {
   const SeasonCardLegCountContainer({
     Key? key,
-    required this.seasonId,
+    required this.season,
   }) : super(key: key);
 
-  final String seasonId;
+  final Season season;
 
   @override
   State<SeasonCardLegCountContainer> createState() =>
@@ -26,7 +27,7 @@ class _SeasonCardLegCountContainerState
     int legCount = 0;
 
     return FutureBuilder<List<Leg>>(
-        future: legProvider.fetchLegs(widget.seasonId),
+        future: legProvider.fetchLegs(season: widget.season),
         builder: (context, AsyncSnapshot<List<Leg>> snapshot) {
           if (snapshot.hasData) {
             legCount = snapshot.data?.length ?? 0;

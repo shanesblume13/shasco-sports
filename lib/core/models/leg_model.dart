@@ -3,12 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Leg {
   String id;
   String name;
-  String startDate;
-  String lockDate;
-  String endDate;
+  DateTime startDate;
+  DateTime lockDate;
+  DateTime endDate;
   bool isLocked;
   bool isComplete;
-  String seasonId;
+  DocumentReference? seasonReference;
 
   Leg({
     required this.id,
@@ -18,27 +18,27 @@ class Leg {
     required this.endDate,
     required this.isLocked,
     required this.isComplete,
-    required this.seasonId,
+    required this.seasonReference,
   });
 
   Leg.fromQueryDocumentSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot, this.id)
       : name = snapshot['name'],
-        startDate = snapshot['startDate'],
-        lockDate = snapshot['lockDate'],
-        endDate = snapshot['endDate'],
+        startDate = (snapshot['startDate'] as Timestamp).toDate(),
+        lockDate = (snapshot['lockDate'] as Timestamp).toDate(),
+        endDate = (snapshot['endDate'] as Timestamp).toDate(),
         isLocked = snapshot['isLocked'],
         isComplete = snapshot['isComplete'],
-        seasonId = snapshot['seasonId'];
+        seasonReference = snapshot['seasonReference'];
 
   Leg.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : name = snapshot['name'],
-        startDate = snapshot['startDate'],
-        lockDate = snapshot['lockDate'],
-        endDate = snapshot['endDate'],
+        startDate = (snapshot['startDate'] as Timestamp).toDate(),
+        lockDate = (snapshot['lockDate'] as Timestamp).toDate(),
+        endDate = (snapshot['endDate'] as Timestamp).toDate(),
         isLocked = snapshot['isLocked'],
         isComplete = snapshot['isComplete'],
-        seasonId = snapshot['seasonId'];
+        seasonReference = snapshot['seasonReference'];
 
   toJson() {
     return {
@@ -48,7 +48,7 @@ class Leg {
       'endDate': endDate,
       'isLocked': isLocked,
       'isComplete': isComplete,
-      'seasonId': seasonId,
+      'seasonReference': seasonReference,
     };
   }
 }

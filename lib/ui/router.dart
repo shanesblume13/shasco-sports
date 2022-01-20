@@ -8,7 +8,6 @@ import 'package:pick/ui/views/matchup_view.dart';
 import 'package:pick/ui/views/leagues_view.dart';
 import 'package:pick/ui/views/seasons_view.dart';
 import 'package:pick/ui/views/sports_view.dart';
-import 'package:pick/ui/views/legs_view.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -45,10 +44,10 @@ class Router {
         return MaterialPageRoute(
           builder: (_) => const MatchupsView(),
         );
-      case '/legs':
-        return MaterialPageRoute(
-          builder: (_) => const LegsView(),
-        );
+      // case '/legs':
+      //   return MaterialPageRoute(
+      //     builder: (_) => const LegsView(seasonReference: null),
+      //   );
       case '/addMatchup':
         return MaterialPageRoute(
           builder: (_) => const AddMathcupView(),

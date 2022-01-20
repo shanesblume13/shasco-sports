@@ -6,7 +6,7 @@ class LegStartClip extends StatelessWidget {
     required this.startDate,
   }) : super(key: key);
 
-  final String startDate;
+  final DateTime startDate;
 
   @override
   Widget build(BuildContext context) {

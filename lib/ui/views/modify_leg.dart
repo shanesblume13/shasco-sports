@@ -61,7 +61,7 @@ class _ModifyLegState extends State<ModifyLeg> {
                 height: 16,
               ),
               TextFormField(
-                  initialValue: widget.leg.startDate,
+                  initialValue: widget.leg.startDate.toString(),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Start Date',
@@ -75,7 +75,7 @@ class _ModifyLegState extends State<ModifyLeg> {
                   },
                   onSaved: (value) => startDate = value ?? ''),
               TextFormField(
-                  initialValue: widget.leg.lockDate,
+                  initialValue: widget.leg.lockDate.toString(),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Lock Date',
@@ -89,7 +89,7 @@ class _ModifyLegState extends State<ModifyLeg> {
                   },
                   onSaved: (value) => lockDate = value ?? ''),
               TextFormField(
-                  initialValue: widget.leg.endDate,
+                  initialValue: widget.leg.endDate.toString(),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'End Date',
@@ -124,16 +124,15 @@ class _ModifyLegState extends State<ModifyLeg> {
                     _formKey.currentState?.save();
                     await legProvider.updateLeg(
                         Leg(
-                          id: widget.leg.id,
-                          name: name,
-                          startDate: startDate,
-                          lockDate: lockDate,
-                          endDate: endDate,
-                          isLocked: isLocked,
-                          isComplete: isComplete,
-                          // TODO: Add seasonId
-                          seasonId: '',
-                        ),
+                            id: widget.leg.id,
+                            name: name,
+                            startDate: DateTime.parse(startDate),
+                            lockDate: DateTime.parse(lockDate),
+                            endDate: DateTime.parse(endDate),
+                            isLocked: isLocked,
+                            isComplete: isComplete,
+                            // TODO: Add seasonId
+                            seasonReference: null),
                         widget.leg.id);
                     Navigator.pop(context);
                   }

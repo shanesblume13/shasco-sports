@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
+import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/viewmodels/leg_view_model.dart';
 import 'package:pick/ui/widgets/legs/legs_listview.dart';
 import 'package:provider/provider.dart';
 
 class LegsView extends StatefulWidget {
-  const LegsView({Key? key}) : super(key: key);
+  final Season season;
+
+  const LegsView({
+    Key? key,
+    required this.season,
+  }) : super(key: key);
 
   @override
   _LegsViewState createState() => _LegsViewState();
@@ -32,7 +38,7 @@ class _LegsViewState extends State<LegsView> {
       ),
       body: FutureBuilder<List<Leg>>(
         // TODO: Add seasonId
-        future: legProvider.fetchLegs(''),
+        future: legProvider.fetchLegs(season: widget.season),
         builder: (context, AsyncSnapshot<List<Leg>> snapshot) {
           if (snapshot.hasData) {
             legs = snapshot.data?.toList() ?? [];

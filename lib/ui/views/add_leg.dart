@@ -14,9 +14,9 @@ class _AddLegViewState extends State<AddLegView> {
   final _formKey = GlobalKey<FormState>();
   String name = '';
   int order = 0;
-  String startDate = '';
-  String lockDate = '';
-  String endDate = '';
+  DateTime startDate = DateTime.now();
+  DateTime lockDate = DateTime.now();
+  DateTime endDate = DateTime.now();
   bool isLocked = true;
   bool isComplete = false;
 
@@ -75,7 +75,7 @@ class _AddLegViewState extends State<AddLegView> {
                     return 'Please enter a Start Date';
                   }
                 },
-                onSaved: (value) => startDate = value ?? '',
+                onSaved: (value) => startDate = DateTime.parse(value ?? ''),
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -89,7 +89,7 @@ class _AddLegViewState extends State<AddLegView> {
                     return 'Please enter a Lock Date';
                   }
                 },
-                onSaved: (value) => lockDate = value ?? '',
+                onSaved: (value) => lockDate = DateTime.parse(value ?? ''),
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -103,7 +103,7 @@ class _AddLegViewState extends State<AddLegView> {
                     return 'Please enter an End Date';
                   }
                 },
-                onSaved: (value) => endDate = value ?? '',
+                onSaved: (value) => endDate = DateTime.parse(value ?? ''),
               ),
               Checkbox(
                 value: isLocked,
@@ -135,7 +135,7 @@ class _AddLegViewState extends State<AddLegView> {
                         isLocked: isLocked,
                         isComplete: isComplete,
                         // TODO: Implement seasonId
-                        seasonId: '',
+                        seasonReference: null,
                       ),
                     );
                     Navigator.pop(context);

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
+import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/services/leg_api_service.dart';
 import 'package:pick/locator.dart';
 
@@ -9,16 +10,18 @@ class LegViewModel extends ChangeNotifier {
 
   List<Leg> legs = [];
 
-  Future<List<Leg>> fetchLegs(String seasonId) async {
-    // TODO: use SeasonId to fetch legs (docRef?)
+  Future<List<Leg>> fetchLegs({
+    required Season season,
+  }) async {
     var result = await _apiService.getDataCollection();
     legs = result.docs
         .map((doc) => Leg.fromQueryDocumentSnapshot(doc, doc.id))
+        .where((leg) => leg.seasonReference == (season.reference))
         .toList();
     return legs;
   }
 
-  Stream<List<Leg>> fetchLegsAsStream(String seasonId) {
+  Stream<List<Leg>> fetchLegsAsStream(DocumentReference? seasonReference) {
     Stream<List<Leg>> legsStream;
     Stream<QuerySnapshot<Map<String, dynamic>>> result =
         _apiService.streamDataCollection();
@@ -29,8 +32,7 @@ class LegViewModel extends ChangeNotifier {
             .map(
               (doc) => Leg.fromQueryDocumentSnapshot(doc, doc.id),
             )
-            .where(
-                (leg) => leg.seasonId.toLowerCase() == seasonId.toLowerCase())
+            .where((leg) => leg.seasonReference == seasonReference)
             .toList();
       },
     );
