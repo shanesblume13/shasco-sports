@@ -52,7 +52,6 @@ class SeasonCard extends StatelessWidget {
                 SeasonCardNameConatiner(name: season.name),
               ),
               gridArea('legCount').containing(
-                // TODO: Figure out how to use seasonId
                 SeasonCardLegCountContainer(season: season),
               ),
             ],

@@ -131,7 +131,6 @@ class _ModifyLegState extends State<ModifyLeg> {
                           endDate: DateTime.parse(endDate),
                           isLocked: isLocked,
                           isComplete: isComplete,
-                          // TODO: Add seasonId
                           seasonReference: widget.leg.seasonReference,
                         ),
                         widget.leg.id);

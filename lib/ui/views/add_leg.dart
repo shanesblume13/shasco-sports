@@ -139,7 +139,6 @@ class _AddLegViewState extends State<AddLegView> {
                         endDate: endDate,
                         isLocked: isLocked,
                         isComplete: isComplete,
-                        // TODO: Implement seasonId
                         seasonReference: widget.season.reference,
                       ),
                     );

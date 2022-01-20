@@ -51,7 +51,6 @@ class LegCard extends StatelessWidget {
                 LegCardNameConatiner(name: leg.name),
               ),
               gridArea('matchupCount').containing(
-                // TODO: Figure out how to use seasonId
                 LegCardMatchupCountContainer(leg: leg),
               ),
             ],
