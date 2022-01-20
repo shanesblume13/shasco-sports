@@ -37,8 +37,8 @@ class _SeasonsViewState extends State<SeasonsView> {
           child: Text('Seasons View'),
         ),
       ),
-      body: StreamBuilder<List<Season>>(
-        stream: seasonProvider.fetchSeasonsAsStream(league),
+      body: FutureBuilder<List<Season>>(
+        future: seasonProvider.fetchSeasons(league),
         builder: (context, AsyncSnapshot<List<Season>> snapshot) {
           if (snapshot.hasData) {
             seasons = snapshot.data?.toList() ?? [];

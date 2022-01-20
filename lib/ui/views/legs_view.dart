@@ -30,9 +30,9 @@ class _LegsViewState extends State<LegsView> {
           child: Text('Legs View'),
         ),
       ),
-      body: StreamBuilder<List<Leg>>(
+      body: FutureBuilder<List<Leg>>(
         // TODO: Add seasonId
-        stream: legProvider.fetchLegsAsStream(''),
+        future: legProvider.fetchLegs(''),
         builder: (context, AsyncSnapshot<List<Leg>> snapshot) {
           if (snapshot.hasData) {
             legs = snapshot.data?.toList() ?? [];

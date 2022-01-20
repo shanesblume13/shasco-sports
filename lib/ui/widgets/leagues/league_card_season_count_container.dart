@@ -24,8 +24,8 @@ class _LeagueCardSeasonCountContainerState
         Provider.of<SeasonViewModel>(context);
     int seasonCount = 0;
 
-    return StreamBuilder<List<Season>>(
-        stream: seasonProvider.fetchSeasonsAsStream(widget.league),
+    return FutureBuilder<List<Season>>(
+        future: seasonProvider.fetchSeasons(widget.league),
         builder: (context, AsyncSnapshot<List<Season>> snapshot) {
           if (snapshot.hasData) {
             seasonCount = snapshot.data?.length ?? 0;

@@ -25,8 +25,8 @@ class _SeasonCardLegCountContainerState
     final LegViewModel legProvider = Provider.of<LegViewModel>(context);
     int legCount = 0;
 
-    return StreamBuilder<List<Leg>>(
-        stream: legProvider.fetchLegsAsStream(widget.seasonId),
+    return FutureBuilder<List<Leg>>(
+        future: legProvider.fetchLegs(widget.seasonId),
         builder: (context, AsyncSnapshot<List<Leg>> snapshot) {
           if (snapshot.hasData) {
             legCount = snapshot.data?.length ?? 0;
