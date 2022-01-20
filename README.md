@@ -11,6 +11,7 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [] 2 Users w/ Picks, firestore U
     - [] Stats, Graphs, and Results, Firestore U
 - Add user permissions
+- Use image clip icons and colors to distinguish status.
 - Figure out how to handle dates correctly.
 - Create a splash screen.
 - Update loading indicator to incorporate logo.

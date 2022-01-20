@@ -14,7 +14,7 @@ class SeasonCardImageClip extends StatelessWidget {
       child: Container(
         color: Palette.shascoBlue,
         child: Icon(
-          Icons.date_range,
+          Icons.calendar_today,
           color: Palette.shascoGrey,
           size: 60,
         ),
