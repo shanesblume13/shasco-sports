@@ -6,12 +6,12 @@ import 'package:pick/ui/widgets/legs/leg_cards_listview.dart';
 import 'package:provider/provider.dart';
 
 class LegsView extends StatefulWidget {
-  final Season season;
-
   const LegsView({
     Key? key,
     required this.season,
   }) : super(key: key);
+
+  final Season season;
 
   @override
   _LegsViewState createState() => _LegsViewState();
@@ -25,12 +25,12 @@ class _LegsViewState extends State<LegsView> {
     final legProvider = Provider.of<LegViewModel>(context);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.pushNamed(context, '/addLeg');
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: const Icon(Icons.add),
+      //   onPressed: () {
+      //     Navigator.pushNamed(context, '/addLeg');
+      //   },
+      // ),
       appBar: AppBar(
         title: const Center(
           child: Text('Legs View'),

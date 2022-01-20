@@ -6,7 +6,7 @@ class Season {
   String league;
   DateTime startDate;
   DateTime endDate;
-  DocumentReference reference;
+  DocumentReference? reference;
 
   Season({
     required this.id,
@@ -14,20 +14,20 @@ class Season {
     required this.league,
     required this.startDate,
     required this.endDate,
-    required this.reference,
+    this.reference,
   });
 
   Season.fromQueryDocumentSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot, this.id)
-      : name = snapshot['name'],
-        league = snapshot['league'],
+      : name = snapshot['name'] as String,
+        league = snapshot['league'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
         reference = snapshot.reference;
 
   Season.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
-      : name = snapshot['name'],
-        league = snapshot['league'],
+      : name = snapshot['name'] as String,
+        league = snapshot['league'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
         reference = snapshot.reference;

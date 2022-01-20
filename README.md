@@ -4,12 +4,14 @@ A mobile app built with flutter and firebase that allows users to play various g
 
 # To Do
 - Demo a week of picks
-    - [x] League: NFL, local
-    - [] Season: 2021-2022, firestore SA
-    - [] Leg: Week 1, firestore SA
-    - [] 10 Matchups, firestore LA
-    - [] 2 Users w/ Picks, firestore U
-    - [] Stats, Graphs, and Results, Firestore U
+    - [x] League: NFL
+    - [x] Season: 2021-2022
+    - [x] Leg: Week 1
+    - [] 3 Matchups
+    - [] 2 Teams
+    - [] 2 Users w/ Picks
+    - [] Stats, Graphs, and Results
+- Add local data to firestore
 - Add user permissions
 - Use image clip icons and colors to distinguish status.
 - Figure out how to handle dates correctly.

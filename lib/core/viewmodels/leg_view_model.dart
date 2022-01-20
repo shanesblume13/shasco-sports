@@ -23,7 +23,9 @@ class LegViewModel extends ChangeNotifier {
     return legs;
   }
 
-  Stream<List<Leg>> fetchLegsAsStream(DocumentReference? seasonReference) {
+  Stream<List<Leg>> fetchLegsAsStream({
+    required Season season,
+  }) {
     Stream<List<Leg>> legsStream;
     Stream<QuerySnapshot<Map<String, dynamic>>> result =
         _apiService.streamDataCollection();
@@ -34,7 +36,7 @@ class LegViewModel extends ChangeNotifier {
             .map(
               (doc) => Leg.fromQueryDocumentSnapshot(doc, doc.id),
             )
-            .where((leg) => leg.seasonReference == seasonReference)
+            .where((leg) => leg.seasonReference == season.reference)
             .toList();
       },
     );

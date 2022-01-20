@@ -25,23 +25,23 @@ class Leg {
 
   Leg.fromQueryDocumentSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot, this.id)
-      : name = snapshot['name'],
+      : name = snapshot['name'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         lockDate = (snapshot['lockDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
-        isLocked = snapshot['isLocked'],
-        isComplete = snapshot['isComplete'],
-        seasonReference = snapshot['seasonReference'],
+        isLocked = snapshot['isLocked'] as bool,
+        isComplete = snapshot['isComplete'] as bool,
+        seasonReference = snapshot['seasonReference'] as DocumentReference,
         reference = snapshot.reference;
 
   Leg.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
-      : name = snapshot['name'],
+      : name = snapshot['name'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         lockDate = (snapshot['lockDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
-        isLocked = snapshot['isLocked'],
-        isComplete = snapshot['isComplete'],
-        seasonReference = snapshot['seasonReference'],
+        isLocked = snapshot['isLocked'] as bool,
+        isComplete = snapshot['isComplete'] as bool,
+        seasonReference = snapshot['seasonReference'] as DocumentReference,
         reference = snapshot.reference;
 
   toJson() {

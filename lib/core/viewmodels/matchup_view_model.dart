@@ -16,12 +16,32 @@ class MatchupViewModel extends ChangeNotifier {
     var result = await _apiService.getDataCollection();
     matchups = result.docs
         .map((doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id))
+        .where((matchup) => matchup.legReference == leg.reference)
         .toList();
+
+    matchups.sort((a, b) => a.startDateTime.compareTo(b.startDateTime));
     return matchups;
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> fetchMatchupsAsStream() {
-    return _apiService.streamDataCollection();
+  Stream<List<Matchup>> fetchMatchupsAsStream({
+    required Leg leg,
+  }) {
+    Stream<List<Matchup>> matchupsStream;
+    Stream<QuerySnapshot<Map<String, dynamic>>> result =
+        _apiService.streamDataCollection();
+
+    matchupsStream = result.map(
+      (snapshot) {
+        return snapshot.docs
+            .map(
+              (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
+            )
+            .where((matchup) => matchup.legReference == leg.reference)
+            .toList();
+      },
+    );
+
+    return matchupsStream;
   }
 
   Future<Matchup> getMatchupById(String id) async {

@@ -5,8 +5,8 @@ import 'package:pick/ui/widgets/matchups/matchup_pick_score_divider.dart';
 import 'package:pick/ui/widgets/matchups/team_image_container.dart';
 import 'package:pick/ui/widgets/matchups/team_name_container.dart';
 
-class MatchupsListview extends StatelessWidget {
-  MatchupsListview({
+class MatchupCardsListview extends StatelessWidget {
+  MatchupCardsListview({
     Key? key,
     required this.matchups,
   }) : super(key: key);
@@ -62,7 +62,8 @@ class MatchupsListview extends StatelessWidget {
                     splashColor: Colors.transparent,
                     child: TeamNameContainer(
                       isPicked: false, //_picks.contains(i),
-                      teamName: matchups[i].awayTeamId,
+                      // TODO: Get team name from id
+                      teamName: matchups[i].awayTeamId.toString(),
                       isHome: false,
                     ),
                   ),
@@ -84,7 +85,8 @@ class MatchupsListview extends StatelessWidget {
                     splashColor: Colors.transparent,
                     child: TeamNameContainer(
                       isPicked: false, //_picks.contains(i + 1),
-                      teamName: matchups[i].homeTeamId,
+                      // TODO: Get team name from id
+                      teamName: matchups[i].homeTeamId.toString(),
                       isHome: true,
                     ),
                   ),

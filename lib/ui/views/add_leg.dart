@@ -5,11 +5,12 @@ import 'package:pick/core/viewmodels/leg_view_model.dart';
 import 'package:provider/provider.dart';
 
 class AddLegView extends StatefulWidget {
-  final Season season;
   const AddLegView({
     Key? key,
     required this.season,
   }) : super(key: key);
+
+  final Season season;
 
   @override
   _AddLegViewState createState() => _AddLegViewState();
@@ -139,7 +140,7 @@ class _AddLegViewState extends State<AddLegView> {
                         endDate: endDate,
                         isLocked: isLocked,
                         isComplete: isComplete,
-                        seasonReference: widget.season.reference,
+                        seasonReference: widget.season.reference!,
                       ),
                     );
                     Navigator.pop(context);

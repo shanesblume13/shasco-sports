@@ -1,11 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/viewmodels/matchup_view_model.dart';
 import 'package:provider/provider.dart';
 
 class AddMathcupView extends StatefulWidget {
-  const AddMathcupView({Key? key}) : super(key: key);
+  const AddMathcupView({
+    Key? key,
+    required this.leg,
+  }) : super(key: key);
+
+  final Leg leg;
 
   @override
   _AddMathcupViewState createState() => _AddMathcupViewState();
@@ -151,14 +156,15 @@ class _AddMathcupViewState extends State<AddMathcupView> {
                     await matchupProvider.addMatchup(
                       Matchup(
                         id: '',
-                        legId: legId as DocumentReference,
-                        legOrder: legOrder,
-                        homeTeamId: homeTeamId,
-                        awayTeamId: awayTeamId,
+                        homeTeamId: int.parse(homeTeamId),
+                        awayTeamId: int.parse(awayTeamId),
+                        startDateTime: DateTime.now(),
+                        lockDateTime: DateTime.now(),
                         isLocked: isLocked,
                         isComplete: isComplete,
                         homeTeamSpread: homeTeamSpread,
-                        winningTeamId: winningTeamId,
+                        winningTeamId: int.parse(winningTeamId),
+                        legReference: widget.leg.reference!,
                       ),
                     );
                     Navigator.pop(context);

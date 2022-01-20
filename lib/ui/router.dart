@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pick/ui/views/add_matchup.dart';
 import 'package:pick/ui/views/auth_view.dart';
 import 'package:pick/ui/views/games_view.dart';
 import 'package:pick/ui/views/logo_view.dart';
-import 'package:pick/ui/views/matchup_view.dart';
 import 'package:pick/ui/views/leagues_view.dart';
 import 'package:pick/ui/views/seasons_view.dart';
 import 'package:pick/ui/views/sports_view.dart';
@@ -39,18 +37,18 @@ class Router {
         return MaterialPageRoute(
           builder: (_) => const SeasonsView(league: ''),
         );
-      case '/matchups':
-        return MaterialPageRoute(
-          builder: (_) => const MatchupsView(),
-        );
+      // case '/matchups':
+      //   return MaterialPageRoute(
+      //     builder: (_) => const MatchupsView(),
+      //   );
       // case '/legs':
       //   return MaterialPageRoute(
       //     builder: (_) => const LegsView(seasonReference: null),
       //   );
-      case '/addMatchup':
-        return MaterialPageRoute(
-          builder: (_) => const AddMathcupView(),
-        );
+      // case '/addMatchup':
+      //   return MaterialPageRoute(
+      //     builder: (_) => const AddMathcupView(),
+      //   );
       // case '/addLeg':
       //   return MaterialPageRoute(
       //     builder: (_) => const AddLegView(season: season),
