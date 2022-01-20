@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/viewmodels/season_view_model.dart';
+import 'package:pick/ui/widgets/seasons/season_cards_listview.dart';
 import 'package:provider/provider.dart';
 
 class SeasonsView extends StatefulWidget {
@@ -41,9 +42,8 @@ class _SeasonsViewState extends State<SeasonsView> {
         builder: (context, AsyncSnapshot<List<Season>> snapshot) {
           if (snapshot.hasData) {
             seasons = snapshot.data?.toList() ?? [];
-            return Text(
-              'Season count: ${seasons.length}',
-            );
+            seasons.sort((b, a) => b.startDate.compareTo(a.startDate));
+            return SeasonCardsListview(seasons: seasons);
           } else {
             return const Center(
               child: CircularProgressIndicator(),

@@ -131,7 +131,8 @@ class _ModifyLegState extends State<ModifyLeg> {
                           endDate: endDate,
                           isLocked: isLocked,
                           isComplete: isComplete,
-                          season: null,
+                          // TODO: Add seasonId
+                          seasonId: '',
                         ),
                         widget.leg.id);
                     Navigator.pop(context);

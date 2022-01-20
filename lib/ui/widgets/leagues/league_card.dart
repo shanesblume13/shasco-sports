@@ -53,7 +53,9 @@ class LeagueCard extends StatelessWidget {
                 LeagueCardNameConatiner(name: league.name),
               ),
               gridArea('seasonCount').containing(
-                const LeagueCardSeasonCountContainer(),
+                LeagueCardSeasonCountContainer(
+                  league: league.name,
+                ),
               ),
             ],
           ),

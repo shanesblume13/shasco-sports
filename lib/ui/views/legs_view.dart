@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/viewmodels/leg_view_model.dart';
@@ -31,15 +30,12 @@ class _LegsViewState extends State<LegsView> {
           child: Text('Legs View'),
         ),
       ),
-      body: StreamBuilder(
-        stream: legProvider.fetchLegsAsStream(),
-        builder: (context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+      body: StreamBuilder<List<Leg>>(
+        // TODO: Add seasonId
+        stream: legProvider.fetchLegsAsStream(''),
+        builder: (context, AsyncSnapshot<List<Leg>> snapshot) {
           if (snapshot.hasData) {
-            legs = snapshot.data?.docs
-                    .map((doc) => Leg.fromQueryDocumentSnapshot(doc, doc.id))
-                    .toList() ??
-                [];
+            legs = snapshot.data?.toList() ?? [];
 
             legs.sort((a, b) => a.startDate.compareTo(b.startDate));
 

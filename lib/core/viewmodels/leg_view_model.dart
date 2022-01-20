@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
-import 'package:pick/core/services/api_service.dart';
+import 'package:pick/core/services/leg_api_service.dart';
 import 'package:pick/locator.dart';
 
 class LegViewModel extends ChangeNotifier {
-  final ApiService _apiService = locator<ApiService>();
+  final LegApiService _apiService = locator<LegApiService>();
 
   List<Leg> legs = [];
 
-  Future<List<Leg>> fetcLegs() async {
+  Future<List<Leg>> fetchLegs(String seasonId) async {
+    // TODO: use SeasonId to fetch legs (docRef?)
     var result = await _apiService.getDataCollection();
     legs = result.docs
         .map((doc) => Leg.fromQueryDocumentSnapshot(doc, doc.id))
@@ -17,8 +18,24 @@ class LegViewModel extends ChangeNotifier {
     return legs;
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> fetchLegsAsStream() {
-    return _apiService.streamDataCollection();
+  Stream<List<Leg>> fetchLegsAsStream(String seasonId) {
+    Stream<List<Leg>> legsStream;
+    Stream<QuerySnapshot<Map<String, dynamic>>> result =
+        _apiService.streamDataCollection();
+
+    legsStream = result.map(
+      (snapshot) {
+        return snapshot.docs
+            .map(
+              (doc) => Leg.fromQueryDocumentSnapshot(doc, doc.id),
+            )
+            .where(
+                (leg) => leg.seasonId.toLowerCase() == seasonId.toLowerCase())
+            .toList();
+      },
+    );
+
+    return legsStream;
   }
 
   Future<Leg> getLegById(String id) async {

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pick/core/models/season_model.dart';
 
 class Leg {
   String id;
@@ -9,7 +8,7 @@ class Leg {
   String endDate;
   bool isLocked;
   bool isComplete;
-  Season? season;
+  String seasonId;
 
   Leg({
     required this.id,
@@ -19,7 +18,7 @@ class Leg {
     required this.endDate,
     required this.isLocked,
     required this.isComplete,
-    this.season,
+    required this.seasonId,
   });
 
   Leg.fromQueryDocumentSnapshot(
@@ -29,7 +28,8 @@ class Leg {
         lockDate = snapshot['lockDate'],
         endDate = snapshot['endDate'],
         isLocked = snapshot['isLocked'],
-        isComplete = snapshot['isComplete'];
+        isComplete = snapshot['isComplete'],
+        seasonId = snapshot['seasonId'];
 
   Leg.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : name = snapshot['name'],
@@ -37,7 +37,8 @@ class Leg {
         lockDate = snapshot['lockDate'],
         endDate = snapshot['endDate'],
         isLocked = snapshot['isLocked'],
-        isComplete = snapshot['isComplete'];
+        isComplete = snapshot['isComplete'],
+        seasonId = snapshot['seasonId'];
 
   toJson() {
     return {
@@ -47,6 +48,7 @@ class Leg {
       'endDate': endDate,
       'isLocked': isLocked,
       'isComplete': isComplete,
+      'seasonId': seasonId,
     };
   }
 }
