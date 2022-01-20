@@ -18,6 +18,8 @@ class LegViewModel extends ChangeNotifier {
         .map((doc) => Leg.fromQueryDocumentSnapshot(doc, doc.id))
         .where((leg) => leg.seasonReference == (season.reference))
         .toList();
+
+    legs.sort((a, b) => a.startDate.compareTo(b.startDate));
     return legs;
   }
 

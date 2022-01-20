@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
+import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/viewmodels/leg_view_model.dart';
 import 'package:provider/provider.dart';
 
 class AddLegView extends StatefulWidget {
-  const AddLegView({Key? key}) : super(key: key);
+  final Season season;
+  const AddLegView({
+    Key? key,
+    required this.season,
+  }) : super(key: key);
 
   @override
   _AddLegViewState createState() => _AddLegViewState();
@@ -135,7 +140,7 @@ class _AddLegViewState extends State<AddLegView> {
                         isLocked: isLocked,
                         isComplete: isComplete,
                         // TODO: Implement seasonId
-                        seasonReference: null,
+                        seasonReference: widget.season.reference,
                       ),
                     );
                     Navigator.pop(context);

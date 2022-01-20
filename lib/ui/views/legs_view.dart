@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/viewmodels/leg_view_model.dart';
-import 'package:pick/ui/widgets/legs/legs_listview.dart';
+import 'package:pick/ui/widgets/legs/leg_cards_listview.dart';
 import 'package:provider/provider.dart';
 
 class LegsView extends StatefulWidget {
@@ -37,15 +37,12 @@ class _LegsViewState extends State<LegsView> {
         ),
       ),
       body: FutureBuilder<List<Leg>>(
-        // TODO: Add seasonId
         future: legProvider.fetchLegs(season: widget.season),
         builder: (context, AsyncSnapshot<List<Leg>> snapshot) {
           if (snapshot.hasData) {
             legs = snapshot.data?.toList() ?? [];
 
-            legs.sort((a, b) => a.startDate.compareTo(b.startDate));
-
-            return LegsListview(legs: legs);
+            return LegCardsListview(legs: legs);
           } else {
             return const Center(
               child: CircularProgressIndicator(),

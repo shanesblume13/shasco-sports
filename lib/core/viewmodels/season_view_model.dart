@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/season_model.dart';
-import 'package:pick/core/services/seeason_api_service.dart';
+import 'package:pick/core/services/season_api_service.dart';
 import 'package:pick/locator.dart';
 
 class SeasonViewModel extends ChangeNotifier {

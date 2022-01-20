@@ -8,7 +8,8 @@ class Leg {
   DateTime endDate;
   bool isLocked;
   bool isComplete;
-  DocumentReference? seasonReference;
+  DocumentReference seasonReference;
+  DocumentReference? reference;
 
   Leg({
     required this.id,
@@ -19,6 +20,7 @@ class Leg {
     required this.isLocked,
     required this.isComplete,
     required this.seasonReference,
+    this.reference,
   });
 
   Leg.fromQueryDocumentSnapshot(
@@ -29,7 +31,8 @@ class Leg {
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
         isLocked = snapshot['isLocked'],
         isComplete = snapshot['isComplete'],
-        seasonReference = snapshot['seasonReference'];
+        seasonReference = snapshot['seasonReference'],
+        reference = snapshot.reference;
 
   Leg.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : name = snapshot['name'],
@@ -38,7 +41,8 @@ class Leg {
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
         isLocked = snapshot['isLocked'],
         isComplete = snapshot['isComplete'],
-        seasonReference = snapshot['seasonReference'];
+        seasonReference = snapshot['seasonReference'],
+        reference = snapshot.reference;
 
   toJson() {
     return {
@@ -49,6 +53,7 @@ class Leg {
       'isLocked': isLocked,
       'isComplete': isComplete,
       'seasonReference': seasonReference,
+      'reference': reference,
     };
   }
 }

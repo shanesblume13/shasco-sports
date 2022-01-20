@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pick/ui/shared/palette.dart';
 
-class LegNameContainer extends StatelessWidget {
-  const LegNameContainer({
+class LegCardNameConatiner extends StatelessWidget {
+  const LegCardNameConatiner({
     Key? key,
     required this.name,
   }) : super(key: key);
@@ -21,8 +22,8 @@ class LegNameContainer extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: const TextStyle(
-                    color: Colors.black,
+                  style: TextStyle(
+                    color: Palette.shascoBlue,
                     fontSize: 18,
                     fontWeight: FontWeight.normal,
                   ),

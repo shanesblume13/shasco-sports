@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:pick/core/models/season_model.dart';
-import 'package:pick/ui/views/legs_view.dart';
-import 'package:pick/ui/widgets/seasons/season_card_image_clip.dart';
-import 'package:pick/ui/widgets/seasons/season_card_name_container.dart';
-import 'package:pick/ui/widgets/seasons/season_card_leg_count_container.dart';
+import 'package:pick/core/models/leg_model.dart';
+import 'package:pick/ui/widgets/legs/leg_card_image_clip.dart';
+import 'package:pick/ui/widgets/legs/leg_card_matchup_count_container.dart';
+import 'package:pick/ui/widgets/legs/leg_card_name_container.dart';
 
-class SeasonCard extends StatelessWidget {
-  const SeasonCard({
+class LegCard extends StatelessWidget {
+  const LegCard({
     Key? key,
-    required this.season,
+    required this.leg,
   }) : super(key: key);
 
-  final Season season;
+  final Leg leg;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         null;
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => LegsView(
-              season: season,
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (_) => LegsView(
+        //       season: season,
+        //     ),
+        //   ),
+        // );
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -34,7 +33,7 @@ class SeasonCard extends StatelessWidget {
           elevation: 6,
           child: LayoutGrid(
             areas: '''
-                image name legCount
+                image name matchupCount
               ''',
             rowSizes: const [
               auto,
@@ -46,14 +45,14 @@ class SeasonCard extends StatelessWidget {
             ],
             children: [
               gridArea('image').containing(
-                const SeasonCardImageClip(),
+                const LegCardImageClip(),
               ),
               gridArea('name').containing(
-                SeasonCardNameConatiner(name: season.name),
+                LegCardNameConatiner(name: leg.name),
               ),
-              gridArea('legCount').containing(
+              gridArea('matchupCount').containing(
                 // TODO: Figure out how to use seasonId
-                SeasonCardLegCountContainer(season: season),
+                LegCardMatchupCountContainer(leg: leg),
               ),
             ],
           ),

@@ -124,15 +124,16 @@ class _ModifyLegState extends State<ModifyLeg> {
                     _formKey.currentState?.save();
                     await legProvider.updateLeg(
                         Leg(
-                            id: widget.leg.id,
-                            name: name,
-                            startDate: DateTime.parse(startDate),
-                            lockDate: DateTime.parse(lockDate),
-                            endDate: DateTime.parse(endDate),
-                            isLocked: isLocked,
-                            isComplete: isComplete,
-                            // TODO: Add seasonId
-                            seasonReference: null),
+                          id: widget.leg.id,
+                          name: name,
+                          startDate: DateTime.parse(startDate),
+                          lockDate: DateTime.parse(lockDate),
+                          endDate: DateTime.parse(endDate),
+                          isLocked: isLocked,
+                          isComplete: isComplete,
+                          // TODO: Add seasonId
+                          seasonReference: widget.leg.seasonReference,
+                        ),
                         widget.leg.id);
                     Navigator.pop(context);
                   }

@@ -1,15 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
-import 'package:pick/core/services/api_service.dart';
+import 'package:pick/core/services/matchup_api_service.dart';
 import 'package:pick/locator.dart';
 
 class MatchupViewModel extends ChangeNotifier {
-  final ApiService _apiService = locator<ApiService>();
+  final MatchupApiService _apiService = locator<MatchupApiService>();
 
   List<Matchup> matchups = [];
 
-  Future<List<Matchup>> fetchMatchups() async {
+  Future<List<Matchup>> fetchMatchups({
+    required Leg leg,
+  }) async {
     var result = await _apiService.getDataCollection();
     matchups = result.docs
         .map((doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id))

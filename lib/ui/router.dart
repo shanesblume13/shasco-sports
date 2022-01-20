@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pick/ui/views/add_matchup.dart';
-import 'package:pick/ui/views/add_leg.dart';
 import 'package:pick/ui/views/auth_view.dart';
 import 'package:pick/ui/views/games_view.dart';
 import 'package:pick/ui/views/logo_view.dart';
@@ -52,10 +51,10 @@ class Router {
         return MaterialPageRoute(
           builder: (_) => const AddMathcupView(),
         );
-      case '/addLeg':
-        return MaterialPageRoute(
-          builder: (_) => const AddLegView(),
-        );
+      // case '/addLeg':
+      //   return MaterialPageRoute(
+      //     builder: (_) => const AddLegView(season: season),
+      //   );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
