@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Team {
-  int id;
+  String id;
   int leagueId;
   String location;
   String nickname;
   String imagePath;
+  DocumentReference? reference;
 
   Team({
     required this.id,
@@ -11,22 +14,20 @@ class Team {
     required this.location,
     required this.nickname,
     required this.imagePath,
+    this.reference,
   });
 
-  static List<Team> teams = [
-    Team(
-      id: 1,
-      leagueId: 1,
-      location: "Arizona",
-      nickname: "Cardinals",
-      imagePath: "assets/images/logos/nfl/cardinals.gif",
-    ),
-    Team(
-      id: 2,
-      leagueId: 1,
-      location: "Atlanta",
-      nickname: "Falcons",
-      imagePath: "assets/images/logos/nfl/falcons.gif",
-    ),
-  ];
+  Team.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot, this.id)
+      : leagueId = snapshot['leagueId'] as int,
+        location = snapshot['location'] as String,
+        nickname = snapshot['nickname'] as String,
+        imagePath = 'assets/images/logos/nfl/${snapshot['nickname']}.gif',
+        reference = snapshot.reference;
+
+  Team.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
+      : leagueId = snapshot['leagueId'] as int,
+        location = snapshot['location'] as String,
+        nickname = snapshot['nickname'] as String,
+        imagePath = 'assets/images/logos/nfl/${snapshot['nickname']}.gif',
+        reference = snapshot.reference;
 }

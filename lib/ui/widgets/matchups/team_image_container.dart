@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:pick/core/models/team_model.dart';
 import 'package:pick/ui/widgets/matchups/team_image_clip.dart';
 
 class TeamImageContainer extends StatelessWidget {
   const TeamImageContainer({
     Key? key,
     required this.isPicked,
-    required this.imagePath,
+    required this.team,
     required this.isHome,
+    required this.defaultImagePath,
   }) : super(key: key);
 
   final bool isPicked;
-  final String imagePath;
+  final Team team;
   final bool isHome;
+  final String defaultImagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class TeamImageContainer extends StatelessWidget {
       ),
       duration: const Duration(milliseconds: 300),
       child: TeamImageClip(
-        imagePath: imagePath,
+        imagePath: defaultImagePath,
         isPicked: isPicked,
         isHome: isHome,
       ),

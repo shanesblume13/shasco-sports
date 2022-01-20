@@ -11,6 +11,8 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [] 2 Teams
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
+- Fix team image paths.
+- Figure out how to handle null document references (winningTeamReference)
 - Add local data to firestore
 - Add user permissions
 - Use image clip icons and colors to distinguish status.

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:pick/ui/widgets/matchups/team_name_location.dart';
-import 'package:pick/ui/widgets/matchups/team_name_mascot.dart';
+import 'package:pick/core/models/team_model.dart';
+import 'package:pick/ui/widgets/matchups/matchup_card_team_location.dart';
+import 'package:pick/ui/widgets/matchups/matchup_card_team_nickname.dart';
 
-class TeamNameContainer extends StatelessWidget {
-  const TeamNameContainer({
+class MatchupCardTeamNameContainer extends StatelessWidget {
+  const MatchupCardTeamNameContainer({
     Key? key,
     required this.isPicked,
-    required this.teamName,
+    required this.team,
     required this.isHome,
   }) : super(key: key);
 
   final bool isPicked;
-  final String teamName;
+  final Team team;
   final bool isHome;
 
   @override
@@ -32,13 +33,13 @@ class TeamNameContainer extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TeamNameLocation(
-                teamLocation: teamName,
+              MatchupCardTeamLocation(
+                teamLocation: team.location,
                 isHome: isHome,
                 isPicked: isPicked,
               ),
-              TeamNameMascot(
-                teamName: teamName,
+              MatchupCardTeamNickname(
+                teamName: team.nickname,
                 isHome: isHome,
                 isPicked: isPicked,
               ),

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
-import 'package:pick/core/models/matchup_model.dart';
-import 'package:pick/core/viewmodels/matchup_view_model.dart';
-import 'package:provider/provider.dart';
 
 class AddMathcupView extends StatefulWidget {
   const AddMathcupView({
@@ -29,7 +26,7 @@ class _AddMathcupViewState extends State<AddMathcupView> {
 
   @override
   Widget build(BuildContext context) {
-    var matchupProvider = Provider.of<MatchupViewModel>(context);
+    // var matchupProvider = Provider.of<MatchupViewModel>(context);
     List<String> teamIds = ['1', '2', '3', '4', '5'];
 
     return Scaffold(
@@ -151,24 +148,24 @@ class _AddMathcupViewState extends State<AddMathcupView> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    await matchupProvider.addMatchup(
-                      Matchup(
-                        id: '',
-                        homeTeamId: int.parse(homeTeamId),
-                        awayTeamId: int.parse(awayTeamId),
-                        startDateTime: DateTime.now(),
-                        lockDateTime: DateTime.now(),
-                        isLocked: isLocked,
-                        isComplete: isComplete,
-                        homeTeamSpread: homeTeamSpread,
-                        winningTeamId: int.parse(winningTeamId),
-                        legReference: widget.leg.reference!,
-                      ),
-                    );
-                    Navigator.pop(context);
-                  }
+                  // if (_formKey.currentState!.validate()) {
+                  //   _formKey.currentState!.save();
+                  //   await matchupProvider.addMatchup(
+                  //     Matchup(
+                  //       id: '',
+                  //       homeTeamId: int.parse(homeTeamId),
+                  //       awayTeamId: int.parse(awayTeamId),
+                  //       startDateTime: DateTime.now(),
+                  //       lockDateTime: DateTime.now(),
+                  //       isLocked: isLocked,
+                  //       isComplete: isComplete,
+                  //       homeTeamSpread: homeTeamSpread,
+                  //       winningTeamId: int.parse(winningTeamId),
+                  //       legReference: widget.leg.reference!,
+                  //     ),
+                  //   );
+                  //   Navigator.pop(context);
+                  // }
                 },
                 child: const Text('Add Matchup',
                     style: TextStyle(color: Colors.white)),

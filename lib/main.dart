@@ -6,6 +6,7 @@ import 'package:pick/core/viewmodels/league_view_model.dart';
 import 'package:pick/core/viewmodels/season_view_model.dart';
 import 'package:pick/core/viewmodels/sport_view_model.dart';
 import 'package:pick/core/viewmodels/leg_view_model.dart';
+import 'package:pick/core/viewmodels/team_view_model.dart';
 import 'package:pick/firebase_options.dart';
 import 'package:pick/locator.dart';
 import 'package:pick/ui/shared/palette.dart';
@@ -33,6 +34,9 @@ class App extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => locator<MatchupViewModel>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => locator<TeamViewModel>(),
         ),
         Provider(
           create: (_) => locator<SportViewModel>(),

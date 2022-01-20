@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class TeamNameMascot extends StatelessWidget {
-  const TeamNameMascot({
+class MatchupCardTeamLocation extends StatelessWidget {
+  const MatchupCardTeamLocation({
     Key? key,
-    required this.teamName,
+    required this.teamLocation,
     required this.isHome,
     required this.isPicked,
   }) : super(key: key);
 
-  final String teamName;
+  final String teamLocation;
   final bool isHome;
   final bool isPicked;
 
@@ -22,11 +22,11 @@ class TeamNameMascot extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           style: TextStyle(
             color: isPicked ? Colors.black : Colors.grey,
-            fontSize: isPicked ? 18 : 16,
+            fontSize: isPicked ? 12 : 10,
             fontWeight: isPicked ? FontWeight.bold : FontWeight.normal,
           ),
           child: Text(
-            teamName,
+            teamLocation,
           ),
         ),
       ],
