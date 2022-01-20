@@ -1,29 +1,44 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/season_model.dart';
-import 'package:pick/core/services/api_service.dart';
+import 'package:pick/core/services/seeason_api_service.dart';
 import 'package:pick/locator.dart';
 
 class SeasonViewModel extends ChangeNotifier {
-  final ApiService _apiService = locator<ApiService>();
+  final SeasonApiService _apiService = locator<SeasonApiService>();
 
-  List<Season> seasons = [];
-
-  // TODO: Only return seasons with a matching league
   Future<List<Season>> fetchSeasons(String league) async {
+    List<Season> seasons = [];
     var result = await _apiService.getDataCollection();
 
     seasons = result.docs
-        .map((doc) => Season.fromQueryDocumentSnapshot(doc, doc.id))
+        .map(
+          (doc) => Season.fromQueryDocumentSnapshot(doc, doc.id),
+        )
+        .where((season) => season.league.toLowerCase() == league.toLowerCase())
         .toList();
 
     return seasons;
   }
 
-  // TODO: Only return seasons with a matching leagueå
-  Stream<QuerySnapshot<Map<String, dynamic>>> fetchSeasonsAsStream(
-      String league) {
-    return _apiService.streamDataCollection();
+  Stream<List<Season>> fetchSeasonsAsStream(String league) {
+    Stream<List<Season>> seasonsStream;
+    Stream<QuerySnapshot<Map<String, dynamic>>> result =
+        _apiService.streamDataCollection();
+
+    seasonsStream = result.map(
+      (snapshot) {
+        return snapshot.docs
+            .map(
+              (doc) => Season.fromQueryDocumentSnapshot(doc, doc.id),
+            )
+            .where(
+                (season) => season.league.toLowerCase() == league.toLowerCase())
+            .toList();
+      },
+    );
+
+    return seasonsStream;
   }
 
   Future<Season> getSeasonById(String id) async {

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/viewmodels/season_view_model.dart';
@@ -37,18 +36,11 @@ class _SeasonsViewState extends State<SeasonsView> {
           child: Text('Seasons View'),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      body: StreamBuilder<List<Season>>(
         stream: seasonProvider.fetchSeasonsAsStream(league),
-        builder: (context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+        builder: (context, AsyncSnapshot<List<Season>> snapshot) {
           if (snapshot.hasData) {
-            seasons = snapshot.data?.docs
-                    .map((doc) => Season.fromQueryDocumentSnapshot(doc, doc.id))
-                    .where((season) =>
-                        season.league.toString().toLowerCase() ==
-                        league.toLowerCase())
-                    .toList() ??
-                [];
+            seasons = snapshot.data?.toList() ?? [];
             return Text(
               'Season count: ${seasons.length}',
             );

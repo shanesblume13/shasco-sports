@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:pick/core/services/api_service.dart';
+import 'package:pick/core/services/seeason_api_service.dart';
 import 'package:pick/core/viewmodels/game_view_model.dart';
 import 'package:pick/core/viewmodels/matchup_view_model.dart';
 import 'package:pick/core/viewmodels/league_view_model.dart';
@@ -12,7 +12,7 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   //locator.registerLazySingleton(() => ApiService('mathcups'));
-  locator.registerLazySingleton(() => ApiService('seasons'));
+  locator.registerLazySingleton(() => SeasonApiService());
   locator.registerLazySingleton(() => MatchupViewModel());
   locator.registerLazySingleton(() => LegViewModel());
   locator.registerLazySingleton(() => SportViewModel());
