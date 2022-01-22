@@ -32,12 +32,16 @@ class MatchupViewModel extends ChangeNotifier {
 
     matchupsStream = result.map(
       (snapshot) {
-        return snapshot.docs
+        List<Matchup> matchups = snapshot.docs
             .map(
               (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
             )
             .where((matchup) => matchup.legReference == leg.reference)
             .toList();
+
+        matchups.sort((a, b) => a.startDateTime.compareTo(b.startDateTime));
+
+        return matchups;
       },
     );
 

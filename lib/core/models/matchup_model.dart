@@ -36,7 +36,8 @@ class Matchup {
         lockDateTime = (snapshot['lockDateTime'] as Timestamp).toDate(),
         isLocked = snapshot['isLocked'] as bool,
         isComplete = snapshot['isComplete'] as bool,
-        homeTeamSpread = snapshot['homeTeamSpread'] as double,
+        homeTeamSpread =
+            double.tryParse(snapshot['homeTeamSpread'].toString()) ?? 0.0,
         legReference = snapshot['legReference'] as DocumentReference,
         reference = snapshot.reference;
 
@@ -49,7 +50,8 @@ class Matchup {
         lockDateTime = (snapshot['lockDateTime'] as Timestamp).toDate(),
         isLocked = snapshot['isLocked'] as bool,
         isComplete = snapshot['isComplete' as bool],
-        homeTeamSpread = snapshot['homeTeamSpread'] as double,
+        homeTeamSpread =
+            double.tryParse(snapshot['homeTeamSpread'].toString()) ?? 0.0,
         legReference = snapshot['legReference'] as DocumentReference,
         reference = snapshot.reference;
 
