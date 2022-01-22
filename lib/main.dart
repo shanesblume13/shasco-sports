@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pick/core/viewmodels/game_view_model.dart';
 import 'package:pick/core/viewmodels/matchup_view_model.dart';
 import 'package:pick/core/viewmodels/league_view_model.dart';
+import 'package:pick/core/viewmodels/pick_view_model.dart';
 import 'package:pick/core/viewmodels/season_view_model.dart';
 import 'package:pick/core/viewmodels/sport_view_model.dart';
 import 'package:pick/core/viewmodels/leg_view_model.dart';
@@ -31,6 +32,9 @@ class App extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => locator<LegViewModel>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => locator<PickViewModel>(),
         ),
         ChangeNotifierProvider(
           create: (_) => locator<MatchupViewModel>(),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
+import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/viewmodels/matchup_view_model.dart';
+import 'package:pick/core/viewmodels/pick_view_model.dart';
 import 'package:pick/ui/widgets/matchups/matchup_cards_listview.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +25,7 @@ class _MatchupsViewState extends State<MatchupsView> {
   @override
   Widget build(BuildContext context) {
     final matchupProvider = Provider.of<MatchupViewModel>(context);
+    final pickProvider = Provider.of<PickViewModel>(context);
 
     return Scaffold(
       // floatingActionButton: FloatingActionButton(
@@ -32,8 +35,8 @@ class _MatchupsViewState extends State<MatchupsView> {
       //   },
       // ),
       appBar: AppBar(
-        title: const Center(
-          child: Text('Matchups View'),
+        title: Center(
+          child: Text(widget.leg.name),
         ),
       ),
       body: StreamBuilder<List<Matchup>>(
@@ -42,7 +45,19 @@ class _MatchupsViewState extends State<MatchupsView> {
           if (snapshot.hasData) {
             matchups = snapshot.data?.toList() ?? [];
 
-            return MatchupCardsListview(matchups: matchups);
+            return FutureBuilder<List<Pick>?>(
+              future: pickProvider.fetchPicks(matchups: matchups),
+              builder: (context, AsyncSnapshot<List<Pick>?> snapshot) {
+                if (snapshot.hasData) {
+                  return MatchupCardsListview(
+                      matchups: matchups, picks: snapshot.data);
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            );
           } else {
             return const Center(
               child: CircularProgressIndicator(),

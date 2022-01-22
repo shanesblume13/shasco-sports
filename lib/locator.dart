@@ -1,11 +1,13 @@
 import 'package:get_it/get_it.dart';
 import 'package:pick/core/services/leg_api_service.dart';
 import 'package:pick/core/services/matchup_api_service.dart';
+import 'package:pick/core/services/pick_api_service.dart';
 import 'package:pick/core/services/season_api_service.dart';
 import 'package:pick/core/services/team_api_service.dart';
 import 'package:pick/core/viewmodels/game_view_model.dart';
 import 'package:pick/core/viewmodels/matchup_view_model.dart';
 import 'package:pick/core/viewmodels/league_view_model.dart';
+import 'package:pick/core/viewmodels/pick_view_model.dart';
 import 'package:pick/core/viewmodels/season_view_model.dart';
 import 'package:pick/core/viewmodels/sport_view_model.dart';
 import 'package:pick/core/viewmodels/leg_view_model.dart';
@@ -20,6 +22,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => LegApiService());
   locator.registerLazySingleton(() => MatchupApiService());
   locator.registerLazySingleton(() => TeamApiService());
+  locator.registerLazySingleton(() => PickApiService());
   locator.registerLazySingleton(() => MatchupViewModel());
   locator.registerLazySingleton(() => LegViewModel());
   locator.registerLazySingleton(() => SportViewModel());
@@ -27,4 +30,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => SeasonViewModel());
   locator.registerLazySingleton(() => GameViewModel());
   locator.registerLazySingleton(() => TeamViewModel());
+  locator.registerLazySingleton(() => PickViewModel());
 }

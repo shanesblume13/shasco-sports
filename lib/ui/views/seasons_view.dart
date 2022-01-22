@@ -33,8 +33,8 @@ class _SeasonsViewState extends State<SeasonsView> {
       //   },
       // ),
       appBar: AppBar(
-        title: const Center(
-          child: Text('Seasons View'),
+        title: Center(
+          child: Text('$league Seasons'),
         ),
       ),
       body: FutureBuilder<List<Season>>(

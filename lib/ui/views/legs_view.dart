@@ -32,8 +32,8 @@ class _LegsViewState extends State<LegsView> {
       //   },
       // ),
       appBar: AppBar(
-        title: const Center(
-          child: Text('Legs View'),
+        title: Center(
+          child: Text(widget.season.name),
         ),
       ),
       body: FutureBuilder<List<Leg>>(

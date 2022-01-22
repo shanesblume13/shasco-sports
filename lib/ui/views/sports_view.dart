@@ -15,7 +15,7 @@ class SportsView extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Center(
-            child: Text('Sports List'),
+            child: Text('Sports'),
           ),
         ),
         body: SportCardsListview(sports: sports));

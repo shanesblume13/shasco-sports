@@ -8,12 +8,12 @@ class MatchupPickScoreDivider extends StatelessWidget {
     Key? key,
     required this.homePicked,
     required this.awayPicked,
-    required this.pickScore,
+    required this.points,
   }) : super(key: key);
 
   final bool homePicked;
   final bool awayPicked;
-  final int pickScore;
+  final int points;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class MatchupPickScoreDivider extends StatelessWidget {
                   homePicked || awayPicked ? Palette.shascoBlue : Colors.white,
               child: Center(
                 child: Text(
-                  pickScore.toString(),
+                  points.toString(),
                   style: TextStyle(
                     fontSize: 15,
                     color:

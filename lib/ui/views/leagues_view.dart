@@ -20,7 +20,7 @@ class LeaguesView extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Center(
-            child: Text('Leagues List'),
+            child: Text('Leagues'),
           ),
         ),
         body: LeagueCardsListview(leagues: leagues));
