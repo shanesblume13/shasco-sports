@@ -1,3 +1,4 @@
+
 # Pick
 
 A mobile app built with flutter and firebase that allows users to play various games based on sports predecitions.
@@ -10,6 +11,8 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
+- Get uid for picks.
+- Modify and save user picks.
 - Figure out how to handle null document references (winningTeamReference)
 - Add local data to firestore
 - Add user permissions
