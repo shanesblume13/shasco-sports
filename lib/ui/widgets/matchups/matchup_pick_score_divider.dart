@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pick/ui/shared/palette.dart';
 // import 'packages:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
 
@@ -12,7 +13,7 @@ class MatchupPickScoreDivider extends StatelessWidget {
 
   final bool homePicked;
   final bool awayPicked;
-  final String pickScore;
+  final int pickScore;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +21,15 @@ class MatchupPickScoreDivider extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: homePicked || awayPicked ? Colors.black : Colors.transparent,
+            color: homePicked || awayPicked
+                ? Palette.shascoBlue
+                : Colors.transparent,
             width: 3.0,
           ),
           bottom: BorderSide(
-            color: homePicked || awayPicked ? Colors.black : Colors.transparent,
+            color: homePicked || awayPicked
+                ? Palette.shascoBlue
+                : Colors.transparent,
             width: 3.0,
           ),
         ),
@@ -36,21 +41,22 @@ class MatchupPickScoreDivider extends StatelessWidget {
           Container(
             height: 60,
             width: 0,
-            color: Colors.black,
+            color: Palette.shascoBlue,
           ),
           ClipPath(
             clipper: homePicked
-                ? MyCustomClipper3()
+                ? DividerHomePickClipper()
                 : awayPicked
-                    ? MyCustomClipper4()
+                    ? DividerAwayPickClipper()
                     : null,
             child: Container(
               width: 30,
               height: 48,
-              color: homePicked || awayPicked ? Colors.black : Colors.white,
+              color:
+                  homePicked || awayPicked ? Palette.shascoBlue : Colors.white,
               child: Center(
                 child: Text(
-                  pickScore,
+                  pickScore.toString(),
                   style: TextStyle(
                     fontSize: 15,
                     color:
@@ -67,7 +73,7 @@ class MatchupPickScoreDivider extends StatelessWidget {
   }
 }
 
-class MyCustomClipper3 extends CustomClipper<Path> {
+class DividerHomePickClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     double width = size.width;
@@ -87,7 +93,7 @@ class MyCustomClipper3 extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) => true;
 }
 
-class MyCustomClipper4 extends CustomClipper<Path> {
+class DividerAwayPickClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     double width = size.width;

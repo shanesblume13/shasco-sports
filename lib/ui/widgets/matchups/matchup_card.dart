@@ -25,6 +25,8 @@ class MatchupCard extends StatefulWidget {
 
 class _MatchupCardState extends State<MatchupCard> {
   List<String> _imagePaths = [];
+  Team? _pick;
+  int _pickScore = 0;
 
   @override
   void initState() {
@@ -75,10 +77,10 @@ class _MatchupCardState extends State<MatchupCard> {
                 children: [
                   gridArea('awayLogo').containing(
                     InkWell(
-                      onTap: () {}, //_savePick(i, false),
+                      onTap: () => _savePick(team: awayTeam),
                       splashColor: Colors.transparent,
                       child: TeamImageContainer(
-                        isPicked: false, //_picks.contains(i),
+                        isPicked: _pick?.reference == awayTeam.reference,
                         team: awayTeam,
                         isHome: false,
                         imagePath: awayImagePath,
@@ -87,10 +89,10 @@ class _MatchupCardState extends State<MatchupCard> {
                   ),
                   gridArea('awayName').containing(
                     InkWell(
-                      onTap: () {}, //_savePick(i, false),
+                      onTap: () => _savePick(team: awayTeam),
                       splashColor: Colors.transparent,
                       child: MatchupCardTeamNameContainer(
-                        isPicked: false, //_picks.contains(i),
+                        isPicked: _pick?.reference == awayTeam.reference,
                         team: awayTeam,
                         isHome: false,
                       ),
@@ -98,21 +100,22 @@ class _MatchupCardState extends State<MatchupCard> {
                   ),
                   gridArea('scoreDivider').containing(
                     InkWell(
-                      onTap: () {}, //_savePickScore(pickScoreIndex),
+                      onTap: () =>
+                          _updatePickScore(), //_savePickScore(pickScoreIndex),
                       splashColor: Colors.transparent,
-                      child: const MatchupPickScoreDivider(
-                        homePicked: false, //_picks.contains(i + 1),
-                        awayPicked: false, //_picks.contains(i),
-                        pickScore: '0', //_pickScores[pickScoreIndex],
+                      child: MatchupPickScoreDivider(
+                        homePicked: _pick?.reference == homeTeam.reference,
+                        awayPicked: _pick?.reference == awayTeam.reference,
+                        pickScore: _pickScore, //_pickScores[pickScoreIndex],
                       ),
                     ),
                   ),
                   gridArea('homeName').containing(
                     InkWell(
-                      onTap: () {}, //_savePick(i + 1, true),
+                      onTap: () => _savePick(team: homeTeam),
                       splashColor: Colors.transparent,
                       child: MatchupCardTeamNameContainer(
-                        isPicked: false, //_picks.contains(i + 1),
+                        isPicked: _pick?.reference == homeTeam.reference,
                         team: homeTeam,
                         isHome: true,
                       ),
@@ -120,10 +123,10 @@ class _MatchupCardState extends State<MatchupCard> {
                   ),
                   gridArea('homeLogo').containing(
                     InkWell(
-                      onTap: () {}, //_savePick(i + 1, true),
+                      onTap: () => _savePick(team: homeTeam),
                       splashColor: Colors.transparent,
                       child: TeamImageContainer(
-                        isPicked: false, //_picks.contains(i + 1),
+                        isPicked: _pick?.reference == homeTeam.reference,
                         team: homeTeam,
                         isHome: true,
                         imagePath: homeImagePath,
@@ -156,6 +159,33 @@ class _MatchupCardState extends State<MatchupCard> {
 
     setState(() {
       _imagePaths = imagePaths;
+    });
+  }
+
+  void _savePick({required Team team}) {
+    Team? pick = _pick;
+
+    if (pick?.reference == team.reference) {
+      pick = null;
+    } else {
+      pick = team;
+    }
+
+    setState(() {
+      _pick = pick;
+    });
+  }
+
+  _updatePickScore() {
+    int pickScore = _pickScore;
+
+    pickScore++;
+    if (pickScore > 10) {
+      pickScore = 0;
+    }
+
+    setState(() {
+      _pickScore = pickScore;
     });
   }
 }

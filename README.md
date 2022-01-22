@@ -7,7 +7,7 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] League: NFL
     - [x] Season: 2021-2022
     - [x] Leg: Week 1
-    - [] 3 Matchups
+    - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
 - Figure out how to handle null document references (winningTeamReference)

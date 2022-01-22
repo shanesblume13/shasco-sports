@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/team_model.dart';
+import 'package:pick/ui/shared/palette.dart';
 import 'package:pick/ui/widgets/matchups/matchup_card_team_location.dart';
 import 'package:pick/ui/widgets/matchups/matchup_card_team_nickname.dart';
 
@@ -21,7 +22,7 @@ class MatchupCardTeamNameContainer extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.symmetric(
           horizontal: BorderSide(
-            color: isPicked ? Colors.black : Colors.transparent,
+            color: isPicked ? Palette.shascoBlue : Colors.transparent,
             width: 3,
           ),
         ),
