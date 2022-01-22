@@ -8,13 +8,13 @@ class TeamImageContainer extends StatelessWidget {
     required this.isPicked,
     required this.team,
     required this.isHome,
-    required this.defaultImagePath,
+    required this.imagePath,
   }) : super(key: key);
 
   final bool isPicked;
   final Team team;
   final bool isHome;
-  final String defaultImagePath;
+  final String imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class TeamImageContainer extends StatelessWidget {
       ),
       duration: const Duration(milliseconds: 300),
       child: TeamImageClip(
-        imagePath: defaultImagePath,
+        imagePath: imagePath,
         isPicked: isPicked,
         isHome: isHome,
       ),
