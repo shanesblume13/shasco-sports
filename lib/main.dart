@@ -1,8 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/core/viewmodels/game_view_model.dart';
+import 'package:pick/core/viewmodels/matchup_view_model.dart';
+import 'package:pick/core/viewmodels/league_view_model.dart';
+import 'package:pick/core/viewmodels/pick_view_model.dart';
+import 'package:pick/core/viewmodels/season_view_model.dart';
+import 'package:pick/core/viewmodels/sport_view_model.dart';
+import 'package:pick/core/viewmodels/leg_view_model.dart';
+import 'package:pick/core/viewmodels/team_view_model.dart';
 import 'package:pick/firebase_options.dart';
+import 'package:pick/locator.dart';
 import 'package:pick/ui/shared/palette.dart';
+import 'package:provider/provider.dart';
 import 'ui/router.dart' as my_router;
 
 void main() async {
@@ -10,49 +19,51 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const ProviderScope(child: App()));
+  setupLocator();
+  runApp(const App());
 }
 
-class App extends HookConsumerWidget {
+class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // return provider.MultiProvider(
-    //   providers: [
-    //     provider.ChangeNotifierProvider(
-    //       create: (_) => locator<LegViewModel>(),
-    //     ),
-    //     provider.ChangeNotifierProvider(
-    //       create: (_) => locator<PickViewModel>(),
-    //     ),
-    //     provider.ChangeNotifierProvider(
-    //       create: (_) => locator<MatchupViewModel>(),
-    //     ),
-    //     provider.ChangeNotifierProvider(
-    //       create: (_) => locator<TeamViewModel>(),
-    //     ),
-    //     provider.Provider(
-    //       create: (_) => locator<SportViewModel>(),
-    //     ),
-    //     provider.Provider(
-    //       create: (_) => locator<LeagueViewModel>(),
-    //     ),
-    //     provider.Provider(
-    //       create: (_) => locator<GameViewModel>(),
-    //     ),
-    //     provider.ChangeNotifierProvider(
-    //       create: (_) => locator<SeasonViewModel>(),
-    //     ),
-    //   ],
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/auth',
-      title: 'Pickem App',
-      theme: ThemeData(
-        primarySwatch: Palette.shascoBlue,
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => locator<LegViewModel>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => locator<PickViewModel>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => locator<MatchupViewModel>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => locator<TeamViewModel>(),
+        ),
+        Provider(
+          create: (_) => locator<SportViewModel>(),
+        ),
+        Provider(
+          create: (_) => locator<LeagueViewModel>(),
+        ),
+        Provider(
+          create: (_) => locator<GameViewModel>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => locator<SeasonViewModel>(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/auth',
+        title: 'Pickem App',
+        theme: ThemeData(
+          primarySwatch: Palette.shascoBlue,
+        ),
+        onGenerateRoute: my_router.Router.generateRoute,
       ),
-      onGenerateRoute: my_router.Router.generateRoute,
     );
   }
 }
