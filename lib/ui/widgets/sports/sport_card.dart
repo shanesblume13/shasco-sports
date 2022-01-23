@@ -3,7 +3,6 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:pick/core/models/sport_model.dart';
 import 'package:pick/ui/views/leagues_view.dart';
 import 'package:pick/ui/widgets/sports/sport_card_image_clip.dart';
-import 'package:pick/ui/widgets/sports/sport_card_league_count_container.dart';
 import 'package:pick/ui/widgets/sports/sport_card_name_container.dart';
 
 class SportCard extends StatelessWidget {
@@ -54,7 +53,8 @@ class SportCard extends StatelessWidget {
                 SportCardNameConatiner(name: sport.name),
               ),
               gridArea('leagueCount').containing(
-                SportCardLeagueCountContainer(sport: sport.name),
+                const Text('0'),
+                //SportCardLeagueCountContainer(sport: sport.name),
               ),
             ],
           ),
