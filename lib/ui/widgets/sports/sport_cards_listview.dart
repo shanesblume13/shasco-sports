@@ -12,7 +12,7 @@ class SportCardsListview extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    for (var sport in ref.watch(sportsStateProvider)) {
+    for (var sport in ref.watch(allSportsStateProvider)) {
       sportCards.add(
         SportCard(sport: sport),
       );

@@ -2,8 +2,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/services/firestore_season_service.dart';
 
-final allSeasonsStateProvider = StateNotifierProvider.autoDispose<
-    AllSeasonsState, AsyncValue<List<Season>>>((ref) {
+final allSeasonsStateProvider =
+    StateNotifierProvider<AllSeasonsState, AsyncValue<List<Season>>>((ref) {
   final AllSeasonsState allSeasonsState = AllSeasonsState();
   allSeasonsState.init();
   return allSeasonsState;

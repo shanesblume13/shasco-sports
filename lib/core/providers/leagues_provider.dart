@@ -1,6 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
+import 'package:pick/core/models/league_season_count.dart';
 import 'package:pick/core/models/sport_model.dart';
+import 'package:pick/core/providers/seasons_provider.dart';
 import 'package:pick/core/providers/sports_provider.dart';
 
 final allLeaguesStateProvider =
@@ -23,11 +25,21 @@ final selectedLeagueStateProvider =
   return SelectedLeagueState();
 });
 
+final leagueSeasonCountsStateProvider =
+    StateNotifierProvider<LeagueSeasonCountsState, List<LeagueSeasonCount>>(
+        (ref) {
+  final LeagueSeasonCountsState leagueSeasonCountsState =
+      LeagueSeasonCountsState(ref);
+  leagueSeasonCountsState.init();
+  return leagueSeasonCountsState;
+});
+
 class AllLeaguesState extends StateNotifier<AsyncValue<List<League>>> {
   AllLeaguesState() : super(const AsyncLoading<List<League>>());
 
   void init() async {
     state = const AsyncLoading<List<League>>();
+    //TODO: Remove delayed when leagues are on firestore.
     final leagues = await Future.delayed(const Duration(seconds: 1))
         .then((_) => League.leagues);
     state = AsyncData<List<League>>(leagues);
@@ -45,6 +57,7 @@ class LeaguesBySelectedSportState
     final Sport? selectedSportState = ref.watch(selectedSportStateProvider);
 
     state = const AsyncLoading<List<League>>();
+    //TODO: Remove delayed when leagues are on firestore.
     final leagues = await Future.delayed(const Duration(seconds: 1)).then((_) {
       if (selectedSportState != null) {
         return League.leagues
@@ -66,5 +79,33 @@ class SelectedLeagueState extends StateNotifier<League?> {
 
   void select(League? league) {
     state = league;
+  }
+}
+
+class LeagueSeasonCountsState extends StateNotifier<List<LeagueSeasonCount>> {
+  LeagueSeasonCountsState(this.ref) : super([]);
+
+  final Ref ref;
+
+  void init() {
+    List<League>? leagues = ref.watch(allLeaguesStateProvider).value;
+    List<LeagueSeasonCount> leagueSeasonCounts = [];
+
+    if (leagues != null) {
+      for (League league in leagues) {
+        leagueSeasonCounts.add(LeagueSeasonCount(
+          league: league,
+          count: ref
+                  .watch(allSeasonsStateProvider)
+                  .value
+                  ?.where((season) =>
+                      season.league.toLowerCase() == league.name.toLowerCase())
+                  .length ??
+              0,
+        ));
+      }
+    }
+
+    state = leagueSeasonCounts;
   }
 }

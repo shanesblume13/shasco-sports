@@ -3,7 +3,8 @@ import 'package:pick/core/models/sport_league_count.dart';
 import 'package:pick/core/models/sport_model.dart';
 import 'package:pick/core/providers/leagues_provider.dart';
 
-final sportsStateProvider = StateNotifierProvider<Sports, List<Sport>>((ref) {
+final allSportsStateProvider =
+    StateNotifierProvider<Sports, List<Sport>>((ref) {
   return Sports(ref);
 });
 
@@ -13,8 +14,9 @@ final selectedSportStateProvider =
 });
 
 final sportLeagueCountsStateProvider =
-    StateNotifierProvider<SportLeagueCounts, List<SportLeagueCount>>((ref) {
-  return SportLeagueCounts(ref);
+    StateNotifierProvider<SportLeagueCountsState, List<SportLeagueCount>>(
+        (ref) {
+  return SportLeagueCountsState(ref);
 });
 
 class Sports extends StateNotifier<List<Sport>> {
@@ -39,15 +41,15 @@ class SelectedSportState extends StateNotifier<Sport?> {
   }
 }
 
-class SportLeagueCounts extends StateNotifier<List<SportLeagueCount>> {
-  SportLeagueCounts(this.ref) : super([]) {
+class SportLeagueCountsState extends StateNotifier<List<SportLeagueCount>> {
+  SportLeagueCountsState(this.ref) : super([]) {
     getSportLeagueCounts();
   }
 
   final Ref ref;
 
   void getSportLeagueCounts() {
-    List<Sport> sports = ref.watch(sportsStateProvider);
+    List<Sport> sports = ref.watch(allSportsStateProvider);
     List<SportLeagueCount> sportLeagueCounts = [];
 
     for (Sport sport in sports) {
