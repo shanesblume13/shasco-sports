@@ -1,11 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' as hr;
 import 'package:pick/core/viewmodels/game_view_model.dart';
 import 'package:pick/core/viewmodels/matchup_view_model.dart';
 import 'package:pick/core/viewmodels/league_view_model.dart';
 import 'package:pick/core/viewmodels/pick_view_model.dart';
 import 'package:pick/core/viewmodels/season_view_model.dart';
-import 'package:pick/core/viewmodels/sport_view_model.dart';
 import 'package:pick/core/viewmodels/leg_view_model.dart';
 import 'package:pick/core/viewmodels/team_view_model.dart';
 import 'package:pick/firebase_options.dart';
@@ -20,7 +20,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   setupLocator();
-  runApp(const App());
+  runApp(const hr.ProviderScope(child: App()));
 }
 
 class App extends StatelessWidget {
@@ -41,9 +41,6 @@ class App extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => locator<TeamViewModel>(),
-        ),
-        Provider(
-          create: (_) => locator<SportViewModel>(),
         ),
         Provider(
           create: (_) => locator<LeagueViewModel>(),
