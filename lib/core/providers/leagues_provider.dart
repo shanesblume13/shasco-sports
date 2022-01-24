@@ -9,12 +9,12 @@ final leaguesProvider = StateNotifierProvider<Leagues, List<League>>((ref) {
 
 class Leagues extends StateNotifier<List<League>> {
   Leagues(this.ref) : super([]) {
-    loadBySelectedSport();
+    getLeagues();
   }
 
   final Ref ref;
 
-  void loadBySelectedSport() {
+  void getLeagues() {
     Sport? selectedSport = ref.watch(selectedSportProvider);
 
     state = League.leagues

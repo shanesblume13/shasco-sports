@@ -12,12 +12,12 @@ final selectedSportProvider =
 
 class Sports extends StateNotifier<List<Sport>> {
   Sports(this.ref) : super([]) {
-    load();
+    getSports();
   }
 
   final Ref ref;
 
-  void load() {
+  void getSports() {
     state = Sport.sports;
   }
 }
