@@ -6,7 +6,7 @@ import 'package:pick/core/services/season_api_service.dart';
 import 'package:pick/core/services/team_api_service.dart';
 import 'package:pick/core/providers/game_view_model.dart';
 import 'package:pick/core/providers/matchup_view_model.dart';
-import 'package:pick/core/providers/league_view_model.dart';
+import 'package:pick/core/providers/leagues_provider.dart';
 import 'package:pick/core/providers/pick_view_model.dart';
 import 'package:pick/core/providers/season_view_model.dart';
 import 'package:pick/core/providers/leg_view_model.dart';
