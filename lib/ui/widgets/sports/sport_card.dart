@@ -49,7 +49,6 @@ class SportCard extends HookConsumerWidget {
               gridArea('image').containing(
                 SportCardImageClip(
                   iconData: sport.iconData,
-                  iconColor: sport.iconColor,
                 ),
               ),
               gridArea('name').containing(
