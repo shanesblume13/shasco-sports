@@ -11,6 +11,7 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
+- Get leagueCount from providers.
 - Get uid for picks.
 - Modify and save user picks.
 - Figure out how to handle null document references (winningTeamReference)
@@ -26,7 +27,6 @@ A mobile app built with flutter and firebase that allows users to play various g
 - Add a squares style format.
 
 # Issues
-- locator.registerLazySingleton(() => ApiService(<Entity Name>)) needs to be set for multiple entities.
 - App signs with dominionsystems email unless XCode is open and updated.
 - Fastlane files are removed on pub get.
 - Podfile reverts platform:ios version to 9.0 on pub get.

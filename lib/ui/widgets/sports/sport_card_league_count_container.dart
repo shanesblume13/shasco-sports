@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/core/providers/sports_provider.dart';
 
-class SportCardLeagueCountContainer extends StatelessWidget {
+class SportCardLeagueCountContainer extends HookConsumerWidget {
   const SportCardLeagueCountContainer({
     Key? key,
     required this.sport,
@@ -9,8 +11,12 @@ class SportCardLeagueCountContainer extends StatelessWidget {
   final String sport;
 
   @override
-  Widget build(BuildContext context) {
-    const int leagueCount = 0;
+  Widget build(BuildContext context, WidgetRef ref) {
+    var sportLeagueCount = ref.watch(sportLeagueCountsProvider);
+    var test = sportLeagueCount
+        .firstWhere(
+            (data) => data.sport.name.toLowerCase() == sport.toLowerCase())
+        .count;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -18,7 +24,7 @@ class SportCardLeagueCountContainer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(leagueCount.toString()),
+            Text(test.toString()),
           ],
         ),
         Row(
