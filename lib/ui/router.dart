@@ -35,7 +35,7 @@ class Router {
         );
       case '/seasons':
         return MaterialPageRoute(
-          builder: (_) => const SeasonsView(league: ''),
+          builder: (_) => const SeasonsView(),
         );
       // case '/matchups':
       //   return MaterialPageRoute(

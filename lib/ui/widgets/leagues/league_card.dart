@@ -21,9 +21,7 @@ class LeagueCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => SeasonsView(
-              league: league.name,
-            ),
+            builder: (_) => const SeasonsView(),
           ),
         );
       },

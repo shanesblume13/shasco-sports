@@ -10,12 +10,21 @@ class FirestoreSeasonService extends ChangeNotifier {
     List<Season> seasons = [];
     var result = await _apiService.getDataCollection();
 
-    seasons = result.docs
-        .map(
-          (doc) => Season.fromQueryDocumentSnapshot(doc, doc.id),
-        )
-        .where((season) => season.league.toLowerCase() == league.toLowerCase())
-        .toList();
+    if (league.isEmpty) {
+      seasons = result.docs
+          .map(
+            (doc) => Season.fromQueryDocumentSnapshot(doc, doc.id),
+          )
+          .toList();
+    } else {
+      seasons = result.docs
+          .map(
+            (doc) => Season.fromQueryDocumentSnapshot(doc, doc.id),
+          )
+          .where(
+              (season) => season.league.toLowerCase() == league.toLowerCase())
+          .toList();
+    }
 
     return seasons;
   }
