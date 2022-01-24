@@ -20,7 +20,7 @@ class SportCard extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        ref.watch(selectedSportProvider.notifier).select(sport);
+        ref.watch(selectedSportStateProvider.notifier).select(sport);
 
         Navigator.push(
           context,

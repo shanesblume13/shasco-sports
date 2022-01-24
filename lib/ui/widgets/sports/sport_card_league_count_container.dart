@@ -12,7 +12,7 @@ class SportCardLeagueCountContainer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var sportLeagueCount = ref.watch(sportLeagueCountsProvider);
+    var sportLeagueCount = ref.watch(sportLeagueCountsStateProvider);
     var test = sportLeagueCount
         .firstWhere(
             (data) => data.sport.name.toLowerCase() == sport.toLowerCase())

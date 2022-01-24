@@ -3,16 +3,16 @@ import 'package:pick/core/models/sport_league_count.dart';
 import 'package:pick/core/models/sport_model.dart';
 import 'package:pick/core/providers/leagues_provider.dart';
 
-final sportsProvider = StateNotifierProvider<Sports, List<Sport>>((ref) {
+final sportsStateProvider = StateNotifierProvider<Sports, List<Sport>>((ref) {
   return Sports(ref);
 });
 
-final selectedSportProvider =
-    StateNotifierProvider<SelectedSport, Sport?>((ref) {
-  return SelectedSport(ref);
+final selectedSportStateProvider =
+    StateNotifierProvider<SelectedSportState, Sport?>((ref) {
+  return SelectedSportState(ref);
 });
 
-final sportLeagueCountsProvider =
+final sportLeagueCountsStateProvider =
     StateNotifierProvider<SportLeagueCounts, List<SportLeagueCount>>((ref) {
   return SportLeagueCounts(ref);
 });
@@ -29,10 +29,8 @@ class Sports extends StateNotifier<List<Sport>> {
   }
 }
 
-class SelectedSport extends StateNotifier<Sport?> {
-  SelectedSport(this.ref) : super(null) {
-    select(null);
-  }
+class SelectedSportState extends StateNotifier<Sport?> {
+  SelectedSportState(this.ref) : super(null);
 
   final Ref ref;
 
@@ -49,17 +47,19 @@ class SportLeagueCounts extends StateNotifier<List<SportLeagueCount>> {
   final Ref ref;
 
   void getSportLeagueCounts() {
-    List<Sport> sports = ref.watch(sportsProvider);
+    List<Sport> sports = ref.watch(sportsStateProvider);
     List<SportLeagueCount> sportLeagueCounts = [];
 
     for (Sport sport in sports) {
       sportLeagueCounts.add(SportLeagueCount(
         sport: sport,
         count: ref
-            .watch(allLeaguesProvider)
-            .where((league) =>
-                league.sport.toLowerCase() == sport.name.toLowerCase())
-            .length,
+                .watch(allLeaguesStateProvider)
+                .value
+                ?.where((league) =>
+                    league.sport.toLowerCase() == sport.name.toLowerCase())
+                .length ??
+            0,
       ));
     }
 
