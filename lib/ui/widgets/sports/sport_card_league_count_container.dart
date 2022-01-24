@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/league_model.dart';
-import 'package:pick/core/providers/leagues_provider.dart';
-import 'package:provider/provider.dart';
 
 class SportCardLeagueCountContainer extends StatelessWidget {
   const SportCardLeagueCountContainer({
@@ -13,9 +10,7 @@ class SportCardLeagueCountContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final leagueProvider = Provider.of<LeagueViewModel>(context);
-    final List<League> leagues = leagueProvider.fetchLeagues(sport: sport);
-    final int leagueCount = leagues.length;
+    const int leagueCount = 0;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

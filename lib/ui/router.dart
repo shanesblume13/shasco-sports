@@ -27,7 +27,7 @@ class Router {
         );
       case '/leagues':
         return MaterialPageRoute(
-          builder: (_) => const LeaguesView(sport: ''),
+          builder: (_) => const LeaguesView(),
         );
       case '/games':
         return MaterialPageRoute(

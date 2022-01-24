@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as hr;
 import 'package:pick/core/providers/game_view_model.dart';
 import 'package:pick/core/providers/matchup_view_model.dart';
-import 'package:pick/core/providers/leagues_provider.dart';
 import 'package:pick/core/providers/pick_view_model.dart';
 import 'package:pick/core/providers/season_view_model.dart';
 import 'package:pick/core/providers/leg_view_model.dart';
@@ -41,9 +40,6 @@ class App extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => locator<TeamViewModel>(),
-        ),
-        Provider(
-          create: (_) => locator<LeagueViewModel>(),
         ),
         Provider(
           create: (_) => locator<GameViewModel>(),

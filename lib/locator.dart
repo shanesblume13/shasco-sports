@@ -6,7 +6,6 @@ import 'package:pick/core/services/season_api_service.dart';
 import 'package:pick/core/services/team_api_service.dart';
 import 'package:pick/core/providers/game_view_model.dart';
 import 'package:pick/core/providers/matchup_view_model.dart';
-import 'package:pick/core/providers/leagues_provider.dart';
 import 'package:pick/core/providers/pick_view_model.dart';
 import 'package:pick/core/providers/season_view_model.dart';
 import 'package:pick/core/providers/leg_view_model.dart';
@@ -24,7 +23,6 @@ void setupLocator() {
   locator.registerLazySingleton(() => PickApiService());
   locator.registerLazySingleton(() => MatchupViewModel());
   locator.registerLazySingleton(() => LegViewModel());
-  locator.registerLazySingleton(() => LeagueViewModel());
   locator.registerLazySingleton(() => SeasonViewModel());
   locator.registerLazySingleton(() => GameViewModel());
   locator.registerLazySingleton(() => TeamViewModel());

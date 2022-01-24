@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/sport_model.dart';
+import 'package:pick/core/providers/sports_provider.dart';
 import 'package:pick/ui/views/leagues_view.dart';
 import 'package:pick/ui/widgets/sports/sport_card_image_clip.dart';
 import 'package:pick/ui/widgets/sports/sport_card_league_count_container.dart';
 import 'package:pick/ui/widgets/sports/sport_card_name_container.dart';
 
-class SportCard extends StatelessWidget {
+class SportCard extends HookConsumerWidget {
   const SportCard({
     Key? key,
     required this.sport,
@@ -15,15 +17,15 @@ class SportCard extends StatelessWidget {
   final Sport sport;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
+        ref.watch(selectedSportProvider.notifier).select(sport);
+
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => LeaguesView(
-              sport: sport.name,
-            ),
+            builder: (_) => const LeaguesView(),
           ),
         );
       },
