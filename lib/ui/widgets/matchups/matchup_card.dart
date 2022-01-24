@@ -7,7 +7,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
-import 'package:pick/core/viewmodels/team_view_model.dart';
+import 'package:pick/core/providers/team_view_model.dart';
 import 'package:pick/ui/widgets/matchups/matchup_pick_score_divider.dart';
 import 'package:pick/ui/widgets/matchups/team_image_container.dart';
 import 'package:pick/ui/widgets/matchups/matchup_card_team_name_container.dart';

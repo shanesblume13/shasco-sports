@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/game_model.dart';
-import 'package:pick/core/viewmodels/game_view_model.dart';
+import 'package:pick/core/providers/game_view_model.dart';
 import 'package:pick/ui/widgets/games/game_cards_listview.dart';
 import 'package:provider/provider.dart';
 

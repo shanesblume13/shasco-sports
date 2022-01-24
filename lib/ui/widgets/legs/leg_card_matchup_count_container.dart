@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
-import 'package:pick/core/viewmodels/matchup_view_model.dart';
+import 'package:pick/core/providers/matchup_view_model.dart';
 import 'package:provider/provider.dart';
 
 class LegCardMatchupCountContainer extends StatefulWidget {

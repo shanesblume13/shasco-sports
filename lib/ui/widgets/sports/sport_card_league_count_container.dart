@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/league_model.dart';
-import 'package:pick/core/viewmodels/league_view_model.dart';
+import 'package:pick/core/providers/league_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SportCardLeagueCountContainer extends StatelessWidget {

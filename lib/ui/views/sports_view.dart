@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/viewmodels/sports_provider.dart';
+import 'package:pick/core/providers/sports_provider.dart';
 import 'package:pick/ui/widgets/sports/sport_cards_listview.dart';
 
 class SportsView extends HookConsumerWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/season_model.dart';
-import 'package:pick/core/viewmodels/season_view_model.dart';
+import 'package:pick/core/providers/season_view_model.dart';
 import 'package:pick/ui/widgets/seasons/season_cards_listview.dart';
 import 'package:provider/provider.dart';
 

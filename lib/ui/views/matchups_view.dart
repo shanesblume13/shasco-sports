@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
-import 'package:pick/core/viewmodels/matchup_view_model.dart';
-import 'package:pick/core/viewmodels/pick_view_model.dart';
+import 'package:pick/core/providers/matchup_view_model.dart';
+import 'package:pick/core/providers/pick_view_model.dart';
 import 'package:pick/ui/widgets/matchups/matchup_cards_listview.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/leg_model.dart';
-import 'package:pick/core/viewmodels/leg_view_model.dart';
+import 'package:pick/core/providers/leg_view_model.dart';
 import 'package:provider/provider.dart';
 
 class ModifyLeg extends StatefulWidget {
