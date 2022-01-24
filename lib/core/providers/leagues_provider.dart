@@ -10,14 +10,17 @@ final allLeaguesStateProvider =
   return allLeaguesState;
 });
 
-final leaguesBySelectedSportProvider =
-    StateNotifierProvider<LeaguesBySelectedSport, List<League>>((ref) {
-  return LeaguesBySelectedSport(ref);
+final leaguesBySelectedSportStateProvider = StateNotifierProvider<
+    LeaguesBySelectedSportState, AsyncValue<List<League>>>((ref) {
+  final LeaguesBySelectedSportState leaguesBySelectedSportState =
+      LeaguesBySelectedSportState(ref);
+  leaguesBySelectedSportState.init();
+  return leaguesBySelectedSportState;
 });
 
 final selectedLeagueStateProvider =
     StateNotifierProvider<SelectedLeagueState, League?>((ref) {
-  return SelectedLeagueState(ref);
+  return SelectedLeagueState();
 });
 
 class AllLeaguesState extends StateNotifier<AsyncValue<List<League>>> {
@@ -31,27 +34,35 @@ class AllLeaguesState extends StateNotifier<AsyncValue<List<League>>> {
   }
 }
 
-class LeaguesBySelectedSport extends StateNotifier<List<League>> {
-  LeaguesBySelectedSport(this.ref) : super([]) {
-    getLeagues();
-  }
+class LeaguesBySelectedSportState
+    extends StateNotifier<AsyncValue<List<League>>> {
+  LeaguesBySelectedSportState(this.ref)
+      : super(const AsyncLoading<List<League>>());
 
   final Ref ref;
 
-  void getLeagues() {
-    Sport? selectedSport = ref.watch(selectedSportStateProvider);
+  void init() async {
+    final Sport? selectedSportState = ref.watch(selectedSportStateProvider);
 
-    state = League.leagues
-        .where((league) =>
-            league.sport.toLowerCase() == selectedSport?.name.toLowerCase())
-        .toList();
+    state = const AsyncLoading<List<League>>();
+    final leagues = await Future.delayed(const Duration(seconds: 1)).then((_) {
+      if (selectedSportState != null) {
+        return League.leagues
+            .where((league) =>
+                league.sport.toLowerCase() ==
+                selectedSportState.name.toLowerCase())
+            .toList();
+      } else {
+        return League.leagues;
+      }
+    });
+
+    state = AsyncData<List<League>>(leagues);
   }
 }
 
 class SelectedLeagueState extends StateNotifier<League?> {
-  SelectedLeagueState(this.ref) : super(null);
-
-  final Ref ref;
+  SelectedLeagueState() : super(null);
 
   void select(League? league) {
     state = league;

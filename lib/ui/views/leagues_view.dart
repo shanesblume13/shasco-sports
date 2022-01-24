@@ -13,7 +13,8 @@ class LeaguesView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<List<League>> leagues = ref.watch(allLeaguesStateProvider);
+    AsyncValue<List<League>> leagues =
+        ref.watch(leaguesBySelectedSportStateProvider);
     final Sport? selectedSport = ref.watch(selectedSportStateProvider);
 
     return Scaffold(
