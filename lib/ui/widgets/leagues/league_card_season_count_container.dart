@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/season_model.dart';
-import 'package:pick/core/providers/season_view_model.dart';
+import 'package:pick/core/services/firestore_season_service.dart';
 import 'package:provider/provider.dart';
 
 class LeagueCardSeasonCountContainer extends StatefulWidget {
@@ -20,8 +20,8 @@ class _LeagueCardSeasonCountContainerState
     extends State<LeagueCardSeasonCountContainer> {
   @override
   Widget build(BuildContext context) {
-    final SeasonViewModel seasonProvider =
-        Provider.of<SeasonViewModel>(context);
+    final FirestoreSeasonService seasonProvider =
+        Provider.of<FirestoreSeasonService>(context);
     int seasonCount = 0;
 
     return FutureBuilder<List<Season>>(

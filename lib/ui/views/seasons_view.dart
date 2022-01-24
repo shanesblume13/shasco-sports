@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/season_model.dart';
-import 'package:pick/core/providers/season_view_model.dart';
+import 'package:pick/core/services/firestore_season_service.dart';
 import 'package:pick/ui/widgets/seasons/season_cards_listview.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +21,7 @@ class _SeasonsViewState extends State<SeasonsView> {
 
   @override
   Widget build(BuildContext context) {
-    final seasonProvider = Provider.of<SeasonViewModel>(context);
+    final seasonProvider = Provider.of<FirestoreSeasonService>(context);
     String league = widget.league;
 
     return Scaffold(

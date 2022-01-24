@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/season_model.dart';
-import 'package:pick/core/services/season_api_service.dart';
-import 'package:pick/locator.dart';
+import 'package:pick/core/services/firestore_api_service.dart';
 
-class SeasonViewModel extends ChangeNotifier {
-  final SeasonApiService _apiService = locator<SeasonApiService>();
+class FirestoreSeasonService extends ChangeNotifier {
+  final FirestoreApiService _apiService = FirestoreApiService('seasons');
 
   Future<List<Season>> fetchSeasons(String league) async {
     List<Season> seasons = [];

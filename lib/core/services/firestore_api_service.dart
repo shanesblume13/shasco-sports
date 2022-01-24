@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
-class SeasonApiService {
+class FirestoreApiService {
+  FirestoreApiService(
+    this.collectionName,
+  ) {
+    ref = _db.collection(collectionName);
+  }
+
+  final String collectionName;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   late CollectionReference<Map<String, dynamic>> ref;
-
-  SeasonApiService() {
-    ref = _db.collection('seasons');
-  }
 
   Future<QuerySnapshot<Map<String, dynamic>>> getDataCollection() {
     return ref.get();
