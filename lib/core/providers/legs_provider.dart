@@ -1,6 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/core/models/leg_matchup_count_model.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/season_model.dart';
+import 'package:pick/core/providers/matchups_provider.dart';
 import 'package:pick/core/providers/seasons_provider.dart';
 import 'package:pick/core/services/firestore_leg_service.dart';
 
@@ -18,6 +20,19 @@ final legsBySelectedSeasonStateProvider =
       LegsBySelectedSeasonState(ref);
   legsBySelectedSeasonState.init();
   return legsBySelectedSeasonState;
+});
+
+final selectedLegStateProvider =
+    StateNotifierProvider<SelectedLegState, Leg?>((ref) {
+  return SelectedLegState();
+});
+
+final legMatchupCountsStateProvider =
+    StateNotifierProvider<LegMatchupCountsState, List<LegMatchupCount>>((ref) {
+  final LegMatchupCountsState legMatchupCountsState =
+      LegMatchupCountsState(ref);
+  legMatchupCountsState.init();
+  return legMatchupCountsState;
 });
 
 class AllLegsState extends StateNotifier<AsyncValue<List<Leg>>> {
@@ -53,5 +68,40 @@ class LegsBySelectedSeasonState extends StateNotifier<AsyncValue<List<Leg>>> {
     }
 
     state = AsyncData<List<Leg>>(legs);
+  }
+}
+
+class SelectedLegState extends StateNotifier<Leg?> {
+  SelectedLegState() : super(null);
+
+  void select(Leg? leg) {
+    state = leg;
+  }
+}
+
+class LegMatchupCountsState extends StateNotifier<List<LegMatchupCount>> {
+  LegMatchupCountsState(this.ref) : super([]);
+
+  final Ref ref;
+
+  void init() {
+    List<Leg>? legs = ref.watch(allLegsStateProvider).value;
+    List<LegMatchupCount> legMatchupCounts = [];
+
+    if (legs != null) {
+      for (Leg leg in legs) {
+        legMatchupCounts.add(LegMatchupCount(
+          leg: leg,
+          count: ref
+                  .watch(allMatchupsStateProvider)
+                  .value
+                  ?.where((matchup) => matchup.legReference == leg.reference)
+                  .length ??
+              0,
+        ));
+      }
+    }
+
+    state = legMatchupCounts;
   }
 }

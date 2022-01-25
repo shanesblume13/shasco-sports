@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/core/models/leg_matchup_count_model.dart';
 import 'package:pick/core/models/leg_model.dart';
-import 'package:pick/core/models/matchup_model.dart';
-import 'package:pick/core/providers/matchup_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:pick/core/providers/legs_provider.dart';
 
-class LegCardMatchupCountContainer extends StatefulWidget {
+class LegCardMatchupCountContainer extends HookConsumerWidget {
   const LegCardMatchupCountContainer({
     Key? key,
     required this.leg,
@@ -13,44 +13,29 @@ class LegCardMatchupCountContainer extends StatefulWidget {
   final Leg leg;
 
   @override
-  State<LegCardMatchupCountContainer> createState() =>
-      _LegCardMatchupCountContainerState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<LegMatchupCount> legMatchupCounts =
+        ref.watch(legMatchupCountsStateProvider);
+    int legMatchupCount = legMatchupCounts
+        .firstWhere((data) => data.leg.reference == leg.reference)
+        .count;
 
-class _LegCardMatchupCountContainerState
-    extends State<LegCardMatchupCountContainer> {
-  List<Matchup> matchups = [];
-
-  @override
-  Widget build(BuildContext context) {
-    final MatchupViewModel matchupProvider =
-        Provider.of<MatchupViewModel>(context);
-    int matchupCount = 0;
-
-    return FutureBuilder<List<Matchup>>(
-        future: matchupProvider.fetchMatchups(leg: widget.leg),
-        builder: (context, AsyncSnapshot<List<Matchup>> snapshot) {
-          if (snapshot.hasData) {
-            matchupCount = snapshot.data?.length ?? 0;
-          }
-
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('$matchupCount'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text('Matchups'),
-                ],
-              ),
-            ],
-          );
-        });
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(legMatchupCount.toString()),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text('Matchups'),
+          ],
+        ),
+      ],
+    );
   }
 }

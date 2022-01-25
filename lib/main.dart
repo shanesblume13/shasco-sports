@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as hr;
 import 'package:pick/core/providers/game_view_model.dart';
-import 'package:pick/core/providers/matchup_view_model.dart';
 import 'package:pick/core/providers/pick_view_model.dart';
 import 'package:pick/core/providers/team_view_model.dart';
 import 'package:pick/firebase_options.dart';
@@ -29,9 +28,6 @@ class App extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => locator<PickViewModel>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => locator<MatchupViewModel>(),
         ),
         ChangeNotifierProvider(
           create: (_) => locator<TeamViewModel>(),
