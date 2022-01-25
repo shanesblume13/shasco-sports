@@ -13,20 +13,22 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [] Stats, Graphs, and Results
 - Replace matchup viewmodel.
 - Replace pick viewmodel.
+- Add sports and leagues to firestore.
 - Use auth from provider.
 - Get uid for picks.
 - Modify and save user picks.
 - Figure out how to handle null document references (winningTeamReference)
-- Add local data to firestore
 - Add user permissions
 - Use image clip icons and colors to distinguish status.
 - Figure out how to handle dates correctly.
 - Create a splash screen.
 - Update loading indicator to incorporate logo.
-- Add a pick'em style format.
 - Add pick'em leagues
 - Add pick'em metrics
 - Add a squares style format.
+- Add options
+    - Use spread
+    - Scoring (confidence, sevencoals, single point)
 
 # Issues
 - App signs with dominionsystems email unless XCode is open and updated.
