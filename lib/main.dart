@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart' as hr;
 import 'package:pick/core/providers/game_view_model.dart';
 import 'package:pick/core/providers/matchup_view_model.dart';
 import 'package:pick/core/providers/pick_view_model.dart';
-import 'package:pick/core/providers/leg_view_model.dart';
 import 'package:pick/core/providers/team_view_model.dart';
 import 'package:pick/firebase_options.dart';
 import 'package:pick/locator.dart';
@@ -28,9 +27,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => locator<LegViewModel>(),
-        ),
         ChangeNotifierProvider(
           create: (_) => locator<PickViewModel>(),
         ),

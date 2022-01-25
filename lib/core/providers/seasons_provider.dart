@@ -1,7 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
+import 'package:pick/core/models/season_leg_count_model.dart';
 import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/providers/leagues_provider.dart';
+import 'package:pick/core/providers/legs_provider.dart';
 import 'package:pick/core/services/firestore_season_service.dart';
 
 final allSeasonsStateProvider =
@@ -22,6 +24,13 @@ final seasonsBySelectedLeagueStateProvider = StateNotifierProvider<
 final selectedSeasonStateProvider =
     StateNotifierProvider<SelectedSeasonState, Season?>((ref) {
   return SelectedSeasonState();
+});
+
+final seasonLegCountsStateProvider =
+    StateNotifierProvider<SeasonLegCountsState, List<SeasonLegCount>>((ref) {
+  final SeasonLegCountsState seasonLegCountsState = SeasonLegCountsState(ref);
+  seasonLegCountsState.init();
+  return seasonLegCountsState;
 });
 
 class AllSeasonsState extends StateNotifier<AsyncValue<List<Season>>> {
@@ -68,5 +77,32 @@ class SelectedSeasonState extends StateNotifier<Season?> {
 
   void select(Season? season) {
     state = season;
+  }
+}
+
+class SeasonLegCountsState extends StateNotifier<List<SeasonLegCount>> {
+  SeasonLegCountsState(this.ref) : super([]);
+
+  final Ref ref;
+
+  void init() {
+    List<Season>? seasons = ref.watch(allSeasonsStateProvider).value;
+    List<SeasonLegCount> seasonLegCounts = [];
+
+    if (seasons != null) {
+      for (Season season in seasons) {
+        seasonLegCounts.add(SeasonLegCount(
+          season: season,
+          count: ref
+                  .watch(allLegsStateProvider)
+                  .value
+                  ?.where((leg) => leg.seasonReference == season.reference)
+                  .length ??
+              0,
+        ));
+      }
+    }
+
+    state = seasonLegCounts;
   }
 }

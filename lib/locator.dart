@@ -7,7 +7,6 @@ import 'package:pick/core/providers/game_view_model.dart';
 import 'package:pick/core/providers/matchup_view_model.dart';
 import 'package:pick/core/providers/pick_view_model.dart';
 import 'package:pick/core/services/firestore_season_service.dart';
-import 'package:pick/core/providers/leg_view_model.dart';
 import 'package:pick/core/providers/team_view_model.dart';
 // import './core/viewmodels/CRUDModel.dart';
 
@@ -19,7 +18,6 @@ void setupLocator() {
   locator.registerLazySingleton(() => TeamApiService());
   locator.registerLazySingleton(() => PickApiService());
   locator.registerLazySingleton(() => MatchupViewModel());
-  locator.registerLazySingleton(() => LegViewModel());
   locator.registerLazySingleton(() => FirestoreSeasonService());
   locator.registerLazySingleton(() => GameViewModel());
   locator.registerLazySingleton(() => TeamViewModel());

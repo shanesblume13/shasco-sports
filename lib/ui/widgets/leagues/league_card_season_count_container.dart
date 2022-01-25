@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/league_season_count.dart';
+import 'package:pick/core/models/league_season_count_model.dart';
 import 'package:pick/core/providers/leagues_provider.dart';
 
 class LeagueCardSeasonCountContainer extends HookConsumerWidget {

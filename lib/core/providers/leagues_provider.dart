@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
-import 'package:pick/core/models/league_season_count.dart';
+import 'package:pick/core/models/league_season_count_model.dart';
 import 'package:pick/core/models/sport_model.dart';
 import 'package:pick/core/providers/seasons_provider.dart';
 import 'package:pick/core/providers/sports_provider.dart';

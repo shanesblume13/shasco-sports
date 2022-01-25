@@ -11,9 +11,8 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
-- Get legs from provider.
-- Get matchups from provder.
-- Get picks from provider.
+- Replace matchup viewmodel.
+- Replace pick viewmodel.
 - Use auth from provider.
 - Get uid for picks.
 - Modify and save user picks.

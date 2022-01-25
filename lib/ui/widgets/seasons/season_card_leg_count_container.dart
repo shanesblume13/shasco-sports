@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/leg_model.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/core/models/season_leg_count_model.dart';
 import 'package:pick/core/models/season_model.dart';
-import 'package:pick/core/providers/leg_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:pick/core/providers/seasons_provider.dart';
 
-class SeasonCardLegCountContainer extends StatefulWidget {
+class SeasonCardLegCountContainer extends HookConsumerWidget {
   const SeasonCardLegCountContainer({
     Key? key,
     required this.season,
@@ -13,43 +13,29 @@ class SeasonCardLegCountContainer extends StatefulWidget {
   final Season season;
 
   @override
-  State<SeasonCardLegCountContainer> createState() =>
-      _SeasonCardLegCountContainerState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<SeasonLegCount> seasonLegCounts =
+        ref.watch(seasonLegCountsStateProvider);
+    int seasonLegCount = seasonLegCounts
+        .firstWhere((data) => data.season.reference == season.reference)
+        .count;
 
-class _SeasonCardLegCountContainerState
-    extends State<SeasonCardLegCountContainer> {
-  List<Leg> legs = [];
-
-  @override
-  Widget build(BuildContext context) {
-    final LegViewModel legProvider = Provider.of<LegViewModel>(context);
-    int legCount = 0;
-
-    return FutureBuilder<List<Leg>>(
-        future: legProvider.fetchLegs(season: widget.season),
-        builder: (context, AsyncSnapshot<List<Leg>> snapshot) {
-          if (snapshot.hasData) {
-            legCount = snapshot.data?.length ?? 0;
-          }
-
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('$legCount'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text('Legs'),
-                ],
-              ),
-            ],
-          );
-        });
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(seasonLegCount.toString()),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text('Legs'),
+          ],
+        ),
+      ],
+    );
   }
 }
