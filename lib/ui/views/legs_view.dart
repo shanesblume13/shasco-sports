@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/season_model.dart';
-import 'package:pick/core/providers/leg_view_model.dart';
+import 'package:pick/core/providers/legs_provider.dart';
+import 'package:pick/core/providers/seasons_provider.dart';
 import 'package:pick/ui/widgets/legs/leg_cards_listview.dart';
-import 'package:provider/provider.dart';
 
-class LegsView extends StatefulWidget {
+class LegsView extends HookConsumerWidget {
   const LegsView({
     Key? key,
-    required this.season,
   }) : super(key: key);
 
-  final Season season;
-
   @override
-  _LegsViewState createState() => _LegsViewState();
-}
-
-class _LegsViewState extends State<LegsView> {
-  List<Leg> legs = [];
-
-  @override
-  Widget build(BuildContext context) {
-    final legProvider = Provider.of<LegViewModel>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    AsyncValue<List<Leg>> legs = ref.watch(legsBySelectedSeasonStateProvider);
+    final Season? selectedSeason = ref.watch(selectedSeasonStateProvider);
 
     return Scaffold(
       // floatingActionButton: FloatingActionButton(
@@ -33,22 +25,13 @@ class _LegsViewState extends State<LegsView> {
       // ),
       appBar: AppBar(
         title: Center(
-          child: Text(widget.season.name),
+          child: Text(selectedSeason?.name ?? 'Legs'),
         ),
       ),
-      body: FutureBuilder<List<Leg>>(
-        future: legProvider.fetchLegs(season: widget.season),
-        builder: (context, AsyncSnapshot<List<Leg>> snapshot) {
-          if (snapshot.hasData) {
-            legs = snapshot.data?.toList() ?? [];
-
-            return LegCardsListview(legs: legs);
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+      body: legs.when(
+        data: (legs) => LegCardsListview(legs: legs),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, s) => const Center(child: Text('Something went wrong!')),
       ),
     );
   }

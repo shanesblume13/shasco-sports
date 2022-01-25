@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/season_model.dart';
+import 'package:pick/core/providers/seasons_provider.dart';
 import 'package:pick/ui/views/legs_view.dart';
 import 'package:pick/ui/widgets/seasons/season_card_image_clip.dart';
 import 'package:pick/ui/widgets/seasons/season_card_name_container.dart';
 import 'package:pick/ui/widgets/seasons/season_card_leg_count_container.dart';
 
-class SeasonCard extends StatelessWidget {
+class SeasonCard extends HookConsumerWidget {
   const SeasonCard({
     Key? key,
     required this.season,
@@ -15,16 +17,15 @@ class SeasonCard extends StatelessWidget {
   final Season season;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        null;
+        ref.watch(selectedSeasonStateProvider.notifier).select(season);
+
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => LegsView(
-              season: season,
-            ),
+            builder: (_) => const LegsView(),
           ),
         );
       },
