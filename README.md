@@ -11,8 +11,10 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
-- Get seasons list from provider. 
-- Get active season count from providers.
+- Get legs from provider.
+- Get matchups from provder.
+- Get picks from provider.
+- Use auth from provider.
 - Get uid for picks.
 - Modify and save user picks.
 - Figure out how to handle null document references (winningTeamReference)

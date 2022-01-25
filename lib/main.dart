@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart' as hr;
 import 'package:pick/core/providers/game_view_model.dart';
 import 'package:pick/core/providers/matchup_view_model.dart';
 import 'package:pick/core/providers/pick_view_model.dart';
-import 'package:pick/core/services/firestore_season_service.dart';
 import 'package:pick/core/providers/leg_view_model.dart';
 import 'package:pick/core/providers/team_view_model.dart';
 import 'package:pick/firebase_options.dart';
@@ -43,9 +42,6 @@ class App extends StatelessWidget {
         ),
         Provider(
           create: (_) => locator<GameViewModel>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => locator<FirestoreSeasonService>(),
         ),
       ],
       child: MaterialApp(
