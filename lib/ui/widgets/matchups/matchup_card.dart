@@ -5,6 +5,7 @@ import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
 import 'package:pick/core/providers/images_provider.dart';
+import 'package:pick/core/providers/picks_provider.dart';
 import 'package:pick/ui/widgets/matchups/matchup_pick_score_divider.dart';
 import 'package:pick/ui/widgets/matchups/team_image_container.dart';
 import 'package:pick/ui/widgets/matchups/matchup_card_team_name_container.dart';
@@ -58,7 +59,9 @@ class MatchupCard extends HookConsumerWidget {
               children: [
                 gridArea('awayLogo').containing(
                   InkWell(
-                    onTap: () => null, //_savePick(team: awayTeam),
+                    onTap: () => ref
+                        .watch(selectedLegPicksStateProvider.notifier)
+                        .updatePickedTeam(matchup: matchup, team: awayTeam),
                     splashColor: Colors.transparent,
                     child: TeamImageContainer(
                       isPicked: pick?.teamReference == awayTeam.reference,
@@ -70,7 +73,9 @@ class MatchupCard extends HookConsumerWidget {
                 ),
                 gridArea('awayName').containing(
                   InkWell(
-                    onTap: () => null, //_savePick(team: awayTeam),
+                    onTap: () => ref
+                        .watch(selectedLegPicksStateProvider.notifier)
+                        .updatePickedTeam(matchup: matchup, team: awayTeam),
                     splashColor: Colors.transparent,
                     child: MatchupCardTeamNameContainer(
                       isPicked: pick?.teamReference == awayTeam.reference,
@@ -93,7 +98,9 @@ class MatchupCard extends HookConsumerWidget {
                 ),
                 gridArea('homeName').containing(
                   InkWell(
-                    onTap: () => null, //_savePick(team: homeTeam),
+                    onTap: () => ref
+                        .watch(selectedLegPicksStateProvider.notifier)
+                        .updatePickedTeam(matchup: matchup, team: homeTeam),
                     splashColor: Colors.transparent,
                     child: MatchupCardTeamNameContainer(
                       isPicked: pick?.teamReference == homeTeam.reference,
@@ -104,7 +111,9 @@ class MatchupCard extends HookConsumerWidget {
                 ),
                 gridArea('homeLogo').containing(
                   InkWell(
-                    onTap: () => null, //_savePick(team: homeTeam),
+                    onTap: () => ref
+                        .watch(selectedLegPicksStateProvider.notifier)
+                        .updatePickedTeam(matchup: matchup, team: homeTeam),
                     splashColor: Colors.transparent,
                     child: TeamImageContainer(
                       isPicked: pick?.teamReference == homeTeam.reference,

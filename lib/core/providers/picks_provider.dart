@@ -2,6 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
+import 'package:pick/core/models/team_model.dart';
 import 'package:pick/core/providers/legs_provider.dart';
 import 'package:pick/core/services/firestore_pick_service.dart';
 import 'package:collection/collection.dart';
@@ -100,5 +101,43 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
     if (selectedLegPicks != null) {
       state = AsyncData<List<Pick>>(selectedLegPicks);
     }
+  }
+
+  updatePickedTeam({required Matchup matchup, required Team team}) {
+    state = const AsyncLoading<List<Pick>>();
+    final selectedLeg = ref.watch(selectedLegStateProvider);
+    final selectedLegPicks =
+        ref.read(picksByLegStateProvider(selectedLeg!)).value ?? [];
+
+    Pick? pick = selectedLegPicks
+        .firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
+
+    if (pick != null) {
+      selectedLegPicks.remove(pick);
+      if (pick.teamReference != team.reference) {
+        selectedLegPicks.remove(pick);
+        pick = Pick(
+          id: pick.id,
+          uid: pick.uid,
+          matchupReference: pick.matchupReference,
+          teamReference: team.reference,
+          legReference: pick.legReference,
+          points: pick.points,
+        );
+        selectedLegPicks.add(pick);
+      }
+    } else {
+      pick = Pick(
+        id: '',
+        uid: '',
+        matchupReference: matchup.reference,
+        teamReference: team.reference,
+        legReference: matchup.legReference,
+        points: 0,
+      );
+      selectedLegPicks.add(pick);
+    }
+
+    state = AsyncData<List<Pick>>(selectedLegPicks);
   }
 }

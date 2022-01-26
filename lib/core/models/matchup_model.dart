@@ -11,7 +11,7 @@ class Matchup {
   bool isComplete;
   double homeTeamSpread;
   DocumentReference legReference;
-  DocumentReference? reference;
+  DocumentReference reference;
 
   Matchup({
     required this.id,
@@ -24,7 +24,7 @@ class Matchup {
     required this.isComplete,
     required this.homeTeamSpread,
     required this.legReference,
-    this.reference,
+    required this.reference,
   });
 
   Matchup.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot, this.id)
