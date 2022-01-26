@@ -11,7 +11,8 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
-- Create team provider 
+- Remove ModelBySelectedParent providers.
+- Add ModelbyId non-state providers. 
 - Create images provider
 - Replace widget parameters with provider states.
 - Replace pick viewmodel.
