@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/providers/legs_provider.dart';
-import 'package:pick/core/providers/seasons_provider.dart';
 import 'package:pick/ui/widgets/legs/leg_cards_listview.dart';
 
 class LegsView extends HookConsumerWidget {
   const LegsView({
     Key? key,
+    required this.league,
+    required this.season,
   }) : super(key: key);
+
+  final League league;
+  final Season season;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<List<Leg>> legs = ref.watch(legsBySelectedSeasonStateProvider);
-    final Season? selectedSeason = ref.watch(selectedSeasonStateProvider);
+    AsyncValue<List<Leg>> legs = ref.watch(legsBySeasonStateProvider(season));
 
     return Scaffold(
       // floatingActionButton: FloatingActionButton(
@@ -25,11 +29,11 @@ class LegsView extends HookConsumerWidget {
       // ),
       appBar: AppBar(
         title: Center(
-          child: Text(selectedSeason?.name ?? 'Legs'),
+          child: Text(season.name),
         ),
       ),
       body: legs.when(
-        data: (legs) => LegCardsListview(legs: legs),
+        data: (legs) => LegCardsListview(league: league, legs: legs),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, s) => const Center(child: Text('Something went wrong!')),
       ),

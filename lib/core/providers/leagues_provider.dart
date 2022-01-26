@@ -3,7 +3,6 @@ import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/league_season_count_model.dart';
 import 'package:pick/core/models/sport_model.dart';
 import 'package:pick/core/providers/seasons_provider.dart';
-import 'package:pick/core/providers/sports_provider.dart';
 
 final allLeaguesStateProvider =
     StateNotifierProvider<AllLeaguesState, AsyncValue<List<League>>>((ref) {
@@ -18,11 +17,6 @@ final leaguesBySportStateProvider = StateNotifierProvider.family<
       LeaguesBySportState(ref, sport);
   leaguesBySportState.init();
   return leaguesBySportState;
-});
-
-final selectedLeagueStateProvider =
-    StateNotifierProvider<SelectedLeagueState, League?>((ref) {
-  return SelectedLeagueState();
 });
 
 final leagueSeasonCountsStateProvider =
@@ -64,14 +58,6 @@ class LeaguesBySportState extends StateNotifier<AsyncValue<List<League>>> {
     });
 
     state = AsyncData<List<League>>(leagues);
-  }
-}
-
-class SelectedLeagueState extends StateNotifier<League?> {
-  SelectedLeagueState() : super(null);
-
-  void select(League? league) {
-    state = league;
   }
 }
 

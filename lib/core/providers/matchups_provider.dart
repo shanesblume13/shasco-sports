@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
-import 'package:pick/core/providers/legs_provider.dart';
 import 'package:pick/core/services/firestore_matchup_service.dart';
 
 final allMatchupsStateProvider =
@@ -11,17 +10,11 @@ final allMatchupsStateProvider =
   return allMatchupsState;
 });
 
-final matchupsBySelectedLegStateProvider = StateNotifierProvider<
-    MatchupsBySelectedLegState, AsyncValue<List<Matchup>>>((ref) {
-  final MatchupsBySelectedLegState matchupsBySelectedLegState =
-      MatchupsBySelectedLegState(ref);
-  matchupsBySelectedLegState.init();
-  return matchupsBySelectedLegState;
-});
-
-final selectedMatchupStateProvider =
-    StateNotifierProvider<SelectedMatchupState, Matchup?>((ref) {
-  return SelectedMatchupState();
+final matchupsByLegStateProvider = StateNotifierProvider.family<
+    MatchupsByLegState, AsyncValue<List<Matchup>>, Leg>((ref, leg) {
+  final MatchupsByLegState matchupsByLegState = MatchupsByLegState(ref, leg);
+  matchupsByLegState.init();
+  return matchupsByLegState;
 });
 
 class AllMatchupsState extends StateNotifier<AsyncValue<List<Matchup>>> {
@@ -34,38 +27,23 @@ class AllMatchupsState extends StateNotifier<AsyncValue<List<Matchup>>> {
   }
 }
 
-class MatchupsBySelectedLegState
-    extends StateNotifier<AsyncValue<List<Matchup>>> {
-  MatchupsBySelectedLegState(this.ref)
+class MatchupsByLegState extends StateNotifier<AsyncValue<List<Matchup>>> {
+  MatchupsByLegState(this.ref, this.leg)
       : super(const AsyncLoading<List<Matchup>>());
 
   final Ref ref;
+  final Leg leg;
 
   void init() async {
-    final Leg? selectedLegState = ref.watch(selectedLegStateProvider);
-
     state = const AsyncLoading<List<Matchup>>();
     final allMatchups = ref.watch(allMatchupsStateProvider).value;
     List<Matchup> matchups = [];
 
-    if (selectedLegState != null) {
-      matchups = allMatchups
-              ?.where((matchup) =>
-                  matchup.legReference == selectedLegState.reference)
-              .toList() ??
-          [];
-    } else {
-      matchups = allMatchups ?? [];
-    }
+    matchups = allMatchups
+            ?.where((matchup) => matchup.legReference == leg.reference)
+            .toList() ??
+        [];
 
     state = AsyncData<List<Matchup>>(matchups);
-  }
-}
-
-class SelectedMatchupState extends StateNotifier<Matchup?> {
-  SelectedMatchupState() : super(null);
-
-  void select(Matchup? matchup) {
-    state = matchup;
   }
 }

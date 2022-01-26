@@ -2,7 +2,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/season_leg_count_model.dart';
 import 'package:pick/core/models/season_model.dart';
-import 'package:pick/core/providers/leagues_provider.dart';
 import 'package:pick/core/providers/legs_provider.dart';
 import 'package:pick/core/services/firestore_season_service.dart';
 
@@ -13,17 +12,12 @@ final allSeasonsStateProvider =
   return allSeasonsState;
 });
 
-final seasonsBySelectedLeagueStateProvider = StateNotifierProvider<
-    SeasonsBySelectedLeagueState, AsyncValue<List<Season>>>((ref) {
-  final SeasonsBySelectedLeagueState seasonsBySelectedLeagueState =
-      SeasonsBySelectedLeagueState(ref);
-  seasonsBySelectedLeagueState.init();
-  return seasonsBySelectedLeagueState;
-});
-
-final selectedSeasonStateProvider =
-    StateNotifierProvider<SelectedSeasonState, Season?>((ref) {
-  return SelectedSeasonState();
+final seasonsByLeagueStateProvider = StateNotifierProvider.family<
+    SeasonsByLeagueState, AsyncValue<List<Season>>, League>((ref, league) {
+  final SeasonsByLeagueState seasonsByLeagueState =
+      SeasonsByLeagueState(ref, league);
+  seasonsByLeagueState.init();
+  return seasonsByLeagueState;
 });
 
 final seasonLegCountsStateProvider =
@@ -43,40 +37,25 @@ class AllSeasonsState extends StateNotifier<AsyncValue<List<Season>>> {
   }
 }
 
-class SeasonsBySelectedLeagueState
-    extends StateNotifier<AsyncValue<List<Season>>> {
-  SeasonsBySelectedLeagueState(this.ref)
+class SeasonsByLeagueState extends StateNotifier<AsyncValue<List<Season>>> {
+  SeasonsByLeagueState(this.ref, this.league)
       : super(const AsyncLoading<List<Season>>());
 
   final Ref ref;
+  final League league;
 
   void init() async {
-    final League? selectedLeagueState = ref.watch(selectedLeagueStateProvider);
-
     state = const AsyncLoading<List<Season>>();
     final allSeasons = ref.watch(allSeasonsStateProvider).value;
     List<Season> seasons = [];
 
-    if (selectedLeagueState != null) {
-      seasons = allSeasons
-              ?.where((season) =>
-                  season.league.toLowerCase() ==
-                  selectedLeagueState.name.toLowerCase())
-              .toList() ??
-          [];
-    } else {
-      seasons = allSeasons ?? [];
-    }
+    seasons = allSeasons
+            ?.where((season) =>
+                season.league.toLowerCase() == league.name.toLowerCase())
+            .toList() ??
+        [];
 
     state = AsyncData<List<Season>>(seasons);
-  }
-}
-
-class SelectedSeasonState extends StateNotifier<Season?> {
-  SelectedSeasonState() : super(null);
-
-  void select(Season? season) {
-    state = season;
   }
 }
 

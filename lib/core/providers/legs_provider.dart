@@ -3,7 +3,6 @@ import 'package:pick/core/models/leg_matchup_count_model.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/season_model.dart';
 import 'package:pick/core/providers/matchups_provider.dart';
-import 'package:pick/core/providers/seasons_provider.dart';
 import 'package:pick/core/services/firestore_leg_service.dart';
 
 final allLegsStateProvider =
@@ -13,18 +12,11 @@ final allLegsStateProvider =
   return allLegsState;
 });
 
-final legsBySelectedSeasonStateProvider =
-    StateNotifierProvider<LegsBySelectedSeasonState, AsyncValue<List<Leg>>>(
-        (ref) {
-  final LegsBySelectedSeasonState legsBySelectedSeasonState =
-      LegsBySelectedSeasonState(ref);
-  legsBySelectedSeasonState.init();
-  return legsBySelectedSeasonState;
-});
-
-final selectedLegStateProvider =
-    StateNotifierProvider<SelectedLegState, Leg?>((ref) {
-  return SelectedLegState();
+final legsBySeasonStateProvider = StateNotifierProvider.family<
+    LegsBySeasonState, AsyncValue<List<Leg>>, Season>((ref, season) {
+  final LegsBySeasonState legsBySeasonState = LegsBySeasonState(ref, season);
+  legsBySeasonState.init();
+  return legsBySeasonState;
 });
 
 final legMatchupCountsStateProvider =
@@ -45,37 +37,24 @@ class AllLegsState extends StateNotifier<AsyncValue<List<Leg>>> {
   }
 }
 
-class LegsBySelectedSeasonState extends StateNotifier<AsyncValue<List<Leg>>> {
-  LegsBySelectedSeasonState(this.ref) : super(const AsyncLoading<List<Leg>>());
+class LegsBySeasonState extends StateNotifier<AsyncValue<List<Leg>>> {
+  LegsBySeasonState(this.ref, this.season)
+      : super(const AsyncLoading<List<Leg>>());
 
   final Ref ref;
+  final Season season;
 
   void init() async {
-    final Season? selectedSeasonState = ref.watch(selectedSeasonStateProvider);
-
     state = const AsyncLoading<List<Leg>>();
     final allLegs = ref.watch(allLegsStateProvider).value;
     List<Leg> legs = [];
 
-    if (selectedSeasonState != null) {
-      legs = allLegs
-              ?.where(
-                  (leg) => leg.seasonReference == selectedSeasonState.reference)
-              .toList() ??
-          [];
-    } else {
-      legs = allLegs ?? [];
-    }
+    legs = allLegs
+            ?.where((leg) => leg.seasonReference == season.reference)
+            .toList() ??
+        [];
 
     state = AsyncData<List<Leg>>(legs);
-  }
-}
-
-class SelectedLegState extends StateNotifier<Leg?> {
-  SelectedLegState() : super(null);
-
-  void select(Leg? leg) {
-    state = leg;
   }
 }
 

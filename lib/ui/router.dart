@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pick/ui/views/auth_view.dart';
 import 'package:pick/ui/views/games_view.dart';
 import 'package:pick/ui/views/logo_view.dart';
-import 'package:pick/ui/views/seasons_view.dart';
 import 'package:pick/ui/views/sports_view.dart';
 
 class Router {
@@ -32,10 +31,10 @@ class Router {
         return MaterialPageRoute(
           builder: (_) => const GamesView(),
         );
-      case '/seasons':
-        return MaterialPageRoute(
-          builder: (_) => const SeasonsView(),
-        );
+      // case '/seasons':
+      //   return MaterialPageRoute(
+      //     builder: (_) => const SeasonsView(),
+      //   );
       // case '/matchups':
       //   return MaterialPageRoute(
       //     builder: (_) => const MatchupsView(),

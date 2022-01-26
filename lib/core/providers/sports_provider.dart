@@ -8,11 +8,6 @@ final allSportsStateProvider =
   return Sports(ref);
 });
 
-final selectedSportStateProvider =
-    StateNotifierProvider<SelectedSportState, Sport?>((ref) {
-  return SelectedSportState(ref);
-});
-
 final sportLeagueCountsStateProvider =
     StateNotifierProvider<SportLeagueCountsState, List<SportLeagueCount>>(
         (ref) {
@@ -28,16 +23,6 @@ class Sports extends StateNotifier<List<Sport>> {
 
   void getSports() {
     state = Sport.sports;
-  }
-}
-
-class SelectedSportState extends StateNotifier<Sport?> {
-  SelectedSportState(this.ref) : super(null);
-
-  final Ref ref;
-
-  void select(Sport? sport) {
-    state = sport;
   }
 }
 

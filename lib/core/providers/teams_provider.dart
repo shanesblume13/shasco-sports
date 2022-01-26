@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/team_model.dart';
-import 'package:pick/core/providers/leagues_provider.dart';
 import 'package:pick/core/services/firestore_team_serivce.dart';
 
 final allTeamsStateProvider =
@@ -11,13 +10,11 @@ final allTeamsStateProvider =
   return allTeamsState;
 });
 
-final teamsBySelectedLeagueStateProvider =
-    StateNotifierProvider<TeamsBySelectedLeagueState, AsyncValue<List<Team>>>(
-        (ref) {
-  final TeamsBySelectedLeagueState teamsBySelectedLeagueState =
-      TeamsBySelectedLeagueState(ref);
-  teamsBySelectedLeagueState.init();
-  return teamsBySelectedLeagueState;
+final teamsByLeagueStateProvider = StateNotifierProvider.family<
+    TeamsByLeagueState, AsyncValue<List<Team>>, League>((ref, league) {
+  final TeamsByLeagueState teamsByLeagueState = TeamsByLeagueState(ref, league);
+  teamsByLeagueState.init();
+  return teamsByLeagueState;
 });
 
 class AllTeamsState extends StateNotifier<AsyncValue<List<Team>>> {
@@ -30,27 +27,20 @@ class AllTeamsState extends StateNotifier<AsyncValue<List<Team>>> {
   }
 }
 
-class TeamsBySelectedLeagueState extends StateNotifier<AsyncValue<List<Team>>> {
-  TeamsBySelectedLeagueState(this.ref)
+class TeamsByLeagueState extends StateNotifier<AsyncValue<List<Team>>> {
+  TeamsByLeagueState(this.ref, this.league)
       : super(const AsyncLoading<List<Team>>());
 
   final Ref ref;
+  final League league;
 
   void init() async {
-    final League? selectedLeagueState = ref.watch(selectedLeagueStateProvider);
-
     state = const AsyncLoading<List<Team>>();
     final allTeams = ref.watch(allTeamsStateProvider).value;
     List<Team> teams = [];
 
-    if (selectedLeagueState != null) {
-      teams = allTeams
-              ?.where((team) => team.leagueId == selectedLeagueState.id)
-              .toList() ??
-          [];
-    } else {
-      teams = allTeams ?? [];
-    }
+    teams =
+        allTeams?.where((team) => team.leagueId == league.id).toList() ?? [];
 
     state = AsyncData<List<Team>>(teams);
   }
