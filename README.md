@@ -11,7 +11,8 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
-- Stop passing league to get teams. When you select a league, load teams before navigation.
+- Remove allTeamsStateProvider from matchup card.
+- Reduce use of "all" calls to firebase.
 - Add ModelbyId non-state providers. 
 - Create images provider
 - Replace widget parameters with provider states.
