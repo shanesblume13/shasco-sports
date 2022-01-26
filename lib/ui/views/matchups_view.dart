@@ -26,7 +26,7 @@ class MatchupsView extends HookConsumerWidget {
       // ),
       appBar: AppBar(
         title: Center(
-          child: Text(selectedLeg?.name ?? 'Mathcups'),
+          child: Text(selectedLeg?.name ?? 'Matchups'),
         ),
       ),
       body: matchups.when(

@@ -2,7 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/providers/legs_provider.dart';
-import 'package:pick/core/services/firestore_mathcup_service.dart';
+import 'package:pick/core/services/firestore_matchup_service.dart';
 
 final allMatchupsStateProvider =
     StateNotifierProvider<AllMatchupsState, AsyncValue<List<Matchup>>>((ref) {
@@ -12,9 +12,9 @@ final allMatchupsStateProvider =
 });
 
 final matchupsBySelectedLegStateProvider = StateNotifierProvider<
-    MathcupsBySelectedLegState, AsyncValue<List<Matchup>>>((ref) {
-  final MathcupsBySelectedLegState matchupsBySelectedLegState =
-      MathcupsBySelectedLegState(ref);
+    MatchupsBySelectedLegState, AsyncValue<List<Matchup>>>((ref) {
+  final MatchupsBySelectedLegState matchupsBySelectedLegState =
+      MatchupsBySelectedLegState(ref);
   matchupsBySelectedLegState.init();
   return matchupsBySelectedLegState;
 });
@@ -34,9 +34,9 @@ class AllMatchupsState extends StateNotifier<AsyncValue<List<Matchup>>> {
   }
 }
 
-class MathcupsBySelectedLegState
+class MatchupsBySelectedLegState
     extends StateNotifier<AsyncValue<List<Matchup>>> {
-  MathcupsBySelectedLegState(this.ref)
+  MatchupsBySelectedLegState(this.ref)
       : super(const AsyncLoading<List<Matchup>>());
 
   final Ref ref;
