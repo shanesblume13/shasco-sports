@@ -11,8 +11,9 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
-- Handle score update ui.
 - Save / clear picks on button click or navigation.
+- Save score state when deselecting a matchup.
+- Add new score selection ui.
 - Add typing to all providers.
 - Reduce use of "all" calls to firebase.
 - Add sports and leagues to firestore.

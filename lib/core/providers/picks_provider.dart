@@ -140,4 +140,32 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
 
     state = AsyncData<List<Pick>>(selectedLegPicks);
   }
+
+  updatePickScore({required Matchup matchup}) {
+    state = const AsyncLoading<List<Pick>>();
+    final selectedLeg = ref.watch(selectedLegStateProvider);
+    final selectedLegPicks =
+        ref.read(picksByLegStateProvider(selectedLeg!)).value ?? [];
+
+    Pick? pick = selectedLegPicks
+        .firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
+
+    int points = pick?.points ?? 0;
+    points = points < 10 ? points + 1 : 0;
+
+    if (pick != null) {
+      selectedLegPicks.remove(pick);
+      pick = Pick(
+        id: pick.id,
+        uid: pick.uid,
+        matchupReference: pick.matchupReference,
+        teamReference: pick.teamReference,
+        legReference: pick.legReference,
+        points: points,
+      );
+      selectedLegPicks.add(pick);
+    }
+
+    state = AsyncData<List<Pick>>(selectedLegPicks);
+  }
 }
