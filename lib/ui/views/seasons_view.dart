@@ -27,7 +27,7 @@ class SeasonsView extends HookConsumerWidget {
       body: seasons.when(
         data: (seasons) => SeasonCardsListview(seasons: seasons),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, s) => const Center(child: Text('Something went wrong!')),
+        error: (e, s) => const Center(child: Text('Error getting seasons!')),
       ),
     );
   }

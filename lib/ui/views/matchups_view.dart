@@ -33,7 +33,7 @@ class MatchupsView extends HookConsumerWidget {
       body: matchups.when(
         data: (matchups) => MatchupCardsListview(matchups: matchups),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, s) => const Center(child: Text('Something went wrong!')),
+        error: (e, s) => const Center(child: Text('Error getting matchups!')),
       ),
     );
   }

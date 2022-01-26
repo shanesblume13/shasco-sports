@@ -11,7 +11,8 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
-- Remove allTeamsStateProvider from matchup card.
+- Bring back team images, away teams, and home teams.
+- Add typing to all providers.
 - Reduce use of "all" calls to firebase.
 - Add ModelbyId non-state providers. 
 - Create images provider

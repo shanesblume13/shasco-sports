@@ -32,7 +32,8 @@ class AllSeasonsState extends StateNotifier<AsyncValue<List<Season>>> {
 
   void init() async {
     state = const AsyncLoading<List<Season>>();
-    final seasons = await FirestoreSeasonService().fetchSeasons('');
+    final List<Season> seasons =
+        await FirestoreSeasonService().fetchSeasons('');
     state = AsyncData<List<Season>>(seasons);
   }
 }
@@ -46,7 +47,7 @@ class SeasonsByLeagueState extends StateNotifier<AsyncValue<List<Season>>> {
 
   void init() async {
     state = const AsyncLoading<List<Season>>();
-    final allSeasons = ref.watch(allSeasonsStateProvider).value;
+    final List<Season>? allSeasons = ref.watch(allSeasonsStateProvider).value;
     List<Season> seasons = [];
 
     seasons = allSeasons
@@ -65,7 +66,7 @@ class SeasonLegCountsState extends StateNotifier<List<SeasonLegCount>> {
   final Ref ref;
 
   void init() {
-    List<Season>? seasons = ref.watch(allSeasonsStateProvider).value;
+    final List<Season>? seasons = ref.watch(allSeasonsStateProvider).value;
     List<SeasonLegCount> seasonLegCounts = [];
 
     if (seasons != null) {

@@ -27,7 +27,7 @@ class LeaguesView extends HookConsumerWidget {
       body: leagues.when(
         data: (leagues) => LeagueCardsListview(leagues: leagues),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, s) => const Center(child: Text('Something went wrong!')),
+        error: (e, s) => const Center(child: Text('Error getting leagues!')),
       ),
     );
   }

@@ -32,7 +32,7 @@ class LegsView extends HookConsumerWidget {
       body: legs.when(
         data: (legs) => LegCardsListview(legs: legs),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, s) => const Center(child: Text('Something went wrong!')),
+        error: (e, s) => const Center(child: Text('Error getting legs!')),
       ),
     );
   }
