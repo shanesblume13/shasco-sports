@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as hr;
 import 'package:pick/core/providers/game_view_model.dart';
-import 'package:pick/core/providers/pick_view_model.dart';
 import 'package:pick/firebase_options.dart';
 import 'package:pick/locator.dart';
 import 'package:pick/ui/shared/palette.dart';
@@ -25,9 +24,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => locator<PickViewModel>(),
-        ),
         Provider(
           create: (_) => locator<GameViewModel>(),
         ),
