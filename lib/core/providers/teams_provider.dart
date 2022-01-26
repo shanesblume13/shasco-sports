@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/team_model.dart';
+import 'package:pick/core/providers/leagues_provider.dart';
 import 'package:pick/core/services/firestore_team_serivce.dart';
 
 final allTeamsStateProvider =
@@ -15,6 +16,15 @@ final teamsByLeagueStateProvider = StateNotifierProvider.family<
   final TeamsByLeagueState teamsByLeagueState = TeamsByLeagueState(ref, league);
   teamsByLeagueState.init();
   return teamsByLeagueState;
+});
+
+final selectedLeagueTeamsStateProvider =
+    StateNotifierProvider<SelectedLeagueTeamsState, AsyncValue<List<Team>>>(
+        (ref) {
+  final SelectedLeagueTeamsState selectedLeagueTeamsState =
+      SelectedLeagueTeamsState(ref);
+  selectedLeagueTeamsState.init();
+  return selectedLeagueTeamsState;
 });
 
 class AllTeamsState extends StateNotifier<AsyncValue<List<Team>>> {
@@ -43,5 +53,22 @@ class TeamsByLeagueState extends StateNotifier<AsyncValue<List<Team>>> {
         allTeams?.where((team) => team.leagueId == league.id).toList() ?? [];
 
     state = AsyncData<List<Team>>(teams);
+  }
+}
+
+class SelectedLeagueTeamsState extends StateNotifier<AsyncValue<List<Team>>> {
+  SelectedLeagueTeamsState(this.ref) : super(const AsyncLoading<List<Team>>());
+
+  final Ref ref;
+
+  void init() async {
+    state = const AsyncLoading<List<Team>>();
+    final selectedLeague = ref.watch(selectedLeagueStateProvider);
+    final selectedLeagueTeams =
+        ref.watch(teamsByLeagueStateProvider(selectedLeague!)).value;
+
+    if (selectedLeagueTeams != null) {
+      state = AsyncData<List<Team>>(selectedLeagueTeams);
+    }
   }
 }

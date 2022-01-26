@@ -39,7 +39,7 @@ class MatchupCard extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // TODO: use teams by selected state.
-    var teams = ref.watch(allTeamsStateProvider);
+    AsyncValue<List<Team>> teams = ref.watch(selectedLeagueTeamsStateProvider);
     String defaultImagePath = 'assets/images/logos/nfl/nfl.jpeg';
     String awayImagePath = defaultImagePath;
     String homeImagePath = defaultImagePath;

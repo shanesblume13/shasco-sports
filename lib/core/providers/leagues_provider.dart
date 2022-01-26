@@ -28,6 +28,12 @@ final leagueSeasonCountsStateProvider =
   return leagueSeasonCountsState;
 });
 
+final selectedLeagueStateProvider =
+    StateNotifierProvider<SelectedLeagueState, League?>((ref) {
+  final SelectedLeagueState selectedLeagueState = SelectedLeagueState();
+  return selectedLeagueState;
+});
+
 class AllLeaguesState extends StateNotifier<AsyncValue<List<League>>> {
   AllLeaguesState() : super(const AsyncLoading<List<League>>());
 
@@ -86,5 +92,13 @@ class LeagueSeasonCountsState extends StateNotifier<List<LeagueSeasonCount>> {
     }
 
     state = leagueSeasonCounts;
+  }
+}
+
+class SelectedLeagueState extends StateNotifier<League?> {
+  SelectedLeagueState() : super(null);
+
+  void selectLeague(League league) {
+    state = league;
   }
 }
