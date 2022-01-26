@@ -30,21 +30,14 @@ class MatchupCard extends HookConsumerWidget {
 
     return imagePaths.when(
       data: (imagePaths) {
-        String defaultImagePath = 'assets/images/logos/nfl/nfl.jpeg';
-        String awayImagePath = defaultImagePath;
-        String homeImagePath = defaultImagePath;
-
-        if (imagePaths.contains(
-            'assets/images/logos/nfl/${awayTeam.nickname.toLowerCase()}.gif')) {
-          awayImagePath =
-              'assets/images/logos/nfl/${awayTeam.nickname.toLowerCase()}.gif';
-        }
-
-        if (imagePaths.contains(
-            'assets/images/logos/nfl/${homeTeam.nickname.toLowerCase()}.gif')) {
-          homeImagePath =
-              'assets/images/logos/nfl/${homeTeam.nickname.toLowerCase()}.gif';
-        }
+        String awayImagePath = setTeamImagePath(
+          imagePaths: imagePaths,
+          teamNickname: awayTeam.nickname,
+        );
+        String homeImagePath = setTeamImagePath(
+          imagePaths: imagePaths,
+          teamNickname: homeTeam.nickname,
+        );
 
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -59,9 +52,7 @@ class MatchupCard extends HookConsumerWidget {
               children: [
                 gridArea('awayLogo').containing(
                   InkWell(
-                    onTap: () => ref
-                        .watch(selectedLegPicksStateProvider.notifier)
-                        .updatePickedTeam(matchup: matchup, team: awayTeam),
+                    onTap: () => updatePick(ref: ref, team: awayTeam),
                     splashColor: Colors.transparent,
                     child: TeamImageContainer(
                       isPicked: pick?.teamReference == awayTeam.reference,
@@ -73,9 +64,7 @@ class MatchupCard extends HookConsumerWidget {
                 ),
                 gridArea('awayName').containing(
                   InkWell(
-                    onTap: () => ref
-                        .watch(selectedLegPicksStateProvider.notifier)
-                        .updatePickedTeam(matchup: matchup, team: awayTeam),
+                    onTap: () => updatePick(ref: ref, team: awayTeam),
                     splashColor: Colors.transparent,
                     child: MatchupCardTeamNameContainer(
                       isPicked: pick?.teamReference == awayTeam.reference,
@@ -98,9 +87,7 @@ class MatchupCard extends HookConsumerWidget {
                 ),
                 gridArea('homeName').containing(
                   InkWell(
-                    onTap: () => ref
-                        .watch(selectedLegPicksStateProvider.notifier)
-                        .updatePickedTeam(matchup: matchup, team: homeTeam),
+                    onTap: () => updatePick(ref: ref, team: homeTeam),
                     splashColor: Colors.transparent,
                     child: MatchupCardTeamNameContainer(
                       isPicked: pick?.teamReference == homeTeam.reference,
@@ -111,9 +98,7 @@ class MatchupCard extends HookConsumerWidget {
                 ),
                 gridArea('homeLogo').containing(
                   InkWell(
-                    onTap: () => ref
-                        .watch(selectedLegPicksStateProvider.notifier)
-                        .updatePickedTeam(matchup: matchup, team: homeTeam),
+                    onTap: () => updatePick(ref: ref, team: homeTeam),
                     splashColor: Colors.transparent,
                     child: TeamImageContainer(
                       isPicked: pick?.teamReference == homeTeam.reference,
@@ -133,46 +118,20 @@ class MatchupCard extends HookConsumerWidget {
     );
   }
 
-  // Future _initImages() async {
-  //   // >> To get paths you need these 2 lines
-  //   final manifestContent = await rootBundle.loadString('AssetManifest.json');
+  String setTeamImagePath(
+      {required List<String> imagePaths, required String teamNickname}) {
+    String imagePath = 'assets/images/logos/nfl/nfl.jpeg';
 
-  //   final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-  //   // >> To get paths you need these 2 lines
+    if (imagePaths.contains(
+        'assets/images/logos/nfl/${teamNickname.toLowerCase()}.gif')) {
+      imagePath = 'assets/images/logos/nfl/${teamNickname.toLowerCase()}.gif';
+    }
+    return imagePath;
+  }
 
-  //   final imagePaths = manifestMap.keys
-  //       .where((String key) => key.contains('images/'))
-  //       .toList();
-
-  //   setState(() {
-  //     _imagePaths = imagePaths;
-  //   });
-  // }
-
-  // void _savePick({required Team team}) {
-  //   DocumentReference? pickedTeamReference = _pickedTeamReference;
-
-  //   if (pickedTeamReference == team.reference) {
-  //     pickedTeamReference = null;
-  //   } else {
-  //     pickedTeamReference = team.reference;
-  //   }
-
-  //   setState(() {
-  //     _pickedTeamReference = pickedTeamReference;
-  //   });
-  // }
-
-  // _updatePoints() {
-  //   int points = _points;
-
-  //   points++;
-  //   if (points > 10) {
-  //     points = 0;
-  //   }
-
-  //   setState(() {
-  //     _points = points;
-  //   });
-  // }
+  updatePick({required WidgetRef ref, required Team team}) {
+    ref
+        .watch(selectedLegPicksStateProvider.notifier)
+        .updatePickedTeam(matchup: matchup, team: team);
+  }
 }
