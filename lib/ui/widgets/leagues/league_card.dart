@@ -3,6 +3,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/providers/leagues_provider.dart';
+import 'package:pick/core/providers/teams_provider.dart';
 import 'package:pick/ui/views/seasons_view.dart';
 import 'package:pick/ui/widgets/leagues/league_card_image_clip.dart';
 import 'package:pick/ui/widgets/leagues/league_card_name_container.dart';
@@ -21,6 +22,7 @@ class LeagueCard extends HookConsumerWidget {
     return GestureDetector(
       onTap: () {
         ref.watch(selectedLeagueStateProvider.notifier).select(league);
+        ref.watch(allTeamsStateProvider.notifier);
 
         Navigator.push(
           context,
