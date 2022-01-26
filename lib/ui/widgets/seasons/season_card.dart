@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/season_model.dart';
 import 'package:pick/ui/views/legs_view.dart';
 import 'package:pick/ui/widgets/seasons/season_card_image_clip.dart';
@@ -11,11 +10,9 @@ import 'package:pick/ui/widgets/seasons/season_card_leg_count_container.dart';
 class SeasonCard extends HookConsumerWidget {
   const SeasonCard({
     Key? key,
-    required this.league,
     required this.season,
   }) : super(key: key);
 
-  final League league;
   final Season season;
 
   @override
@@ -25,7 +22,7 @@ class SeasonCard extends HookConsumerWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => LegsView(league: league, season: season),
+            builder: (_) => LegsView(season: season),
           ),
         );
       },

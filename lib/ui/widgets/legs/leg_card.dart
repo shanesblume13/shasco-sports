@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/ui/views/matchups_view.dart';
 import 'package:pick/ui/widgets/legs/leg_card_image_clip.dart';
@@ -11,11 +10,9 @@ import 'package:pick/ui/widgets/legs/leg_card_name_container.dart';
 class LegCard extends HookConsumerWidget {
   const LegCard({
     Key? key,
-    required this.league,
     required this.leg,
   }) : super(key: key);
 
-  final League league;
   final Leg leg;
 
   @override
@@ -25,7 +22,7 @@ class LegCard extends HookConsumerWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => MatchupsView(league: league, leg: leg),
+            builder: (_) => MatchupsView(leg: leg),
           ),
         );
       },

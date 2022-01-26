@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/providers/matchups_provider.dart';
@@ -9,11 +8,9 @@ import 'package:pick/ui/widgets/matchups/matchup_cards_listview.dart';
 class MatchupsView extends HookConsumerWidget {
   const MatchupsView({
     Key? key,
-    required this.league,
     required this.leg,
   }) : super(key: key);
 
-  final League league;
   final Leg leg;
 
   @override
@@ -34,8 +31,7 @@ class MatchupsView extends HookConsumerWidget {
         ),
       ),
       body: matchups.when(
-        data: (matchups) =>
-            MatchupCardsListview(league: league, matchups: matchups),
+        data: (matchups) => MatchupCardsListview(matchups: matchups),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, s) => const Center(child: Text('Something went wrong!')),
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
@@ -13,12 +12,10 @@ import 'package:pick/ui/widgets/matchups/matchup_card_team_name_container.dart';
 class MatchupCard extends HookConsumerWidget {
   const MatchupCard({
     Key? key,
-    required this.league,
     required this.matchup,
     this.pick,
   }) : super(key: key);
 
-  final League league;
   final Matchup matchup;
   final Pick? pick;
 
@@ -41,8 +38,8 @@ class MatchupCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<List<Team>> teams =
-        ref.watch(teamsByLeagueStateProvider(league));
+    // TODO: use teams by selected state.
+    var teams = ref.watch(allTeamsStateProvider);
     String defaultImagePath = 'assets/images/logos/nfl/nfl.jpeg';
     String awayImagePath = defaultImagePath;
     String homeImagePath = defaultImagePath;

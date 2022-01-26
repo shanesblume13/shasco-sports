@@ -20,7 +20,7 @@ class LeagueCard extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        ref.watch(allTeamsStateProvider.notifier);
+        ref.watch(teamsByLeagueStateProvider(league));
 
         Navigator.push(
           context,
