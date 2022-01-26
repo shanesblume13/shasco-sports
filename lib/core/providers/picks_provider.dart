@@ -2,6 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/services/firestore_pick_service.dart';
+import 'package:collection/collection.dart';
 
 final allPicksStateProvider =
     StateNotifierProvider<AllPicksState, AsyncValue<List<Pick>>>((ref) {
@@ -10,9 +11,8 @@ final allPicksStateProvider =
   return allPicksState;
 });
 
-final pickByMatchupStateProvider =
-    StateNotifierProvider.family<PickByMatchupState, AsyncValue<Pick>, Matchup>(
-        (ref, matchup) {
+final pickByMatchupStateProvider = StateNotifierProvider.family<
+    PickByMatchupState, AsyncValue<Pick?>, Matchup>((ref, matchup) {
   final PickByMatchupState pickByMatchupState =
       PickByMatchupState(ref, matchup);
   pickByMatchupState.init();
@@ -29,23 +29,21 @@ class AllPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
   }
 }
 
-class PickByMatchupState extends StateNotifier<AsyncValue<List<Pick>>> {
+class PickByMatchupState extends StateNotifier<AsyncValue<Pick?>> {
   PickByMatchupState(this.ref, this.matchup)
-      : super(const AsyncLoading<List<Pick>>());
+      : super(const AsyncLoading<Pick>());
 
   final Ref ref;
   final Matchup matchup;
 
   void init() async {
-    state = const AsyncLoading<List<Pick>>();
+    state = const AsyncLoading<Pick>();
     final allPicks = ref.watch(allPicksStateProvider).value;
-    List<Pick> picks = [];
+    Pick? pick;
 
-    picks = allPicks
-            ?.where((pick) => pick.matchupReference == matchup.reference)
-            .toList() ??
-        [];
+    pick = allPicks?.firstWhereOrNull(
+        (pick) => pick.matchupReference == matchup.reference);
 
-    state = AsyncData<List<Pick>>(picks);
+    state = AsyncData<Pick?>(pick);
   }
 }

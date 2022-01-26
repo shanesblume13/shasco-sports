@@ -11,13 +11,9 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
-- Add pick provider. AllPicks, PicksByLeg, PickByMatchup.
+- Combine matchups, teams, and picks into a single provider.
 - Add typing to all providers.
 - Reduce use of "all" calls to firebase.
-- Add ModelbyId non-state providers. 
-- Create images provider
-- Replace widget parameters with provider states.
-- Replace pick viewmodel.
 - Add sports and leagues to firestore.
 - Use auth from provider.
 - Get uid for picks.

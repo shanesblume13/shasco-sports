@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/ui/widgets/matchups/matchup_card.dart';
-import 'package:collection/collection.dart';
 
-class MatchupCardsListview extends StatelessWidget {
+class MatchupCardsListview extends HookConsumerWidget {
   MatchupCardsListview({
     Key? key,
     required this.matchups,
@@ -16,13 +16,10 @@ class MatchupCardsListview extends StatelessWidget {
   final List<Widget> matchupCards = [];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     for (var matchup in matchups) {
-      Pick? pick = picks?.firstWhereOrNull(
-        (pick) => pick.matchupReference == matchup.reference,
-      );
       matchupCards.add(
-        MatchupCard(matchup: matchup, pick: pick),
+        MatchupCard(matchup: matchup),
       );
     }
     return ListView(children: matchupCards);
