@@ -3,24 +3,25 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/sport_model.dart';
 import 'package:pick/core/providers/leagues_provider.dart';
-import 'package:pick/core/providers/sports_provider.dart';
 import 'package:pick/ui/widgets/leagues/league_cards_listview.dart';
 
 class LeaguesView extends HookConsumerWidget {
   const LeaguesView({
     Key? key,
+    required this.sport,
   }) : super(key: key);
+
+  final Sport sport;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<List<League>> leagues =
-        ref.watch(leaguesBySelectedSportStateProvider);
-    final Sport? selectedSport = ref.watch(selectedSportStateProvider);
+        ref.watch(leaguesBySportStateProvider(sport));
 
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text(selectedSport?.name ?? 'Leagues'),
+          child: Text(sport.name),
         ),
       ),
       body: leagues.when(

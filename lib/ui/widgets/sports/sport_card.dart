@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/sport_model.dart';
-import 'package:pick/core/providers/sports_provider.dart';
 import 'package:pick/ui/views/leagues_view.dart';
 import 'package:pick/ui/widgets/sports/sport_card_image_clip.dart';
 import 'package:pick/ui/widgets/sports/sport_card_league_count_container.dart';
@@ -20,12 +19,10 @@ class SportCard extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
-        ref.watch(selectedSportStateProvider.notifier).select(sport);
-
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => const LeaguesView(),
+            builder: (_) => LeaguesView(sport: sport),
           ),
         );
       },

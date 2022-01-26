@@ -12,12 +12,12 @@ final allLeaguesStateProvider =
   return allLeaguesState;
 });
 
-final leaguesBySelectedSportStateProvider = StateNotifierProvider<
-    LeaguesBySelectedSportState, AsyncValue<List<League>>>((ref) {
-  final LeaguesBySelectedSportState leaguesBySelectedSportState =
-      LeaguesBySelectedSportState(ref);
-  leaguesBySelectedSportState.init();
-  return leaguesBySelectedSportState;
+final leaguesBySportStateProvider = StateNotifierProvider.family<
+    LeaguesBySportState, AsyncValue<List<League>>, Sport>((ref, sport) {
+  final LeaguesBySportState leaguesBySportState =
+      LeaguesBySportState(ref, sport);
+  leaguesBySportState.init();
+  return leaguesBySportState;
 });
 
 final selectedLeagueStateProvider =
@@ -46,28 +46,21 @@ class AllLeaguesState extends StateNotifier<AsyncValue<List<League>>> {
   }
 }
 
-class LeaguesBySelectedSportState
-    extends StateNotifier<AsyncValue<List<League>>> {
-  LeaguesBySelectedSportState(this.ref)
+class LeaguesBySportState extends StateNotifier<AsyncValue<List<League>>> {
+  LeaguesBySportState(this.ref, this.sport)
       : super(const AsyncLoading<List<League>>());
 
   final Ref ref;
+  final Sport sport;
 
   void init() async {
-    final Sport? selectedSportState = ref.watch(selectedSportStateProvider);
-
     state = const AsyncLoading<List<League>>();
     //TODO: Remove delayed when leagues are on firestore.
     final leagues = await Future.delayed(const Duration(seconds: 1)).then((_) {
-      if (selectedSportState != null) {
-        return League.leagues
-            .where((league) =>
-                league.sport.toLowerCase() ==
-                selectedSportState.name.toLowerCase())
-            .toList();
-      } else {
-        return League.leagues;
-      }
+      return League.leagues
+          .where((league) =>
+              league.sport.toLowerCase() == sport.name.toLowerCase())
+          .toList();
     });
 
     state = AsyncData<List<League>>(leagues);
