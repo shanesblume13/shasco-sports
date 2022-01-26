@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
+import 'package:pick/core/providers/legs_provider.dart';
 import 'package:pick/core/services/firestore_matchup_service.dart';
 
 final allMatchupsStateProvider =
@@ -15,6 +16,15 @@ final matchupsByLegStateProvider = StateNotifierProvider.family<
   final MatchupsByLegState matchupsByLegState = MatchupsByLegState(ref, leg);
   matchupsByLegState.init();
   return matchupsByLegState;
+});
+
+final selectedLegMatchupsStateProvider =
+    StateNotifierProvider<SelectedLegMatchupsState, AsyncValue<List<Matchup>>>(
+        (ref) {
+  final SelectedLegMatchupsState selectedLegMatchupsState =
+      SelectedLegMatchupsState(ref);
+  selectedLegMatchupsState.init();
+  return selectedLegMatchupsState;
 });
 
 class AllMatchupsState extends StateNotifier<AsyncValue<List<Matchup>>> {
@@ -45,5 +55,24 @@ class MatchupsByLegState extends StateNotifier<AsyncValue<List<Matchup>>> {
         [];
 
     state = AsyncData<List<Matchup>>(matchups);
+  }
+}
+
+class SelectedLegMatchupsState
+    extends StateNotifier<AsyncValue<List<Matchup>>> {
+  SelectedLegMatchupsState(this.ref)
+      : super(const AsyncLoading<List<Matchup>>());
+
+  final Ref ref;
+
+  void init() async {
+    state = const AsyncLoading<List<Matchup>>();
+    final selectedLeg = ref.watch(selectedLegStateProvider);
+    final selectedLegMatchups =
+        ref.watch(matchupsByLegStateProvider(selectedLeg!)).value;
+
+    if (selectedLegMatchups != null) {
+      state = AsyncData<List<Matchup>>(selectedLegMatchups);
+    }
   }
 }

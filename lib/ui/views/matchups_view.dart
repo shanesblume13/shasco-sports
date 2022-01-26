@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
+import 'package:pick/core/models/pick_model.dart';
+import 'package:pick/core/models/team_model.dart';
 import 'package:pick/core/providers/matchups_provider.dart';
+import 'package:pick/core/providers/picks_provider.dart';
+import 'package:pick/core/providers/teams_provider.dart';
 import 'package:pick/ui/widgets/matchups/matchup_cards_listview.dart';
 
 class MatchupsView extends HookConsumerWidget {
@@ -16,7 +20,7 @@ class MatchupsView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<List<Matchup>> matchups =
-        ref.watch(matchupsByLegStateProvider(leg));
+        ref.watch(selectedLegMatchupsStateProvider);
 
     return Scaffold(
       // floatingActionButton: FloatingActionButton(
@@ -31,7 +35,32 @@ class MatchupsView extends HookConsumerWidget {
         ),
       ),
       body: matchups.when(
-        data: (matchups) => MatchupCardsListview(matchups: matchups),
+        data: (matchups) {
+          AsyncValue<List<Team>> teams =
+              ref.watch(selectedLeagueTeamsStateProvider);
+
+          return teams.when(
+            data: (teams) {
+              AsyncValue<List<Pick>> picks =
+                  ref.watch(selectedLegPicksStateProvider);
+
+              return picks.when(
+                data: (picks) {
+                  return MatchupCardsListview(
+                    matchups: matchups,
+                    teams: teams,
+                    picks: picks,
+                  );
+                },
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (e, s) =>
+                    const Center(child: Text('Error getting picks!')),
+              );
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (e, s) => const Center(child: Text('Error getting teams!')),
+          );
+        },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, s) => const Center(child: Text('Error getting matchups!')),
       ),

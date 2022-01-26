@@ -27,6 +27,12 @@ final legMatchupCountsStateProvider =
   return legMatchupCountsState;
 });
 
+final selectedLegStateProvider =
+    StateNotifierProvider<SelectedLegState, Leg?>((ref) {
+  final SelectedLegState selectedLegState = SelectedLegState();
+  return selectedLegState;
+});
+
 class AllLegsState extends StateNotifier<AsyncValue<List<Leg>>> {
   AllLegsState() : super(const AsyncLoading<List<Leg>>());
 
@@ -82,5 +88,13 @@ class LegMatchupCountsState extends StateNotifier<List<LegMatchupCount>> {
     }
 
     state = legMatchupCounts;
+  }
+}
+
+class SelectedLegState extends StateNotifier<Leg?> {
+  SelectedLegState() : super(null);
+
+  void selectLeague(Leg leg) {
+    state = leg;
   }
 }
