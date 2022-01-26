@@ -46,7 +46,8 @@ class MatchupCard extends HookConsumerWidget {
 
     return teams.when(
       data: (teams) {
-        AsyncValue<List<String>> imagePaths = ref.watch(allImagesStateProvider);
+        AsyncValue<List<String>> imagePaths =
+            ref.watch(allImagePathsStateProvider);
 
         return imagePaths.when(
           data: (imagePaths) {
