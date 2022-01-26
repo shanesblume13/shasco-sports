@@ -11,7 +11,7 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
-- Replace matchup viewmodel.
+- Replace widget parameters with provider states.
 - Replace pick viewmodel.
 - Add sports and leagues to firestore.
 - Use auth from provider.
