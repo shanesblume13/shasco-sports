@@ -29,6 +29,8 @@ A mobile app built with flutter and firebase that allows users to play various g
 - Add pick'em leagues
 - Add pick'em metrics
 - Add a squares style format.
+- Add secret json file location https://blog.codemagic.io/deploying-flutter-app-to-firebase-app-distribution-using-fastlane/
+- fastlane supply init when developer account is setup.
 - Add options
     - Use spread
     - Scoring (confidence, sevencoals, single point)
