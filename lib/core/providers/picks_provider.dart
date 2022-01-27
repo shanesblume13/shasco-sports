@@ -103,7 +103,7 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
     }
   }
 
-  updatePickedTeam({required Matchup matchup, required Team team}) {
+  void updatePickedTeam({required Matchup matchup, required Team team}) {
     state = const AsyncLoading<List<Pick>>();
     final selectedLeg = ref.watch(selectedLegStateProvider);
     final selectedLegPicks =
@@ -113,7 +113,6 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
         .firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
 
     if (pick != null) {
-      selectedLegPicks.remove(pick);
       if (pick.teamReference != team.reference) {
         selectedLegPicks.remove(pick);
         pick = Pick(
@@ -123,6 +122,7 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
           teamReference: team.reference,
           legReference: pick.legReference,
           points: pick.points,
+          reference: pick.reference,
         );
         selectedLegPicks.add(pick);
       }
@@ -134,6 +134,7 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
         teamReference: team.reference,
         legReference: matchup.legReference,
         points: 0,
+        reference: null,
       );
       selectedLegPicks.add(pick);
     }
@@ -141,7 +142,7 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
     state = AsyncData<List<Pick>>(selectedLegPicks);
   }
 
-  updatePickScore({required Matchup matchup}) {
+  void updatePickScore({required Matchup matchup}) {
     state = const AsyncLoading<List<Pick>>();
     final selectedLeg = ref.watch(selectedLegStateProvider);
     final selectedLegPicks =
@@ -162,10 +163,99 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
         teamReference: pick.teamReference,
         legReference: pick.legReference,
         points: points,
+        reference: pick.reference,
       );
       selectedLegPicks.add(pick);
     }
 
     state = AsyncData<List<Pick>>(selectedLegPicks);
+  }
+
+  void savePicks({required List<Matchup> matchups}) async {
+    state = const AsyncLoading<List<Pick>>();
+    final selectedLeg = ref.watch(selectedLegStateProvider);
+    final selectedLegPicks =
+        ref.read(picksByLegStateProvider(selectedLeg!)).value ?? [];
+    final allPicks = ref.watch(allPicksStateProvider).value ?? [];
+
+    List<Pick> picksToDelete = [];
+    List<Pick> picksToCreate = [];
+    List<Pick> picksToUpdate = [];
+
+    for (Matchup matchup in matchups) {
+      // If allpicks has a pick for this matchup and selectedLegPicks doesn't, delete it
+      if (allPicks.firstWhereOrNull(
+                  (pick) => pick.matchupReference == matchup.reference) !=
+              null &&
+          selectedLegPicks.firstWhereOrNull(
+                  (pick) => pick.matchupReference == matchup.reference) ==
+              null) {
+        picksToDelete.addAll(allPicks
+            .where((pick) => pick.matchupReference == matchup.reference));
+      }
+      // If allpicks doesn't have a pick for this matchup and selectedLegPicks does, add it
+      if (allPicks.firstWhereOrNull(
+                  (pick) => pick.matchupReference == matchup.reference) ==
+              null &&
+          selectedLegPicks.firstWhereOrNull(
+                  (pick) => pick.matchupReference == matchup.reference) !=
+              null) {
+        picksToCreate.add(selectedLegPicks
+            .firstWhere((pick) => pick.matchupReference == matchup.reference));
+      }
+      // If allpicks has a pick for this matchup and selectedLegPicks also does, update it
+      if (allPicks.firstWhereOrNull(
+                  (pick) => pick.matchupReference == matchup.reference) !=
+              null &&
+          selectedLegPicks.firstWhereOrNull(
+                  (pick) => pick.matchupReference == matchup.reference) !=
+              null) {
+        picksToUpdate.add(selectedLegPicks
+            .firstWhere((pick) => pick.matchupReference == matchup.reference));
+      }
+    }
+
+    for (Pick pick in picksToDelete) {
+      pick.id = ref
+              .watch(allPicksStateProvider)
+              .value
+              ?.firstWhere((allPicksPick) =>
+                  allPicksPick.matchupReference == pick.matchupReference)
+              .id ??
+          '';
+      pick.uid = ref
+              .watch(allPicksStateProvider)
+              .value
+              ?.firstWhere((allPicksPick) =>
+                  allPicksPick.matchupReference == pick.matchupReference)
+              .uid ??
+          '';
+      await FirestorePickService().removePick(pick);
+    }
+
+    for (Pick pick in picksToCreate) {
+      await FirestorePickService().createPick(pick);
+    }
+
+    for (Pick pick in picksToUpdate) {
+      pick.id = ref
+              .watch(allPicksStateProvider)
+              .value
+              ?.firstWhere((allPicksPick) =>
+                  allPicksPick.matchupReference == pick.matchupReference)
+              .id ??
+          '';
+      pick.uid = ref
+              .watch(allPicksStateProvider)
+              .value
+              ?.firstWhere((allPicksPick) =>
+                  allPicksPick.matchupReference == pick.matchupReference)
+              .uid ??
+          '';
+      await FirestorePickService().updatePick(pick);
+    }
+
+    state = AsyncData<List<Pick>>(selectedLegPicks);
+    ref.watch(allPicksStateProvider.notifier).init();
   }
 }

@@ -46,10 +46,32 @@ class MatchupsView extends HookConsumerWidget {
 
               return picks.when(
                 data: (picks) {
-                  return MatchupCardsListview(
-                    matchups: matchups,
-                    teams: teams,
-                    picks: picks,
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: MatchupCardsListview(
+                          matchups: matchups,
+                          teams: teams,
+                          picks: picks,
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              child: const Text('Save Picks'),
+                              onPressed: () {
+                                ref
+                                    .watch(
+                                        selectedLegPicksStateProvider.notifier)
+                                    .savePicks(matchups: matchups);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   );
                 },
                 loading: () => const Center(child: CircularProgressIndicator()),

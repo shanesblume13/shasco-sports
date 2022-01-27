@@ -29,7 +29,7 @@ class FirestorePickService extends ChangeNotifier {
     return picks;
   }
 
-  Stream<List<Pick>> fetchLegsAsStream(Matchup? matchup) {
+  Stream<List<Pick>> fetchPicksAsStream(Matchup? matchup) {
     Stream<List<Pick>> picksStream;
     Stream<QuerySnapshot<Map<String, dynamic>>> result =
         _apiService.streamDataCollection();
@@ -58,6 +58,21 @@ class FirestorePickService extends ChangeNotifier {
     }
 
     return picksStream;
+  }
+
+  Future createPick(Pick pick) async {
+    await _apiService.addDocument(pick.toJson());
+    return;
+  }
+
+  Future updatePick(Pick pick) async {
+    await _apiService.updateDocument(pick.toJson(), pick.id);
+    return;
+  }
+
+  Future removePick(Pick pick) async {
+    await _apiService.removeDocument(pick.id);
+    return;
   }
 
   // Future<Season> getSeasonById(String id) async {

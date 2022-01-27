@@ -7,6 +7,7 @@ class Pick {
   DocumentReference matchupReference;
   DocumentReference? teamReference;
   int points;
+  DocumentReference? reference;
 
   Pick({
     required this.id,
@@ -15,6 +16,7 @@ class Pick {
     required this.matchupReference,
     this.teamReference,
     required this.points,
+    required this.reference,
   });
 
   Pick.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot, this.id)
@@ -22,14 +24,16 @@ class Pick {
         legReference = snapshot['legReference'] as DocumentReference,
         matchupReference = snapshot['matchupReference'] as DocumentReference,
         teamReference = snapshot['teamReference'] as DocumentReference,
-        points = snapshot['points'] as int;
+        points = snapshot['points'] as int,
+        reference = snapshot.reference;
 
   Pick.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : uid = snapshot['uid'] as String,
         legReference = snapshot['legReference'] as DocumentReference,
         matchupReference = snapshot['matchupReference'] as DocumentReference,
         teamReference = snapshot['teamReference'] as DocumentReference,
-        points = snapshot['points'] as int;
+        points = snapshot['points'] as int,
+        reference = snapshot.reference;
 
   toJson() {
     return {
@@ -38,6 +42,7 @@ class Pick {
       'matchupReference': matchupReference,
       'teamReference': teamReference,
       'points': points,
+      'reference': reference,
     };
   }
 }
