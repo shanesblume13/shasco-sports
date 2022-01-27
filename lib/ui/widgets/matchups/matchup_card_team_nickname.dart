@@ -5,11 +5,13 @@ class MatchupCardTeamNickname extends StatelessWidget {
     Key? key,
     required this.teamName,
     required this.isHome,
+    required this.hasPick,
     required this.isPicked,
   }) : super(key: key);
 
   final String teamName;
   final bool isHome;
+  final bool hasPick;
   final bool isPicked;
 
   @override
@@ -21,9 +23,21 @@ class MatchupCardTeamNickname extends StatelessWidget {
         AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 300),
           style: TextStyle(
-            color: isPicked ? Colors.black : Colors.grey,
-            fontSize: isPicked ? 18 : 16,
-            fontWeight: isPicked ? FontWeight.bold : FontWeight.normal,
+            color: !hasPick
+                ? Colors.black
+                : isPicked
+                    ? Colors.black
+                    : Colors.grey,
+            fontSize: !hasPick
+                ? 16
+                : isPicked
+                    ? 18
+                    : 16,
+            fontWeight: !hasPick
+                ? FontWeight.normal
+                : isPicked
+                    ? FontWeight.bold
+                    : FontWeight.normal,
           ),
           child: Text(
             teamName,

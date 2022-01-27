@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/sport_model.dart';
 import 'package:pick/core/providers/leagues_provider.dart';
+import 'package:pick/ui/shared/gradient_scaffold.dart';
 import 'package:pick/ui/widgets/leagues/league_cards_listview.dart';
 
 class LeaguesView extends HookConsumerWidget {
@@ -18,12 +19,8 @@ class LeaguesView extends HookConsumerWidget {
     AsyncValue<List<League>> leagues =
         ref.watch(leaguesBySportStateProvider(sport));
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text(sport.name),
-        ),
-      ),
+    return GradientScaffold(
+      appBarText: sport.name,
       body: leagues.when(
         data: (leagues) => LeagueCardsListview(leagues: leagues),
         loading: () => const Center(child: CircularProgressIndicator()),

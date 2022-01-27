@@ -59,8 +59,9 @@ class MatchupPickScoreDivider extends StatelessWidget {
                   points.toString(),
                   style: TextStyle(
                     fontSize: 15,
-                    color:
-                        homePicked || awayPicked ? Colors.white : Colors.grey,
+                    color: homePicked || awayPicked
+                        ? Colors.white
+                        : Colors.transparent,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

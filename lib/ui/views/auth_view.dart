@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterfire_ui/auth.dart';
+import 'package:pick/ui/main_app.dart';
 import 'package:pick/ui/widgets/auth/auth_card.dart';
-import '/ui/router.dart' as my_router;
 
 class AuthView extends StatelessWidget {
   const AuthView({Key? key}) : super(key: key);
@@ -29,13 +29,7 @@ class AuthView extends StatelessWidget {
           );
         }
 
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          initialRoute: '/',
-          title: 'Pickem App',
-          theme: ThemeData(),
-          onGenerateRoute: my_router.Router.generateRoute,
-        );
+        return const MainApp();
       },
     );
   }

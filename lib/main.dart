@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart' as hr;
 import 'package:pick/core/providers/game_view_model.dart';
 import 'package:pick/firebase_options.dart';
 import 'package:pick/locator.dart';
-import 'package:pick/ui/shared/palette.dart';
 import 'package:provider/provider.dart';
 import 'ui/router.dart' as my_router;
 
@@ -28,13 +27,10 @@ class App extends StatelessWidget {
           create: (_) => locator<GameViewModel>(),
         ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/auth',
         title: 'Pickem App',
-        theme: ThemeData(
-          primarySwatch: Palette.shascoBlue,
-        ),
         onGenerateRoute: my_router.Router.generateRoute,
       ),
     );

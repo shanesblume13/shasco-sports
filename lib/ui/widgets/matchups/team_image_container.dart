@@ -6,12 +6,14 @@ import 'package:pick/ui/widgets/matchups/team_image_clip.dart';
 class TeamImageContainer extends StatelessWidget {
   const TeamImageContainer({
     Key? key,
+    required this.hasPick,
     required this.isPicked,
     required this.team,
     required this.isHome,
     required this.imagePath,
   }) : super(key: key);
 
+  final bool hasPick;
   final bool isPicked;
   final Team team;
   final bool isHome;
@@ -24,7 +26,11 @@ class TeamImageContainer extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.symmetric(
           horizontal: BorderSide(
-            color: isPicked ? Palette.shascoBlue : Colors.transparent,
+            color: !hasPick
+                ? Colors.transparent
+                : isPicked
+                    ? Palette.shascoBlue
+                    : Palette.shascoBlue[100]!,
             width: 3,
           ),
         ),
@@ -32,6 +38,7 @@ class TeamImageContainer extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       child: TeamImageClip(
         imagePath: imagePath,
+        hasPick: hasPick,
         isPicked: isPicked,
         isHome: isHome,
       ),

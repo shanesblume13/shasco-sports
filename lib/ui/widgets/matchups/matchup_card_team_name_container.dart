@@ -7,11 +7,13 @@ import 'package:pick/ui/widgets/matchups/matchup_card_team_nickname.dart';
 class MatchupCardTeamNameContainer extends StatelessWidget {
   const MatchupCardTeamNameContainer({
     Key? key,
+    required this.hasPick,
     required this.isPicked,
     required this.team,
     required this.isHome,
   }) : super(key: key);
 
+  final bool hasPick;
   final bool isPicked;
   final Team team;
   final bool isHome;
@@ -20,9 +22,14 @@ class MatchupCardTeamNameContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       decoration: BoxDecoration(
+        //color: Palette.shascoBlue[50]!,
         border: Border.symmetric(
           horizontal: BorderSide(
-            color: isPicked ? Palette.shascoBlue : Colors.transparent,
+            color: !hasPick
+                ? Colors.transparent
+                : isPicked
+                    ? Palette.shascoBlue
+                    : Palette.shascoBlue[100]!,
             width: 3,
           ),
         ),
@@ -37,11 +44,13 @@ class MatchupCardTeamNameContainer extends StatelessWidget {
               MatchupCardTeamLocation(
                 teamLocation: team.location,
                 isHome: isHome,
+                hasPick: hasPick,
                 isPicked: isPicked,
               ),
               MatchupCardTeamNickname(
                 teamName: team.nickname,
                 isHome: isHome,
+                hasPick: hasPick,
                 isPicked: isPicked,
               ),
             ],

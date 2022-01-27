@@ -7,6 +7,7 @@ import 'package:pick/core/models/team_model.dart';
 import 'package:pick/core/providers/matchups_provider.dart';
 import 'package:pick/core/providers/picks_provider.dart';
 import 'package:pick/core/providers/teams_provider.dart';
+import 'package:pick/ui/shared/gradient_scaffold.dart';
 import 'package:pick/ui/widgets/matchups/matchup_cards_listview.dart';
 
 class MatchupsView extends HookConsumerWidget {
@@ -22,18 +23,8 @@ class MatchupsView extends HookConsumerWidget {
     AsyncValue<List<Matchup>> matchups =
         ref.watch(selectedLegMatchupsStateProvider);
 
-    return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   child: const Icon(Icons.add),
-      //   onPressed: () {
-      //     Navigator.pushNamed(context, '/addLeg');
-      //   },
-      // ),
-      appBar: AppBar(
-        title: Center(
-          child: Text(leg.name),
-        ),
-      ),
+    return GradientScaffold(
+      appBarText: leg.name,
       body: matchups.when(
         data: (matchups) {
           AsyncValue<List<Team>> teams =

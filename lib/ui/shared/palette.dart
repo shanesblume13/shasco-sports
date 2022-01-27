@@ -19,7 +19,7 @@ class Palette {
     },
   );
 
-  static MaterialColor shascoYellow = const MaterialColor(
+  static MaterialColor shascoGold = const MaterialColor(
     0xffF0A202, // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch.
     <int, Color>{
       50: Color(0xffFDF4E1), //10%

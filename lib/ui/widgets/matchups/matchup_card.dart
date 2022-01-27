@@ -38,7 +38,7 @@ class MatchupCard extends HookConsumerWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
-            elevation: 6,
+            elevation: 3,
             child: LayoutGrid(
               areas: '''
                         awayLogo awayName scoreDivider homeName homeLogo
@@ -49,9 +49,12 @@ class MatchupCard extends HookConsumerWidget {
                 gridArea('awayLogo').containing(
                   InkWell(
                     onTap: () => updatePickedTeam(ref: ref, team: awayTeam),
+                    onLongPress: () =>
+                        isAwayTeamPicked ? clearPick(ref: ref) : null,
                     splashColor: Colors.transparent,
                     child: TeamImageContainer(
-                      isPicked: pick?.teamReference == awayTeam.reference,
+                      hasPick: isAwayTeamPicked || isHomeTeamPicked,
+                      isPicked: isAwayTeamPicked,
                       team: awayTeam,
                       isHome: false,
                       imagePath: awayImagePath,
@@ -61,9 +64,12 @@ class MatchupCard extends HookConsumerWidget {
                 gridArea('awayName').containing(
                   InkWell(
                     onTap: () => updatePickedTeam(ref: ref, team: awayTeam),
+                    onLongPress: () =>
+                        isAwayTeamPicked ? clearPick(ref: ref) : null,
                     splashColor: Colors.transparent,
                     child: MatchupCardTeamNameContainer(
-                      isPicked: pick?.teamReference == awayTeam.reference,
+                      hasPick: isAwayTeamPicked || isHomeTeamPicked,
+                      isPicked: isAwayTeamPicked,
                       team: awayTeam,
                       isHome: false,
                     ),
@@ -74,8 +80,8 @@ class MatchupCard extends HookConsumerWidget {
                     onTap: () => updatePickScore(ref: ref),
                     splashColor: Colors.transparent,
                     child: MatchupPickScoreDivider(
-                      homePicked: pick?.teamReference == homeTeam.reference,
-                      awayPicked: pick?.teamReference == awayTeam.reference,
+                      homePicked: isHomeTeamPicked,
+                      awayPicked: isAwayTeamPicked,
                       points: pick?.points ??
                           0, //_points, //_pickScores[pickScoreIndex],
                     ),
@@ -84,9 +90,12 @@ class MatchupCard extends HookConsumerWidget {
                 gridArea('homeName').containing(
                   InkWell(
                     onTap: () => updatePickedTeam(ref: ref, team: homeTeam),
+                    onLongPress: () =>
+                        isHomeTeamPicked ? clearPick(ref: ref) : null,
                     splashColor: Colors.transparent,
                     child: MatchupCardTeamNameContainer(
-                      isPicked: pick?.teamReference == homeTeam.reference,
+                      hasPick: isAwayTeamPicked || isHomeTeamPicked,
+                      isPicked: isHomeTeamPicked,
                       team: homeTeam,
                       isHome: true,
                     ),
@@ -95,9 +104,12 @@ class MatchupCard extends HookConsumerWidget {
                 gridArea('homeLogo').containing(
                   InkWell(
                     onTap: () => updatePickedTeam(ref: ref, team: homeTeam),
+                    onLongPress: () =>
+                        isHomeTeamPicked ? clearPick(ref: ref) : null,
                     splashColor: Colors.transparent,
                     child: TeamImageContainer(
-                      isPicked: pick?.teamReference == homeTeam.reference,
+                      hasPick: isAwayTeamPicked || isHomeTeamPicked,
+                      isPicked: isHomeTeamPicked,
                       team: homeTeam,
                       isHome: true,
                       imagePath: homeImagePath,
@@ -114,6 +126,10 @@ class MatchupCard extends HookConsumerWidget {
     );
   }
 
+  bool get isAwayTeamPicked => pick?.teamReference == awayTeam.reference;
+
+  bool get isHomeTeamPicked => pick?.teamReference == homeTeam.reference;
+
   String setTeamImagePath(
       {required List<String> imagePaths, required String teamNickname}) {
     String imagePath = 'assets/images/logos/nfl/nfl.jpeg';
@@ -123,6 +139,12 @@ class MatchupCard extends HookConsumerWidget {
       imagePath = 'assets/images/logos/nfl/${teamNickname.toLowerCase()}.gif';
     }
     return imagePath;
+  }
+
+  clearPick({required WidgetRef ref}) {
+    ref
+        .watch(selectedLegPicksStateProvider.notifier)
+        .clearPick(matchup: matchup);
   }
 
   updatePickedTeam({required WidgetRef ref, required Team team}) {

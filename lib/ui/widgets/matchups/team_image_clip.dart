@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:pick/ui/shared/palette.dart';
 
 class TeamImageClip extends StatelessWidget {
   const TeamImageClip({
     Key? key,
     required this.imagePath,
+    required this.hasPick,
     required this.isPicked,
     required this.isHome,
   }) : super(key: key);
 
   final String imagePath;
+  final bool hasPick;
   final bool isPicked;
   final bool isHome;
 
@@ -19,8 +22,12 @@ class TeamImageClip extends StatelessWidget {
       child: Image(
         height: 60,
         fit: BoxFit.cover,
-        color: isPicked ? Colors.white : Colors.grey,
-        colorBlendMode: BlendMode.darken,
+        color: !hasPick
+            ? Colors.transparent
+            : isPicked
+                ? Colors.transparent
+                : Palette.shascoGrey,
+        colorBlendMode: BlendMode.hardLight,
         image: AssetImage(imagePath),
       ),
     );
