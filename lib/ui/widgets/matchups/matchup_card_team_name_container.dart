@@ -29,7 +29,7 @@ class MatchupCardTeamNameContainer extends StatelessWidget {
                 ? Colors.transparent
                 : isPicked
                     ? Palette.shascoBlue
-                    : Colors.transparent,
+                    : Palette.shascoBlue[200]!,
             width: 3,
           ),
         ),
