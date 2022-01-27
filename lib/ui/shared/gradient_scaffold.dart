@@ -17,9 +17,12 @@ class GradientScaffold extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: RadialGradient(
           colors: [
-            Palette.shascoGrey[500]!,
+            Palette.shascoGrey[900]!,
             Palette.shascoBlue,
-            Palette.shascoBlue[900]!,
+            Palette.shascoBlue,
+            Palette.shascoBlue,
+            Palette.shascoBlue,
+            Palette.shascoBlue,
           ],
           center: Alignment.center,
           radius: 6,

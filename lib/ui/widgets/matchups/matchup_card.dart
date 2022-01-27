@@ -6,6 +6,7 @@ import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
 import 'package:pick/core/providers/images_provider.dart';
 import 'package:pick/core/providers/picks_provider.dart';
+import 'package:pick/ui/shared/palette.dart';
 import 'package:pick/ui/widgets/matchups/matchup_pick_score_divider.dart';
 import 'package:pick/ui/widgets/matchups/team_image_container.dart';
 import 'package:pick/ui/widgets/matchups/matchup_card_team_name_container.dart';
@@ -38,6 +39,9 @@ class MatchupCard extends HookConsumerWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
+            color: isAwayTeamPicked || isHomeTeamPicked
+                ? Colors.white
+                : Palette.shascoGrey[500]!,
             elevation: 3,
             child: LayoutGrid(
               areas: '''
