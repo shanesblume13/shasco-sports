@@ -6,6 +6,7 @@ import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
 import 'package:pick/core/providers/images_provider.dart';
 import 'package:pick/core/providers/picks_provider.dart';
+import 'package:pick/ui/shared/flat_outlined_option.dart';
 import 'package:pick/ui/shared/palette.dart';
 import 'package:pick/ui/widgets/matchups/matchup_pick_score_divider.dart';
 import 'package:pick/ui/widgets/matchups/team_image_container.dart';
@@ -36,92 +37,88 @@ class MatchupCard extends HookConsumerWidget {
         String homeImagePath = setTeamImagePath(
             imagePaths: imagePaths, teamNickname: homeTeam.nickname);
 
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Card(
-            color: isAwayTeamPicked || isHomeTeamPicked
-                ? Colors.white
-                : Palette.shascoGrey[500]!,
-            elevation: 3,
-            child: LayoutGrid(
-              areas: '''
-                        awayLogo awayName scoreDivider homeName homeLogo
-                      ''',
-              rowSizes: const [auto],
-              columnSizes: [1.fr, 2.fr, auto, 2.fr, 1.fr],
-              children: [
-                gridArea('awayLogo').containing(
-                  InkWell(
-                    onTap: () => updatePickedTeam(ref: ref, team: awayTeam),
-                    onLongPress: () =>
-                        isAwayTeamPicked ? clearPick(ref: ref) : null,
-                    splashColor: Colors.transparent,
-                    child: TeamImageContainer(
-                      hasPick: isAwayTeamPicked || isHomeTeamPicked,
-                      isPicked: isAwayTeamPicked,
-                      team: awayTeam,
-                      isHome: false,
-                      imagePath: awayImagePath,
-                    ),
+        return FlatBorderOption(
+          borderColor: isAwayTeamPicked || isHomeTeamPicked
+              ? Palette.shascoBlue
+              : Palette.shascoGrey[900]!,
+          child: LayoutGrid(
+            areas: '''
+                      awayLogo awayName scoreDivider homeName homeLogo
+                    ''',
+            rowSizes: const [auto],
+            columnSizes: [1.fr, 2.fr, auto, 2.fr, 1.fr],
+            children: [
+              gridArea('awayLogo').containing(
+                InkWell(
+                  onTap: () => updatePickedTeam(ref: ref, team: awayTeam),
+                  onLongPress: () =>
+                      isAwayTeamPicked ? clearPick(ref: ref) : null,
+                  splashColor: Colors.transparent,
+                  child: TeamImageContainer(
+                    hasPick: isAwayTeamPicked || isHomeTeamPicked,
+                    isPicked: isAwayTeamPicked,
+                    team: awayTeam,
+                    isHome: false,
+                    imagePath: awayImagePath,
                   ),
                 ),
-                gridArea('awayName').containing(
-                  InkWell(
-                    onTap: () => updatePickedTeam(ref: ref, team: awayTeam),
-                    onLongPress: () =>
-                        isAwayTeamPicked ? clearPick(ref: ref) : null,
-                    splashColor: Colors.transparent,
-                    child: MatchupCardTeamNameContainer(
-                      hasPick: isAwayTeamPicked || isHomeTeamPicked,
-                      isPicked: isAwayTeamPicked,
-                      team: awayTeam,
-                      isHome: false,
-                    ),
+              ),
+              gridArea('awayName').containing(
+                InkWell(
+                  onTap: () => updatePickedTeam(ref: ref, team: awayTeam),
+                  onLongPress: () =>
+                      isAwayTeamPicked ? clearPick(ref: ref) : null,
+                  splashColor: Colors.transparent,
+                  child: MatchupCardTeamNameContainer(
+                    hasPick: isAwayTeamPicked || isHomeTeamPicked,
+                    isPicked: isAwayTeamPicked,
+                    team: awayTeam,
+                    isHome: false,
                   ),
                 ),
-                gridArea('scoreDivider').containing(
-                  InkWell(
-                    onTap: () => updatePickScore(ref: ref),
-                    splashColor: Colors.transparent,
-                    child: MatchupPickScoreDivider(
-                      homePicked: isHomeTeamPicked,
-                      awayPicked: isAwayTeamPicked,
-                      points: pick?.points ??
-                          0, //_points, //_pickScores[pickScoreIndex],
-                    ),
+              ),
+              gridArea('scoreDivider').containing(
+                InkWell(
+                  onTap: () => updatePickScore(ref: ref),
+                  splashColor: Colors.transparent,
+                  child: MatchupPickScoreDivider(
+                    homePicked: isHomeTeamPicked,
+                    awayPicked: isAwayTeamPicked,
+                    points: pick?.points ??
+                        0, //_points, //_pickScores[pickScoreIndex],
                   ),
                 ),
-                gridArea('homeName').containing(
-                  InkWell(
-                    onTap: () => updatePickedTeam(ref: ref, team: homeTeam),
-                    onLongPress: () =>
-                        isHomeTeamPicked ? clearPick(ref: ref) : null,
-                    splashColor: Colors.transparent,
-                    child: MatchupCardTeamNameContainer(
-                      hasPick: isAwayTeamPicked || isHomeTeamPicked,
-                      isPicked: isHomeTeamPicked,
-                      team: homeTeam,
-                      isHome: true,
-                    ),
+              ),
+              gridArea('homeName').containing(
+                InkWell(
+                  onTap: () => updatePickedTeam(ref: ref, team: homeTeam),
+                  onLongPress: () =>
+                      isHomeTeamPicked ? clearPick(ref: ref) : null,
+                  splashColor: Colors.transparent,
+                  child: MatchupCardTeamNameContainer(
+                    hasPick: isAwayTeamPicked || isHomeTeamPicked,
+                    isPicked: isHomeTeamPicked,
+                    team: homeTeam,
+                    isHome: true,
                   ),
                 ),
-                gridArea('homeLogo').containing(
-                  InkWell(
-                    onTap: () => updatePickedTeam(ref: ref, team: homeTeam),
-                    onLongPress: () =>
-                        isHomeTeamPicked ? clearPick(ref: ref) : null,
-                    splashColor: Colors.transparent,
-                    child: TeamImageContainer(
-                      hasPick: isAwayTeamPicked || isHomeTeamPicked,
-                      isPicked: isHomeTeamPicked,
-                      team: homeTeam,
-                      isHome: true,
-                      imagePath: homeImagePath,
-                    ),
+              ),
+              gridArea('homeLogo').containing(
+                InkWell(
+                  onTap: () => updatePickedTeam(ref: ref, team: homeTeam),
+                  onLongPress: () =>
+                      isHomeTeamPicked ? clearPick(ref: ref) : null,
+                  splashColor: Colors.transparent,
+                  child: TeamImageContainer(
+                    hasPick: isAwayTeamPicked || isHomeTeamPicked,
+                    isPicked: isHomeTeamPicked,
+                    team: homeTeam,
+                    isHome: true,
+                    imagePath: homeImagePath,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

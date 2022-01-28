@@ -8,6 +8,7 @@ import 'package:pick/core/providers/matchups_provider.dart';
 import 'package:pick/core/providers/picks_provider.dart';
 import 'package:pick/core/providers/teams_provider.dart';
 import 'package:pick/ui/shared/gradient_scaffold.dart';
+import 'package:pick/ui/shared/palette.dart';
 import 'package:pick/ui/widgets/matchups/matchup_cards_listview.dart';
 
 class MatchupsView extends HookConsumerWidget {
@@ -40,26 +41,34 @@ class MatchupsView extends HookConsumerWidget {
                   return Column(
                     children: [
                       Expanded(
+                        flex: 1,
+                        child: Container(
+                          color: Palette.shascoGrey[900]!,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    ref
+                                        .watch(selectedLegPicksStateProvider
+                                            .notifier)
+                                        .savePicks(matchups: matchups);
+                                  },
+                                  child: const Text('Save Picks'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 5,
                         child: MatchupCardsListview(
                           matchups: matchups,
                           teams: teams,
                           picks: picks,
-                        ),
-                      ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              child: const Text('Save Picks'),
-                              onPressed: () {
-                                ref
-                                    .watch(
-                                        selectedLegPicksStateProvider.notifier)
-                                    .savePicks(matchups: matchups);
-                              },
-                            ),
-                          ],
                         ),
                       ),
                     ],

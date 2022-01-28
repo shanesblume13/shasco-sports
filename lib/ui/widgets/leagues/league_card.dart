@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/providers/leagues_provider.dart';
 import 'package:pick/core/providers/teams_provider.dart';
+import 'package:pick/ui/shared/flat_outlined_option.dart';
 import 'package:pick/ui/views/seasons_view.dart';
 import 'package:pick/ui/widgets/leagues/league_card_image_clip.dart';
 import 'package:pick/ui/widgets/leagues/league_card_name_container.dart';
@@ -31,38 +32,34 @@ class LeagueCard extends HookConsumerWidget {
           ),
         );
       },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          elevation: 6,
-          child: LayoutGrid(
-            areas: '''
-                image name seasonCount
-              ''',
-            rowSizes: const [
-              auto,
-            ],
-            columnSizes: [
-              1.fr,
-              3.fr,
-              2.fr,
-            ],
-            children: [
-              gridArea('image').containing(
-                LeagueCardImageClip(
-                  imagePath: league.imagePath,
-                ),
+      child: FlatBorderOption(
+        child: LayoutGrid(
+          areas: '''
+              image name seasonCount
+            ''',
+          rowSizes: const [
+            auto,
+          ],
+          columnSizes: [
+            1.fr,
+            3.fr,
+            2.fr,
+          ],
+          children: [
+            gridArea('image').containing(
+              LeagueCardImageClip(
+                imagePath: league.imagePath,
               ),
-              gridArea('name').containing(
-                LeagueCardNameConatiner(name: league.name),
+            ),
+            gridArea('name').containing(
+              LeagueCardNameConatiner(name: league.name),
+            ),
+            gridArea('seasonCount').containing(
+              LeagueCardSeasonCountContainer(
+                league: league.name,
               ),
-              gridArea('seasonCount').containing(
-                LeagueCardSeasonCountContainer(
-                  league: league.name,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
