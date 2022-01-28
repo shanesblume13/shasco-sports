@@ -8,12 +8,10 @@ class MatchupPickScoreDivider extends StatelessWidget {
     Key? key,
     required this.homePicked,
     required this.awayPicked,
-    required this.points,
   }) : super(key: key);
 
   final bool homePicked;
   final bool awayPicked;
-  final int points;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +90,7 @@ class DividerHomePickClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
 class DividerAwayPickClipper extends CustomClipper<Path> {
@@ -112,5 +110,5 @@ class DividerAwayPickClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

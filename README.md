@@ -11,9 +11,11 @@ A mobile app built with flutter and firebase that allows users to play various g
     - [x] 3 Matchups
     - [] 2 Users w/ Picks
     - [] Stats, Graphs, and Results
+- Clean up matchup widget files and structure.
+- Add score color coding and validation.
+- Fix matchup card color transitions when changing picked team.
 - Add chevrons to flat outlined option cards that navigate.
-- Add rounded bezel to score divider.
-- Move score change trigger to new column.
+- Add rounded bezel to score divider
 - Save / clear picks on reset button click or navigation.
 - Add new score selection ui.
 - Add typing to all providers.

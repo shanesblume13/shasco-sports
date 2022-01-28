@@ -40,7 +40,7 @@ class MatchupCard extends HookConsumerWidget {
         return FlatBorderOption(
           borderColor: isAwayTeamPicked || isHomeTeamPicked
               ? Palette.shascoBlue
-              : Palette.shascoGrey[900]!,
+              : Palette.shascoGrey,
           child: LayoutGrid(
             areas: '''
                       awayLogo awayName scoreDivider homeName homeLogo
@@ -78,15 +78,10 @@ class MatchupCard extends HookConsumerWidget {
                 ),
               ),
               gridArea('scoreDivider').containing(
-                InkWell(
-                  onTap: () => updatePickScore(ref: ref),
-                  splashColor: Colors.transparent,
-                  child: MatchupPickScoreDivider(
-                    homePicked: isHomeTeamPicked,
-                    awayPicked: isAwayTeamPicked,
-                    points: pick?.points ??
-                        0, //_points, //_pickScores[pickScoreIndex],
-                  ),
+                MatchupPickScoreDivider(
+                  homePicked: isHomeTeamPicked,
+                  awayPicked:
+                      isAwayTeamPicked, //_points, //_pickScores[pickScoreIndex]
                 ),
               ),
               gridArea('homeName').containing(
@@ -152,11 +147,5 @@ class MatchupCard extends HookConsumerWidget {
     ref
         .watch(selectedLegPicksStateProvider.notifier)
         .updatePickedTeam(matchup: matchup, team: team);
-  }
-
-  updatePickScore({required WidgetRef ref}) {
-    ref
-        .watch(selectedLegPicksStateProvider.notifier)
-        .updatePickScore(matchup: matchup);
   }
 }

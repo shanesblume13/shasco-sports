@@ -30,10 +30,10 @@ class MatchupCardTeamNickname extends StatelessWidget {
                     ? Palette.shascoBlue
                     : Palette.shascoBlue[200],
             fontSize: !hasPick
-                ? 16
+                ? 15
                 : isPicked
-                    ? 18
-                    : 16,
+                    ? 12
+                    : 15,
             fontWeight: !hasPick
                 ? FontWeight.normal
                 : isPicked

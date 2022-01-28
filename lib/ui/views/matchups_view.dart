@@ -43,7 +43,7 @@ class MatchupsView extends HookConsumerWidget {
                       Expanded(
                         flex: 1,
                         child: Container(
-                          color: Palette.shascoGrey[900]!,
+                          color: Palette.shascoGrey,
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: Row(
