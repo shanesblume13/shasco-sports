@@ -8,8 +8,8 @@ import 'package:pick/core/providers/matchups_provider.dart';
 import 'package:pick/core/providers/picks_provider.dart';
 import 'package:pick/core/providers/teams_provider.dart';
 import 'package:pick/ui/shared/gradient_scaffold.dart';
-import 'package:pick/ui/shared/palette.dart';
 import 'package:pick/ui/widgets/matchups/matchup_cards_listview.dart';
+import 'package:pick/ui/widgets/matchups/matchups_summary_container.dart';
 
 class MatchupsView extends HookConsumerWidget {
   const MatchupsView({
@@ -42,26 +42,7 @@ class MatchupsView extends HookConsumerWidget {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: Container(
-                          color: Palette.shascoGrey,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    ref
-                                        .watch(selectedLegPicksStateProvider
-                                            .notifier)
-                                        .savePicks(matchups: matchups);
-                                  },
-                                  child: const Text('Save Picks'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        child: MatchupsSummaryContainer(matchups: matchups),
                       ),
                       Expanded(
                         flex: 5,
