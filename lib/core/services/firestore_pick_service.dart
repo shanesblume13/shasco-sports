@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/services/firestore_api_service.dart';
@@ -25,6 +26,21 @@ class FirestorePickService extends ChangeNotifier {
           .where((pick) => pick.matchupReference == matchup.reference)
           .toList();
     }
+
+    return picks;
+  }
+
+  Future<List<Pick>> fetchUserLegPicks(
+      {required String uid, required Leg leg}) async {
+    List<Pick> picks = [];
+    var result = await _apiService.getDataCollection();
+
+    picks = result.docs
+        .map(
+          (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
+        )
+        .where((pick) => pick.legReference == leg.reference)
+        .toList();
 
     return picks;
   }

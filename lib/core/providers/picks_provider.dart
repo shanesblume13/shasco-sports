@@ -3,21 +3,21 @@ import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
+import 'package:pick/core/providers/auth_provider.dart';
 import 'package:pick/core/providers/legs_provider.dart';
 import 'package:pick/core/services/firestore_pick_service.dart';
 import 'package:collection/collection.dart';
 
-final allPicksStateProvider =
-    StateNotifierProvider<AllPicksState, AsyncValue<List<Pick>>>((ref) {
-  final AllPicksState allPicksState = AllPicksState();
-  allPicksState.init();
-  return allPicksState;
+final userPicksStateProvider =
+    StateNotifierProvider<UserPicksState, AsyncValue<List<Pick>>>((ref) {
+  final UserPicksState userPicksState = UserPicksState(ref);
+  userPicksState.init();
+  return userPicksState;
 });
 
-final picksByLegStateProvider =
-    StateNotifierProvider.family<PicksByLegState, AsyncValue<List<Pick>>, Leg>(
-        (ref, leg) {
-  final PicksByLegState picksByLegState = PicksByLegState(ref, leg);
+final userPicksByLegStateProvider =
+    StateNotifierProvider<UserPicksByLegState, AsyncValue<List<Pick>>>((ref) {
+  final UserPicksByLegState picksByLegState = UserPicksByLegState(ref);
   picksByLegState.init();
   return picksByLegState;
 });
@@ -38,32 +38,47 @@ final pickByMatchupStateProvider = StateNotifierProvider.family<
   return pickByMatchupState;
 });
 
-class AllPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
-  AllPicksState() : super(const AsyncLoading<List<Pick>>());
+class UserPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
+  UserPicksState(this.ref) : super(const AsyncLoading<List<Pick>>());
+
+  final Ref ref;
 
   void init() async {
     state = const AsyncLoading<List<Pick>>();
-    final picks = await FirestorePickService().fetchPicks(null);
+    final String? uid = ref.watch(authUidProvider);
+    final Leg? leg = ref.watch(selectedLegStateProvider);
+
+    if (uid == null || leg == null) {
+      state = const AsyncData<List<Pick>>([]);
+      return;
+    }
+
+    final picks =
+        await FirestorePickService().fetchUserLegPicks(uid: uid, leg: leg);
     state = AsyncData<List<Pick>>(picks);
   }
 }
 
-class PicksByLegState extends StateNotifier<AsyncValue<List<Pick>>> {
-  PicksByLegState(this.ref, this.leg) : super(const AsyncLoading<List<Pick>>());
+class UserPicksByLegState extends StateNotifier<AsyncValue<List<Pick>>> {
+  UserPicksByLegState(this.ref) : super(const AsyncLoading<List<Pick>>());
 
   final Ref ref;
-  final Leg leg;
 
   void init() async {
     state = const AsyncLoading<List<Pick>>();
-    final allPicks = ref.watch(allPicksStateProvider).value;
+    final List<Pick>? userPicks = ref.watch(userPicksStateProvider).value;
+    final Leg? leg = ref.watch(selectedLegStateProvider);
     List<Pick> picks = [];
 
-    picks = allPicks
+    if (leg == null) {
+      state = const AsyncData<List<Pick>>([]);
+      return;
+    }
+
+    picks = userPicks
             ?.where((pick) => pick.legReference == leg.reference)
             .toList() ??
         [];
-
     state = AsyncData<List<Pick>>(picks);
   }
 }
@@ -77,7 +92,7 @@ class PickByMatchupState extends StateNotifier<AsyncValue<Pick?>> {
 
   void init() async {
     state = const AsyncLoading<Pick>();
-    final allPicks = ref.watch(allPicksStateProvider).value;
+    final allPicks = ref.watch(userPicksStateProvider).value;
     Pick? pick;
 
     pick = allPicks?.firstWhereOrNull(
@@ -94,9 +109,7 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
 
   void init() async {
     state = const AsyncLoading<List<Pick>>();
-    final selectedLeg = ref.watch(selectedLegStateProvider);
-    final selectedLegPicks =
-        ref.watch(picksByLegStateProvider(selectedLeg!)).value;
+    final selectedLegPicks = ref.watch(userPicksByLegStateProvider).value;
 
     if (selectedLegPicks != null) {
       state = AsyncData<List<Pick>>(selectedLegPicks);
@@ -105,9 +118,7 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
 
   void clearPick({required Matchup matchup}) {
     state = const AsyncLoading<List<Pick>>();
-    final selectedLeg = ref.watch(selectedLegStateProvider);
-    final selectedLegPicks =
-        ref.read(picksByLegStateProvider(selectedLeg!)).value ?? [];
+    final selectedLegPicks = ref.read(userPicksByLegStateProvider).value ?? [];
 
     Pick? pick = selectedLegPicks
         .firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
@@ -119,9 +130,7 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
 
   void updatePickedTeam({required Matchup matchup, required Team team}) {
     state = const AsyncLoading<List<Pick>>();
-    final selectedLeg = ref.watch(selectedLegStateProvider);
-    final selectedLegPicks =
-        ref.read(picksByLegStateProvider(selectedLeg!)).value ?? [];
+    final selectedLegPicks = ref.read(userPicksByLegStateProvider).value ?? [];
 
     Pick? pick = selectedLegPicks
         .firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
@@ -158,9 +167,7 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
 
   void updatePickScore({required Matchup matchup}) {
     state = const AsyncLoading<List<Pick>>();
-    final selectedLeg = ref.watch(selectedLegStateProvider);
-    final selectedLegPicks =
-        ref.read(picksByLegStateProvider(selectedLeg!)).value ?? [];
+    final selectedLegPicks = ref.read(userPicksByLegStateProvider).value ?? [];
 
     Pick? pick = selectedLegPicks
         .firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
@@ -187,10 +194,8 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
 
   void savePicks({required List<Matchup> matchups}) async {
     state = const AsyncLoading<List<Pick>>();
-    final selectedLeg = ref.watch(selectedLegStateProvider);
-    final selectedLegPicks =
-        ref.read(picksByLegStateProvider(selectedLeg!)).value ?? [];
-    final allPicks = ref.watch(allPicksStateProvider).value ?? [];
+    final selectedLegPicks = ref.read(userPicksByLegStateProvider).value ?? [];
+    final allPicks = ref.watch(userPicksStateProvider).value ?? [];
 
     List<Pick> picksToDelete = [];
     List<Pick> picksToCreate = [];
@@ -231,14 +236,14 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
 
     for (Pick pick in picksToDelete) {
       pick.id = ref
-              .watch(allPicksStateProvider)
+              .watch(userPicksStateProvider)
               .value
               ?.firstWhere((allPicksPick) =>
                   allPicksPick.matchupReference == pick.matchupReference)
               .id ??
           '';
       pick.uid = ref
-              .watch(allPicksStateProvider)
+              .watch(userPicksStateProvider)
               .value
               ?.firstWhere((allPicksPick) =>
                   allPicksPick.matchupReference == pick.matchupReference)
@@ -253,14 +258,14 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
 
     for (Pick pick in picksToUpdate) {
       pick.id = ref
-              .watch(allPicksStateProvider)
+              .watch(userPicksStateProvider)
               .value
               ?.firstWhere((allPicksPick) =>
                   allPicksPick.matchupReference == pick.matchupReference)
               .id ??
           '';
       pick.uid = ref
-              .watch(allPicksStateProvider)
+              .watch(userPicksStateProvider)
               .value
               ?.firstWhere((allPicksPick) =>
                   allPicksPick.matchupReference == pick.matchupReference)
@@ -270,6 +275,6 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
     }
 
     state = AsyncData<List<Pick>>(selectedLegPicks);
-    ref.watch(allPicksStateProvider.notifier).init();
+    ref.watch(userPicksStateProvider.notifier).init();
   }
 }
