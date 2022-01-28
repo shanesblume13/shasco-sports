@@ -30,7 +30,7 @@ class MatchupCardTeamLocation extends StatelessWidget {
                     ? Palette.shascoBlue
                     : Palette.shascoBlue[200],
             fontSize: !hasPick
-                ? 9
+                ? 12
                 : isPicked
                     ? 12
                     : 9,
