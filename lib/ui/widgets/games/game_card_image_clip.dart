@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/ui/shared/card_image_clip.dart';
+import 'package:pick/ui/shared/palette.dart';
 
 class GameCardImageClip extends StatelessWidget {
   const GameCardImageClip({
@@ -14,7 +15,7 @@ class GameCardImageClip extends StatelessWidget {
     return ClipPath(
       clipper: CardImageClip(clipRight: true),
       child: Container(
-        color: Colors.black,
+        color: Palette.shascoBlue,
         child: Icon(
           iconData,
           color: Colors.white,

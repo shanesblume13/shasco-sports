@@ -20,7 +20,7 @@ class SeasonsView extends HookConsumerWidget {
         ref.watch(seasonsByLeagueStateProvider(league));
 
     return GradientScaffold(
-      appBarText: 'league.name',
+      appBarText: league.name,
       body: seasons.when(
         data: (seasons) => SeasonCardsListview(seasons: seasons),
         loading: () => const Center(child: CircularProgressIndicator()),

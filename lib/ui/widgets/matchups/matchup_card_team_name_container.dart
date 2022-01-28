@@ -21,22 +21,10 @@ class MatchupCardTeamNameContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      // decoration: BoxDecoration(
-      //   //color: Palette.shascoBlue[50]!,
-      //   // border: Border.symmetric(
-      //   //   horizontal: BorderSide(
-      //   //     color: !hasPick
-      //   //         ? Colors.transparent
-      //   //         : isPicked
-      //   //             ? Palette.shascoBlue
-      //   //             : Palette.shascoBlue[200]!,
-      //   //     width: 3,
-      //   //   ),
-      //   // ),
-      // ),
+      color: isPicked ? Palette.shascoBlue[50] : Colors.transparent,
       duration: const Duration(milliseconds: 300),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(3.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

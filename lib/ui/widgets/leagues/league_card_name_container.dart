@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pick/ui/shared/palette.dart';
 
 class LeagueCardNameConatiner extends StatelessWidget {
   const LeagueCardNameConatiner({
@@ -21,8 +22,8 @@ class LeagueCardNameConatiner extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: const TextStyle(
-                    color: Colors.black,
+                  style: TextStyle(
+                    color: Palette.shascoBlue,
                     fontSize: 18,
                     fontWeight: FontWeight.normal,
                   ),

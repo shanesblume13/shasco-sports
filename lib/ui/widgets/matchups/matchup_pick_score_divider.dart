@@ -18,22 +18,9 @@ class MatchupPickScoreDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      // decoration: BoxDecoration(
-      //   border: Border(
-      //     top: BorderSide(
-      //       color: homePicked || awayPicked
-      //           ? Palette.shascoBlue
-      //           : Colors.transparent,
-      //       width: 3.0,
-      //     ),
-      //     bottom: BorderSide(
-      //       color: homePicked || awayPicked
-      //           ? Palette.shascoBlue
-      //           : Colors.transparent,
-      //       width: 3.0,
-      //     ),
-      //   ),
-      // ),
+      color: homePicked || awayPicked
+          ? Palette.shascoBlue[50]
+          : Colors.transparent,
       duration: const Duration(milliseconds: 300),
       child: Stack(
         alignment: Alignment.center,

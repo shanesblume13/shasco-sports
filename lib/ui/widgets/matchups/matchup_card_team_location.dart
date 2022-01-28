@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pick/ui/shared/palette.dart';
 
 class MatchupCardTeamLocation extends StatelessWidget {
   const MatchupCardTeamLocation({
@@ -24,10 +25,10 @@ class MatchupCardTeamLocation extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           style: TextStyle(
             color: !hasPick
-                ? Colors.black
+                ? Palette.shascoBlue
                 : isPicked
-                    ? Colors.black
-                    : Colors.grey,
+                    ? Palette.shascoBlue
+                    : Palette.shascoBlue[200],
             fontSize: !hasPick
                 ? 10
                 : isPicked

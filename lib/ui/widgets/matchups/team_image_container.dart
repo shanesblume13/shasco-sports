@@ -22,19 +22,7 @@ class TeamImageContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      //color: isPicked ? Colors.white : Colors.grey,
-      // decoration: BoxDecoration(
-      //   border: Border.symmetric(
-      //     horizontal: BorderSide(
-      //       color: !hasPick
-      //           ? Colors.transparent
-      //           : isPicked
-      //               ? Palette.shascoBlue
-      //               : Palette.shascoBlue[200]!,
-      //       width: 3,
-      //     ),
-      //   ),
-      // ),
+      color: isPicked ? Palette.shascoBlue[50] : Colors.transparent,
       duration: const Duration(milliseconds: 300),
       child: TeamImageClip(
         imagePath: imagePath,
