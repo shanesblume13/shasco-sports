@@ -43,16 +43,29 @@ class MatchupPickScoreDivider extends StatelessWidget {
                   ? Palette.shascoBlue
                   : Colors.transparent,
               child: Center(
-                child: Text(
-                  points.toString(),
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: homePicked || awayPicked
-                        ? Colors.white
-                        : Colors.transparent,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                child: homePicked
+                    ? Icon(
+                        Icons.chevron_right,
+                        color: Palette.shascoGrey[50],
+                        size: 24,
+                      )
+                    : awayPicked
+                        ? Icon(
+                            Icons.chevron_left,
+                            color: Palette.shascoGrey[50],
+                            size: 24,
+                          )
+                        : null,
+                // child: Text(
+                //   points.toString(),
+                //   style: TextStyle(
+                //     fontSize: 15,
+                //     color: homePicked || awayPicked
+                //         ? Colors.white
+                //         : Colors.transparent,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
               ),
             ),
           ),
