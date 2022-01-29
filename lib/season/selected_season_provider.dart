@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/season_model.dart';
+import 'package:pick/season/season.dart';
 
 final selectedSeasonStateProvider =
     StateNotifierProvider<SelectedSeasonState, Season?>((ref) {

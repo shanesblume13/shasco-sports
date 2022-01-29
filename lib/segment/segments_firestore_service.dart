@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/season_model.dart';
+import 'package:pick/season/season.dart';
 import 'package:pick/segment/segment.dart';
 
 class SegmentsFirestoreService extends ChangeNotifier {

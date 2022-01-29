@@ -6,7 +6,6 @@ class Season {
   String league;
   DateTime startDate;
   DateTime endDate;
-  DocumentReference? reference;
 
   Season({
     required this.id,
@@ -14,7 +13,6 @@ class Season {
     required this.league,
     required this.startDate,
     required this.endDate,
-    this.reference,
   });
 
   Season.fromQueryDocumentSnapshot(
@@ -22,15 +20,13 @@ class Season {
       : name = snapshot['name'] as String,
         league = snapshot['league'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
-        endDate = (snapshot['endDate'] as Timestamp).toDate(),
-        reference = snapshot.reference;
+        endDate = (snapshot['endDate'] as Timestamp).toDate();
 
   Season.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : name = snapshot['name'] as String,
         league = snapshot['league'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
-        endDate = (snapshot['endDate'] as Timestamp).toDate(),
-        reference = snapshot.reference;
+        endDate = (snapshot['endDate'] as Timestamp).toDate();
 
   toJson() {
     return {
@@ -38,7 +34,6 @@ class Season {
       'league': league,
       'startDate': startDate,
       'endDate': endDate,
-      'reference': reference,
     };
   }
 }

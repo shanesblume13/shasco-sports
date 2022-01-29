@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/league/league.dart';
-import 'package:pick/core/models/season_model.dart';
+import 'package:pick/season/season.dart';
 import 'package:pick/league/selected_league_provider.dart';
 import 'package:pick/season/seasons_provider.dart';
 import 'package:pick/season/selected_season_provider.dart';

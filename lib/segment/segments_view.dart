@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/season_model.dart';
+import 'package:pick/season/season.dart';
 import 'package:pick/icon-list-option/icon_list_option.dart';
 import 'package:pick/season/selected_season_provider.dart';
 import 'package:pick/segment/segment.dart';
