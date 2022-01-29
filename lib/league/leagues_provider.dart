@@ -3,6 +3,7 @@ import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/league_season_count_model.dart';
 import 'package:pick/core/models/sport_model.dart';
 import 'package:pick/core/providers/seasons_provider.dart';
+import 'package:pick/sport/selected_sport_provider.dart';
 
 final allLeaguesStateProvider =
     StateNotifierProvider<AllLeaguesState, AsyncValue<List<League>>>((ref) {
@@ -11,12 +12,12 @@ final allLeaguesStateProvider =
   return allLeaguesState;
 });
 
-final leaguesBySportStateProvider = StateNotifierProvider.family<
-    LeaguesBySportState, AsyncValue<List<League>>, Sport>((ref, sport) {
-  final LeaguesBySportState leaguesBySportState =
-      LeaguesBySportState(ref, sport);
-  leaguesBySportState.init();
-  return leaguesBySportState;
+final leaguesBySelectedSportStateProvider = StateNotifierProvider<
+    LeaguesBySelectedSportState, AsyncValue<List<League>>>((ref) {
+  final LeaguesBySelectedSportState leaguesBySelectedSportState =
+      LeaguesBySelectedSportState(ref);
+  leaguesBySelectedSportState.init();
+  return leaguesBySelectedSportState;
 });
 
 final leagueSeasonCountsStateProvider =
@@ -28,35 +29,31 @@ final leagueSeasonCountsStateProvider =
   return leagueSeasonCountsState;
 });
 
-final selectedLeagueStateProvider =
-    StateNotifierProvider<SelectedLeagueState, League?>((ref) {
-  final SelectedLeagueState selectedLeagueState = SelectedLeagueState();
-  return selectedLeagueState;
-});
-
 class AllLeaguesState extends StateNotifier<AsyncValue<List<League>>> {
   AllLeaguesState() : super(const AsyncLoading<List<League>>());
 
   void init() async {
     state = const AsyncLoading<List<League>>();
     //TODO: Remove delayed when leagues are on firestore.
-    final leagues = await Future.delayed(const Duration(seconds: 1))
+    final leagues = await Future.delayed(const Duration(milliseconds: 100))
         .then((_) => League.leagues);
     state = AsyncData<List<League>>(leagues);
   }
 }
 
-class LeaguesBySportState extends StateNotifier<AsyncValue<List<League>>> {
-  LeaguesBySportState(this.ref, this.sport)
+class LeaguesBySelectedSportState
+    extends StateNotifier<AsyncValue<List<League>>> {
+  LeaguesBySelectedSportState(this.ref)
       : super(const AsyncLoading<List<League>>());
 
   final Ref ref;
-  final Sport sport;
 
   void init() async {
     state = const AsyncLoading<List<League>>();
+    final Sport sport = ref.watch(selectedSportProvider)!;
     //TODO: Remove delayed when leagues are on firestore.
-    final leagues = await Future.delayed(const Duration(seconds: 1)).then((_) {
+    final leagues =
+        await Future.delayed(const Duration(milliseconds: 100)).then((_) {
       return League.leagues
           .where((league) =>
               league.sport.toLowerCase() == sport.name.toLowerCase())
@@ -92,13 +89,5 @@ class LeagueSeasonCountsState extends StateNotifier<List<LeagueSeasonCount>> {
     }
 
     state = leagueSeasonCounts;
-  }
-}
-
-class SelectedLeagueState extends StateNotifier<League?> {
-  SelectedLeagueState() : super(null);
-
-  void selectLeague(League league) {
-    state = league;
   }
 }

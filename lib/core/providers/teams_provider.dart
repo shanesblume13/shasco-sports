@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/team_model.dart';
-import 'package:pick/core/providers/leagues_provider.dart';
 import 'package:pick/core/services/firestore_team_serivce.dart';
+import 'package:pick/league/selected_league_provider.dart';
 
 final allTeamsStateProvider =
     StateNotifierProvider<AllTeamsState, AsyncValue<List<Team>>>((ref) {
@@ -63,7 +63,7 @@ class SelectedLeagueTeamsState extends StateNotifier<AsyncValue<List<Team>>> {
 
   void init() async {
     state = const AsyncLoading<List<Team>>();
-    final selectedLeague = ref.watch(selectedLeagueStateProvider);
+    final selectedLeague = ref.watch(selectedLeagueProvider);
     final selectedLeagueTeams =
         ref.watch(teamsByLeagueStateProvider(selectedLeague!)).value;
 

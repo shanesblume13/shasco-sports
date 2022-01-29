@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pick/ui/views/auth_view.dart';
 import 'package:pick/ui/views/games_view.dart';
 import 'package:pick/ui/views/logo_view.dart';
-import 'package:pick/ui/views/sports_view.dart';
+import 'package:pick/sport/sports_view.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pick/ui/shared/palette.dart';
 
-class LeagueCardNameConatiner extends StatelessWidget {
-  const LeagueCardNameConatiner({
+class IconListOptionName extends StatelessWidget {
+  const IconListOptionName({
     Key? key,
-    required this.name,
+    required this.text,
   }) : super(key: key);
 
-  final String name;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class LeagueCardNameConatiner extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  text,
                   style: TextStyle(
                     color: Palette.shascoBlue,
                     fontSize: 18,
