@@ -1,62 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/core/models/league_model.dart';
-import 'package:pick/core/models/sport_model.dart';
-import 'package:pick/league/leagues_provider.dart';
+import 'package:pick/core/models/season_model.dart';
 import 'package:pick/league/selected_league_provider.dart';
-import 'package:pick/sport/selected_sport_provider.dart';
+import 'package:pick/season/seasons_provider.dart';
+import 'package:pick/season/selected_season_provider.dart';
 import 'package:pick/ui/shared/gradient_scaffold.dart';
 import 'package:pick/icon-list-option/icon_list_option.dart';
-import 'package:pick/ui/views/seasons_view.dart';
+import 'package:pick/ui/views/legs_view.dart';
 
-class LeaguesView extends HookConsumerWidget {
-  const LeaguesView({
+class SeasonsView extends HookConsumerWidget {
+  const SeasonsView({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Sport sport = ref.watch(selectedSportProvider)!;
+    final League league = ref.watch(selectedLeagueProvider)!;
 
     return GradientScaffold(
-      appBarText: sport.name,
-      body: ref.watch(leaguesBySelectedSportStateProvider).when(
-            data: (leagues) => getLeagueOptionsListView(
+      appBarText: league.name,
+      body: ref.watch(seasonsBySelectedLeagueStateProvider).when(
+            data: (seasons) => getSeasonOptionsListView(
               context: context,
               ref: ref,
-              sport: sport,
-              leagues: leagues,
+              league: league,
+              seasons: seasons,
             ),
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (e, s) =>
-                const Center(child: Text('Error getting leagues!')),
+                const Center(child: Text('Error getting seasons!')),
           ),
     );
   }
 
-  Widget getLeagueOptionsListView({
+  Widget getSeasonOptionsListView({
     required BuildContext context,
     required WidgetRef ref,
-    required Sport sport,
-    required List<League> leagues,
+    required League league,
+    required List<Season> seasons,
   }) {
     final List<Widget> iconOptionContainers = [];
 
-    for (var league in leagues) {
+    for (var season in seasons) {
       iconOptionContainers.add(
         IconListOption(
-          iconData: sport.iconData,
-          text: league.name,
+          iconData: Icons.calendar_today,
+          text: season.name,
           // TODO Add child count and label
           onTap: () {
             ref
-                .watch(selectedLeagueStateProvider.notifier)
-                .selectLeague(league);
+                .watch(selectedSeasonStateProvider.notifier)
+                .selectSeason(season);
 
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => SeasonsView(league: league),
+                builder: (_) => const LegsView(),
               ),
             );
           },

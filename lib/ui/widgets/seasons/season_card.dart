@@ -23,7 +23,7 @@ class SeasonCard extends HookConsumerWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => LegsView(season: season),
+            builder: (_) => const LegsView(),
           ),
         );
       },
