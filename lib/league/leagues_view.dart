@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/league_model.dart';
+import 'package:pick/league/league.dart';
 import 'package:pick/sport/sport.dart';
 import 'package:pick/league/leagues_provider.dart';
 import 'package:pick/league/selected_league_provider.dart';

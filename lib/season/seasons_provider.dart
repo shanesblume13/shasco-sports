@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/league_model.dart';
+import 'package:pick/league/league.dart';
 import 'package:pick/core/models/season_model.dart';
 import 'package:pick/league/selected_league_provider.dart';
 import 'package:pick/season/seasons_firestore_service.dart';
