@@ -4,10 +4,10 @@ import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/sport_model.dart';
 import 'package:pick/league/leagues_provider.dart';
 import 'package:pick/league/selected_league_provider.dart';
+import 'package:pick/season/seasons_view.dart';
 import 'package:pick/sport/selected_sport_provider.dart';
 import 'package:pick/ui/shared/gradient_scaffold.dart';
 import 'package:pick/icon-list-option/icon_list_option.dart';
-import 'package:pick/ui/views/seasons_view.dart';
 
 class LeaguesView extends HookConsumerWidget {
   const LeaguesView({
@@ -56,7 +56,7 @@ class LeaguesView extends HookConsumerWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => SeasonsView(league: league),
+                builder: (_) => const SeasonsView(),
               ),
             );
           },
