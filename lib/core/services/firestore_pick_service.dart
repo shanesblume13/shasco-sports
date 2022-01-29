@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/services/firestore_api_service.dart';
+import 'package:pick/segment/segment.dart';
 
 class FirestorePickService extends ChangeNotifier {
   final FirestoreApiService _apiService = FirestoreApiService('picks');
@@ -31,7 +31,7 @@ class FirestorePickService extends ChangeNotifier {
   }
 
   Future<List<Pick>> fetchUserLegPicks(
-      {required String uid, required Leg leg}) async {
+      {required String uid, required Segment segment}) async {
     List<Pick> picks = [];
     var result = await _apiService.getDataCollection();
 
@@ -39,7 +39,7 @@ class FirestorePickService extends ChangeNotifier {
         .map(
           (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
         )
-        .where((pick) => pick.legReference == leg.reference)
+        .where((pick) => pick.legReference.id == segment.id)
         .toList();
 
     return picks;

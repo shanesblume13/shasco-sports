@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
-import 'package:pick/core/providers/legs_provider.dart';
 import 'package:pick/core/services/firestore_matchup_service.dart';
+import 'package:pick/segment/segment.dart';
+import 'package:pick/segment/selected_segment_provider.dart';
 
 final allMatchupsStateProvider =
     StateNotifierProvider<AllMatchupsState, AsyncValue<List<Matchup>>>((ref) {
@@ -12,7 +12,7 @@ final allMatchupsStateProvider =
 });
 
 final matchupsByLegStateProvider = StateNotifierProvider.family<
-    MatchupsByLegState, AsyncValue<List<Matchup>>, Leg>((ref, leg) {
+    MatchupsByLegState, AsyncValue<List<Matchup>>, Segment>((ref, leg) {
   final MatchupsByLegState matchupsByLegState = MatchupsByLegState(ref, leg);
   matchupsByLegState.init();
   return matchupsByLegState;
@@ -38,11 +38,11 @@ class AllMatchupsState extends StateNotifier<AsyncValue<List<Matchup>>> {
 }
 
 class MatchupsByLegState extends StateNotifier<AsyncValue<List<Matchup>>> {
-  MatchupsByLegState(this.ref, this.leg)
+  MatchupsByLegState(this.ref, this.segment)
       : super(const AsyncLoading<List<Matchup>>());
 
   final Ref ref;
-  final Leg leg;
+  final Segment segment;
 
   void init() async {
     state = const AsyncLoading<List<Matchup>>();
@@ -50,7 +50,7 @@ class MatchupsByLegState extends StateNotifier<AsyncValue<List<Matchup>>> {
     List<Matchup> matchups = [];
 
     matchups = allMatchups
-            ?.where((matchup) => matchup.legReference == leg.reference)
+            ?.where((matchup) => matchup.legReference.id == segment.id)
             .toList() ??
         [];
 
@@ -67,7 +67,7 @@ class SelectedLegMatchupsState
 
   void init() async {
     state = const AsyncLoading<List<Matchup>>();
-    final selectedLeg = ref.watch(selectedLegStateProvider);
+    final selectedLeg = ref.watch(selectedSegmentStateProvider);
     final selectedLegMatchups =
         ref.watch(matchupsByLegStateProvider(selectedLeg!)).value;
 

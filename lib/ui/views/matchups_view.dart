@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
 import 'package:pick/core/providers/matchups_provider.dart';
 import 'package:pick/core/providers/picks_provider.dart';
 import 'package:pick/core/providers/teams_provider.dart';
+import 'package:pick/segment/segment.dart';
 import 'package:pick/ui/shared/gradient_scaffold.dart';
 import 'package:pick/ui/widgets/matchups/matchup_cards_listview.dart';
 import 'package:pick/ui/widgets/matchups/matchups_summary_container.dart';
@@ -14,10 +14,10 @@ import 'package:pick/ui/widgets/matchups/matchups_summary_container.dart';
 class MatchupsView extends HookConsumerWidget {
   const MatchupsView({
     Key? key,
-    required this.leg,
+    required this.segment,
   }) : super(key: key);
 
-  final Leg leg;
+  final Segment segment;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +25,7 @@ class MatchupsView extends HookConsumerWidget {
         ref.watch(selectedLegMatchupsStateProvider);
 
     return GradientScaffold(
-      appBarText: leg.name,
+      appBarText: segment.name,
       body: matchups.when(
         data: (matchups) {
           AsyncValue<List<Team>> teams =

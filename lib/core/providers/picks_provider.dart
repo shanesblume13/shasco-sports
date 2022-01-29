@@ -1,12 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
 import 'package:pick/core/providers/auth_provider.dart';
-import 'package:pick/core/providers/legs_provider.dart';
 import 'package:pick/core/services/firestore_pick_service.dart';
 import 'package:collection/collection.dart';
+import 'package:pick/segment/segment.dart';
+import 'package:pick/segment/selected_segment_provider.dart';
 
 final userPicksStateProvider =
     StateNotifierProvider<UserPicksState, AsyncValue<List<Pick>>>((ref) {
@@ -46,7 +46,7 @@ class UserPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
   void init() async {
     state = const AsyncLoading<List<Pick>>();
     final String? uid = ref.watch(authUidProvider);
-    final Leg? leg = ref.watch(selectedLegStateProvider);
+    final Segment? leg = ref.watch(selectedSegmentStateProvider);
 
     if (uid == null || leg == null) {
       state = const AsyncData<List<Pick>>([]);
@@ -54,7 +54,7 @@ class UserPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
     }
 
     final picks =
-        await FirestorePickService().fetchUserLegPicks(uid: uid, leg: leg);
+        await FirestorePickService().fetchUserLegPicks(uid: uid, segment: leg);
     state = AsyncData<List<Pick>>(picks);
   }
 }
@@ -67,16 +67,16 @@ class UserPicksByLegState extends StateNotifier<AsyncValue<List<Pick>>> {
   void init() async {
     state = const AsyncLoading<List<Pick>>();
     final List<Pick>? userPicks = ref.watch(userPicksStateProvider).value;
-    final Leg? leg = ref.watch(selectedLegStateProvider);
+    final Segment? segment = ref.watch(selectedSegmentStateProvider);
     List<Pick> picks = [];
 
-    if (leg == null) {
+    if (segment == null) {
       state = const AsyncData<List<Pick>>([]);
       return;
     }
 
     picks = userPicks
-            ?.where((pick) => pick.legReference == leg.reference)
+            ?.where((pick) => pick.legReference.id == segment.id)
             .toList() ??
         [];
     state = AsyncData<List<Pick>>(picks);

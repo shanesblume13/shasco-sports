@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/leg_model.dart';
 import 'package:pick/core/models/matchup_model.dart';
 import 'package:pick/core/services/firestore_api_service.dart';
+import 'package:pick/segment/segment.dart';
 
 class FirestoreMatchupService extends ChangeNotifier {
   final FirestoreApiService _apiService = FirestoreApiService('matchups');
 
-  Future<List<Matchup>> fetchMathchups(Leg? leg) async {
+  Future<List<Matchup>> fetchMathchups(Segment? segment) async {
     List<Matchup> matchups = [];
     var result = await _apiService.getDataCollection();
 
-    if (leg == null) {
+    if (segment == null) {
       matchups = result.docs
           .map(
             (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
@@ -22,19 +22,19 @@ class FirestoreMatchupService extends ChangeNotifier {
           .map(
             (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
           )
-          .where((matchup) => matchup.legReference == leg.reference)
+          .where((matchup) => matchup.legReference.id == segment.id)
           .toList();
     }
 
     return matchups;
   }
 
-  Stream<List<Matchup>> fetchMatchupsAsStream(Leg? leg) {
+  Stream<List<Matchup>> fetchMatchupsAsStream(Segment? segment) {
     Stream<List<Matchup>> matchupsStream;
     Stream<QuerySnapshot<Map<String, dynamic>>> result =
         _apiService.streamDataCollection();
 
-    if (leg == null) {
+    if (segment == null) {
       matchupsStream = result.map(
         (snapshot) {
           return snapshot.docs
@@ -51,7 +51,7 @@ class FirestoreMatchupService extends ChangeNotifier {
               .map(
                 (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
               )
-              .where((matchup) => matchup.legReference == leg.reference)
+              .where((matchup) => matchup.legReference.id == segment.id)
               .toList();
         },
       );

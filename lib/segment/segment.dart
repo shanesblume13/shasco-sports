@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Leg {
+class Segment {
   String id;
   String name;
   DateTime startDate;
@@ -9,9 +9,8 @@ class Leg {
   bool isLocked;
   bool isComplete;
   DocumentReference seasonReference;
-  DocumentReference? reference;
 
-  Leg({
+  Segment({
     required this.id,
     required this.name,
     required this.startDate,
@@ -20,10 +19,9 @@ class Leg {
     required this.isLocked,
     required this.isComplete,
     required this.seasonReference,
-    this.reference,
   });
 
-  Leg.fromQueryDocumentSnapshot(
+  Segment.fromQueryDocumentSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot, this.id)
       : name = snapshot['name'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
@@ -31,18 +29,16 @@ class Leg {
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
         isLocked = snapshot['isLocked'] as bool,
         isComplete = snapshot['isComplete'] as bool,
-        seasonReference = snapshot['seasonReference'] as DocumentReference,
-        reference = snapshot.reference;
+        seasonReference = snapshot['seasonReference'] as DocumentReference;
 
-  Leg.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
+  Segment.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : name = snapshot['name'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         lockDate = (snapshot['lockDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
         isLocked = snapshot['isLocked'] as bool,
         isComplete = snapshot['isComplete'] as bool,
-        seasonReference = snapshot['seasonReference'] as DocumentReference,
-        reference = snapshot.reference;
+        seasonReference = snapshot['seasonReference'] as DocumentReference;
 
   toJson() {
     return {
@@ -53,7 +49,6 @@ class Leg {
       'isLocked': isLocked,
       'isComplete': isComplete,
       'seasonReference': seasonReference,
-      'reference': reference,
     };
   }
 }
