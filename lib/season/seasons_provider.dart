@@ -1,7 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/core/models/league_model.dart';
 import 'package:pick/core/models/season_model.dart';
-import 'package:pick/core/services/firestore_season_service.dart';
 import 'package:pick/league/selected_league_provider.dart';
+import 'package:pick/season/seasons_firestore_service.dart';
 
 final seasonsStateProvider =
     StateNotifierProvider<SeasonsState, AsyncValue<List<Season>>>((ref) {
@@ -23,8 +24,7 @@ class SeasonsState extends StateNotifier<AsyncValue<List<Season>>> {
 
   void init() async {
     state = const AsyncLoading<List<Season>>();
-    final List<Season> seasons =
-        await FirestoreSeasonService().fetchSeasons('');
+    final List<Season> seasons = await SeasonsFirestoreService().fetchSeasons();
     state = AsyncData<List<Season>>(seasons);
   }
 }
@@ -38,16 +38,9 @@ class SeasonsBySelectedLeagueState
 
   void init() async {
     state = const AsyncLoading<List<Season>>();
-    final List<Season>? allSeasons = ref.watch(seasonsStateProvider).value;
-    final league = ref.watch(selectedLeagueProvider)!;
-    List<Season> seasons = [];
-
-    seasons = allSeasons
-            ?.where((season) =>
-                season.league.toLowerCase() == league.name.toLowerCase())
-            .toList() ??
-        [];
-
+    final League selectedLeague = ref.watch(selectedLeagueProvider)!;
+    final List<Season> seasons = await SeasonsFirestoreService()
+        .fetchSeasonsByLeague(league: selectedLeague);
     state = AsyncData<List<Season>>(seasons);
   }
 }
