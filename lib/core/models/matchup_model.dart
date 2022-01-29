@@ -10,7 +10,7 @@ class Matchup {
   bool isLocked;
   bool isComplete;
   double homeTeamSpread;
-  DocumentReference legReference;
+  DocumentReference segmentReference;
   DocumentReference reference;
 
   Matchup({
@@ -23,7 +23,7 @@ class Matchup {
     required this.isLocked,
     required this.isComplete,
     required this.homeTeamSpread,
-    required this.legReference,
+    required this.segmentReference,
     required this.reference,
   });
 
@@ -38,7 +38,7 @@ class Matchup {
         isComplete = snapshot['isComplete'] as bool,
         homeTeamSpread =
             double.tryParse(snapshot['homeTeamSpread'].toString()) ?? 0.0,
-        legReference = snapshot['legReference'] as DocumentReference,
+        segmentReference = snapshot['segmentReference'] as DocumentReference,
         reference = snapshot.reference;
 
   Matchup.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
@@ -52,7 +52,7 @@ class Matchup {
         isComplete = snapshot['isComplete' as bool],
         homeTeamSpread =
             double.tryParse(snapshot['homeTeamSpread'].toString()) ?? 0.0,
-        legReference = snapshot['legReference'] as DocumentReference,
+        segmentReference = snapshot['segmentReference'] as DocumentReference,
         reference = snapshot.reference;
 
   toJson() {
@@ -65,7 +65,7 @@ class Matchup {
       'isLocked': isLocked,
       'isComplete': isComplete,
       'homeTeamSpread': homeTeamSpread,
-      'legReference': legReference,
+      'segmentReference': segmentReference,
       'reference': reference,
     };
   }

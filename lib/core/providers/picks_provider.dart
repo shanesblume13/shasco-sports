@@ -15,19 +15,22 @@ final userPicksStateProvider =
   return userPicksState;
 });
 
-final userPicksByLegStateProvider =
-    StateNotifierProvider<UserPicksByLegState, AsyncValue<List<Pick>>>((ref) {
-  final UserPicksByLegState picksByLegState = UserPicksByLegState(ref);
-  picksByLegState.init();
-  return picksByLegState;
+final userPicksBySegmentStateProvider =
+    StateNotifierProvider<UserPicksBySegmentState, AsyncValue<List<Pick>>>(
+        (ref) {
+  final UserPicksBySegmentState picksBySegmentState =
+      UserPicksBySegmentState(ref);
+  picksBySegmentState.init();
+  return picksBySegmentState;
 });
 
-final selectedLegPicksStateProvider =
-    StateNotifierProvider<SelectedLegPicksState, AsyncValue<List<Pick>>>((ref) {
-  final SelectedLegPicksState selectedLegPicksState =
-      SelectedLegPicksState(ref);
-  selectedLegPicksState.init();
-  return selectedLegPicksState;
+final selectedSegmentPicksStateProvider =
+    StateNotifierProvider<SelectedSegmentPicksState, AsyncValue<List<Pick>>>(
+        (ref) {
+  final SelectedSegmentPicksState selectedSegmentPicksState =
+      SelectedSegmentPicksState(ref);
+  selectedSegmentPicksState.init();
+  return selectedSegmentPicksState;
 });
 
 final pickByMatchupStateProvider = StateNotifierProvider.family<
@@ -46,21 +49,21 @@ class UserPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
   void init() async {
     state = const AsyncLoading<List<Pick>>();
     final String? uid = ref.watch(authUidProvider);
-    final Segment? leg = ref.watch(selectedSegmentStateProvider);
+    final Segment? segment = ref.watch(selectedSegmentStateProvider);
 
-    if (uid == null || leg == null) {
+    if (uid == null || segment == null) {
       state = const AsyncData<List<Pick>>([]);
       return;
     }
 
-    final picks =
-        await FirestorePickService().fetchUserLegPicks(uid: uid, segment: leg);
+    final picks = await FirestorePickService()
+        .fetchUserSegmentPicks(uid: uid, segment: segment);
     state = AsyncData<List<Pick>>(picks);
   }
 }
 
-class UserPicksByLegState extends StateNotifier<AsyncValue<List<Pick>>> {
-  UserPicksByLegState(this.ref) : super(const AsyncLoading<List<Pick>>());
+class UserPicksBySegmentState extends StateNotifier<AsyncValue<List<Pick>>> {
+  UserPicksBySegmentState(this.ref) : super(const AsyncLoading<List<Pick>>());
 
   final Ref ref;
 
@@ -76,7 +79,7 @@ class UserPicksByLegState extends StateNotifier<AsyncValue<List<Pick>>> {
     }
 
     picks = userPicks
-            ?.where((pick) => pick.legReference.id == segment.id)
+            ?.where((pick) => pick.segmentReference.id == segment.id)
             .toList() ??
         [];
     state = AsyncData<List<Pick>>(picks);
@@ -102,52 +105,54 @@ class PickByMatchupState extends StateNotifier<AsyncValue<Pick?>> {
   }
 }
 
-class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
-  SelectedLegPicksState(this.ref) : super(const AsyncLoading<List<Pick>>());
+class SelectedSegmentPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
+  SelectedSegmentPicksState(this.ref) : super(const AsyncLoading<List<Pick>>());
 
   final Ref ref;
 
   void init() async {
     state = const AsyncLoading<List<Pick>>();
-    final selectedLegPicks = ref.watch(userPicksByLegStateProvider).value;
+    final selectedSegmentPicks =
+        ref.watch(userPicksBySegmentStateProvider).value;
 
-    if (selectedLegPicks != null) {
-      state = AsyncData<List<Pick>>(selectedLegPicks);
+    if (selectedSegmentPicks != null) {
+      state = AsyncData<List<Pick>>(selectedSegmentPicks);
     }
   }
 
   void clearPick({required Matchup matchup}) {
     state = const AsyncLoading<List<Pick>>();
-    final selectedLegPicks = ref.read(userPicksByLegStateProvider).value ?? [];
+    final selectedSegmentPicks =
+        ref.read(userPicksBySegmentStateProvider).value ?? [];
 
-    Pick? pick = selectedLegPicks
+    Pick? pick = selectedSegmentPicks
         .firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
 
-    selectedLegPicks.remove(pick);
+    selectedSegmentPicks.remove(pick);
 
-    state = AsyncData<List<Pick>>(selectedLegPicks);
+    state = AsyncData<List<Pick>>(selectedSegmentPicks);
   }
 
   void updatePickedTeam({required Matchup matchup, required Team team}) {
     state = const AsyncLoading<List<Pick>>();
-    final selectedLegPicks = ref.read(userPicksByLegStateProvider).value ?? [];
+    final selectedSegmentPicks =
+        ref.read(userPicksBySegmentStateProvider).value ?? [];
 
-    Pick? pick = selectedLegPicks
+    Pick? pick = selectedSegmentPicks
         .firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
 
     if (pick != null) {
       if (pick.teamReference != team.reference) {
-        selectedLegPicks.remove(pick);
+        selectedSegmentPicks.remove(pick);
         pick = Pick(
           id: pick.id,
           uid: pick.uid,
           matchupReference: pick.matchupReference,
           teamReference: team.reference,
-          legReference: pick.legReference,
+          segmentReference: pick.segmentReference,
           points: pick.points,
-          reference: pick.reference,
         );
-        selectedLegPicks.add(pick);
+        selectedSegmentPicks.add(pick);
       }
     } else {
       pick = Pick(
@@ -155,46 +160,46 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
         uid: '',
         matchupReference: matchup.reference,
         teamReference: team.reference,
-        legReference: matchup.legReference,
+        segmentReference: matchup.segmentReference,
         points: 0,
-        reference: null,
       );
-      selectedLegPicks.add(pick);
+      selectedSegmentPicks.add(pick);
     }
 
-    state = AsyncData<List<Pick>>(selectedLegPicks);
+    state = AsyncData<List<Pick>>(selectedSegmentPicks);
   }
 
   void updatePickScore({required Matchup matchup}) {
     state = const AsyncLoading<List<Pick>>();
-    final selectedLegPicks = ref.read(userPicksByLegStateProvider).value ?? [];
+    final selectedSegmentPicks =
+        ref.read(userPicksBySegmentStateProvider).value ?? [];
 
-    Pick? pick = selectedLegPicks
+    Pick? pick = selectedSegmentPicks
         .firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
 
     int points = pick?.points ?? 0;
     points = points < 10 ? points + 1 : 0;
 
     if (pick != null) {
-      selectedLegPicks.remove(pick);
+      selectedSegmentPicks.remove(pick);
       pick = Pick(
         id: pick.id,
         uid: pick.uid,
         matchupReference: pick.matchupReference,
         teamReference: pick.teamReference,
-        legReference: pick.legReference,
+        segmentReference: pick.segmentReference,
         points: points,
-        reference: pick.reference,
       );
-      selectedLegPicks.add(pick);
+      selectedSegmentPicks.add(pick);
     }
 
-    state = AsyncData<List<Pick>>(selectedLegPicks);
+    state = AsyncData<List<Pick>>(selectedSegmentPicks);
   }
 
   void savePicks({required List<Matchup> matchups}) async {
     state = const AsyncLoading<List<Pick>>();
-    final selectedLegPicks = ref.read(userPicksByLegStateProvider).value ?? [];
+    final selectedSegmentPicks =
+        ref.read(userPicksBySegmentStateProvider).value ?? [];
     final allPicks = ref.watch(userPicksStateProvider).value ?? [];
 
     List<Pick> picksToDelete = [];
@@ -202,34 +207,34 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
     List<Pick> picksToUpdate = [];
 
     for (Matchup matchup in matchups) {
-      // If allpicks has a pick for this matchup and selectedLegPicks doesn't, delete it
+      // If allpicks has a pick for this matchup and selectedSegmentPicks doesn't, delete it
       if (allPicks.firstWhereOrNull(
                   (pick) => pick.matchupReference == matchup.reference) !=
               null &&
-          selectedLegPicks.firstWhereOrNull(
+          selectedSegmentPicks.firstWhereOrNull(
                   (pick) => pick.matchupReference == matchup.reference) ==
               null) {
         picksToDelete.addAll(allPicks
             .where((pick) => pick.matchupReference == matchup.reference));
       }
-      // If allpicks doesn't have a pick for this matchup and selectedLegPicks does, add it
+      // If allpicks doesn't have a pick for this matchup and selectedSegmentPicks does, add it
       if (allPicks.firstWhereOrNull(
                   (pick) => pick.matchupReference == matchup.reference) ==
               null &&
-          selectedLegPicks.firstWhereOrNull(
+          selectedSegmentPicks.firstWhereOrNull(
                   (pick) => pick.matchupReference == matchup.reference) !=
               null) {
-        picksToCreate.add(selectedLegPicks
+        picksToCreate.add(selectedSegmentPicks
             .firstWhere((pick) => pick.matchupReference == matchup.reference));
       }
-      // If allpicks has a pick for this matchup and selectedLegPicks also does, update it
+      // If allpicks has a pick for this matchup and selectedSegmentPicks also does, update it
       if (allPicks.firstWhereOrNull(
                   (pick) => pick.matchupReference == matchup.reference) !=
               null &&
-          selectedLegPicks.firstWhereOrNull(
+          selectedSegmentPicks.firstWhereOrNull(
                   (pick) => pick.matchupReference == matchup.reference) !=
               null) {
-        picksToUpdate.add(selectedLegPicks
+        picksToUpdate.add(selectedSegmentPicks
             .firstWhere((pick) => pick.matchupReference == matchup.reference));
       }
     }
@@ -274,7 +279,7 @@ class SelectedLegPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
       await FirestorePickService().updatePick(pick);
     }
 
-    state = AsyncData<List<Pick>>(selectedLegPicks);
+    state = AsyncData<List<Pick>>(selectedSegmentPicks);
     ref.watch(userPicksStateProvider.notifier).init();
   }
 }

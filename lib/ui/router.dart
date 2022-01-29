@@ -23,34 +23,10 @@ class Router {
         return MaterialPageRoute(
           builder: (_) => const SportsView(),
         );
-      // case '/leagues':
-      //   return MaterialPageRoute(
-      //     builder: (_) => LeaguesView(sport: ),
-      //   );
       case '/games':
         return MaterialPageRoute(
           builder: (_) => const GamesView(),
         );
-      // case '/seasons':
-      //   return MaterialPageRoute(
-      //     builder: (_) => const SeasonsView(),
-      //   );
-      // case '/matchups':
-      //   return MaterialPageRoute(
-      //     builder: (_) => const MatchupsView(),
-      //   );
-      // case '/legs':
-      //   return MaterialPageRoute(
-      //     builder: (_) => const LegsView(seasonReference: null),
-      //   );
-      // case '/addMatchup':
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AddMathcupView(),
-      //   );
-      // case '/addLeg':
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AddLegView(season: season),
-      //   );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

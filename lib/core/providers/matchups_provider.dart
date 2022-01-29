@@ -11,20 +11,20 @@ final allMatchupsStateProvider =
   return allMatchupsState;
 });
 
-final matchupsByLegStateProvider = StateNotifierProvider.family<
-    MatchupsByLegState, AsyncValue<List<Matchup>>, Segment>((ref, leg) {
-  final MatchupsByLegState matchupsByLegState = MatchupsByLegState(ref, leg);
-  matchupsByLegState.init();
-  return matchupsByLegState;
+final matchupsBySegmentStateProvider = StateNotifierProvider.family<
+    MatchupsBySegmentState, AsyncValue<List<Matchup>>, Segment>((ref, segment) {
+  final MatchupsBySegmentState matchupsBySegmentState =
+      MatchupsBySegmentState(ref, segment);
+  matchupsBySegmentState.init();
+  return matchupsBySegmentState;
 });
 
-final selectedLegMatchupsStateProvider =
-    StateNotifierProvider<SelectedLegMatchupsState, AsyncValue<List<Matchup>>>(
-        (ref) {
-  final SelectedLegMatchupsState selectedLegMatchupsState =
-      SelectedLegMatchupsState(ref);
-  selectedLegMatchupsState.init();
-  return selectedLegMatchupsState;
+final selectedSegmentMatchupsStateProvider = StateNotifierProvider<
+    SelectedSegmentMatchupsState, AsyncValue<List<Matchup>>>((ref) {
+  final SelectedSegmentMatchupsState selectedSegmentMatchupsState =
+      SelectedSegmentMatchupsState(ref);
+  selectedSegmentMatchupsState.init();
+  return selectedSegmentMatchupsState;
 });
 
 class AllMatchupsState extends StateNotifier<AsyncValue<List<Matchup>>> {
@@ -37,8 +37,8 @@ class AllMatchupsState extends StateNotifier<AsyncValue<List<Matchup>>> {
   }
 }
 
-class MatchupsByLegState extends StateNotifier<AsyncValue<List<Matchup>>> {
-  MatchupsByLegState(this.ref, this.segment)
+class MatchupsBySegmentState extends StateNotifier<AsyncValue<List<Matchup>>> {
+  MatchupsBySegmentState(this.ref, this.segment)
       : super(const AsyncLoading<List<Matchup>>());
 
   final Ref ref;
@@ -50,7 +50,7 @@ class MatchupsByLegState extends StateNotifier<AsyncValue<List<Matchup>>> {
     List<Matchup> matchups = [];
 
     matchups = allMatchups
-            ?.where((matchup) => matchup.legReference.id == segment.id)
+            ?.where((matchup) => matchup.segmentReference.id == segment.id)
             .toList() ??
         [];
 
@@ -58,21 +58,21 @@ class MatchupsByLegState extends StateNotifier<AsyncValue<List<Matchup>>> {
   }
 }
 
-class SelectedLegMatchupsState
+class SelectedSegmentMatchupsState
     extends StateNotifier<AsyncValue<List<Matchup>>> {
-  SelectedLegMatchupsState(this.ref)
+  SelectedSegmentMatchupsState(this.ref)
       : super(const AsyncLoading<List<Matchup>>());
 
   final Ref ref;
 
   void init() async {
     state = const AsyncLoading<List<Matchup>>();
-    final selectedLeg = ref.watch(selectedSegmentStateProvider);
-    final selectedLegMatchups =
-        ref.watch(matchupsByLegStateProvider(selectedLeg!)).value;
+    final selectedSegment = ref.watch(selectedSegmentStateProvider);
+    final selectedSegmentMatchups =
+        ref.watch(matchupsBySegmentStateProvider(selectedSegment!)).value;
 
-    if (selectedLegMatchups != null) {
-      state = AsyncData<List<Matchup>>(selectedLegMatchups);
+    if (selectedSegmentMatchups != null) {
+      state = AsyncData<List<Matchup>>(selectedSegmentMatchups);
     }
   }
 }

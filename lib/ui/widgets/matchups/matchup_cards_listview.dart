@@ -76,7 +76,7 @@ class MatchupCardsListview extends HookConsumerWidget {
 
   updatePickScore({required WidgetRef ref, required Matchup matchup}) {
     ref
-        .watch(selectedLegPicksStateProvider.notifier)
+        .watch(selectedSegmentPicksStateProvider.notifier)
         .updatePickScore(matchup: matchup);
   }
 }

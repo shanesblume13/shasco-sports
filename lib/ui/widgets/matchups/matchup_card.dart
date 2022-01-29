@@ -139,13 +139,13 @@ class MatchupCard extends HookConsumerWidget {
 
   clearPick({required WidgetRef ref}) {
     ref
-        .watch(selectedLegPicksStateProvider.notifier)
+        .watch(selectedSegmentPicksStateProvider.notifier)
         .clearPick(matchup: matchup);
   }
 
   updatePickedTeam({required WidgetRef ref, required Team team}) {
     ref
-        .watch(selectedLegPicksStateProvider.notifier)
+        .watch(selectedSegmentPicksStateProvider.notifier)
         .updatePickedTeam(matchup: matchup, team: team);
   }
 }

@@ -30,7 +30,7 @@ class FirestorePickService extends ChangeNotifier {
     return picks;
   }
 
-  Future<List<Pick>> fetchUserLegPicks(
+  Future<List<Pick>> fetchUserSegmentPicks(
       {required String uid, required Segment segment}) async {
     List<Pick> picks = [];
     var result = await _apiService.getDataCollection();
@@ -39,7 +39,7 @@ class FirestorePickService extends ChangeNotifier {
         .map(
           (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
         )
-        .where((pick) => pick.legReference.id == segment.id)
+        .where((pick) => pick.segmentReference.id == segment.id)
         .toList();
 
     return picks;

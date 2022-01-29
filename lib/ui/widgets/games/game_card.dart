@@ -18,12 +18,6 @@ class GameCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         null;
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (_) => const LegsView(seas),
-        //   ),
-        // );
       },
       child: FlatBorderOption(
         child: LayoutGrid(

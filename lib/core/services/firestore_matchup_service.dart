@@ -22,7 +22,7 @@ class FirestoreMatchupService extends ChangeNotifier {
           .map(
             (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
           )
-          .where((matchup) => matchup.legReference.id == segment.id)
+          .where((matchup) => matchup.segmentReference.id == segment.id)
           .toList();
     }
 
@@ -51,7 +51,7 @@ class FirestoreMatchupService extends ChangeNotifier {
               .map(
                 (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
               )
-              .where((matchup) => matchup.legReference.id == segment.id)
+              .where((matchup) => matchup.segmentReference.id == segment.id)
               .toList();
         },
       );

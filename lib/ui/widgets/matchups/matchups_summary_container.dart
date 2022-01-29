@@ -24,7 +24,7 @@ class MatchupsSummaryContainer extends HookConsumerWidget {
             ElevatedButton(
               onPressed: () {
                 ref
-                    .watch(selectedLegPicksStateProvider.notifier)
+                    .watch(selectedSegmentPicksStateProvider.notifier)
                     .savePicks(matchups: matchups);
               },
               child: const Text('Save Picks'),

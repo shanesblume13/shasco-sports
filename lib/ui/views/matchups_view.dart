@@ -22,7 +22,7 @@ class MatchupsView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<List<Matchup>> matchups =
-        ref.watch(selectedLegMatchupsStateProvider);
+        ref.watch(selectedSegmentMatchupsStateProvider);
 
     return GradientScaffold(
       appBarText: segment.name,
@@ -34,7 +34,7 @@ class MatchupsView extends HookConsumerWidget {
           return teams.when(
             data: (teams) {
               AsyncValue<List<Pick>> picks =
-                  ref.watch(selectedLegPicksStateProvider);
+                  ref.watch(selectedSegmentPicksStateProvider);
 
               return picks.when(
                 data: (picks) {
