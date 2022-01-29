@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/sport_model.dart';
+import 'package:pick/sport/sport.dart';
 
 final selectedSportStateProvider =
     StateNotifierProvider<SelectedSportState, Sport?>((ref) {

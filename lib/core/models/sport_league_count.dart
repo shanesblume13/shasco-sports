@@ -1,4 +1,4 @@
-import 'package:pick/core/models/sport_model.dart';
+import 'package:pick/sport/sport.dart';
 
 class SportLeagueCount {
   Sport sport;
