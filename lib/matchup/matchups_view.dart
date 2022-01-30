@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/gradient_scaffold.dart';
 import 'package:pick/icon-card/icon_card_list.dart';
-import 'package:pick/icon-card/icon_card_list.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/matchup/matchups_provider.dart';
 import 'package:pick/segment/segment.dart';
@@ -45,7 +44,7 @@ class MatchupsView extends HookConsumerWidget {
       iconOptionContainers.add(
         IconCard(
           iconData: Icons.sports_football,
-          text: matchup.startDateTime.toString(),
+          text: 'Matchup',
           onTap: () {
             null;
           },

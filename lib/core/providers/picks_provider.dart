@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/matchup/matchup.dart';
-import 'package:pick/core/models/pick_model.dart';
-import 'package:pick/core/models/team_model.dart';
+import 'package:pick/pick/pick_model.dart';
+import 'package:pick/team/team_model.dart';
 import 'package:pick/auth/auth_provider.dart';
 import 'package:pick/core/services/firestore_pick_service.dart';
 import 'package:collection/collection.dart';
