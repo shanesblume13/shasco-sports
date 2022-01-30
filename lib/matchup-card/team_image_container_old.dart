@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pick/matchup-card/team_image_clip_old.dart';
 import 'package:pick/team/team_model.dart';
 import 'package:pick/palette.dart';
-import 'package:pick/ui/widgets/matchups/team_image_clip.dart';
 
 class TeamImageContainer extends StatelessWidget {
   const TeamImageContainer({

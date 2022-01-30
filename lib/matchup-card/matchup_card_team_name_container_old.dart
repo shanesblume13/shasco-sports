@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pick/matchup-card/matchup_card_team_location_old.dart';
+import 'package:pick/matchup-card/matchup_card_team_nickname_old.dart';
 import 'package:pick/team/team_model.dart';
 import 'package:pick/palette.dart';
-import 'package:pick/ui/widgets/matchups/matchup_card_team_location.dart';
-import 'package:pick/ui/widgets/matchups/matchup_card_team_nickname.dart';
 
 class MatchupCardTeamNameContainer extends StatelessWidget {
   const MatchupCardTeamNameContainer({

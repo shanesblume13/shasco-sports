@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/flat_outlined_option.dart';
+import 'package:pick/matchup-card/matchup_card_team_name_container_old.dart';
+import 'package:pick/matchup-card/matchup_pick_score_divider_old.dart';
+import 'package:pick/matchup-card/team_image_container_old.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/pick/pick_model.dart';
 import 'package:pick/team/team_model.dart';
 import 'package:pick/images_provider.dart';
 import 'package:pick/pick/picks_provider_old.dart';
 import 'package:pick/palette.dart';
-import 'package:pick/ui/widgets/matchups/matchup_pick_score_divider.dart';
-import 'package:pick/ui/widgets/matchups/team_image_container.dart';
-import 'package:pick/ui/widgets/matchups/matchup_card_team_name_container.dart';
 
 class MatchupCard extends HookConsumerWidget {
   const MatchupCard({
