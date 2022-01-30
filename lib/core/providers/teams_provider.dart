@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/league/league.dart';
 import 'package:pick/team/team_model.dart';
-import 'package:pick/core/services/firestore_team_serivce.dart';
 import 'package:pick/league/selected_league_provider.dart';
+import 'package:pick/team/teams_firestore_service.dart';
 
 final allTeamsStateProvider =
     StateNotifierProvider<AllTeamsState, AsyncValue<List<Team>>>((ref) {
@@ -32,7 +32,7 @@ class AllTeamsState extends StateNotifier<AsyncValue<List<Team>>> {
 
   void init() async {
     state = const AsyncLoading<List<Team>>();
-    final teams = await FirestoreTeamService().fetchTeams(null);
+    final teams = await TeamsFirestoreService().fetchTeams();
     state = AsyncData<List<Team>>(teams);
   }
 }

@@ -1,9 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/pick/pick_model.dart';
+import 'package:pick/pick/picks_firestore_service.dart';
 import 'package:pick/team/team_model.dart';
 import 'package:pick/auth/auth_provider.dart';
-import 'package:pick/core/services/firestore_pick_service.dart';
 import 'package:collection/collection.dart';
 import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/selected_segment_provider.dart';
@@ -56,8 +56,8 @@ class UserPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
       return;
     }
 
-    final picks = await FirestorePickService()
-        .fetchUserSegmentPicks(uid: uid, segment: segment);
+    final picks =
+        await PicksFirestoreService().fetchPicksBySegment(segment: segment);
     state = AsyncData<List<Pick>>(picks);
   }
 }
@@ -239,17 +239,17 @@ class SelectedSegmentPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
       }
     }
 
-    for (Pick pick in picksToDelete) {
-      await FirestorePickService().removePick(pick);
-    }
+    // for (Pick pick in picksToDelete) {
+    //   await PicksFirestoreService().removePick(pick);
+    // }
 
-    for (Pick pick in picksToCreate) {
-      await FirestorePickService().createPick(pick);
-    }
+    // for (Pick pick in picksToCreate) {
+    //   await PicksFirestoreService().createPick(pick);
+    // }
 
-    for (Pick pick in picksToUpdate) {
-      await FirestorePickService().updatePick(pick);
-    }
+    // for (Pick pick in picksToUpdate) {
+    //   await PicksFirestoreService().updatePick(pick);
+    // }
 
     state = AsyncData<List<Pick>>(selectedSegmentPicks);
     ref.watch(userPicksStateProvider.notifier).init();
