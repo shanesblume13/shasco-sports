@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
-import 'package:pick/core/providers/images_provider.dart';
+import 'package:pick/images_provider.dart';
 import 'package:pick/core/providers/picks_provider.dart';
 import 'package:pick/ui/shared/flat_outlined_option.dart';
 import 'package:pick/ui/shared/palette.dart';

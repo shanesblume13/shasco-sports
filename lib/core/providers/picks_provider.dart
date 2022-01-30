@@ -2,7 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
-import 'package:pick/core/providers/auth_provider.dart';
+import 'package:pick/auth_provider.dart';
 import 'package:pick/core/services/firestore_pick_service.dart';
 import 'package:collection/collection.dart';
 import 'package:pick/segment/segment.dart';

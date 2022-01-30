@@ -14,14 +14,6 @@ class Router {
         return MaterialPageRoute(
           builder: (_) => const AuthView(),
         );
-      case '/logo':
-        return MaterialPageRoute(
-          builder: (_) => const LogoView(),
-        );
-      case '/sports':
-        return MaterialPageRoute(
-          builder: (_) => const SportsView(),
-        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
