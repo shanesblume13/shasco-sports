@@ -6,7 +6,7 @@ import 'package:pick/matchup/matchup.dart';
 import 'package:pick/pick/pick_model.dart';
 import 'package:pick/team/team_model.dart';
 import 'package:pick/images_provider.dart';
-import 'package:pick/core/providers/picks_provider.dart';
+import 'package:pick/pick/picks_provider_old.dart';
 import 'package:pick/palette.dart';
 import 'package:pick/ui/widgets/matchups/matchup_pick_score_divider.dart';
 import 'package:pick/ui/widgets/matchups/team_image_container.dart';

@@ -5,7 +5,7 @@ import 'package:pick/flat_outlined_option.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/pick/pick_model.dart';
 import 'package:pick/team/team_model.dart';
-import 'package:pick/core/providers/picks_provider.dart';
+import 'package:pick/pick/picks_provider_old.dart';
 import 'package:pick/palette.dart';
 import 'package:pick/ui/widgets/matchups/matchup_card.dart';
 import 'package:collection/collection.dart';
