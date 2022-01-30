@@ -7,7 +7,7 @@ import 'package:pick/season/selected_season_provider.dart';
 import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/segments_provider.dart';
 import 'package:pick/segment/selected_segment_provider.dart';
-import 'package:pick/ui/views/matchups_view.dart';
+import 'package:pick/matchup/matchups_view.dart';
 
 class SegmentsView extends HookConsumerWidget {
   const SegmentsView({
@@ -46,7 +46,7 @@ class SegmentsView extends HookConsumerWidget {
       iconOptionContainers.add(
         IconCard(
           iconData: Icons.calendar_view_week,
-          text: season.name,
+          text: segment.name,
           // TODO Add child count and label
           onTap: () {
             ref
@@ -56,7 +56,7 @@ class SegmentsView extends HookConsumerWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => MatchupsView(segment: segment),
+                builder: (_) => const MatchupsView(),
               ),
             );
           },

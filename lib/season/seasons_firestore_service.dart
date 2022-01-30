@@ -18,8 +18,7 @@ class SeasonsFirestoreService extends ChangeNotifier {
   }
 
   Future<List<Season>> fetchSeasonsByLeague({required League league}) async {
-    var result =
-        await collection.where('leagueReference', isEqualTo: league.name).get();
+    var result = await collection.where('league', isEqualTo: league.name).get();
 
     return result.docs
         .map(

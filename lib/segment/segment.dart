@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Segment {
-  String id;
-  DocumentReference reference;
+  DocumentReference? reference;
   String name;
   DateTime startDate;
   DateTime lockDate;
@@ -12,7 +11,6 @@ class Segment {
   DocumentReference seasonReference;
 
   Segment({
-    required this.id,
     required this.reference,
     required this.name,
     required this.startDate,
@@ -25,8 +23,7 @@ class Segment {
 
   Segment.fromQueryDocumentSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snapshot, this.reference)
-      : id = reference.id,
-        name = snapshot['name'] as String,
+      : name = snapshot['name'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         lockDate = (snapshot['lockDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
@@ -35,8 +32,7 @@ class Segment {
         seasonReference = snapshot['seasonReference'] as DocumentReference;
 
   Segment.fromDocumentSnapshot(DocumentSnapshot snapshot, this.reference)
-      : id = reference.id,
-        name = snapshot['name'] as String,
+      : name = snapshot['name'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         lockDate = (snapshot['lockDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
@@ -46,7 +42,6 @@ class Segment {
 
   toJson() {
     return {
-      'id': reference.id,
       'reference': reference,
       'name': name,
       'startDate': startDate,

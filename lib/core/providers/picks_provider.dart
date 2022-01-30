@@ -79,7 +79,7 @@ class UserPicksBySegmentState extends StateNotifier<AsyncValue<List<Pick>>> {
     }
 
     picks = userPicks
-            ?.where((pick) => pick.segmentReference.id == segment.id)
+            ?.where((pick) => pick.segmentReference == segment.reference)
             .toList() ??
         [];
     state = AsyncData<List<Pick>>(picks);

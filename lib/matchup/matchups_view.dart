@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/gradient_scaffold.dart';
+import 'package:pick/icon-card/icon_card_list.dart';
+import 'package:pick/icon-card/icon_card_list.dart';
+import 'package:pick/matchup/matchup.dart';
+import 'package:pick/matchup/matchups_provider.dart';
+import 'package:pick/segment/segment.dart';
+import 'package:pick/segment/selected_segment_provider.dart';
+
+class MatchupsView extends HookConsumerWidget {
+  const MatchupsView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final Segment segment = ref.watch(selectedSegmentProvider)!;
+
+    return GradientScaffold(
+      appBarText: segment.name,
+      body: ref.watch(matchupsBySelectedSegmentStateProvider).when(
+            data: (matchups) => getMatchupsOptionsListView(
+              context: context,
+              ref: ref,
+              segment: segment,
+              matchups: matchups,
+            ),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (e, s) =>
+                const Center(child: Text('Error getting matchups!')),
+          ),
+    );
+  }
+
+  Widget getMatchupsOptionsListView({
+    required BuildContext context,
+    required WidgetRef ref,
+    required Segment segment,
+    required List<Matchup> matchups,
+  }) {
+    final List<Widget> iconOptionContainers = [];
+
+    for (var matchup in matchups) {
+      iconOptionContainers.add(
+        IconCard(
+          iconData: Icons.sports_football,
+          text: matchup.startDateTime.toString(),
+          onTap: () {
+            null;
+          },
+        ),
+      );
+    }
+
+    return ListView(children: iconOptionContainers);
+  }
+}

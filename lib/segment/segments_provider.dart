@@ -4,7 +4,7 @@ import 'package:pick/season/selected_season_provider.dart';
 import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/segments_firestore_service.dart';
 
-final segmentssStateProvider =
+final segmentsStateProvider =
     StateNotifierProvider<SegmentsState, AsyncValue<List<Segment>>>((ref) {
   final SegmentsState segmentsState = SegmentsState();
   segmentsState.init();

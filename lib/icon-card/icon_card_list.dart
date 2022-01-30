@@ -21,12 +21,12 @@ class IconCard extends HookConsumerWidget {
   final String text;
   final int? childCount;
   final String? childCountLabel;
-  final Function onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: () => onTap,
+      onTap: onTap,
       child: FlatBorderOption(
         color: Palette.shascoGrey[50]!,
         borderColor: Palette.shascoBlue,
