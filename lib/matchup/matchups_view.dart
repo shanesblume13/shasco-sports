@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/gradient_scaffold.dart';
 import 'package:pick/matchup/matchup.dart';
-import 'package:pick/matchup/matchup_card_row.dart';
+import 'package:pick/matchup/matchup_row.dart';
 import 'package:pick/matchup/matchups_provider.dart';
 import 'package:pick/matchup/matchups_summary_container.dart';
 import 'package:pick/segment/segment.dart';

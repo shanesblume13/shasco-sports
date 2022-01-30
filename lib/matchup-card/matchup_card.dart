@@ -16,19 +16,22 @@ class MatchupCard extends HookConsumerWidget {
   const MatchupCard({
     Key? key,
     required this.matchup,
-    required this.awayTeam,
-    required this.homeTeam,
     this.pick,
   }) : super(key: key);
 
   final Matchup matchup;
-  final Team awayTeam;
-  final Team homeTeam;
   final Pick? pick;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    List<Team> teams = [];
+    const Pick? pick = null;
+    //picks.firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
     AsyncValue<List<String>> imagePaths = ref.watch(allImagePathsStateProvider);
+    final Team awayTeam =
+        teams.firstWhere((team) => team.reference == matchup.awayTeamReference);
+    final Team homeTeam =
+        teams.firstWhere((team) => team.reference == matchup.homeTeamReference);
 
     return imagePaths.when(
       data: (imagePaths) {
@@ -122,9 +125,11 @@ class MatchupCard extends HookConsumerWidget {
     );
   }
 
-  bool get isAwayTeamPicked => pick?.teamReference == awayTeam.reference;
+  bool get isAwayTeamPicked =>
+      false; //pick?.teamReference == awayTeam.reference;
 
-  bool get isHomeTeamPicked => pick?.teamReference == homeTeam.reference;
+  bool get isHomeTeamPicked =>
+      false; //pick?.teamReference == homeTeam.reference;
 
   String setTeamImagePath(
       {required List<String> imagePaths, required String teamNickname}) {
