@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class IconListOptionChildCount extends HookConsumerWidget {
-  const IconListOptionChildCount({
+class IconCardChildCount extends HookConsumerWidget {
+  const IconCardChildCount({
     Key? key,
     this.childCount,
     this.childCountLabel,

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/icon-card/icon_card_child_count.dart';
 import 'package:pick/ui/shared/flat_outlined_option.dart';
 import 'package:pick/ui/shared/palette.dart';
-import 'package:pick/icon-list-option/icon_list_option_image.dart';
-import 'package:pick/icon-list-option/icon_list_option_child_count.dart';
 import 'package:pick/icon-list-option/icon_list_option_name.dart';
 
-class IconListOption extends HookConsumerWidget {
-  const IconListOption({
+import 'icon_card_image.dart';
+
+class IconCard extends HookConsumerWidget {
+  const IconCard({
     Key? key,
     required this.iconData,
     required this.text,
@@ -44,7 +45,7 @@ class IconListOption extends HookConsumerWidget {
           ],
           children: [
             gridArea('icon').containing(
-              IconListOptionImage(
+              IconCardImage(
                 iconData: iconData,
               ),
             ),
@@ -54,7 +55,7 @@ class IconListOption extends HookConsumerWidget {
               ),
             ),
             gridArea('count').containing(
-              IconListOptionChildCount(
+              IconCardChildCount(
                 childCount: childCount,
                 childCountLabel: childCountLabel ?? '',
               ),

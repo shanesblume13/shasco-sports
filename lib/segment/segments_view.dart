@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/icon-card/icon_card_list.dart';
 import 'package:pick/season/season.dart';
-import 'package:pick/icon-list-option/icon_list_option.dart';
 import 'package:pick/season/selected_season_provider.dart';
 import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/segments_provider.dart';
@@ -44,7 +44,7 @@ class SegmentsView extends HookConsumerWidget {
 
     for (var segment in segments) {
       iconOptionContainers.add(
-        IconListOption(
+        IconCard(
           iconData: Icons.calendar_view_week,
           text: season.name,
           // TODO Add child count and label

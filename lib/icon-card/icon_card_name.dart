@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pick/ui/shared/palette.dart';
 
-class IconListOptionName extends StatelessWidget {
-  const IconListOptionName({
+class IconCardName extends StatelessWidget {
+  const IconCardName({
     Key? key,
     required this.text,
   }) : super(key: key);

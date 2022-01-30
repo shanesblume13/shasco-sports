@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pick/ui/shared/card_image_clip.dart';
 import 'package:pick/ui/shared/palette.dart';
 
-class IconListOptionImage extends StatelessWidget {
-  const IconListOptionImage({
+class IconCardImage extends StatelessWidget {
+  const IconCardImage({
     Key? key,
     required this.iconData,
   }) : super(key: key);

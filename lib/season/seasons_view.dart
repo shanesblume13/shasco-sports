@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/icon-card/icon_card_list.dart';
 import 'package:pick/league/league.dart';
 import 'package:pick/season/season.dart';
 import 'package:pick/league/selected_league_provider.dart';
@@ -7,7 +8,6 @@ import 'package:pick/season/seasons_provider.dart';
 import 'package:pick/season/selected_season_provider.dart';
 import 'package:pick/segment/segments_view.dart';
 import 'package:pick/ui/shared/gradient_scaffold.dart';
-import 'package:pick/icon-list-option/icon_list_option.dart';
 
 class SeasonsView extends HookConsumerWidget {
   const SeasonsView({
@@ -44,7 +44,7 @@ class SeasonsView extends HookConsumerWidget {
 
     for (var season in seasons) {
       iconOptionContainers.add(
-        IconListOption(
+        IconCard(
           iconData: Icons.calendar_today,
           text: season.name,
           // TODO Add child count and label
