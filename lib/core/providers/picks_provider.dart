@@ -145,7 +145,7 @@ class SelectedSegmentPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
       if (pick.teamReference != team.reference) {
         selectedSegmentPicks.remove(pick);
         pick = Pick(
-          id: pick.id,
+          reference: pick.reference,
           uid: pick.uid,
           matchupReference: pick.matchupReference,
           teamReference: team.reference,
@@ -156,7 +156,7 @@ class SelectedSegmentPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
       }
     } else {
       pick = Pick(
-        id: '',
+        reference: null,
         uid: '',
         matchupReference: matchup.reference,
         teamReference: team.reference,
@@ -183,7 +183,7 @@ class SelectedSegmentPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
     if (pick != null) {
       selectedSegmentPicks.remove(pick);
       pick = Pick(
-        id: pick.id,
+        reference: pick.reference,
         uid: pick.uid,
         matchupReference: pick.matchupReference,
         teamReference: pick.teamReference,
@@ -240,20 +240,6 @@ class SelectedSegmentPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
     }
 
     for (Pick pick in picksToDelete) {
-      pick.id = ref
-              .watch(userPicksStateProvider)
-              .value
-              ?.firstWhere((allPicksPick) =>
-                  allPicksPick.matchupReference == pick.matchupReference)
-              .id ??
-          '';
-      pick.uid = ref
-              .watch(userPicksStateProvider)
-              .value
-              ?.firstWhere((allPicksPick) =>
-                  allPicksPick.matchupReference == pick.matchupReference)
-              .uid ??
-          '';
       await FirestorePickService().removePick(pick);
     }
 
@@ -262,20 +248,6 @@ class SelectedSegmentPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
     }
 
     for (Pick pick in picksToUpdate) {
-      pick.id = ref
-              .watch(userPicksStateProvider)
-              .value
-              ?.firstWhere((allPicksPick) =>
-                  allPicksPick.matchupReference == pick.matchupReference)
-              .id ??
-          '';
-      pick.uid = ref
-              .watch(userPicksStateProvider)
-              .value
-              ?.firstWhere((allPicksPick) =>
-                  allPicksPick.matchupReference == pick.matchupReference)
-              .uid ??
-          '';
       await FirestorePickService().updatePick(pick);
     }
 

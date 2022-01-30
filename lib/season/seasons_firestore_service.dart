@@ -12,7 +12,7 @@ class SeasonsFirestoreService extends ChangeNotifier {
 
     return result.docs
         .map(
-          (doc) => Season.fromQueryDocumentSnapshot(doc, doc.id),
+          (doc) => Season.fromQueryDocumentSnapshot(doc, doc.reference),
         )
         .toList();
   }
@@ -23,7 +23,7 @@ class SeasonsFirestoreService extends ChangeNotifier {
 
     return result.docs
         .map(
-          (doc) => Season.fromQueryDocumentSnapshot(doc, doc.id),
+          (doc) => Season.fromQueryDocumentSnapshot(doc, doc.reference),
         )
         .toList();
   }

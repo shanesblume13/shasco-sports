@@ -12,18 +12,19 @@ class SegmentsFirestoreService extends ChangeNotifier {
 
     return result.docs
         .map(
-          (doc) => Segment.fromQueryDocumentSnapshot(doc, doc.id),
+          (doc) => Segment.fromQueryDocumentSnapshot(doc, doc.reference),
         )
         .toList();
   }
 
   Future<List<Segment>> fetchSegmentsBySeason({required Season season}) async {
-    var result =
-        await collection.where('seasonReference', isEqualTo: season.id).get();
+    var result = await collection
+        .where('seasonReference', isEqualTo: season.reference)
+        .get();
 
     return result.docs
         .map(
-          (doc) => Segment.fromQueryDocumentSnapshot(doc, doc.id),
+          (doc) => Segment.fromQueryDocumentSnapshot(doc, doc.reference),
         )
         .toList();
   }

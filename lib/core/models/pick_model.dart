@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Pick {
-  String id;
+  DocumentReference? reference;
   String uid;
   DocumentReference segmentReference;
   DocumentReference matchupReference;
@@ -9,7 +9,7 @@ class Pick {
   int points;
 
   Pick({
-    required this.id,
+    required this.reference,
     required this.uid,
     required this.segmentReference,
     required this.matchupReference,
@@ -17,14 +17,14 @@ class Pick {
     required this.points,
   });
 
-  Pick.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot, this.id)
+  Pick.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot, this.reference)
       : uid = snapshot['uid'] as String,
         segmentReference = snapshot['segmentReference'] as DocumentReference,
         matchupReference = snapshot['matchupReference'] as DocumentReference,
         teamReference = snapshot['teamReference'] as DocumentReference,
         points = snapshot['points'] as int;
 
-  Pick.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
+  Pick.fromDocumentSnapshot(DocumentSnapshot snapshot, this.reference)
       : uid = snapshot['uid'] as String,
         segmentReference = snapshot['segmentReference'] as DocumentReference,
         matchupReference = snapshot['matchupReference'] as DocumentReference,
@@ -33,6 +33,7 @@ class Pick {
 
   toJson() {
     return {
+      'reference': reference,
       'uid': uid,
       'segmentReference': segmentReference,
       'matchupReference': matchupReference,

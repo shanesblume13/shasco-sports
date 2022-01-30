@@ -14,13 +14,13 @@ class FirestoreMatchupService extends ChangeNotifier {
     if (segment == null) {
       matchups = result.docs
           .map(
-            (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
+            (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.reference),
           )
           .toList();
     } else {
       matchups = result.docs
           .map(
-            (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
+            (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.reference),
           )
           .where((matchup) => matchup.segmentReference.id == segment.id)
           .toList();
@@ -39,7 +39,7 @@ class FirestoreMatchupService extends ChangeNotifier {
         (snapshot) {
           return snapshot.docs
               .map(
-                (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
+                (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.reference),
               )
               .toList();
         },
@@ -49,7 +49,7 @@ class FirestoreMatchupService extends ChangeNotifier {
         (snapshot) {
           return snapshot.docs
               .map(
-                (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.id),
+                (doc) => Matchup.fromQueryDocumentSnapshot(doc, doc.reference),
               )
               .where((matchup) => matchup.segmentReference.id == segment.id)
               .toList();

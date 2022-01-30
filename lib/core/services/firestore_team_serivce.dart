@@ -14,13 +14,13 @@ class FirestoreTeamService extends ChangeNotifier {
     if (league == null) {
       teams = result.docs
           .map(
-            (doc) => Team.fromQueryDocumentSnapshot(doc, doc.id),
+            (doc) => Team.fromQueryDocumentSnapshot(doc, doc.reference),
           )
           .toList();
     } else {
       teams = result.docs
           .map(
-            (doc) => Team.fromQueryDocumentSnapshot(doc, doc.id),
+            (doc) => Team.fromQueryDocumentSnapshot(doc, doc.reference),
           )
           .where((team) => team.leagueId == league.id)
           .toList();
@@ -39,7 +39,7 @@ class FirestoreTeamService extends ChangeNotifier {
         (snapshot) {
           return snapshot.docs
               .map(
-                (doc) => Team.fromQueryDocumentSnapshot(doc, doc.id),
+                (doc) => Team.fromQueryDocumentSnapshot(doc, doc.reference),
               )
               .toList();
         },
@@ -49,7 +49,7 @@ class FirestoreTeamService extends ChangeNotifier {
         (snapshot) {
           return snapshot.docs
               .map(
-                (doc) => Team.fromQueryDocumentSnapshot(doc, doc.id),
+                (doc) => Team.fromQueryDocumentSnapshot(doc, doc.reference),
               )
               .where((team) => team.leagueId == league.id)
               .toList();

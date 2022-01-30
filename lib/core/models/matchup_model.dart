@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Matchup {
-  String id;
+  DocumentReference reference;
   DocumentReference awayTeamReference;
   DocumentReference homeTeamReference;
   DocumentReference? winningTeamReference;
@@ -11,10 +11,9 @@ class Matchup {
   bool isComplete;
   double homeTeamSpread;
   DocumentReference segmentReference;
-  DocumentReference reference;
 
   Matchup({
-    required this.id,
+    required this.reference,
     required this.awayTeamReference,
     required this.homeTeamReference,
     this.winningTeamReference,
@@ -24,10 +23,10 @@ class Matchup {
     required this.isComplete,
     required this.homeTeamSpread,
     required this.segmentReference,
-    required this.reference,
   });
 
-  Matchup.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot, this.id)
+  Matchup.fromQueryDocumentSnapshot(
+      QueryDocumentSnapshot snapshot, this.reference)
       : awayTeamReference = snapshot['awayTeamReference'] as DocumentReference,
         homeTeamReference = snapshot['homeTeamReference'] as DocumentReference,
         // winningTeamReference =
@@ -38,10 +37,9 @@ class Matchup {
         isComplete = snapshot['isComplete'] as bool,
         homeTeamSpread =
             double.tryParse(snapshot['homeTeamSpread'].toString()) ?? 0.0,
-        segmentReference = snapshot['segmentReference'] as DocumentReference,
-        reference = snapshot.reference;
+        segmentReference = snapshot['segmentReference'] as DocumentReference;
 
-  Matchup.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
+  Matchup.fromDocumentSnapshot(DocumentSnapshot snapshot, this.reference)
       : awayTeamReference = snapshot['awayTeamReference'] as DocumentReference,
         homeTeamReference = snapshot['homeTeamReference'] as DocumentReference,
         // winningTeamReference =
@@ -52,8 +50,7 @@ class Matchup {
         isComplete = snapshot['isComplete' as bool],
         homeTeamSpread =
             double.tryParse(snapshot['homeTeamSpread'].toString()) ?? 0.0,
-        segmentReference = snapshot['segmentReference'] as DocumentReference,
-        reference = snapshot.reference;
+        segmentReference = snapshot['segmentReference'] as DocumentReference;
 
   toJson() {
     return {
@@ -66,7 +63,6 @@ class Matchup {
       'isComplete': isComplete,
       'homeTeamSpread': homeTeamSpread,
       'segmentReference': segmentReference,
-      'reference': reference,
     };
   }
 }

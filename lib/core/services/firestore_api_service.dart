@@ -24,15 +24,16 @@ class FirestoreApiService {
     return ref.doc(id).get();
   }
 
-  Future<void> removeDocument(String id) {
-    return ref.doc(id).delete();
+  Future<void> removeDocument(DocumentReference reference) {
+    return ref.doc(reference.id).delete();
   }
 
   Future<DocumentReference> addDocument(Map<String, dynamic> data) {
     return ref.add(data);
   }
 
-  Future<void> updateDocument(Map<String, Object?> data, String id) {
-    return ref.doc(id).update(data);
+  Future<void> updateDocument(
+      Map<String, Object?> data, DocumentReference reference) {
+    return ref.doc(reference.id).update(data);
   }
 }

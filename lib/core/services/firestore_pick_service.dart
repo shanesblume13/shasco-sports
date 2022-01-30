@@ -15,13 +15,13 @@ class FirestorePickService extends ChangeNotifier {
     if (matchup == null) {
       picks = result.docs
           .map(
-            (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
+            (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.reference),
           )
           .toList();
     } else {
       picks = result.docs
           .map(
-            (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
+            (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.reference),
           )
           .where((pick) => pick.matchupReference == matchup.reference)
           .toList();
@@ -36,10 +36,8 @@ class FirestorePickService extends ChangeNotifier {
     var result = await _apiService.getDataCollection();
 
     picks = result.docs
-        .map(
-          (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
-        )
-        .where((pick) => pick.segmentReference.id == segment.id)
+        .map((doc) => Pick.fromQueryDocumentSnapshot(doc, doc.reference))
+        .where((pick) => pick.segmentReference == segment.reference)
         .toList();
 
     return picks;
@@ -55,7 +53,7 @@ class FirestorePickService extends ChangeNotifier {
         (snapshot) {
           return snapshot.docs
               .map(
-                (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
+                (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.reference),
               )
               .toList();
         },
@@ -65,7 +63,7 @@ class FirestorePickService extends ChangeNotifier {
         (snapshot) {
           return snapshot.docs
               .map(
-                (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
+                (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.reference),
               )
               .where((pick) => pick.matchupReference == matchup.reference)
               .toList();
@@ -82,12 +80,12 @@ class FirestorePickService extends ChangeNotifier {
   }
 
   Future updatePick(Pick pick) async {
-    await _apiService.updateDocument(pick.toJson(), pick.id);
+    await _apiService.updateDocument(pick.toJson(), pick.reference!);
     return;
   }
 
   Future removePick(Pick pick) async {
-    await _apiService.removeDocument(pick.id);
+    await _apiService.removeDocument(pick.reference!);
     return;
   }
 
