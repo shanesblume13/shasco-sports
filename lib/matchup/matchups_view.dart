@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/flat_outlined_option.dart';
 import 'package:pick/gradient_scaffold.dart';
-import 'package:pick/matchup-card/matchup_card.dart';
 import 'package:pick/matchup/matchup.dart';
+import 'package:pick/matchup/matchup_card_row.dart';
 import 'package:pick/matchup/matchups_provider.dart';
 import 'package:pick/matchup/matchups_summary_container.dart';
-import 'package:pick/palette.dart';
-import 'package:pick/pick/pick_model.dart';
-import 'package:pick/pick/picks_provider_old.dart';
 import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/selected_segment_provider.dart';
-import 'package:pick/team/team_model.dart';
 
 class MatchupsView extends HookConsumerWidget {
   const MatchupsView({
@@ -59,58 +53,13 @@ class MatchupsView extends HookConsumerWidget {
     final List<Widget> matchupCards = [];
 
     for (var matchup in matchups) {
-      final Team awayTeam = teams
-          .firstWhere((team) => team.reference == matchup.awayTeamReference);
-      final Team homeTeam = teams
-          .firstWhere((team) => team.reference == matchup.homeTeamReference);
-      final Pick? pick = picks.firstWhereOrNull(
-          (pick) => pick.matchupReference == matchup.reference);
-
       matchupCards.add(
-        LayoutGrid(
-          areas: '''
-              matchupCard score
-            ''',
-          rowSizes: const [
-            auto,
-          ],
-          columnSizes: [
-            auto,
-            70.px,
-          ],
-          children: [
-            gridArea('matchupCard').containing(
-              MatchupCard(
-                matchup: matchup,
-                awayTeam: awayTeam,
-                homeTeam: homeTeam,
-                pick: pick,
-              ),
-            ),
-            gridArea('score').containing(
-              InkWell(
-                onTap: () => updatePickScore(ref: ref, matchup: matchup),
-                splashColor: Colors.transparent,
-                child: FlatBorderOption(
-                  borderColor:
-                      pick == null ? Palette.shascoGrey : Palette.shascoBlue,
-                  child: Center(
-                    child: Text(pick?.points.toString() ?? '0'),
-                  ),
-                ),
-              ),
-            ),
-          ],
+        MatchupRow(
+          matchup: matchup,
         ),
       );
     }
 
     return ListView(children: matchupCards);
-  }
-
-  updatePickScore({required WidgetRef ref, required Matchup matchup}) {
-    ref
-        .watch(selectedSegmentPicksStateProvider.notifier)
-        .updatePickScore(matchup: matchup);
   }
 }
