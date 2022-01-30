@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pick/ui/views/auth_view.dart';
+import 'package:pick/auth/auth_view.dart';
 import 'package:pick/sport/sports_view.dart';
 
 class Router {

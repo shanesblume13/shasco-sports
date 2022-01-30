@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pick/ui/shared/palette.dart';
+import 'package:pick/palette.dart';
 // import 'packages:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pick/ui/shared/palette.dart';
+import 'package:pick/palette.dart';
 
 class MatchupCardTeamNickname extends StatelessWidget {
   const MatchupCardTeamNickname({

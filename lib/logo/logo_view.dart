@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pick/ui/shared/palette.dart';
-import 'package:pick/ui/widgets/logo/logo_image_container.dart';
-import 'package:pick/ui/widgets/logo/logo_name_container.dart';
+import 'package:pick/logo/logo_image_container.dart';
+import 'package:pick/logo/logo_name_container.dart';
+import 'package:pick/palette.dart';
 
 class LogoView extends StatefulWidget {
   const LogoView({

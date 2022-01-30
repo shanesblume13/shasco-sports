@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:pick/ui/shared/palette.dart';
-import 'package:pick/ui/widgets/logo/logo_image_clip.dart';
+import 'package:pick/logo/logo_image_clip.dart';
+import 'package:pick/palette.dart';
 
 class LogoImageContainer extends StatelessWidget {
   const LogoImageContainer({

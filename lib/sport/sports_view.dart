@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/gradient_scaffold.dart';
 import 'package:pick/icon-card/icon_card_list.dart';
 import 'package:pick/sport/sport.dart';
 import 'package:pick/sport/selected_sport_provider.dart';
 import 'package:pick/sport/sports_provider.dart';
 import 'package:pick/league/leagues_view.dart';
-import 'package:pick/ui/shared/gradient_scaffold.dart';
 
 class SportsView extends HookConsumerWidget {
   const SportsView({Key? key}) : super(key: key);

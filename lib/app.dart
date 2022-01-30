@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pick/ui/shared/palette.dart';
-import '/ui/router.dart' as my_router;
+import 'package:pick/palette.dart';
+import 'router.dart' as my_router;
 
 class MainApp extends StatelessWidget {
   const MainApp({

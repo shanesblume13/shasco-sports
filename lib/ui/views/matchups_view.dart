@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/gradient_scaffold.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
@@ -7,7 +8,6 @@ import 'package:pick/core/providers/matchups_provider.dart';
 import 'package:pick/core/providers/picks_provider.dart';
 import 'package:pick/core/providers/teams_provider.dart';
 import 'package:pick/segment/segment.dart';
-import 'package:pick/ui/shared/gradient_scaffold.dart';
 import 'package:pick/ui/widgets/matchups/matchup_cards_listview.dart';
 import 'package:pick/ui/widgets/matchups/matchups_summary_container.dart';
 

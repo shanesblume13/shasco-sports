@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/core/models/team_model.dart';
-import 'package:pick/ui/shared/palette.dart';
+import 'package:pick/palette.dart';
 import 'package:pick/ui/widgets/matchups/team_image_clip.dart';
 
 class TeamImageContainer extends StatelessWidget {

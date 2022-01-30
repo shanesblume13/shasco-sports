@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as hr;
 import 'package:pick/firebase_options.dart';
-import 'ui/router.dart' as my_router;
+import 'router.dart' as my_router;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

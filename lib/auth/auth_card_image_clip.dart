@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pick/ui/shared/card_image_clip.dart';
+import 'package:pick/card_image_clip.dart';
 
 class AuthCardImageClip extends StatelessWidget {
   const AuthCardImageClip({

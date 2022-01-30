@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pick/flat_outlined_option.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/models/team_model.dart';
 import 'package:pick/core/providers/picks_provider.dart';
-import 'package:pick/ui/shared/flat_outlined_option.dart';
-import 'package:pick/ui/shared/palette.dart';
+import 'package:pick/palette.dart';
 import 'package:pick/ui/widgets/matchups/matchup_card.dart';
 import 'package:collection/collection.dart';
 

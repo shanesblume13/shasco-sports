@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/core/providers/picks_provider.dart';
-import 'package:pick/ui/shared/palette.dart';
+import 'package:pick/palette.dart';
 
 class MatchupsSummaryContainer extends HookConsumerWidget {
   const MatchupsSummaryContainer({
