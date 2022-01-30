@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pick/ui/views/auth_view.dart';
-import 'package:pick/ui/views/games_view.dart';
 import 'package:pick/ui/views/logo_view.dart';
 import 'package:pick/sport/sports_view.dart';
 
@@ -22,10 +21,6 @@ class Router {
       case '/sports':
         return MaterialPageRoute(
           builder: (_) => const SportsView(),
-        );
-      case '/games':
-        return MaterialPageRoute(
-          builder: (_) => const GamesView(),
         );
       default:
         return MaterialPageRoute(

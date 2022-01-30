@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pick/core/models/matchup_model.dart';
+import 'package:pick/matchup/matchup.dart';
 import 'package:pick/core/models/pick_model.dart';
 import 'package:pick/core/services/firestore_api_service.dart';
 import 'package:pick/segment/segment.dart';

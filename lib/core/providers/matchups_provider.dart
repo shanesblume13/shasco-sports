@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/core/models/matchup_model.dart';
+import 'package:pick/matchup/matchup.dart';
 import 'package:pick/core/services/firestore_matchup_service.dart';
 import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/selected_segment_provider.dart';

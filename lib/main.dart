@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as hr;
-import 'package:pick/core/providers/game_view_model.dart';
 import 'package:pick/firebase_options.dart';
 import 'package:pick/locator.dart';
 import 'package:provider/provider.dart';
@@ -22,11 +21,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        Provider(
-          create: (_) => locator<GameViewModel>(),
-        ),
-      ],
+      providers: const [],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/auth',
