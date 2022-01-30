@@ -4,6 +4,7 @@ import 'package:pick/gradient_scaffold.dart';
 import 'package:pick/icon-card/icon_card_list.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/matchup/matchups_provider.dart';
+import 'package:pick/matchup/matchups_summary_container.dart';
 import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/selected_segment_provider.dart';
 
@@ -19,11 +20,22 @@ class MatchupsView extends HookConsumerWidget {
     return GradientScaffold(
       appBarText: segment.name,
       body: ref.watch(matchupsBySelectedSegmentStateProvider).when(
-            data: (matchups) => getMatchupsOptionsListView(
-              context: context,
-              ref: ref,
-              segment: segment,
-              matchups: matchups,
+            data: (matchups) => Column(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: MatchupsSummaryContainer(matchups: matchups),
+                ),
+                Expanded(
+                  flex: 5,
+                  child: getMatchupsOptionsListView(
+                    context: context,
+                    ref: ref,
+                    segment: segment,
+                    matchups: matchups,
+                  ),
+                ),
+              ],
             ),
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (e, s) =>
