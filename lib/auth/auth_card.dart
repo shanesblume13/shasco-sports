@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:pick/ui/widgets/auth/auth_card_image_clip.dart';
-import 'package:pick/ui/widgets/auth/auth_card_name_container.dart';
+import 'package:pick/auth/auth_card_image_clip.dart';
+import 'package:pick/auth/auth_card_name_container.dart';
 
 class AuthCard extends StatelessWidget {
   const AuthCard({

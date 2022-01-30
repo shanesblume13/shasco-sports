@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart' as hr;
 import 'package:pick/firebase_options.dart';
-import 'package:provider/provider.dart';
 import 'ui/router.dart' as my_router;
 
 void main() async {
@@ -18,14 +17,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: const [],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/auth',
-        title: 'Pickem App',
-        onGenerateRoute: my_router.Router.generateRoute,
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/auth',
+      title: 'Pickem App',
+      onGenerateRoute: my_router.Router.generateRoute,
     );
   }
 }
