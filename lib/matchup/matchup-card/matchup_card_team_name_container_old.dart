@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pick/matchup-card/matchup_card_team_location_old.dart';
-import 'package:pick/matchup-card/matchup_card_team_nickname_old.dart';
+import 'package:pick/matchup/matchup-card/matchup_card_team_location_old.dart';
+import 'package:pick/matchup/matchup-card/matchup_card_team_nickname_old.dart';
 import 'package:pick/team/team_model.dart';
 import 'package:pick/palette.dart';
 

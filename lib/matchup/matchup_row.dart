@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/matchup-card/matchup_card.dart';
+import 'package:pick/matchup/matchup-card/matchup_card.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/matchup/matchup_points.dart';
 import 'package:pick/pick/pick_model.dart';
