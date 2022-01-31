@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/matchup/matchup.dart';
-import 'package:pick/pick/picks_provider_old.dart';
 import 'package:pick/palette.dart';
 
 class MatchupsSummaryContainer extends HookConsumerWidget {
@@ -20,14 +19,15 @@ class MatchupsSummaryContainer extends HookConsumerWidget {
         padding: const EdgeInsets.all(12.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             ElevatedButton(
-              onPressed: () {
-                ref
-                    .watch(selectedSegmentPicksStateProvider.notifier)
-                    .savePicks(matchups: matchups);
-              },
-              child: const Text('Save Picks'),
+              onPressed: null,
+              // onPressed: () {
+              //   ref
+              //       .watch(selectedSegmentPicksStateProvider.notifier)
+              //       .savePicks(matchups: matchups);
+              // },
+              child: Text('Save Picks'),
             ),
           ],
         ),

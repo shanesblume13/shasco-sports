@@ -26,7 +26,7 @@ class MatchupsView extends HookConsumerWidget {
               AsyncValue<List<Team>> teams =
                   ref.watch(teamsBySelectedLeagueStateProvider);
 
-              teams.when(
+              return teams.when(
                 data: (teams) {
                   return Column(
                     children: [

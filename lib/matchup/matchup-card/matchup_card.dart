@@ -9,7 +9,6 @@ import 'package:pick/matchup/matchup.dart';
 import 'package:pick/pick/pick_model.dart';
 import 'package:pick/team/team_model.dart';
 import 'package:pick/images_provider.dart';
-import 'package:pick/pick/picks_provider_old.dart';
 import 'package:pick/palette.dart';
 
 class MatchupCard extends HookConsumerWidget {
@@ -54,9 +53,10 @@ class MatchupCard extends HookConsumerWidget {
             children: [
               gridArea('awayLogo').containing(
                 InkWell(
-                  onTap: () => updatePickedTeam(ref: ref, team: awayTeam),
-                  onLongPress: () =>
-                      isAwayTeamPicked ? clearPick(ref: ref) : null,
+                  onTap: () =>
+                      null, //updatePickedTeam(ref: ref, team: awayTeam),
+                  // onLongPress: () =>
+                  //     isAwayTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
                   child: TeamImageContainer(
                     hasPick: isAwayTeamPicked || isHomeTeamPicked,
@@ -69,9 +69,10 @@ class MatchupCard extends HookConsumerWidget {
               ),
               gridArea('awayName').containing(
                 InkWell(
-                  onTap: () => updatePickedTeam(ref: ref, team: awayTeam),
-                  onLongPress: () =>
-                      isAwayTeamPicked ? clearPick(ref: ref) : null,
+                  onTap: () =>
+                      null, //updatePickedTeam(ref: ref, team: awayTeam),
+                  // onLongPress: () =>
+                  //     isAwayTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
                   child: MatchupCardTeamNameContainer(
                     hasPick: isAwayTeamPicked || isHomeTeamPicked,
@@ -90,9 +91,10 @@ class MatchupCard extends HookConsumerWidget {
               ),
               gridArea('homeName').containing(
                 InkWell(
-                  onTap: () => updatePickedTeam(ref: ref, team: homeTeam),
-                  onLongPress: () =>
-                      isHomeTeamPicked ? clearPick(ref: ref) : null,
+                  onTap: () =>
+                      null, //updatePickedTeam(ref: ref, team: homeTeam),
+                  // onLongPress: () =>
+                  //     isHomeTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
                   child: MatchupCardTeamNameContainer(
                     hasPick: isAwayTeamPicked || isHomeTeamPicked,
@@ -104,9 +106,10 @@ class MatchupCard extends HookConsumerWidget {
               ),
               gridArea('homeLogo').containing(
                 InkWell(
-                  onTap: () => updatePickedTeam(ref: ref, team: homeTeam),
-                  onLongPress: () =>
-                      isHomeTeamPicked ? clearPick(ref: ref) : null,
+                  onTap: () =>
+                      null, //updatePickedTeam(ref: ref, team: homeTeam),
+                  // onLongPress: () =>
+                  //     isHomeTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
                   child: TeamImageContainer(
                     hasPick: isAwayTeamPicked || isHomeTeamPicked,
@@ -143,15 +146,15 @@ class MatchupCard extends HookConsumerWidget {
     return imagePath;
   }
 
-  clearPick({required WidgetRef ref}) {
-    ref
-        .watch(selectedSegmentPicksStateProvider.notifier)
-        .clearPick(matchup: matchup);
-  }
+  // clearPick({required WidgetRef ref}) {
+  //   ref
+  //       .watch(selectedSegmentPicksStateProvider.notifier)
+  //       .clearPick(matchup: matchup);
+  // }
 
-  updatePickedTeam({required WidgetRef ref, required Team team}) {
-    ref
-        .watch(selectedSegmentPicksStateProvider.notifier)
-        .updatePickedTeam(matchup: matchup, team: team);
-  }
+  // updatePickedTeam({required WidgetRef ref, required Team team}) {
+  //   ref
+  //       .watch(selectedSegmentPicksStateProvider.notifier)
+  //       .updatePickedTeam(matchup: matchup, team: team);
+  // }
 }
