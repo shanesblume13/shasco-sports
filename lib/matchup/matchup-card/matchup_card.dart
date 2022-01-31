@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/flat_outlined_option.dart';
-import 'package:pick/matchup/matchup-card/matchup_card_team_name_container_old.dart';
+import 'package:pick/matchup/matchup-card/matchup_card_team_text.dart';
 import 'package:pick/matchup/matchup-card/matchup_card_team_divider.dart';
-import 'package:pick/matchup/matchup-card/team_image_container_old.dart';
+import 'package:pick/matchup/matchup-card/matchup_card_team_image.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/pick/pick_model.dart';
 import 'package:pick/team/team_model.dart';
@@ -62,11 +62,10 @@ class MatchupCard extends HookConsumerWidget {
                   // onLongPress: () =>
                   //     isAwayTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
-                  child: TeamImageContainer(
-                    hasPick: isAwayTeamPicked || isHomeTeamPicked,
-                    isPicked: isAwayTeamPicked,
+                  child: MatchupCardTeamImage(
                     team: awayTeam,
-                    isHome: false,
+                    matchup: matchup,
+                    pick: pick,
                     imagePath: awayImagePath,
                   ),
                 ),
@@ -78,11 +77,10 @@ class MatchupCard extends HookConsumerWidget {
                   // onLongPress: () =>
                   //     isAwayTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
-                  child: MatchupCardTeamNameContainer(
-                    hasPick: isAwayTeamPicked || isHomeTeamPicked,
-                    isPicked: isAwayTeamPicked,
+                  child: MatchupCardTeamText(
                     team: awayTeam,
-                    isHome: false,
+                    matchup: matchup,
+                    pick: pick,
                   ),
                 ),
               ),
@@ -99,11 +97,10 @@ class MatchupCard extends HookConsumerWidget {
                   // onLongPress: () =>
                   //     isHomeTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
-                  child: MatchupCardTeamNameContainer(
-                    hasPick: isAwayTeamPicked || isHomeTeamPicked,
-                    isPicked: isHomeTeamPicked,
+                  child: MatchupCardTeamText(
                     team: homeTeam,
-                    isHome: true,
+                    matchup: matchup,
+                    pick: pick,
                   ),
                 ),
               ),
@@ -114,11 +111,10 @@ class MatchupCard extends HookConsumerWidget {
                   // onLongPress: () =>
                   //     isHomeTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
-                  child: TeamImageContainer(
-                    hasPick: isAwayTeamPicked || isHomeTeamPicked,
-                    isPicked: isHomeTeamPicked,
+                  child: MatchupCardTeamImage(
                     team: homeTeam,
-                    isHome: true,
+                    matchup: matchup,
+                    pick: pick,
                     imagePath: homeImagePath,
                   ),
                 ),
