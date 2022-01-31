@@ -9,7 +9,7 @@ platform :android do
   lane :android_beta_app do
       firebase_app_distribution(
           app: "1:196400689661:android:14d2dc6ac7cdb75a4a2994",
-          testers: "shanesblume@gmail.com",
+          testers: "shanesblume@gmail.com, alexandrewvetter@gmail.com",
           release_notes: "Initial version of the app",
           firebase_cli_path: "/usr/local/bin/firebase",
           apk_path: "../build/host/outputs/apk/release/app-release.apk"
