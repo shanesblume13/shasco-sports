@@ -14,7 +14,6 @@ A mobile app built with flutter and firebase that allows users to play various g
 - Finish removing _old files
 - Add picks to ui
 - Add picks by user
-- Fix appbar color change on navigation swipe
 - Add score color coding and validation.
 - Fix matchup card color transitions when changing picked team.
 - Add chevrons to flat outlined option cards that navigate.
@@ -43,21 +42,9 @@ A mobile app built with flutter and firebase that allows users to play various g
     - Scoring (confidence, sevencoals, single point)
 
 # Issues
+- Navigation back with a swipe goes back to sports page.
 - App signs with dominionsystems email unless XCode is open and updated.
 - Fastlane files are removed on pub get.
 - Podfile reverts platform:ios version to 9.0 on pub get.
 - IOS/Pods project updates made on pub get.
-
-# Folder Structure
-```
-|-lib               * Create the application
-|--core              * Handle data and non-ui components
-|---models            * Define entities and entiy type conversions.
-|---services          * Create model-based objects from external and internal data sources.        
-|---providers         * Transfer objects to and from the ui.
-|---utility           * Store common functions used across the backend.
-|--ui                * Handle the application ui and user interactions.
-|---shared            * Store common widgets used across the ui.
-|---views             * Display navigable pages to the user
-|---widgets           * Create small components used within specific views.
-```
+- Theme data currently stored on 2 different MaterialApps.
