@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CardImageClip extends CustomClipper<Path> {
-  final bool clipLeft;
-  final bool clipRight;
-
   CardImageClip({
     this.clipLeft = false,
     this.clipRight = false,
   });
+
+  final bool clipLeft;
+  final bool clipRight;
 
   @override
   Path getClip(Size size) {

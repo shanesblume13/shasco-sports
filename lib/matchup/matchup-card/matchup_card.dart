@@ -3,7 +3,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/flat_outlined_option.dart';
 import 'package:pick/matchup/matchup-card/matchup_card_team_name_container_old.dart';
-import 'package:pick/matchup/matchup-card/matchup_pick_score_divider_old.dart';
+import 'package:pick/matchup/matchup-card/matchup_card_team_divider.dart';
 import 'package:pick/matchup/matchup-card/team_image_container_old.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/pick/pick_model.dart';
@@ -50,7 +50,7 @@ class MatchupCard extends HookConsumerWidget {
               : Palette.shascoGrey,
           child: LayoutGrid(
             areas: '''
-                      awayLogo awayName scoreDivider homeName homeLogo
+                      awayLogo awayName divider homeName homeLogo
                     ''',
             rowSizes: const [auto],
             columnSizes: [1.fr, 2.fr, auto, 2.fr, 1.fr],
@@ -86,11 +86,10 @@ class MatchupCard extends HookConsumerWidget {
                   ),
                 ),
               ),
-              gridArea('scoreDivider').containing(
-                MatchupPickScoreDivider(
-                  homePicked: isHomeTeamPicked,
-                  awayPicked:
-                      isAwayTeamPicked, //_points, //_pickScores[pickScoreIndex]
+              gridArea('divider').containing(
+                MatchupCardTeamDivider(
+                  matchup: matchup,
+                  pick: pick, //_points, //_pickScores[pickScoreIndex]
                 ),
               ),
               gridArea('homeName').containing(
