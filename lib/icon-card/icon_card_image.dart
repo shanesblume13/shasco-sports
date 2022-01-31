@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pick/card_image_clip.dart';
+import 'package:pick/card_image_clipper.dart';
 import 'package:pick/palette.dart';
 
 class IconCardImage extends StatelessWidget {
@@ -13,7 +13,7 @@ class IconCardImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipPath(
-      clipper: CardImageClip(clipRight: true),
+      clipper: CardImageClipper(clipRight: true),
       child: Container(
         color: Palette.shascoBlue,
         child: Icon(

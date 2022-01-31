@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CardImageClip extends CustomClipper<Path> {
-  CardImageClip({
+class CardImageClipper extends CustomClipper<Path> {
+  CardImageClipper({
     this.clipLeft = false,
     this.clipRight = false,
   });
@@ -29,7 +29,6 @@ class CardImageClip extends CustomClipper<Path> {
     path.lineTo(width - 6, 3);
     path.quadraticBezierTo(width, 3, width, 9);
     path.lineTo(width * .75, height - 9);
-    //path.lineTo((width * .75) - 9, height - 3);
     path.quadraticBezierTo(
       (width * .75) - 3,
       height - 3,

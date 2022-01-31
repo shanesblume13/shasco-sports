@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:pick/auth/auth_card_image_clip.dart';
+import 'package:pick/auth/auth_card_image.dart';
 import 'package:pick/auth/auth_card_name_container.dart';
 
 class AuthCard extends StatelessWidget {
@@ -29,7 +29,7 @@ class AuthCard extends StatelessWidget {
               ],
               children: [
                 gridArea('image').containing(
-                  const AuthCardImageClip(),
+                  const AuthCardImage(),
                 ),
                 gridArea('name').containing(
                   const AuthCardNameConatiner(),
