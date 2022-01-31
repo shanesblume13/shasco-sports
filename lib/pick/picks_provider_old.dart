@@ -15,6 +15,8 @@ final userPicksStateProvider =
   return userPicksState;
 });
 
+final userPicksProvider = Provider((ref) => ref.watch(userPicksStateProvider));
+
 final userPicksBySegmentStateProvider =
     StateNotifierProvider<UserPicksBySegmentState, AsyncValue<List<Pick>>>(
         (ref) {
@@ -23,6 +25,9 @@ final userPicksBySegmentStateProvider =
   picksBySegmentState.init();
   return picksBySegmentState;
 });
+
+final userPicksBySegmentProvider =
+    Provider((ref) => ref.watch(userPicksBySegmentStateProvider));
 
 final selectedSegmentPicksStateProvider =
     StateNotifierProvider<SelectedSegmentPicksState, AsyncValue<List<Pick>>>(

@@ -11,6 +11,8 @@ final segmentsStateProvider =
   return segmentsState;
 });
 
+final segmentsProvider = Provider((ref) => ref.watch(segmentsStateProvider));
+
 final segmentsBySelectedSeasonStateProvider = StateNotifierProvider<
     SegmentsBySelectedSeasonState, AsyncValue<List<Segment>>>((ref) {
   final SegmentsBySelectedSeasonState segmentsBySelectedSeasonState =
@@ -18,6 +20,9 @@ final segmentsBySelectedSeasonStateProvider = StateNotifierProvider<
   segmentsBySelectedSeasonState.init();
   return segmentsBySelectedSeasonState;
 });
+
+final segmentsBySelectedSeasonProvider =
+    Provider((ref) => ref.watch(segmentsBySelectedSeasonStateProvider));
 
 class SegmentsState extends StateNotifier<AsyncValue<List<Segment>>> {
   SegmentsState() : super(const AsyncLoading<List<Segment>>());

@@ -3,12 +3,14 @@ import 'package:pick/league/league.dart';
 import 'package:pick/sport/sport.dart';
 import 'package:pick/sport/selected_sport_provider.dart';
 
-final allLeaguesStateProvider =
-    StateNotifierProvider<AllLeaguesState, AsyncValue<List<League>>>((ref) {
-  final AllLeaguesState allLeaguesState = AllLeaguesState();
-  allLeaguesState.init();
-  return allLeaguesState;
+final leaguesStateProvider =
+    StateNotifierProvider<LeaguesState, AsyncValue<List<League>>>((ref) {
+  final LeaguesState leaguesState = LeaguesState();
+  leaguesState.init();
+  return leaguesState;
 });
+
+final leaguesProvider = Provider((ref) => ref.read(leaguesStateProvider));
 
 final leaguesBySelectedSportStateProvider = StateNotifierProvider<
     LeaguesBySelectedSportState, AsyncValue<List<League>>>((ref) {
@@ -18,8 +20,11 @@ final leaguesBySelectedSportStateProvider = StateNotifierProvider<
   return leaguesBySelectedSportState;
 });
 
-class AllLeaguesState extends StateNotifier<AsyncValue<List<League>>> {
-  AllLeaguesState() : super(const AsyncLoading<List<League>>());
+final leaguesBySelectedSportProvider =
+    Provider((ref) => ref.watch(leaguesBySelectedSportStateProvider));
+
+class LeaguesState extends StateNotifier<AsyncValue<List<League>>> {
+  LeaguesState() : super(const AsyncLoading<List<League>>());
 
   void init() async {
     state = const AsyncLoading<List<League>>();

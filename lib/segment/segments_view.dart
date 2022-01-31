@@ -20,7 +20,7 @@ class SegmentsView extends HookConsumerWidget {
 
     return GradientScaffold(
       appBarText: season.name,
-      body: ref.watch(segmentsBySelectedSeasonStateProvider).when(
+      body: ref.watch(segmentsBySelectedSeasonProvider).when(
             data: (segments) => getSegmentsOptionsListView(
               context: context,
               ref: ref,

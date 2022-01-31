@@ -11,6 +11,8 @@ final matchupsStateProvider =
   return matchupsState;
 });
 
+final matchupsProvider = Provider((ref) => ref.watch(matchupsStateProvider));
+
 final matchupsBySelectedSegmentStateProvider = StateNotifierProvider<
     MatchupsBySelectedSegmentState, AsyncValue<List<Matchup>>>((ref) {
   final MatchupsBySelectedSegmentState matchupsBySelectedSegmentState =
@@ -18,6 +20,9 @@ final matchupsBySelectedSegmentStateProvider = StateNotifierProvider<
   matchupsBySelectedSegmentState.init();
   return matchupsBySelectedSegmentState;
 });
+
+final matchupsBySelectedSegmentProvider =
+    Provider((ref) => ref.watch(matchupsBySelectedSegmentStateProvider));
 
 class MatchupsState extends StateNotifier<AsyncValue<List<Matchup>>> {
   MatchupsState() : super(const AsyncLoading<List<Matchup>>());

@@ -17,7 +17,7 @@ class SeasonsView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final League league = ref.watch(selectedLeagueProvider)!;
-    final test = ref.watch(seasonsBySelectedLeagueStateProvider);
+    final test = ref.watch(seasonsBySelectedLeagueProvider);
 
     return GradientScaffold(
       appBarText: league.name,

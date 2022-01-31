@@ -20,7 +20,7 @@ class LeaguesView extends HookConsumerWidget {
 
     return GradientScaffold(
       appBarText: sport.name,
-      body: ref.watch(leaguesBySelectedSportStateProvider).when(
+      body: ref.watch(leaguesBySelectedSportProvider).when(
             data: (leagues) => getLeagueOptionsListView(
               context: context,
               ref: ref,

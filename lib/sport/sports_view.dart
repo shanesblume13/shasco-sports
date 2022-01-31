@@ -14,7 +14,7 @@ class SportsView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GradientScaffold(
       appBarText: 'Sports',
-      body: ref.watch(sportsStateProvider).when(
+      body: ref.watch(sportsProvider).when(
             data: (sports) => getSportOptionsListView(
                 context: context, ref: ref, sports: sports),
             loading: () => const Center(child: CircularProgressIndicator()),

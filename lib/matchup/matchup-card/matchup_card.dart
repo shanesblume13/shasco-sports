@@ -27,7 +27,7 @@ class MatchupCard extends HookConsumerWidget {
     List<Team> teams = [];
     const Pick? pick = null;
     //picks.firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
-    AsyncValue<List<String>> imagePaths = ref.watch(allImagePathsStateProvider);
+    AsyncValue<List<String>> imagePaths = ref.watch(imagePathsProvider);
     final Team awayTeam =
         teams.firstWhere((team) => team.reference == matchup.awayTeamReference);
     final Team homeTeam =

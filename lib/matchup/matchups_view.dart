@@ -19,7 +19,7 @@ class MatchupsView extends HookConsumerWidget {
 
     return GradientScaffold(
       appBarText: segment.name,
-      body: ref.watch(matchupsBySelectedSegmentStateProvider).when(
+      body: ref.watch(matchupsBySelectedSegmentProvider).when(
             data: (matchups) => Column(
               children: [
                 Expanded(

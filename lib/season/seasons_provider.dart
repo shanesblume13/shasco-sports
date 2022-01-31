@@ -11,6 +11,8 @@ final seasonsStateProvider =
   return seasonsState;
 });
 
+final seasonsProvider = Provider((ref) => ref.watch(seasonsStateProvider));
+
 final seasonsBySelectedLeagueStateProvider = StateNotifierProvider<
     SeasonsBySelectedLeagueState, AsyncValue<List<Season>>>((ref) {
   final SeasonsBySelectedLeagueState seasonsBySelectedLeagueState =
@@ -18,6 +20,9 @@ final seasonsBySelectedLeagueStateProvider = StateNotifierProvider<
   seasonsBySelectedLeagueState.init();
   return seasonsBySelectedLeagueState;
 });
+
+final seasonsBySelectedLeagueProvider =
+    Provider((ref) => ref.watch(seasonsBySelectedLeagueStateProvider));
 
 class SeasonsState extends StateNotifier<AsyncValue<List<Season>>> {
   SeasonsState() : super(const AsyncLoading<List<Season>>());

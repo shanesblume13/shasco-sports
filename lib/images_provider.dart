@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final allImagePathsStateProvider =
+final imagePathsStateProvider =
     StateNotifierProvider<AllImagePathsState, AsyncValue<List<String>>>((ref) {
   final AllImagePathsState allImagePathsState = AllImagePathsState();
   allImagePathsState.init();
   return allImagePathsState;
 });
+
+final imagePathsProvider =
+    Provider((ref) => ref.watch(imagePathsStateProvider));
 
 class AllImagePathsState extends StateNotifier<AsyncValue<List<String>>> {
   AllImagePathsState() : super(const AsyncLoading<List<String>>());
