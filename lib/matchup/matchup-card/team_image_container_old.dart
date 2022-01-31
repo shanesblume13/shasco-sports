@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pick/matchup-card/team_image_clip_old.dart';
+import 'package:pick/matchup/matchup-card/team_image_clip_old.dart';
 import 'package:pick/team/team_model.dart';
 import 'package:pick/palette.dart';
 
