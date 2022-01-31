@@ -7,9 +7,6 @@ final selectedLeagueStateProvider =
   return selectedLeagueState;
 });
 
-final selectedLeagueProvider =
-    Provider<League?>((ref) => ref.watch(selectedLeagueStateProvider));
-
 class SelectedLeagueState extends StateNotifier<League?> {
   SelectedLeagueState() : super(null);
 

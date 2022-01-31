@@ -16,21 +16,21 @@ class SeasonsView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final League league = ref.watch(selectedLeagueProvider)!;
-    final test = ref.watch(seasonsBySelectedLeagueProvider);
+    final League league = ref.watch(selectedLeagueStateProvider)!;
 
     return GradientScaffold(
       appBarText: league.name,
-      body: test.when(
-        data: (seasons) => getSeasonOptionsListView(
-          context: context,
-          ref: ref,
-          league: league,
-          seasons: seasons,
-        ),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, s) => const Center(child: Text('Error getting seasons!')),
-      ),
+      body: ref.watch(seasonsBySelectedLeagueStateProvider).when(
+            data: (seasons) => getSeasonOptionsListView(
+              context: context,
+              ref: ref,
+              league: league,
+              seasons: seasons,
+            ),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (e, s) =>
+                const Center(child: Text('Error getting seasons!')),
+          ),
     );
   }
 

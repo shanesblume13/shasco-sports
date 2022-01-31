@@ -16,18 +16,19 @@ class MatchupCard extends HookConsumerWidget {
   const MatchupCard({
     Key? key,
     required this.matchup,
+    required this.teams,
     this.pick,
   }) : super(key: key);
 
   final Matchup matchup;
+  final List<Team> teams;
   final Pick? pick;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    List<Team> teams = [];
     const Pick? pick = null;
     //picks.firstWhereOrNull((pick) => pick.matchupReference == matchup.reference);
-    AsyncValue<List<String>> imagePaths = ref.watch(imagePathsProvider);
+    AsyncValue<List<String>> imagePaths = ref.watch(imagePathsStateProvider);
     final Team awayTeam =
         teams.firstWhere((team) => team.reference == matchup.awayTeamReference);
     final Team homeTeam =

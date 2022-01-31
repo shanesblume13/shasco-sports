@@ -8,8 +8,6 @@ final sportsStateProvider =
   return sportsState;
 });
 
-final sportsProvider = Provider((ref) => ref.watch(sportsStateProvider));
-
 class SportsState extends StateNotifier<AsyncValue<List<Sport>>> {
   SportsState() : super(const AsyncLoading<List<Sport>>());
 

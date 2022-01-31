@@ -11,8 +11,6 @@ final teamsStateProvider =
   return teamsState;
 });
 
-final teamsProvider = Provider((ref) => ref.watch(teamsStateProvider));
-
 final teamsBySelectedLeagueStateProvider =
     StateNotifierProvider<TeamsBySelectedLeagueState, AsyncValue<List<Team>>>(
         (ref) {
@@ -21,9 +19,6 @@ final teamsBySelectedLeagueStateProvider =
   teamsBySelectedLeagueState.init();
   return teamsBySelectedLeagueState;
 });
-
-final teamsBySelectedLeagueProvider =
-    Provider((ref) => ref.watch(teamsBySelectedLeagueStateProvider));
 
 class TeamsState extends StateNotifier<AsyncValue<List<Team>>> {
   TeamsState() : super(const AsyncLoading<List<Team>>());
@@ -43,7 +38,7 @@ class TeamsBySelectedLeagueState extends StateNotifier<AsyncValue<List<Team>>> {
 
   void init() async {
     state = const AsyncLoading<List<Team>>();
-    final League selectedLeague = ref.watch(selectedLeagueProvider)!;
+    final League selectedLeague = ref.watch(selectedLeagueStateProvider)!;
     final List<Team> teams = await TeamsFirestoreService()
         .fetchTeamsByLeague(league: selectedLeague);
     state = AsyncData<List<Team>>(teams);

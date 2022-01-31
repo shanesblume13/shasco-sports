@@ -10,8 +10,6 @@ final leaguesStateProvider =
   return leaguesState;
 });
 
-final leaguesProvider = Provider((ref) => ref.read(leaguesStateProvider));
-
 final leaguesBySelectedSportStateProvider = StateNotifierProvider<
     LeaguesBySelectedSportState, AsyncValue<List<League>>>((ref) {
   final LeaguesBySelectedSportState leaguesBySelectedSportState =
@@ -19,9 +17,6 @@ final leaguesBySelectedSportStateProvider = StateNotifierProvider<
   leaguesBySelectedSportState.init();
   return leaguesBySelectedSportState;
 });
-
-final leaguesBySelectedSportProvider =
-    Provider((ref) => ref.watch(leaguesBySelectedSportStateProvider));
 
 class LeaguesState extends StateNotifier<AsyncValue<List<League>>> {
   LeaguesState() : super(const AsyncLoading<List<League>>());
@@ -44,7 +39,7 @@ class LeaguesBySelectedSportState
 
   void init() async {
     state = const AsyncLoading<List<League>>();
-    final Sport sport = ref.watch(selectedSportProvider)!;
+    final Sport sport = ref.watch(selectedSportStateProvider)!;
     //TODO: Remove delayed when leagues are on firestore.
     final leagues =
         await Future.delayed(const Duration(milliseconds: 100)).then((_) {

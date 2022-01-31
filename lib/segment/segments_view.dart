@@ -16,11 +16,11 @@ class SegmentsView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Season season = ref.watch(selectedSeasonProvider)!;
+    final Season season = ref.watch(selectedSeasonStateProvider)!;
 
     return GradientScaffold(
       appBarText: season.name,
-      body: ref.watch(segmentsBySelectedSeasonProvider).when(
+      body: ref.watch(segmentsBySelectedSeasonStateProvider).when(
             data: (segments) => getSegmentsOptionsListView(
               context: context,
               ref: ref,

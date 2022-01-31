@@ -11,8 +11,6 @@ final segmentsStateProvider =
   return segmentsState;
 });
 
-final segmentsProvider = Provider((ref) => ref.watch(segmentsStateProvider));
-
 final segmentsBySelectedSeasonStateProvider = StateNotifierProvider<
     SegmentsBySelectedSeasonState, AsyncValue<List<Segment>>>((ref) {
   final SegmentsBySelectedSeasonState segmentsBySelectedSeasonState =
@@ -20,9 +18,6 @@ final segmentsBySelectedSeasonStateProvider = StateNotifierProvider<
   segmentsBySelectedSeasonState.init();
   return segmentsBySelectedSeasonState;
 });
-
-final segmentsBySelectedSeasonProvider =
-    Provider((ref) => ref.watch(segmentsBySelectedSeasonStateProvider));
 
 class SegmentsState extends StateNotifier<AsyncValue<List<Segment>>> {
   SegmentsState() : super(const AsyncLoading<List<Segment>>());
@@ -44,7 +39,7 @@ class SegmentsBySelectedSeasonState
 
   void init() async {
     state = const AsyncLoading<List<Segment>>();
-    final Season selectedSeason = ref.watch(selectedSeasonProvider)!;
+    final Season selectedSeason = ref.watch(selectedSeasonStateProvider)!;
     final List<Segment> segments = await SegmentsFirestoreService()
         .fetchSegmentsBySeason(season: selectedSeason);
     state = AsyncData<List<Segment>>(segments);

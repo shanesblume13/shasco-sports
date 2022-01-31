@@ -7,9 +7,6 @@ final selectedSegmentStateProvider =
   return selectedSegmentState;
 });
 
-final selectedSegmentProvider =
-    Provider<Segment?>((ref) => ref.watch(selectedSegmentStateProvider));
-
 class SelectedSegmentState extends StateNotifier<Segment?> {
   SelectedSegmentState() : super(null);
 

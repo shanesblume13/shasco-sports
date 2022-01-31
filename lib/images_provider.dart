@@ -4,17 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final imagePathsStateProvider =
-    StateNotifierProvider<AllImagePathsState, AsyncValue<List<String>>>((ref) {
-  final AllImagePathsState allImagePathsState = AllImagePathsState();
-  allImagePathsState.init();
-  return allImagePathsState;
+    StateNotifierProvider<ImagePathsState, AsyncValue<List<String>>>((ref) {
+  final ImagePathsState imagePathsState = ImagePathsState();
+  imagePathsState.init();
+  return imagePathsState;
 });
 
-final imagePathsProvider =
-    Provider((ref) => ref.watch(imagePathsStateProvider));
-
-class AllImagePathsState extends StateNotifier<AsyncValue<List<String>>> {
-  AllImagePathsState() : super(const AsyncLoading<List<String>>());
+class ImagePathsState extends StateNotifier<AsyncValue<List<String>>> {
+  ImagePathsState() : super(const AsyncLoading<List<String>>());
 
   void init() async {
     state = const AsyncLoading<List<String>>();

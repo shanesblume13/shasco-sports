@@ -5,15 +5,18 @@ import 'package:pick/matchup/matchup-card/matchup_card.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/matchup/matchup_points.dart';
 import 'package:pick/pick/pick_model.dart';
+import 'package:pick/team/team_model.dart';
 
 class MatchupRow extends HookConsumerWidget {
   const MatchupRow({
     Key? key,
     required this.matchup,
+    required this.teams,
     this.pick,
   }) : super(key: key);
 
   final Matchup matchup;
+  final List<Team> teams;
   final Pick? pick;
 
   @override
@@ -33,6 +36,7 @@ class MatchupRow extends HookConsumerWidget {
         gridArea('matchupCard').containing(
           MatchupCard(
             matchup: matchup,
+            teams: teams,
             pick: pick,
           ),
         ),

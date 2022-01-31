@@ -16,11 +16,11 @@ class LeaguesView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Sport sport = ref.watch(selectedSportProvider)!;
+    final Sport sport = ref.watch(selectedSportStateProvider)!;
 
     return GradientScaffold(
       appBarText: sport.name,
-      body: ref.watch(leaguesBySelectedSportProvider).when(
+      body: ref.watch(leaguesBySelectedSportStateProvider).when(
             data: (leagues) => getLeagueOptionsListView(
               context: context,
               ref: ref,

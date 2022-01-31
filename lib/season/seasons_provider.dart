@@ -11,8 +11,6 @@ final seasonsStateProvider =
   return seasonsState;
 });
 
-final seasonsProvider = Provider((ref) => ref.watch(seasonsStateProvider));
-
 final seasonsBySelectedLeagueStateProvider = StateNotifierProvider<
     SeasonsBySelectedLeagueState, AsyncValue<List<Season>>>((ref) {
   final SeasonsBySelectedLeagueState seasonsBySelectedLeagueState =
@@ -20,9 +18,6 @@ final seasonsBySelectedLeagueStateProvider = StateNotifierProvider<
   seasonsBySelectedLeagueState.init();
   return seasonsBySelectedLeagueState;
 });
-
-final seasonsBySelectedLeagueProvider =
-    Provider((ref) => ref.watch(seasonsBySelectedLeagueStateProvider));
 
 class SeasonsState extends StateNotifier<AsyncValue<List<Season>>> {
   SeasonsState() : super(const AsyncLoading<List<Season>>());
@@ -43,7 +38,7 @@ class SeasonsBySelectedLeagueState
 
   void init() async {
     state = const AsyncLoading<List<Season>>();
-    final League selectedLeague = ref.watch(selectedLeagueProvider)!;
+    final League selectedLeague = ref.watch(selectedLeagueStateProvider)!;
     final List<Season> seasons = await SeasonsFirestoreService()
         .fetchSeasonsByLeague(league: selectedLeague);
     state = AsyncData<List<Season>>(seasons);
