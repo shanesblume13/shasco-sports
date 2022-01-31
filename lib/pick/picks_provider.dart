@@ -46,4 +46,28 @@ class PicksBySelectedSegmentState
         .fetchPicksBySegment(segment: selectedSegment);
     state = AsyncData<List<Pick>>(picks);
   }
+
+  void reset() async {
+    state = const AsyncLoading<List<Pick>>();
+    final Segment selectedSegment = ref.watch(selectedSegmentStateProvider)!;
+    final List<Pick> picks = await PicksFirestoreService()
+        .fetchPicksBySegment(segment: selectedSegment);
+    state = AsyncData<List<Pick>>(picks);
+  }
+
+  void updatePoints(Pick pick) {
+    if (state.value != null) {
+      List<Pick> newPickState = [
+        for (final Pick statePick in state.value!)
+          if (statePick == pick)
+            statePick.copyWith(
+              points: statePick.points + 1 <= 10 ? statePick.points + 1 : 0,
+            )
+          else
+            statePick,
+      ];
+
+      state = AsyncData<List<Pick>>(newPickState);
+    }
+  }
 }

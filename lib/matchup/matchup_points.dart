@@ -19,7 +19,6 @@ class MatchupPoints extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
-      // TODO remove print
       onTap: () =>
           updatePickPoints(ref), // updatePickScore(ref: ref, matchup: matchup),
       splashColor: Colors.transparent,
@@ -35,8 +34,10 @@ class MatchupPoints extends HookConsumerWidget {
   void updatePickPoints(WidgetRef ref) {
     if (pick == null) {
       return;
+    } else {
+      ref
+          .watch(picksBySelectedSegmentStateProvider.notifier)
+          .updatePoints(pick!);
     }
-
-    return print("Updating Score");
   }
 }

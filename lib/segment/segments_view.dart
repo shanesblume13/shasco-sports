@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/gradient_scaffold.dart';
 import 'package:pick/icon-card/icon_card_list.dart';
+import 'package:pick/pick/picks_provider.dart';
 import 'package:pick/season/season.dart';
 import 'package:pick/season/selected_season_provider.dart';
 import 'package:pick/segment/segment.dart';

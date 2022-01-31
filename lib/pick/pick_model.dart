@@ -17,6 +17,23 @@ class Pick {
     required this.points,
   });
 
+  Pick copyWith(
+      {DocumentReference? reference,
+      String? uid,
+      DocumentReference? segmentReference,
+      DocumentReference? matchupReference,
+      DocumentReference? teamReference,
+      int? points}) {
+    return Pick(
+      reference: reference ?? this.reference,
+      uid: uid ?? this.uid,
+      segmentReference: segmentReference ?? this.segmentReference,
+      matchupReference: matchupReference ?? this.matchupReference,
+      teamReference: teamReference ?? this.teamReference,
+      points: points ?? this.points,
+    );
+  }
+
   Pick.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot, this.reference)
       : uid = snapshot['uid'] as String,
         segmentReference = snapshot['segmentReference'] as DocumentReference,
