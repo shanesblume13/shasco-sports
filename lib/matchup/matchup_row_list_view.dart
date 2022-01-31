@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/matchup/matchup_row.dart';
-import 'package:pick/pick/pick_model.dart';
+import 'package:pick/pick/pick.dart';
 import 'package:pick/segment/segment.dart';
-import 'package:pick/team/team_model.dart';
+import 'package:pick/team/team.dart';
 import 'package:collection/collection.dart';
 
 class MatchupRowListView extends HookConsumerWidget {

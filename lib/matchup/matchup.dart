@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Matchup {
-  DocumentReference reference;
+  DocumentReference? reference;
   DocumentReference awayTeamReference;
   DocumentReference homeTeamReference;
   DocumentReference? winningTeamReference;

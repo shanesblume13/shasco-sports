@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/matchup/matchup.dart';
-import 'package:pick/pick/pick_model.dart';
+import 'package:pick/pick/pick.dart';
 import 'package:pick/segment/segment.dart';
 
 class PicksFirestoreService extends ChangeNotifier {

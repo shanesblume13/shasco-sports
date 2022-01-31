@@ -4,11 +4,11 @@ import 'package:pick/gradient_scaffold.dart';
 import 'package:pick/matchup/matchup_row_list_view.dart';
 import 'package:pick/matchup/matchups_provider.dart';
 import 'package:pick/matchup/matchups_summary_container.dart';
-import 'package:pick/pick/pick_model.dart';
+import 'package:pick/pick/pick.dart';
 import 'package:pick/pick/picks_provider.dart';
 import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/selected_segment_provider.dart';
-import 'package:pick/team/team_model.dart';
+import 'package:pick/team/team.dart';
 import 'package:pick/team/teams_provider.dart';
 
 class MatchupsView extends HookConsumerWidget {

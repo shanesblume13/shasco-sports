@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pick/league/league.dart';
-import 'package:pick/team/team_model.dart';
+import 'package:pick/team/team.dart';
 
 class TeamsFirestoreService extends ChangeNotifier {
   final CollectionReference<Map<String, dynamic>> collection =

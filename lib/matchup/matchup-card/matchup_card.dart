@@ -6,8 +6,9 @@ import 'package:pick/matchup/matchup-card/matchup_card_team_text.dart';
 import 'package:pick/matchup/matchup-card/matchup_card_team_divider.dart';
 import 'package:pick/matchup/matchup-card/matchup_card_team_image.dart';
 import 'package:pick/matchup/matchup.dart';
-import 'package:pick/pick/pick_model.dart';
-import 'package:pick/team/team_model.dart';
+import 'package:pick/pick/pick.dart';
+import 'package:pick/pick/picks_provider.dart';
+import 'package:pick/team/team.dart';
 import 'package:pick/images_provider.dart';
 import 'package:pick/palette.dart';
 
@@ -43,9 +44,7 @@ class MatchupCard extends HookConsumerWidget {
         );
 
         return FlatBorderOption(
-          borderColor: isAwayTeamPicked || isHomeTeamPicked
-              ? Palette.shascoBlue
-              : Palette.shascoGrey,
+          borderColor: pick != null ? Palette.shascoBlue : Palette.shascoGrey,
           child: LayoutGrid(
             areas: '''
                       awayLogo awayName divider homeName homeLogo
@@ -55,8 +54,10 @@ class MatchupCard extends HookConsumerWidget {
             children: [
               gridArea('awayLogo').containing(
                 InkWell(
-                  onTap: () =>
-                      null, //updatePickedTeam(ref: ref, team: awayTeam),
+                  onTap: () => updatePickTeam(
+                    ref: ref,
+                    team: awayTeam,
+                  ), //updatePickedTeam(ref: ref, team: awayTeam),
                   // onLongPress: () =>
                   //     isAwayTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
@@ -70,8 +71,10 @@ class MatchupCard extends HookConsumerWidget {
               ),
               gridArea('awayName').containing(
                 InkWell(
-                  onTap: () =>
-                      null, //updatePickedTeam(ref: ref, team: awayTeam),
+                  onTap: () => updatePickTeam(
+                    ref: ref,
+                    team: awayTeam,
+                  ),
                   // onLongPress: () =>
                   //     isAwayTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
@@ -90,8 +93,10 @@ class MatchupCard extends HookConsumerWidget {
               ),
               gridArea('homeName').containing(
                 InkWell(
-                  onTap: () =>
-                      null, //updatePickedTeam(ref: ref, team: homeTeam),
+                  onTap: () => updatePickTeam(
+                    ref: ref,
+                    team: homeTeam,
+                  ),
                   // onLongPress: () =>
                   //     isHomeTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
@@ -104,8 +109,10 @@ class MatchupCard extends HookConsumerWidget {
               ),
               gridArea('homeLogo').containing(
                 InkWell(
-                  onTap: () =>
-                      null, //updatePickedTeam(ref: ref, team: homeTeam),
+                  onTap: () => updatePickTeam(
+                    ref: ref,
+                    team: homeTeam,
+                  ),
                   // onLongPress: () =>
                   //     isHomeTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
@@ -126,12 +133,6 @@ class MatchupCard extends HookConsumerWidget {
     );
   }
 
-  bool get isAwayTeamPicked =>
-      false; //pick?.teamReference == awayTeam.reference;
-
-  bool get isHomeTeamPicked =>
-      false; //pick?.teamReference == homeTeam.reference;
-
   String setTeamImagePath({
     required List<String> imagePaths,
     required String teamNickname,
@@ -147,15 +148,21 @@ class MatchupCard extends HookConsumerWidget {
     return imagePath;
   }
 
+  void updatePickTeam({required WidgetRef ref, required Team team}) {
+    if (pick == null) {
+      ref
+          .watch(picksBySelectedSegmentStateProvider.notifier)
+          .addPick(matchup: matchup, team: team);
+    } else {
+      ref
+          .watch(picksBySelectedSegmentStateProvider.notifier)
+          .updateTeam(pick: pick!, team: team);
+    }
+  }
+
   // clearPick({required WidgetRef ref}) {
   //   ref
   //       .watch(selectedSegmentPicksStateProvider.notifier)
   //       .clearPick(matchup: matchup);
-  // }
-
-  // updatePickedTeam({required WidgetRef ref, required Team team}) {
-  //   ref
-  //       .watch(selectedSegmentPicksStateProvider.notifier)
-  //       .updatePickedTeam(matchup: matchup, team: team);
   // }
 }

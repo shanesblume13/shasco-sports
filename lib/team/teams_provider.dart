@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/league/league.dart';
 import 'package:pick/league/selected_league_provider.dart';
-import 'package:pick/team/team_model.dart';
+import 'package:pick/team/team.dart';
 import 'package:pick/team/teams_firestore_service.dart';
 
 final teamsStateProvider =

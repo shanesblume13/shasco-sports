@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pick/matchup/matchup-card/matchup_card_team_divider_clipper.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/palette.dart';
-import 'package:pick/pick/pick_model.dart';
+import 'package:pick/pick/pick.dart';
 // import 'packages:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
 
@@ -19,7 +19,7 @@ class MatchupCardTeamDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      color: pick != null ? Palette.shascoBlue[50] : Colors.transparent,
+      color: pick != null ? Palette.shascoBlue[50] : Palette.shascoGrey[50],
       duration: const Duration(milliseconds: 300),
       child: Stack(
         alignment: Alignment.center,

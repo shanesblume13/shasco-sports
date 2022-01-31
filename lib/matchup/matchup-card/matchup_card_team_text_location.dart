@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/palette.dart';
-import 'package:pick/pick/pick_model.dart';
-import 'package:pick/team/team_model.dart';
+import 'package:pick/pick/pick.dart';
+import 'package:pick/team/team.dart';
 
 class MatchupCardTeamTextLocation extends StatelessWidget {
   const MatchupCardTeamTextLocation({

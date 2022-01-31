@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick/card_image_clipper.dart';
+import 'package:pick/palette.dart';
 
 class AuthCardImage extends StatelessWidget {
   const AuthCardImage({
@@ -12,9 +13,9 @@ class AuthCardImage extends StatelessWidget {
       clipper: CardImageClipper(clipRight: true),
       child: Container(
         color: Colors.black,
-        child: const Icon(
+        child: Icon(
           Icons.sports,
-          color: Colors.white,
+          color: Palette.shascoGrey[50]!,
           size: 60,
         ),
       ),

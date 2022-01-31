@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pick/card_image_clipper.dart';
 import 'package:pick/matchup/matchup.dart';
-import 'package:pick/pick/pick_model.dart';
-import 'package:pick/team/team_model.dart';
+import 'package:pick/pick/pick.dart';
+import 'package:pick/team/team.dart';
 import 'package:pick/palette.dart';
 
 class MatchupCardTeamImage extends StatelessWidget {
@@ -24,7 +24,7 @@ class MatchupCardTeamImage extends StatelessWidget {
     return AnimatedContainer(
         color: pick?.teamReference == team.reference
             ? Palette.shascoBlue[50]
-            : Colors.transparent,
+            : Palette.shascoGrey[50],
         duration: const Duration(milliseconds: 300),
         child: ClipPath(
           clipper: matchup.homeTeamReference == team.reference
