@@ -5,6 +5,7 @@ final sportsStateProvider =
     StateNotifierProvider<SportsState, AsyncValue<List<Sport>>>((ref) {
   final SportsState sportsState = SportsState();
   sportsState.init();
+
   return sportsState;
 });
 

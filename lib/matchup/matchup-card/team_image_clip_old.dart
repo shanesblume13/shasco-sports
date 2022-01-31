@@ -46,9 +46,14 @@ class MyCustomClipper extends CustomClipper<Path> {
     path.quadraticBezierTo(width, 3, width, 9);
     path.lineTo(width * .75, height - 9);
     path.quadraticBezierTo(
-        width * .75, height - 3, (width * .75) - 6, height - 3);
+      width * .75,
+      height - 3,
+      (width * .75) - 6,
+      height - 3,
+    );
     path.lineTo(0, height - 3);
     path.lineTo(0, 3);
+
     return path;
   }
 
@@ -70,6 +75,7 @@ class MyCustomClipper2 extends CustomClipper<Path> {
     path.quadraticBezierTo(0, height - 3, 6, height - 3);
     path.lineTo(width, height - 3);
     path.lineTo(width, 3);
+
     return path;
   }
 

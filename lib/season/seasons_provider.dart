@@ -8,6 +8,7 @@ final seasonsStateProvider =
     StateNotifierProvider<SeasonsState, AsyncValue<List<Season>>>((ref) {
   final SeasonsState seasonsState = SeasonsState();
   seasonsState.init();
+
   return seasonsState;
 });
 
@@ -16,6 +17,7 @@ final seasonsBySelectedLeagueStateProvider = StateNotifierProvider<
   final SeasonsBySelectedLeagueState seasonsBySelectedLeagueState =
       SeasonsBySelectedLeagueState(ref);
   seasonsBySelectedLeagueState.init();
+
   return seasonsBySelectedLeagueState;
 });
 

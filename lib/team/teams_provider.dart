@@ -8,15 +8,18 @@ final teamsStateProvider =
     StateNotifierProvider<TeamsState, AsyncValue<List<Team>>>((ref) {
   final TeamsState teamsState = TeamsState();
   teamsState.init();
+
   return teamsState;
 });
 
 final teamsBySelectedLeagueStateProvider =
-    StateNotifierProvider<TeamsBySelectedLeagueState, AsyncValue<List<Team>>>(
-        (ref) {
+    StateNotifierProvider<TeamsBySelectedLeagueState, AsyncValue<List<Team>>>((
+  ref,
+) {
   final TeamsBySelectedLeagueState teamsBySelectedLeagueState =
       TeamsBySelectedLeagueState(ref);
   teamsBySelectedLeagueState.init();
+
   return teamsBySelectedLeagueState;
 });
 

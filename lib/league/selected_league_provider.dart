@@ -4,6 +4,7 @@ import 'package:pick/league/league.dart';
 final selectedLeagueStateProvider =
     StateNotifierProvider<SelectedLeagueState, League?>((ref) {
   final SelectedLeagueState selectedLeagueState = SelectedLeagueState();
+
   return selectedLeagueState;
 });
 

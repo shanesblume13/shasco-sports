@@ -7,6 +7,7 @@ final leaguesStateProvider =
     StateNotifierProvider<LeaguesState, AsyncValue<List<League>>>((ref) {
   final LeaguesState leaguesState = LeaguesState();
   leaguesState.init();
+
   return leaguesState;
 });
 
@@ -15,6 +16,7 @@ final leaguesBySelectedSportStateProvider = StateNotifierProvider<
   final LeaguesBySelectedSportState leaguesBySelectedSportState =
       LeaguesBySelectedSportState(ref);
   leaguesBySelectedSportState.init();
+
   return leaguesBySelectedSportState;
 });
 

@@ -22,8 +22,9 @@ class Segment {
   });
 
   Segment.fromQueryDocumentSnapshot(
-      QueryDocumentSnapshot<Map<String, dynamic>> snapshot, this.reference)
-      : name = snapshot['name'] as String,
+    QueryDocumentSnapshot<Map<String, dynamic>> snapshot,
+    this.reference,
+  )   : name = snapshot['name'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         lockDate = (snapshot['lockDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate(),
@@ -31,8 +32,10 @@ class Segment {
         isComplete = snapshot['isComplete'] as bool,
         seasonReference = snapshot['seasonReference'] as DocumentReference;
 
-  Segment.fromDocumentSnapshot(DocumentSnapshot snapshot, this.reference)
-      : name = snapshot['name'] as String,
+  Segment.fromDocumentSnapshot(
+    DocumentSnapshot snapshot,
+    this.reference,
+  )   : name = snapshot['name'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         lockDate = (snapshot['lockDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate(),

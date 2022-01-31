@@ -4,6 +4,7 @@ import 'package:pick/segment/segment.dart';
 final selectedSegmentStateProvider =
     StateNotifierProvider<SelectedSegmentState, Segment?>((ref) {
   final SelectedSegmentState selectedSegmentState = SelectedSegmentState();
+
   return selectedSegmentState;
 });
 

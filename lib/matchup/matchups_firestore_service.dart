@@ -17,8 +17,9 @@ class MatchupsFirestoreService extends ChangeNotifier {
         .toList();
   }
 
-  Future<List<Matchup>> fetchMatchupsBySegment(
-      {required Segment segment}) async {
+  Future<List<Matchup>> fetchMatchupsBySegment({
+    required Segment segment,
+  }) async {
     var result = await collection
         .where('segmentReference', isEqualTo: segment.reference)
         .get();

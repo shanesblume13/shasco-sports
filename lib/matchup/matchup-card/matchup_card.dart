@@ -36,9 +36,13 @@ class MatchupCard extends HookConsumerWidget {
     return imagePaths.when(
       data: (imagePaths) {
         String awayImagePath = setTeamImagePath(
-            imagePaths: imagePaths, teamNickname: awayTeam.nickname);
+          imagePaths: imagePaths,
+          teamNickname: awayTeam.nickname,
+        );
         String homeImagePath = setTeamImagePath(
-            imagePaths: imagePaths, teamNickname: homeTeam.nickname);
+          imagePaths: imagePaths,
+          teamNickname: homeTeam.nickname,
+        );
 
         return FlatBorderOption(
           borderColor: isAwayTeamPicked || isHomeTeamPicked
@@ -135,14 +139,18 @@ class MatchupCard extends HookConsumerWidget {
   bool get isHomeTeamPicked =>
       false; //pick?.teamReference == homeTeam.reference;
 
-  String setTeamImagePath(
-      {required List<String> imagePaths, required String teamNickname}) {
+  String setTeamImagePath({
+    required List<String> imagePaths,
+    required String teamNickname,
+  }) {
     String imagePath = 'assets/images/logos/nfl/nfl.jpeg';
 
     if (imagePaths.contains(
-        'assets/images/logos/nfl/${teamNickname.toLowerCase()}.gif')) {
+      'assets/images/logos/nfl/${teamNickname.toLowerCase()}.gif',
+    )) {
       imagePath = 'assets/images/logos/nfl/${teamNickname.toLowerCase()}.gif';
     }
+
     return imagePath;
   }
 

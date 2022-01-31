@@ -8,6 +8,7 @@ final matchupsStateProvider =
     StateNotifierProvider<MatchupsState, AsyncValue<List<Matchup>>>((ref) {
   final MatchupsState matchupsState = MatchupsState();
   matchupsState.init();
+
   return matchupsState;
 });
 
@@ -16,6 +17,7 @@ final matchupsBySelectedSegmentStateProvider = StateNotifierProvider<
   final MatchupsBySelectedSegmentState matchupsBySelectedSegmentState =
       MatchupsBySelectedSegmentState(ref);
   matchupsBySelectedSegmentState.init();
+
   return matchupsBySelectedSegmentState;
 });
 

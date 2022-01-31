@@ -86,6 +86,7 @@ class DividerHomePickClipper extends CustomClipper<Path> {
     path.lineTo(width * .75, height);
     path.lineTo(0, height);
     path.lineTo(0, 0);
+
     return path;
   }
 
@@ -106,6 +107,7 @@ class DividerAwayPickClipper extends CustomClipper<Path> {
     path.lineTo(width * .25, height);
     path.lineTo(width, height);
     path.lineTo(width, 0);
+
     return path;
   }
 

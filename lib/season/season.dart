@@ -16,14 +16,17 @@ class Season {
   });
 
   Season.fromQueryDocumentSnapshot(
-      QueryDocumentSnapshot<Map<String, dynamic>> snapshot, this.reference)
-      : name = snapshot['name'] as String,
+    QueryDocumentSnapshot<Map<String, dynamic>> snapshot,
+    this.reference,
+  )   : name = snapshot['name'] as String,
         league = snapshot['league'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate();
 
-  Season.fromDocumentSnapshot(DocumentSnapshot snapshot, this.reference)
-      : name = snapshot['name'] as String,
+  Season.fromDocumentSnapshot(
+    DocumentSnapshot snapshot,
+    this.reference,
+  )   : name = snapshot['name'] as String,
         league = snapshot['league'] as String,
         startDate = (snapshot['startDate'] as Timestamp).toDate(),
         endDate = (snapshot['endDate'] as Timestamp).toDate();

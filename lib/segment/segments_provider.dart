@@ -8,6 +8,7 @@ final segmentsStateProvider =
     StateNotifierProvider<SegmentsState, AsyncValue<List<Segment>>>((ref) {
   final SegmentsState segmentsState = SegmentsState();
   segmentsState.init();
+
   return segmentsState;
 });
 
@@ -16,6 +17,7 @@ final segmentsBySelectedSeasonStateProvider = StateNotifierProvider<
   final SegmentsBySelectedSeasonState segmentsBySelectedSeasonState =
       SegmentsBySelectedSeasonState(ref);
   segmentsBySelectedSeasonState.init();
+
   return segmentsBySelectedSeasonState;
 });
 

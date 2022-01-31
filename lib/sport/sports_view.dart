@@ -16,17 +16,21 @@ class SportsView extends HookConsumerWidget {
       appBarText: 'Sports',
       body: ref.watch(sportsStateProvider).when(
             data: (sports) => getSportOptionsListView(
-                context: context, ref: ref, sports: sports),
+              context: context,
+              ref: ref,
+              sports: sports,
+            ),
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (e, s) => const Center(child: Text('Error getting sports!')),
           ),
     );
   }
 
-  Widget getSportOptionsListView(
-      {required BuildContext context,
-      required WidgetRef ref,
-      required List<Sport> sports}) {
+  Widget getSportOptionsListView({
+    required BuildContext context,
+    required WidgetRef ref,
+    required List<Sport> sports,
+  }) {
     final List<Widget> iconOptionContainers = [];
 
     for (var sport in sports) {

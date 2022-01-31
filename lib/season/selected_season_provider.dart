@@ -4,6 +4,7 @@ import 'package:pick/season/season.dart';
 final selectedSeasonStateProvider =
     StateNotifierProvider<SelectedSeasonState, Season?>((ref) {
   final SelectedSeasonState selectedLeagueState = SelectedSeasonState();
+
   return selectedLeagueState;
 });
 

@@ -7,6 +7,7 @@ final imagePathsStateProvider =
     StateNotifierProvider<ImagePathsState, AsyncValue<List<String>>>((ref) {
   final ImagePathsState imagePathsState = ImagePathsState();
   imagePathsState.init();
+
   return imagePathsState;
 });
 

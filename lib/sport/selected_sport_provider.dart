@@ -4,6 +4,7 @@ import 'package:pick/sport/sport.dart';
 final selectedSportStateProvider =
     StateNotifierProvider<SelectedSportState, Sport?>((ref) {
   final SelectedSportState selectedSportState = SelectedSportState();
+
   return selectedSportState;
 });
 

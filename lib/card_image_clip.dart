@@ -31,9 +31,14 @@ class CardImageClip extends CustomClipper<Path> {
     path.lineTo(width * .75, height - 9);
     //path.lineTo((width * .75) - 9, height - 3);
     path.quadraticBezierTo(
-        (width * .75) - 3, height - 3, (width * .75) - 9, height - 3);
+      (width * .75) - 3,
+      height - 3,
+      (width * .75) - 9,
+      height - 3,
+    );
     path.lineTo(0, height - 3);
     path.lineTo(0, 3);
+
     return path;
   }
 
@@ -45,6 +50,7 @@ class CardImageClip extends CustomClipper<Path> {
     path.quadraticBezierTo(0, height - 3, 6, height - 3);
     path.lineTo(width, height - 3);
     path.lineTo(width, 3);
+
     return path;
   }
 

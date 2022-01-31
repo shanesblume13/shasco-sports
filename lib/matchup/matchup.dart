@@ -26,8 +26,9 @@ class Matchup {
   });
 
   Matchup.fromQueryDocumentSnapshot(
-      QueryDocumentSnapshot snapshot, this.reference)
-      : awayTeamReference = snapshot['awayTeamReference'] as DocumentReference,
+    QueryDocumentSnapshot snapshot,
+    this.reference,
+  )   : awayTeamReference = snapshot['awayTeamReference'] as DocumentReference,
         homeTeamReference = snapshot['homeTeamReference'] as DocumentReference,
         // winningTeamReference =
         //     snapshot['winningTeamReference'] as DocumentReference?,

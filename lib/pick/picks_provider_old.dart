@@ -12,17 +12,20 @@ final userPicksStateProvider =
     StateNotifierProvider<UserPicksState, AsyncValue<List<Pick>>>((ref) {
   final UserPicksState userPicksState = UserPicksState(ref);
   userPicksState.init();
+
   return userPicksState;
 });
 
 final userPicksProvider = Provider((ref) => ref.watch(userPicksStateProvider));
 
 final userPicksBySegmentStateProvider =
-    StateNotifierProvider<UserPicksBySegmentState, AsyncValue<List<Pick>>>(
-        (ref) {
+    StateNotifierProvider<UserPicksBySegmentState, AsyncValue<List<Pick>>>((
+  ref,
+) {
   final UserPicksBySegmentState picksBySegmentState =
       UserPicksBySegmentState(ref);
   picksBySegmentState.init();
+
   return picksBySegmentState;
 });
 
@@ -30,11 +33,13 @@ final userPicksBySegmentProvider =
     Provider((ref) => ref.watch(userPicksBySegmentStateProvider));
 
 final selectedSegmentPicksStateProvider =
-    StateNotifierProvider<SelectedSegmentPicksState, AsyncValue<List<Pick>>>(
-        (ref) {
+    StateNotifierProvider<SelectedSegmentPicksState, AsyncValue<List<Pick>>>((
+  ref,
+) {
   final SelectedSegmentPicksState selectedSegmentPicksState =
       SelectedSegmentPicksState(ref);
   selectedSegmentPicksState.init();
+
   return selectedSegmentPicksState;
 });
 
@@ -43,6 +48,7 @@ final pickByMatchupStateProvider = StateNotifierProvider.family<
   final PickByMatchupState pickByMatchupState =
       PickByMatchupState(ref, matchup);
   pickByMatchupState.init();
+
   return pickByMatchupState;
 });
 
@@ -58,6 +64,7 @@ class UserPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
 
     if (uid == null || segment == null) {
       state = const AsyncData<List<Pick>>([]);
+
       return;
     }
 
@@ -80,6 +87,7 @@ class UserPicksBySegmentState extends StateNotifier<AsyncValue<List<Pick>>> {
 
     if (segment == null) {
       state = const AsyncData<List<Pick>>([]);
+
       return;
     }
 
@@ -104,9 +112,12 @@ class PickByMatchupState extends StateNotifier<AsyncValue<Pick?>> {
     Pick? pick;
 
     pick = allPicks?.firstWhereOrNull(
-        (pick) => pick.matchupReference == matchup.reference);
+      (pick) => pick.matchupReference == matchup.reference,
+    );
 
-    state = AsyncData<Pick?>(pick);
+    state = AsyncData<Pick?>(
+      pick,
+    );
   }
 }
 
@@ -214,33 +225,41 @@ class SelectedSegmentPicksState extends StateNotifier<AsyncValue<List<Pick>>> {
     for (Matchup matchup in matchups) {
       // If allpicks has a pick for this matchup and selectedSegmentPicks doesn't, delete it
       if (allPicks.firstWhereOrNull(
-                  (pick) => pick.matchupReference == matchup.reference) !=
+                (pick) => pick.matchupReference == matchup.reference,
+              ) !=
               null &&
           selectedSegmentPicks.firstWhereOrNull(
-                  (pick) => pick.matchupReference == matchup.reference) ==
+                (pick) => pick.matchupReference == matchup.reference,
+              ) ==
               null) {
-        picksToDelete.addAll(allPicks
-            .where((pick) => pick.matchupReference == matchup.reference));
+        picksToDelete.addAll(allPicks.where(
+          (pick) => pick.matchupReference == matchup.reference,
+        ));
       }
       // If allpicks doesn't have a pick for this matchup and selectedSegmentPicks does, add it
       if (allPicks.firstWhereOrNull(
-                  (pick) => pick.matchupReference == matchup.reference) ==
+                (pick) => pick.matchupReference == matchup.reference,
+              ) ==
               null &&
           selectedSegmentPicks.firstWhereOrNull(
-                  (pick) => pick.matchupReference == matchup.reference) !=
+                (pick) => pick.matchupReference == matchup.reference,
+              ) !=
               null) {
         picksToCreate.add(selectedSegmentPicks
             .firstWhere((pick) => pick.matchupReference == matchup.reference));
       }
       // If allpicks has a pick for this matchup and selectedSegmentPicks also does, update it
       if (allPicks.firstWhereOrNull(
-                  (pick) => pick.matchupReference == matchup.reference) !=
+                (pick) => pick.matchupReference == matchup.reference,
+              ) !=
               null &&
           selectedSegmentPicks.firstWhereOrNull(
-                  (pick) => pick.matchupReference == matchup.reference) !=
+                (pick) => pick.matchupReference == matchup.reference,
+              ) !=
               null) {
-        picksToUpdate.add(selectedSegmentPicks
-            .firstWhere((pick) => pick.matchupReference == matchup.reference));
+        picksToUpdate.add(selectedSegmentPicks.firstWhere(
+          (pick) => pick.matchupReference == matchup.reference,
+        ));
       }
     }
 
