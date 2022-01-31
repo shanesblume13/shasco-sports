@@ -5,9 +5,10 @@ A mobile app built with flutter and firebase that allows users to play various g
 
 # To Do
 - Add shared picks and points crud
+- Add picks by user
 - Add leagues and sports to firestore.
 - Add versioning for android and ios firebase deploys.
-- Add picks by user
+- Disable or handle portrait mode.
 - Add score color coding and validation.
 - Fix matchup card color transitions when changing picked team.
 - Add chevrons to flat outlined option cards that navigate.
