@@ -15,10 +15,10 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## Android
 
-### android android_beta_app
+### android firebase
 
 ```sh
-[bundle exec] fastlane android android_beta_app
+[bundle exec] fastlane android firebase
 ```
 
 Shasco Sports Firebase Deploy

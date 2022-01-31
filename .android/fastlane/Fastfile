@@ -1,18 +1,30 @@
 default_platform(:android)
 
 platform :android do
-  desc "Shasco Sports Firebase Deploy"
-  gradle(
-      task: 'assemble',
-      build_type: 'Release'
-  )
-  lane :android_beta_app do
-      firebase_app_distribution(
-          app: "1:196400689661:android:14d2dc6ac7cdb75a4a2994",
-          testers: "shanesblume@gmail.com, alexandrewvetter@gmail.com",
-          release_notes: "Initial version of the app",
-          firebase_cli_path: "/usr/local/bin/firebase",
-          apk_path: "../build/host/outputs/apk/release/app-release.apk"
-      )
-  end
+    desc "Shasco Sports Firebase Deploy"
+
+    gradle(task: "assemble", build_type: "Release")
+
+    lane :firebase do
+        firebase_app_distribution(
+            app: "1:196400689661:android:14d2dc6ac7cdb75a4a2994",
+            testers: "shanesblume@gmail.com, alexandrewvetter@gmail.com",
+            release_notes: "Initial version of the app",
+            firebase_cli_path: "/usr/local/bin/firebase",
+            apk_path: "../build/host/outputs/apk/release/app-release.apk"
+        )
+    end
+
+    lane :bump_version_code do
+        path = '../app/build.gradle'
+        re = /versionCode\s+(\d+)/ 
+      
+        s = File.read(path)
+        versionCode = s[re, 1].to_i
+        s[re, 1] = (versionCode + 1).to_s
+      
+        f = File.new(path, 'w')
+        f.write(s)
+        f.close
+    end
 end

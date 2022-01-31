@@ -1,6 +1,8 @@
 platform :ios do
-  desc "Shasco Sports Firebase Deploy"
-    lane :ios_beta_app do
+    desc "Shasco Sports Firebase Deploy"
+    lane :firebase do
+        increment_build_number
+
         build_app(
             scheme: "Runner",
             archive_path: "./build/Runner.xcarchive",

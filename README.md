@@ -4,15 +4,8 @@
 A mobile app built with flutter and firebase that allows users to play various games based on sports predecitions.
 
 # To Do
-- Demo a week of picks
-    - [x] League: NFL
-    - [x] Season: 2021-2022
-    - [x] Leg: Week 1
-    - [x] 3 Matchups
-    - [] 2 Users w/ Picks
-    - [] Stats, Graphs, and Results
+- Add leagues and sports to firestore.
 - Update picks_provider_old.
-- Combine clippers into common file
 - Add picks and points back into ui
 - Add picks by user
 - Add score color coding and validation.
