@@ -41,7 +41,7 @@ class MatchupRow extends HookConsumerWidget {
           ),
         ),
         gridArea('score').containing(
-          MatchupPoints(matchup: matchup),
+          MatchupPoints(matchup: matchup, pick: pick),
         ),
       ],
     );

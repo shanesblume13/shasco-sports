@@ -5,10 +5,13 @@ import 'package:pick/matchup/matchup.dart';
 import 'package:pick/matchup/matchup_row.dart';
 import 'package:pick/matchup/matchups_provider.dart';
 import 'package:pick/matchup/matchups_summary_container.dart';
+import 'package:pick/pick/pick_model.dart';
+import 'package:pick/pick/picks_provider.dart';
 import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/selected_segment_provider.dart';
 import 'package:pick/team/team_model.dart';
 import 'package:pick/team/teams_provider.dart';
+import 'package:collection/collection.dart';
 
 class MatchupsView extends HookConsumerWidget {
   const MatchupsView({
@@ -28,23 +31,35 @@ class MatchupsView extends HookConsumerWidget {
 
               return teams.when(
                 data: (teams) {
-                  return Column(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: MatchupsSummaryContainer(matchups: matchups),
-                      ),
-                      Expanded(
-                        flex: 5,
-                        child: getMatchupCardListView(
-                          context: context,
-                          ref: ref,
-                          segment: segment,
-                          matchups: matchups,
-                          teams: teams,
-                        ),
-                      ),
-                    ],
+                  AsyncValue<List<Pick>> picks =
+                      ref.watch(picksBySelectedSegmentStateProvider);
+
+                  return picks.when(
+                    data: (picks) {
+                      return Column(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: MatchupsSummaryContainer(matchups: matchups),
+                          ),
+                          Expanded(
+                            flex: 5,
+                            child: getMatchupCardListView(
+                              context: context,
+                              ref: ref,
+                              segment: segment,
+                              matchups: matchups,
+                              teams: teams,
+                              picks: picks,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    error: (e, s) =>
+                        const Center(child: Text('Error getting picks!')),
                   );
                 },
                 loading: () => const Center(child: CircularProgressIndicator()),
@@ -65,14 +80,19 @@ class MatchupsView extends HookConsumerWidget {
     required Segment segment,
     required List<Matchup> matchups,
     required List<Team> teams,
+    required List<Pick>? picks,
   }) {
     final List<Widget> matchupCards = [];
 
     for (var matchup in matchups) {
+      Pick? pick = picks?.firstWhereOrNull(
+          (Pick pick) => pick.matchupReference == matchup.reference);
+
       matchupCards.add(
         MatchupRow(
           matchup: matchup,
           teams: teams,
+          pick: pick,
         ),
       );
     }

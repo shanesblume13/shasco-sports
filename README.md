@@ -4,9 +4,9 @@
 A mobile app built with flutter and firebase that allows users to play various games based on sports predecitions.
 
 # To Do
+- Add shared picks and points crud
 - Add leagues and sports to firestore.
-- Update picks_provider_old.
-- Add picks and points back into ui
+- Add versioning for android and ios firebase deploys.
 - Add picks by user
 - Add score color coding and validation.
 - Fix matchup card color transitions when changing picked team.
