@@ -25,11 +25,6 @@ class MatchupsSummaryContainer extends HookConsumerWidget {
               onPressed: () => savePicks(
                 ref: ref,
               ),
-              // onPressed: () {
-              //   ref
-              //       .watch(selectedSegmentPicksStateProvider.notifier)
-              //       .savePicks(matchups: matchups);
-              // },
               child: const Text('Save Picks'),
             ),
           ],
@@ -38,7 +33,7 @@ class MatchupsSummaryContainer extends HookConsumerWidget {
     );
   }
 
-  void savePicks({required WidgetRef ref}) {
+  void savePicks({required WidgetRef ref}) async {
     ref.watch(picksBySelectedSegmentStateProvider.notifier).saveSegmentPicks();
   }
 }

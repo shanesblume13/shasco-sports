@@ -160,5 +160,7 @@ class PicksBySelectedSegmentState
         }
       }
     }
+
+    ref.read(picksBySelectedSegmentStateProvider.notifier).init();
   }
 }
