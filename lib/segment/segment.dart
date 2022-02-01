@@ -11,7 +11,7 @@ class Segment {
   DocumentReference seasonReference;
 
   Segment({
-    required this.reference,
+    this.reference,
     required this.name,
     required this.startDate,
     required this.lockDate,
@@ -42,17 +42,4 @@ class Segment {
         isLocked = snapshot['isLocked'] as bool,
         isComplete = snapshot['isComplete'] as bool,
         seasonReference = snapshot['seasonReference'] as DocumentReference;
-
-  toJson() {
-    return {
-      'reference': reference,
-      'name': name,
-      'startDate': startDate,
-      'lockDate': lockDate,
-      'endDate': endDate,
-      'isLocked': isLocked,
-      'isComplete': isComplete,
-      'seasonReference': seasonReference,
-    };
-  }
 }

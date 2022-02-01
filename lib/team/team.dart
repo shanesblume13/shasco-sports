@@ -8,7 +8,7 @@ class Team {
   String imagePath;
 
   Team({
-    required this.reference,
+    this.reference,
     required this.leagueId,
     required this.location,
     required this.nickname,

@@ -13,7 +13,7 @@ class Matchup {
   DocumentReference segmentReference;
 
   Matchup({
-    required this.reference,
+    this.reference,
     required this.awayTeamReference,
     required this.homeTeamReference,
     this.winningTeamReference,
@@ -52,18 +52,4 @@ class Matchup {
         homeTeamSpread =
             double.tryParse(snapshot['homeTeamSpread'].toString()) ?? 0.0,
         segmentReference = snapshot['segmentReference'] as DocumentReference;
-
-  toJson() {
-    return {
-      'awayTeamReference': homeTeamReference,
-      'homeTeamReference': awayTeamReference,
-      'winningTeamReference': winningTeamReference,
-      'startDateTime': startDateTime,
-      'lockDateTime': lockDateTime,
-      'isLocked': isLocked,
-      'isComplete': isComplete,
-      'homeTeamSpread': homeTeamSpread,
-      'segmentReference': segmentReference,
-    };
-  }
 }

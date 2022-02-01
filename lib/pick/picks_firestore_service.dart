@@ -41,4 +41,24 @@ class PicksFirestoreService extends ChangeNotifier {
         )
         .toList();
   }
+
+  Future<void> addPick({required Pick pick}) async {
+    await collection.add(
+      pick.toJson(),
+    );
+  }
+
+  Future<void> deletePick({required Pick pick}) async {
+    await collection.doc(pick.reference?.id).delete();
+  }
+
+  Future<void> deletePicksBySegment({required Segment segment}) async {
+    var picks = await collection
+        .where('segmentReference', isEqualTo: segment.reference)
+        .get();
+
+    for (var doc in picks.docs) {
+      collection.doc(doc.reference.id).delete();
+    }
+  }
 }

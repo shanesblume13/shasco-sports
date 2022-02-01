@@ -77,18 +77,19 @@ class PicksBySelectedSegmentState
     required Matchup matchup,
     required Team team,
   }) {
-    Segment? segment = ref.watch(selectedSegmentStateProvider)!;
+    Segment? segment = ref.watch(selectedSegmentStateProvider);
 
     if (state.value != null && segment != null) {
       List<Pick> newPickState = state.value!;
-      newPickState.add(Pick(
-        reference: null,
-        uid: '',
-        segmentReference: segment.reference!,
-        matchupReference: matchup.reference!,
-        teamReference: team.reference,
-        points: 0,
-      ));
+      newPickState.add(
+        Pick(
+          uid: '',
+          segmentReference: segment.reference!,
+          matchupReference: matchup.reference!,
+          teamReference: team.reference,
+          points: 0,
+        ),
+      );
 
       state = AsyncData<List<Pick>>(newPickState);
     }
@@ -107,6 +108,17 @@ class PicksBySelectedSegmentState
       ];
 
       state = AsyncData<List<Pick>>(newPickState);
+    }
+  }
+
+  void saveSegmentPicks() async {
+    Segment? segment = ref.watch(selectedSegmentStateProvider);
+
+    if (state.value != null && segment != null) {
+      await PicksFirestoreService().deletePicksBySegment(segment: segment);
+      for (Pick pick in state.value!) {
+        await PicksFirestoreService().addPick(pick: pick);
+      }
     }
   }
 }

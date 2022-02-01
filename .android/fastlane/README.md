@@ -23,6 +23,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Shasco Sports Firebase Deploy
 
+### android bump_version_code
+
+```sh
+[bundle exec] fastlane android bump_version_code
+```
+
+
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

@@ -30,7 +30,8 @@ class FlatBorderOption extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(6.0),
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
         clipBehavior: Clip.hardEdge,
         decoration: kGradientBoxDecoration,
         height: 64,

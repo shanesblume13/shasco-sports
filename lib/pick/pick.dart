@@ -9,7 +9,7 @@ class Pick {
   int points;
 
   Pick({
-    required this.reference,
+    this.reference,
     required this.uid,
     required this.segmentReference,
     required this.matchupReference,
@@ -17,13 +17,14 @@ class Pick {
     required this.points,
   });
 
-  Pick copyWith(
-      {DocumentReference? reference,
-      String? uid,
-      DocumentReference? segmentReference,
-      DocumentReference? matchupReference,
-      DocumentReference? teamReference,
-      int? points}) {
+  Pick copyWith({
+    DocumentReference? reference,
+    String? uid,
+    DocumentReference? segmentReference,
+    DocumentReference? matchupReference,
+    DocumentReference? teamReference,
+    int? points,
+  }) {
     return Pick(
       reference: reference ?? this.reference,
       uid: uid ?? this.uid,
@@ -50,7 +51,6 @@ class Pick {
 
   toJson() {
     return {
-      'reference': reference,
       'uid': uid,
       'segmentReference': segmentReference,
       'matchupReference': matchupReference,
