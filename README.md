@@ -4,6 +4,8 @@
 A mobile app built with flutter and firebase that allows users to play various games based on sports predecitions.
 
 # To Do
+- Remove logos
+- Add PickMatchupStatus styling
 - Clear pick changes on navigation.
 - Add leagues and sports to firestore.
 - Add versioning for android and ios firebase deploys.

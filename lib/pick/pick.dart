@@ -59,3 +59,14 @@ class Pick {
     };
   }
 }
+
+enum PickMathcupStatus {
+  open,
+  openPicked,
+  locked,
+  lockedPicked,
+  closed,
+  closedCorrect,
+  closedIncorrect,
+  closedPush,
+}
