@@ -5,6 +5,7 @@ import 'package:pick/pick/picks_firestore_service.dart';
 import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/selected_segment_provider.dart';
 import 'package:pick/team/team.dart';
+import 'package:collection/collection.dart';
 
 final picksStateProvider =
     StateNotifierProvider<PicksState, AsyncValue<List<Pick>>>((ref) {
@@ -57,7 +58,7 @@ class PicksBySelectedSegmentState
     state = AsyncData<List<Pick>>(picks);
   }
 
-  void updatePoints({required Pick pick}) {
+  void incrementPickScore({required Pick pick}) {
     if (state.value != null) {
       List<Pick> newPickState = [
         for (final Pick statePick in state.value!)
@@ -73,7 +74,7 @@ class PicksBySelectedSegmentState
     }
   }
 
-  void addPick({
+  void addNewPick({
     required Matchup matchup,
     required Team team,
   }) {
@@ -95,7 +96,19 @@ class PicksBySelectedSegmentState
     }
   }
 
-  void updateTeam({required Pick pick, required Team team}) {
+  void deletePick({
+    required Pick pick,
+  }) {
+    if (state.value != null) {
+      List<Pick> newPickState = state.value!;
+      newPickState.removeWhere(
+          (statePick) => statePick.matchupReference == pick.matchupReference);
+
+      state = AsyncData<List<Pick>>(newPickState);
+    }
+  }
+
+  void updatePickTeam({required Pick pick, required Team team}) {
     if (state.value != null) {
       List<Pick> newPickState = [
         for (final Pick statePick in state.value!)
@@ -112,12 +125,39 @@ class PicksBySelectedSegmentState
   }
 
   void saveSegmentPicks() async {
-    Segment? segment = ref.watch(selectedSegmentStateProvider);
+    final Segment? segment = ref.watch(selectedSegmentStateProvider);
+    List<Pick> dbPicks = [];
 
     if (state.value != null && segment != null) {
-      await PicksFirestoreService().deletePicksBySegment(segment: segment);
-      for (Pick pick in state.value!) {
-        await PicksFirestoreService().addPick(pick: pick);
+      dbPicks = await PicksFirestoreService().fetchPicksBySegment(
+        segment: segment,
+      );
+
+      // delete picks no longer in segment
+      for (Pick dbPick in dbPicks) {
+        if (state.value!.firstWhereOrNull((statePick) =>
+                statePick.matchupReference == dbPick.matchupReference) ==
+            null) {
+          await PicksFirestoreService().deletePick(pick: dbPick);
+        }
+      }
+
+      // update picks that are in segment
+      for (Pick statePick in state.value!) {
+        if (dbPicks.firstWhereOrNull((dbPick) =>
+                dbPick.matchupReference == statePick.matchupReference) !=
+            null) {
+          await PicksFirestoreService().updatePick(pick: statePick);
+        }
+      }
+
+      // add new picks to segment
+      for (Pick statePick in state.value!) {
+        if (dbPicks.firstWhereOrNull((dbPick) =>
+                dbPick.matchupReference == statePick.matchupReference) ==
+            null) {
+          await PicksFirestoreService().addPick(pick: statePick);
+        }
       }
     }
   }

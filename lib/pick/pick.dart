@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Pick {
-  DocumentReference? reference;
+  String? id;
   String uid;
   DocumentReference segmentReference;
   DocumentReference matchupReference;
@@ -9,7 +9,7 @@ class Pick {
   int points;
 
   Pick({
-    this.reference,
+    this.id,
     required this.uid,
     required this.segmentReference,
     required this.matchupReference,
@@ -18,7 +18,7 @@ class Pick {
   });
 
   Pick copyWith({
-    DocumentReference? reference,
+    String? id,
     String? uid,
     DocumentReference? segmentReference,
     DocumentReference? matchupReference,
@@ -26,7 +26,7 @@ class Pick {
     int? points,
   }) {
     return Pick(
-      reference: reference ?? this.reference,
+      id: id ?? this.id,
       uid: uid ?? this.uid,
       segmentReference: segmentReference ?? this.segmentReference,
       matchupReference: matchupReference ?? this.matchupReference,
@@ -35,14 +35,14 @@ class Pick {
     );
   }
 
-  Pick.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot, this.reference)
+  Pick.fromQueryDocumentSnapshot(QueryDocumentSnapshot snapshot, this.id)
       : uid = snapshot['uid'] as String,
         segmentReference = snapshot['segmentReference'] as DocumentReference,
         matchupReference = snapshot['matchupReference'] as DocumentReference,
         teamReference = snapshot['teamReference'] as DocumentReference,
         points = snapshot['points'] as int;
 
-  Pick.fromDocumentSnapshot(DocumentSnapshot snapshot, this.reference)
+  Pick.fromDocumentSnapshot(DocumentSnapshot snapshot, this.id)
       : uid = snapshot['uid'] as String,
         segmentReference = snapshot['segmentReference'] as DocumentReference,
         matchupReference = snapshot['matchupReference'] as DocumentReference,

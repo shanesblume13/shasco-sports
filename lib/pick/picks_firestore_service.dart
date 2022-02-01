@@ -13,7 +13,7 @@ class PicksFirestoreService extends ChangeNotifier {
 
     return result.docs
         .map(
-          (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.reference),
+          (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
         )
         .toList();
   }
@@ -25,7 +25,7 @@ class PicksFirestoreService extends ChangeNotifier {
 
     return result.docs
         .map(
-          (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.reference),
+          (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
         )
         .toList();
   }
@@ -37,7 +37,7 @@ class PicksFirestoreService extends ChangeNotifier {
 
     return result.docs
         .map(
-          (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.reference),
+          (doc) => Pick.fromQueryDocumentSnapshot(doc, doc.id),
         )
         .toList();
   }
@@ -48,8 +48,14 @@ class PicksFirestoreService extends ChangeNotifier {
     );
   }
 
+  Future<void> updatePick({required Pick pick}) async {
+    await collection.doc(pick.id).update(
+          pick.toJson(),
+        );
+  }
+
   Future<void> deletePick({required Pick pick}) async {
-    await collection.doc(pick.reference?.id).delete();
+    await collection.doc(pick.id).delete();
   }
 
   Future<void> deletePicksBySegment({required Segment segment}) async {

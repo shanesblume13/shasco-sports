@@ -37,7 +37,7 @@ class MatchupPoints extends HookConsumerWidget {
     } else {
       ref
           .watch(picksBySelectedSegmentStateProvider.notifier)
-          .updatePoints(pick: pick!);
+          .incrementPickScore(pick: pick!);
     }
   }
 }

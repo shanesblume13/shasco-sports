@@ -58,8 +58,7 @@ class MatchupCard extends HookConsumerWidget {
                     ref: ref,
                     team: awayTeam,
                   ), //updatePickedTeam(ref: ref, team: awayTeam),
-                  // onLongPress: () =>
-                  //     isAwayTeamPicked ? clearPick(ref: ref) : null,
+                  onLongPress: () => deletePick(ref: ref),
                   splashColor: Colors.transparent,
                   child: MatchupCardTeamImage(
                     team: awayTeam,
@@ -75,6 +74,7 @@ class MatchupCard extends HookConsumerWidget {
                     ref: ref,
                     team: awayTeam,
                   ),
+                  onLongPress: () => deletePick(ref: ref),
                   // onLongPress: () =>
                   //     isAwayTeamPicked ? clearPick(ref: ref) : null,
                   splashColor: Colors.transparent,
@@ -97,8 +97,7 @@ class MatchupCard extends HookConsumerWidget {
                     ref: ref,
                     team: homeTeam,
                   ),
-                  // onLongPress: () =>
-                  //     isHomeTeamPicked ? clearPick(ref: ref) : null,
+                  onLongPress: () => deletePick(ref: ref),
                   splashColor: Colors.transparent,
                   child: MatchupCardTeamText(
                     team: homeTeam,
@@ -113,8 +112,7 @@ class MatchupCard extends HookConsumerWidget {
                     ref: ref,
                     team: homeTeam,
                   ),
-                  // onLongPress: () =>
-                  //     isHomeTeamPicked ? clearPick(ref: ref) : null,
+                  onLongPress: () => deletePick(ref: ref),
                   splashColor: Colors.transparent,
                   child: MatchupCardTeamImage(
                     team: homeTeam,
@@ -152,17 +150,19 @@ class MatchupCard extends HookConsumerWidget {
     if (pick == null) {
       ref
           .watch(picksBySelectedSegmentStateProvider.notifier)
-          .addPick(matchup: matchup, team: team);
+          .addNewPick(matchup: matchup, team: team);
     } else {
       ref
           .watch(picksBySelectedSegmentStateProvider.notifier)
-          .updateTeam(pick: pick!, team: team);
+          .updatePickTeam(pick: pick!, team: team);
     }
   }
 
-  // clearPick({required WidgetRef ref}) {
-  //   ref
-  //       .watch(selectedSegmentPicksStateProvider.notifier)
-  //       .clearPick(matchup: matchup);
-  // }
+  void deletePick({required WidgetRef ref}) {
+    if (pick != null) {
+      ref
+          .watch(picksBySelectedSegmentStateProvider.notifier)
+          .deletePick(pick: pick!);
+    }
+  }
 }
