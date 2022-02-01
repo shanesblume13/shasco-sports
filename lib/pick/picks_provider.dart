@@ -158,4 +158,8 @@ class PicksBySelectedSegmentState
 
     ref.read(picksBySelectedSegmentStateProvider.notifier).init();
   }
+
+  void resetSegmentPicks() {
+    ref.read(picksBySelectedSegmentStateProvider.notifier).init();
+  }
 }
