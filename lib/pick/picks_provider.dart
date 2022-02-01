@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/pick/pick.dart';
@@ -6,6 +7,8 @@ import 'package:pick/segment/segment.dart';
 import 'package:pick/segment/selected_segment_provider.dart';
 import 'package:pick/team/team.dart';
 import 'package:collection/collection.dart';
+
+String? uid = FirebaseAuth.instance.currentUser?.uid;
 
 final picksStateProvider =
     StateNotifierProvider<PicksState, AsyncValue<List<Pick>>>((ref) {
@@ -30,7 +33,7 @@ class PicksState extends StateNotifier<AsyncValue<List<Pick>>> {
 
   void init() async {
     state = const AsyncLoading<List<Pick>>();
-    final List<Pick> picks = await PicksFirestoreService().fetchPicks();
+    final List<Pick> picks = await PicksFirestoreService(uid: uid).fetchPicks();
     state = AsyncData<List<Pick>>(picks);
   }
 }
@@ -45,15 +48,7 @@ class PicksBySelectedSegmentState
   void init() async {
     state = const AsyncLoading<List<Pick>>();
     final Segment selectedSegment = ref.watch(selectedSegmentStateProvider)!;
-    final List<Pick> picks = await PicksFirestoreService()
-        .fetchPicksBySegment(segment: selectedSegment);
-    state = AsyncData<List<Pick>>(picks);
-  }
-
-  void reset() async {
-    state = const AsyncLoading<List<Pick>>();
-    final Segment selectedSegment = ref.watch(selectedSegmentStateProvider)!;
-    final List<Pick> picks = await PicksFirestoreService()
+    final List<Pick> picks = await PicksFirestoreService(uid: uid)
         .fetchPicksBySegment(segment: selectedSegment);
     state = AsyncData<List<Pick>>(picks);
   }
@@ -80,11 +75,11 @@ class PicksBySelectedSegmentState
   }) {
     Segment? segment = ref.watch(selectedSegmentStateProvider);
 
-    if (state.value != null && segment != null) {
+    if (uid != null && state.value != null && segment != null) {
       List<Pick> newPickState = state.value!;
       newPickState.add(
         Pick(
-          uid: '',
+          uid: uid!,
           segmentReference: segment.reference!,
           matchupReference: matchup.reference!,
           teamReference: team.reference,
@@ -128,8 +123,8 @@ class PicksBySelectedSegmentState
     final Segment? segment = ref.watch(selectedSegmentStateProvider);
     List<Pick> dbPicks = [];
 
-    if (state.value != null && segment != null) {
-      dbPicks = await PicksFirestoreService().fetchPicksBySegment(
+    if (uid != null && state.value != null && segment != null) {
+      dbPicks = await PicksFirestoreService(uid: uid).fetchPicksBySegment(
         segment: segment,
       );
 
@@ -138,7 +133,7 @@ class PicksBySelectedSegmentState
         if (state.value!.firstWhereOrNull((statePick) =>
                 statePick.matchupReference == dbPick.matchupReference) ==
             null) {
-          await PicksFirestoreService().deletePick(pick: dbPick);
+          await PicksFirestoreService(uid: uid).deletePick(pick: dbPick);
         }
       }
 
@@ -147,7 +142,7 @@ class PicksBySelectedSegmentState
         if (dbPicks.firstWhereOrNull((dbPick) =>
                 dbPick.matchupReference == statePick.matchupReference) !=
             null) {
-          await PicksFirestoreService().updatePick(pick: statePick);
+          await PicksFirestoreService(uid: uid).updatePick(pick: statePick);
         }
       }
 
@@ -156,7 +151,7 @@ class PicksBySelectedSegmentState
         if (dbPicks.firstWhereOrNull((dbPick) =>
                 dbPick.matchupReference == statePick.matchupReference) ==
             null) {
-          await PicksFirestoreService().addPick(pick: statePick);
+          await PicksFirestoreService(uid: uid).addPick(pick: statePick);
         }
       }
     }

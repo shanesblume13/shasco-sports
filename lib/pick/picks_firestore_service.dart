@@ -5,11 +5,16 @@ import 'package:pick/pick/pick.dart';
 import 'package:pick/segment/segment.dart';
 
 class PicksFirestoreService extends ChangeNotifier {
+  PicksFirestoreService({
+    @required this.uid,
+  });
+
+  final String? uid;
   final CollectionReference<Map<String, dynamic>> collection =
       FirebaseFirestore.instance.collection('picks');
 
   Future<List<Pick>> fetchPicks() async {
-    var result = await collection.get();
+    var result = await collection.where("uid", isEqualTo: uid).get();
 
     return result.docs
         .map(
@@ -20,6 +25,7 @@ class PicksFirestoreService extends ChangeNotifier {
 
   Future<List<Pick>> fetchPicksByMatchup({required Matchup matchup}) async {
     var result = await collection
+        .where("uid", isEqualTo: uid)
         .where('matchupReference', isEqualTo: matchup.reference)
         .get();
 
@@ -32,6 +38,7 @@ class PicksFirestoreService extends ChangeNotifier {
 
   Future<List<Pick>> fetchPicksBySegment({required Segment segment}) async {
     var result = await collection
+        .where("uid", isEqualTo: uid)
         .where('segmentReference', isEqualTo: segment.reference)
         .get();
 
@@ -60,6 +67,7 @@ class PicksFirestoreService extends ChangeNotifier {
 
   Future<void> deletePicksBySegment({required Segment segment}) async {
     var picks = await collection
+        .where("uid", isEqualTo: uid)
         .where('segmentReference', isEqualTo: segment.reference)
         .get();
 
