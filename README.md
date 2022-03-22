@@ -1,7 +1,7 @@
 
 # Shasco Sports
 
-A prototype app built with flutter, firebase , and riverpod that allows users to play various games based on sports predecitions.
+A prototype app built with flutter, firebase , and riverpod that allows users to play various games based on sports predicitions.
 
 # To Do
 - Remove logos
