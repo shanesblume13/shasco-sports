@@ -30,8 +30,8 @@ class Matchup {
     this.reference,
   )   : awayTeamReference = snapshot['awayTeamReference'] as DocumentReference,
         homeTeamReference = snapshot['homeTeamReference'] as DocumentReference,
-        // winningTeamReference =
-        //     snapshot['winningTeamReference'] as DocumentReference?,
+        winningTeamReference =
+            getWinningTeamReferencefromQueryDocumentSnapshot(snapshot),
         startDateTime = (snapshot['startDateTime'] as Timestamp).toDate(),
         lockDateTime = (snapshot['lockDateTime'] as Timestamp).toDate(),
         isLocked = snapshot['isLocked'] as bool,
@@ -40,11 +40,25 @@ class Matchup {
             double.tryParse(snapshot['homeTeamSpread'].toString()) ?? 0.0,
         segmentReference = snapshot['segmentReference'] as DocumentReference;
 
+  static DocumentReference? getWinningTeamReferencefromQueryDocumentSnapshot(
+    QueryDocumentSnapshot<Object?> snapshot,
+  ) {
+    DocumentReference? result;
+
+    try {
+      result = snapshot['winningTeamReference'] as DocumentReference?;
+    } catch (e) {
+      result = null;
+    }
+
+    return result;
+  }
+
   Matchup.fromDocumentSnapshot(DocumentSnapshot snapshot, this.reference)
       : awayTeamReference = snapshot['awayTeamReference'] as DocumentReference,
         homeTeamReference = snapshot['homeTeamReference'] as DocumentReference,
-        // winningTeamReference =
-        //     snapshot['winningTeamReference'] as DocumentReference?,
+        winningTeamReference =
+            getWinningTeamReferencefromDocumentSnapshot(snapshot),
         startDateTime = (snapshot['startDateTime'] as Timestamp).toDate(),
         lockDateTime = (snapshot['lockDateTime'] as Timestamp).toDate(),
         isLocked = snapshot['isLocked'] as bool,
@@ -52,4 +66,18 @@ class Matchup {
         homeTeamSpread =
             double.tryParse(snapshot['homeTeamSpread'].toString()) ?? 0.0,
         segmentReference = snapshot['segmentReference'] as DocumentReference;
+
+  static dynamic getWinningTeamReferencefromDocumentSnapshot(
+    DocumentSnapshot<Object?> snapshot,
+  ) {
+    DocumentReference? result;
+
+    try {
+      result = snapshot['winningTeamReference'] as DocumentReference?;
+    } catch (e) {
+      result = null;
+    }
+
+    return result;
+  }
 }

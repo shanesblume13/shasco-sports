@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/matchup/matchup-card/matchup_card.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/matchup/matchup_points.dart';
+import 'package:pick/palette.dart';
 import 'package:pick/pick/pick.dart';
 import 'package:pick/team/team.dart';
 
@@ -21,6 +22,11 @@ class MatchupRow extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Color borderColor = matchup.isLocked || matchup.isComplete
+        ? Colors.transparent
+        : Palette.shascoBlue;
+    Color color = Colors.transparent;
+
     return LayoutGrid(
       areas: '''
               matchupCard score
@@ -38,10 +44,17 @@ class MatchupRow extends HookConsumerWidget {
             matchup: matchup,
             teams: teams,
             pick: pick,
+            borderColor: borderColor,
+            color: color,
           ),
         ),
         gridArea('score').containing(
-          MatchupPoints(matchup: matchup, pick: pick),
+          MatchupPoints(
+            matchup: matchup,
+            pick: pick,
+            borderColor: borderColor,
+            color: color,
+          ),
         ),
       ],
     );

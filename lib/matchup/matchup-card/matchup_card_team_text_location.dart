@@ -26,21 +26,8 @@ class MatchupCardTeamTextLocation extends StatelessWidget {
         AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 300),
           style: TextStyle(
-            color: pick == null
-                ? Palette.shascoBlue
-                : pick?.teamReference == team.reference
-                    ? Palette.shascoBlue
-                    : Palette.shascoBlue[200],
-            fontSize: pick == null
-                ? 12
-                : pick?.teamReference == team.reference
-                    ? 12
-                    : 9,
-            fontWeight: pick == null
-                ? FontWeight.normal
-                : pick?.teamReference == team.reference
-                    ? FontWeight.bold
-                    : FontWeight.normal,
+            fontSize: 12,
+            color: Palette.shascoBlue,
           ),
           child: Text(
             team.location,

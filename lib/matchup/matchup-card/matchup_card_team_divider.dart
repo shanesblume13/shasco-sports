@@ -36,25 +36,25 @@ class MatchupCardTeamDivider extends StatelessWidget {
                     ? MatchupCardTeamDividerClipper(clipRight: true)
                     : null,
             child: Container(
-              width: 30,
-              height: 48,
-              color: pick != null ? Palette.shascoBlue : Colors.transparent,
-              child: Center(
-                child: pick?.teamReference == matchup.homeTeamReference
-                    ? Icon(
-                        Icons.chevron_right,
-                        color: Palette.shascoGrey[50],
-                        size: 24,
-                      )
-                    : pick?.teamReference == matchup.awayTeamReference
-                        ? Icon(
-                            Icons.chevron_left,
-                            color: Palette.shascoGrey[50],
-                            size: 24,
-                          )
-                        : null,
-              ),
-            ),
+                // width: 30,
+                // height: 48,
+                // color: pick != null ? Palette.shascoBlue : Colors.transparent,
+                // child: Center(
+                //   child: pick?.teamReference == matchup.homeTeamReference
+                //       ? Icon(
+                //           Icons.chevron_right,
+                //           color: Palette.shascoGrey[50],
+                //           size: 24,
+                //         )
+                //       : pick?.teamReference == matchup.awayTeamReference
+                //           ? Icon(
+                //               Icons.chevron_left,
+                //               color: Palette.shascoGrey[50],
+                //               size: 24,
+                //             )
+                //           : null,
+                // ),
+                ),
           ),
         ],
       ),

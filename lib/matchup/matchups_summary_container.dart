@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pick/flat_outlined_option.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/palette.dart';
 import 'package:pick/pick/picks_provider.dart';

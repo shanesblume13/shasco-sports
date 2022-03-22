@@ -4,7 +4,6 @@ import 'package:pick/matchup/matchup-card/matchup_card_team_text_nickname.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/pick/pick.dart';
 import 'package:pick/team/team.dart';
-import 'package:pick/palette.dart';
 
 class MatchupCardTeamText extends StatelessWidget {
   const MatchupCardTeamText({
@@ -21,9 +20,9 @@ class MatchupCardTeamText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      color: pick?.teamReference == team.reference
-          ? Palette.shascoBlue[50]
-          : Palette.shascoGrey[50],
+      // color: pick?.teamReference == team.reference
+      //     ? Palette.shascoBlue[50]
+      //     : Palette.shascoGrey[50],
       duration: const Duration(milliseconds: 300),
       child: Padding(
         padding: const EdgeInsets.all(3.0),

@@ -60,13 +60,15 @@ class Pick {
   }
 }
 
-enum PickMathcupStatus {
-  open,
-  openPicked,
-  locked,
-  lockedPicked,
-  closed,
-  closedCorrect,
-  closedIncorrect,
-  closedPush,
+enum PickMatchupStatus {
+  openPick,
+  openNotPicked,
+  lockedPick,
+  lockedNotPicked,
+  completeWinnerNotPicked,
+  completeWinnerPick,
+  completeLoserNotPicked,
+  completeLoserPick,
+  completePushPick,
+  completePushNotPicked,
 }

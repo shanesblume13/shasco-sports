@@ -11,10 +11,14 @@ class MatchupPoints extends HookConsumerWidget {
     Key? key,
     required this.matchup,
     this.pick,
+    required this.borderColor,
+    required this.color,
   }) : super(key: key);
 
   final Matchup matchup;
   final Pick? pick;
+  final Color borderColor;
+  final Color color;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,9 +27,17 @@ class MatchupPoints extends HookConsumerWidget {
           ref: ref), // updatePickScore(ref: ref, matchup: matchup),
       splashColor: Colors.transparent,
       child: FlatBorderOption(
-        borderColor: pick == null ? Palette.shascoGrey : Palette.shascoBlue,
+        color: color,
+        borderColor: borderColor,
         child: Center(
-          child: Text(pick?.points.toString() ?? '0'),
+          child: Text(
+            pick?.points.toString() ?? '0',
+            style: TextStyle(
+              fontSize: 18,
+              color:
+                  pick == null ? Palette.shascoGrey[900] : Palette.shascoBlue,
+            ),
+          ),
         ),
       ),
     );

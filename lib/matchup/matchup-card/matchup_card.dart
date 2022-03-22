@@ -4,13 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pick/flat_outlined_option.dart';
 import 'package:pick/matchup/matchup-card/matchup_card_team_text.dart';
 import 'package:pick/matchup/matchup-card/matchup_card_team_divider.dart';
-import 'package:pick/matchup/matchup-card/matchup_card_team_image.dart';
+import 'package:pick/matchup/matchup-card/matchup_card_status_icon.dart';
 import 'package:pick/matchup/matchup.dart';
 import 'package:pick/pick/pick.dart';
 import 'package:pick/pick/picks_provider.dart';
 import 'package:pick/team/team.dart';
 import 'package:pick/images_provider.dart';
-import 'package:pick/palette.dart';
 
 class MatchupCard extends HookConsumerWidget {
   const MatchupCard({
@@ -18,11 +17,15 @@ class MatchupCard extends HookConsumerWidget {
     required this.matchup,
     required this.teams,
     this.pick,
+    required this.borderColor,
+    required this.color,
   }) : super(key: key);
 
   final Matchup matchup;
   final List<Team> teams;
   final Pick? pick;
+  final Color borderColor;
+  final Color color;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,7 +47,8 @@ class MatchupCard extends HookConsumerWidget {
         );
 
         return FlatBorderOption(
-          borderColor: pick != null ? Palette.shascoBlue : Palette.shascoGrey,
+          color: color,
+          borderColor: borderColor,
           child: LayoutGrid(
             areas: '''
                       awayLogo awayName divider homeName homeLogo
@@ -60,7 +64,7 @@ class MatchupCard extends HookConsumerWidget {
                   ), //updatePickedTeam(ref: ref, team: awayTeam),
                   onLongPress: () => deletePick(ref: ref),
                   splashColor: Colors.transparent,
-                  child: MatchupCardTeamImage(
+                  child: MatchupCardStatusIcon(
                     team: awayTeam,
                     matchup: matchup,
                     pick: pick,
@@ -88,7 +92,7 @@ class MatchupCard extends HookConsumerWidget {
               gridArea('divider').containing(
                 MatchupCardTeamDivider(
                   matchup: matchup,
-                  pick: pick, //_points, //_pickScores[pickScoreIndex]
+                  pick: pick,
                 ),
               ),
               gridArea('homeName').containing(
@@ -114,7 +118,7 @@ class MatchupCard extends HookConsumerWidget {
                   ),
                   onLongPress: () => deletePick(ref: ref),
                   splashColor: Colors.transparent,
-                  child: MatchupCardTeamImage(
+                  child: MatchupCardStatusIcon(
                     team: homeTeam,
                     matchup: matchup,
                     pick: pick,
